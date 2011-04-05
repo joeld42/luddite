@@ -1,12 +1,11 @@
 #ifndef RESOURCE_H
 #define RESOURCE_H
 
-#include <string>
-#include <algorithm>
-#include <map>
+#include <EASTL/string.h>
+#include <EASTL/map.h>
 
-#include "handle.h"
-#include "debug.h"
+#include <luddite/core/handle.h>
+#include <luddite/core/debug.h>
 
 // The 'resource mgr' is built on top of the handle mgr and
 // provides on-demand loading and name-based lookup
@@ -43,12 +42,11 @@ private:
     {
         HANDLE m_hRes;
         size_t m_refCount;
-        std::string m_resName;
+        eastl::string m_resName;
     };
     
-    // Was using a std_ext::hash, caused all sorts of headaches, 
-    // now back to good ol' std::map
-	typedef std::map<std::string, ResInfo> ResourceHash;
+    // Maps resource names to the res info
+	typedef eastl::map<eastl::string, ResInfo> ResourceHash;
 
 protected:
     HMgrType     m_resMgr;    

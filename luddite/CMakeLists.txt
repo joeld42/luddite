@@ -4,6 +4,7 @@ SET ( core_SRCS
 
       core/allocator.cpp
       core/debug.cpp
+      #core/texture.cpp
 
       )
 

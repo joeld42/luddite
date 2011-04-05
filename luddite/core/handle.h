@@ -6,7 +6,7 @@
 
 #include <EASTL/vector.h>
 
-#include "debug.h"
+#include <luddite/core/debug.h>
 
 namespace luddite
 {

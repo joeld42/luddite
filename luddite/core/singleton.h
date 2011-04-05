@@ -15,7 +15,7 @@
 //
 // =======================================================
 
-#include "debug.h"
+#include <luddite/core/debug.h>
 
 namespace luddite
 {

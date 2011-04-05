@@ -1,5 +1,15 @@
 
 
+include_directories(
+    ${OPENGL_INCLUDE_DIR}
+    ${SDL_INCLUDE_DIR}
+    )
+
+set ( LIBS ${LIBS}
+    ${SDL_LIBRARY}
+    ${OPENGL_LIBRARIES}
+    )
+
 # ----------------------------------------------------------------------------
 # Hello World
 # ----------------------------------------------------------------------------
@@ -12,7 +22,7 @@ add_executable( hello-luddite ${hello_SRCS} )
 set_target_properties( hello-luddite PROPERTIES
 			RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/example/basics )
 
-target_link_libraries( hello-luddite luddite eastl )
+target_link_libraries( hello-luddite luddite eastl ${LIBS} )
 
 
 # ----------------------------------------------------------------------------
