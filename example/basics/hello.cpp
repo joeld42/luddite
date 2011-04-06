@@ -13,9 +13,13 @@
 #include <SDL_endian.h>
 
 // opengl
-#include <GL/gl.h>
-#include <GL/glu.h>
-
+#ifdef EA_PLATFORM_APPLE
+#  include <OpenGL/gl.h>
+#  include <OpenGL/glu.h>
+#else
+#  include <GL/gl.h>
+#  include <GL/glu.h>
+#endif
 using namespace luddite;
 
 // 30 ticks per sim frame 
@@ -119,13 +123,20 @@ int main( int argc, char *argv[] )
                     {
                         case SDLK_ESCAPE:
                             done = true;
-                            break;                        
+                            break;
+                            
+                        default:
+                            // ignore
+                            break;
                     }
                     break;
 
                 case SDL_QUIT:
                     done = true;
-                    break;                    
+                    break;      
+                default:
+                    // ignore
+                    break;
             }
             
         }

@@ -46,13 +46,13 @@ const int DBG::kVerbose_Dbg = 6;
 
 /////////////////////////////////////////////////////////
 void vmessage( int message_level, const char *fmt, va_list args) {
-	static char *catname[8] = {
+	static const char *catname[8] = {
 		"", "fatal: ", "error: ", "warn: ", 
 		"progress: ", "info: ", "debug: ", "vdebug: "
 	};
 	
 #ifndef WIN32
-	static char *catcolor[8] = {
+	static const char *catcolor[8] = {
 		"\e[0m", // reset
 		"\e[1m\e[31m", // fatal - bright red
 		"\e[0m\e[31m", // error - red
@@ -166,7 +166,7 @@ void stack_outf( const char *fmt, ... )
 	//OutputDebugString( (LPCWSTR)line );
 
 	// send to console
-	printf( line );
+	puts( line );
 
 	// TODO: log file??
 

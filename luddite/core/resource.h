@@ -177,7 +177,7 @@ void ResourceMgr<DATA,HANDLE>::dbgPrintUsage()
           ri != m_nameIndex.end(); ++ri )
     {
         ResInfo &info = (*ri).second;
-        printf("%20s ... %d\n", info.m_resName.c_str(), info.m_refCount );        
+        printf("%20s ... %zu\n", info.m_resName.c_str(), info.m_refCount );        
     }
     printf("========================================================\n" );
 }

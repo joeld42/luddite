@@ -1,6 +1,9 @@
 #ifndef TEXTURE_H
 #define TEXTURE_H
 
+
+#include <EASTL/string.h>
+
 #ifdef WIN32
 # define WIN32_LEAN_AND_MEAN
 # include <winsock2.h>
@@ -8,13 +11,15 @@
 # include <crtdbg.h>
 #endif
 
-#include <GL/gl.h>
+#ifdef EA_PLATFORM_APPLE
+# include <OpenGL/gl.h>
+#else
+# include <GL/gl.h>
+#endif
 
 #include <luddite/core/handle.h>
 #include <luddite/core/resource.h>
 #include <luddite/core/singleton.h>
-
-#include <EASTL/string.h>
 
 namespace luddite
 {
