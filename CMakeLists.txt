@@ -4,14 +4,18 @@ set ( CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_SOURCE_DIR}/cmake/Modules)
 
 # Add luddite to the project include/link
 project( luddite )
-include_directories( . )
-link_directories( ${luddite_BINARY_DIR}/luddite )
+
+message ("CMAKE_SOURCE_DIR is ${CMAKE_SOURCE_DIR}" )
+message ("Module path is  ${CMAKE_MODULE_PATH} " )
 
 # Look for dependancies
 FIND_PACKAGE( OpenGL )
 FIND_PACKAGE( SDL )
+FIND_PACKAGE( SDL_image )
+FIND_PACKAGE( PNG )
 
-#FIND_PACKAGE( PNG )
+include_directories( . )
+link_directories( ${luddite_BINARY_DIR}/luddite )
 
 # Add EASTL
 include_directories( extern/eastl/include )

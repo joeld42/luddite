@@ -3,11 +3,13 @@
 include_directories(
     ${OPENGL_INCLUDE_DIR}
     ${SDL_INCLUDE_DIR}
+    ${PNG_PNG_INCLUDE_DIR}
     )
 
 set ( LIBS ${LIBS}
     ${SDL_LIBRARY}
     ${OPENGL_LIBRARIES}
+    ${PNG_LIBRARY}
     )
 
 # ----------------------------------------------------------------------------

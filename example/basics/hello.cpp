@@ -6,7 +6,7 @@
 // Luddite 
 #include <luddite/core/debug.h>
 #include <luddite/core/handle.h>
-//#include <luddite/core/texture.h>
+#include <luddite/core/texture.h>
 
 // SDL
 #include <SDL.h>
@@ -22,33 +22,53 @@ using namespace luddite;
 #define STEPTIME (33)
 
 // Game globals
-//luddite::TextureDB g_texDB;
+luddite::TextureDB g_texDB;
+luddite::HTexture g_htexGrid;
 
 // ===========================================================================
 void hello_init()
 {
     DBG::info( "Hello init\n" );
+    
+    g_htexGrid = luddite::TextureDB::singleton().getTexture( "gamedata/ash_uvgrid02.png" );    
 }
 
 // ===========================================================================
 void hello_redraw()
-{
+{    
+    luddite::TextureDB &texDB = luddite::TextureDB::singleton();    
+    
+    GLuint texId = texDB.getTextureId( g_htexGrid );    
+
     glClearColor( 0.2f, 0.2f, 0.4f, 1.0f );
     glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );    
 
     glMatrixMode( GL_PROJECTION );
     glLoadIdentity();
-    glOrtho( 0, 800, 0, 600, -1.0, 1.0 );
+    glOrtho( 0, 800, 0, 600, -1.0, 1.0 );    
     
     glMatrixMode( GL_MODELVIEW );
     glLoadIdentity();
     
     glColor3f( 1.0, 1.0, 1.0 );    
+
+    glEnable( GL_TEXTURE );
+    glEnable( GL_TEXTURE_2D );
+
+    glBindTexture( GL_TEXTURE_2D, texId );    
+
     glBegin( GL_QUADS );
 
+    glTexCoord2f( 0.0, 0.0 );    
     glVertex3f( 100, 100, 0.0 );
+
+    glTexCoord2f( 1.0, 0.0 );
     glVertex3f( 500, 100, 0.0 );
+
+    glTexCoord2f( 1.0, 1.0 );
     glVertex3f( 500, 500, 0.0 );
+
+    glTexCoord2f( 0.0, 1.0 );
     glVertex3f( 100, 500, 0.0 );
 
     glEnd();

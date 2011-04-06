@@ -50,8 +50,10 @@ public:
     HTexture getTexture( const char *name );
     void freeTexture( HTexture hTex );
 
+#if 0
 	HTexture buildTextureFromData( const char *name, const GLubyte *data, 
 									GLint width, GLint height );
+#endif
 
     // Access to texture
     // TODO: needs to be reconsiled with the 
@@ -59,14 +61,16 @@ public:
     GLuint getTextureId( HTexture hTex );    
 
     // Access to texture name
-    const std::string &getTextureName( HTexture hTex );
+    const eastl::string &getTextureName( HTexture hTex );
 	
 	// Access to texture size
 	// todo
 	
+#if 0
 	// Print texture usage report
-	static void reportTexture( const std::string &resName, unsigned int refCount, HTexture hTex );
+	static void reportTexture( const eastl::string &resName, unsigned int refCount, HTexture hTex );
 	void reportUsage();
+#endif
     
 };
 

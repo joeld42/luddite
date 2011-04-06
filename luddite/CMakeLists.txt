@@ -4,7 +4,11 @@ SET ( core_SRCS
 
       core/allocator.cpp
       core/debug.cpp
-      #core/texture.cpp
+      core/texture.cpp
+
+      # FIXME: make this choose a different
+      # platform file based on, well, platform
+      platform/platform_SDL.cpp
 
       )
 

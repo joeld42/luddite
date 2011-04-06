@@ -1,9 +1,9 @@
 #include <string.h>
 
-#include "texture.h"
-#include "debug.h"
+#include <luddite/core/texture.h>
+#include <luddite/core/debug.h>
 
-//#include "PNGLoader.h"
+#include <luddite/platform/platform.h>
 
 using namespace luddite;
 
@@ -20,43 +20,42 @@ bool isPow2(unsigned int v)
     return (c==1);    
 }
 
+
+
 //  entry points for the resource manager
-bool loadResource( const char *filename, TextureGL *texture )
+bool loadResource( const char *filename, luddite::TextureGL *texture )
 {
     // Remember filename
-    texture->m_texName = filename;    
+    texture->m_texName = filename;
 
-    // Determine file extension
-	const char *ext = strrchr( filename, '.');
-	if ((!ext)||(strlen(ext)<4))
-	{
-		DBG::warn("Can't determine file extension for texture %s\n", filename );
-        return false;        
-	}    
-	
-	// Use the extension to determine format
-	if ( strncmp( ext, ".png", 4)==0)              
+    // call platform code to do the heavy lifting
+    GLubyte *data = NULL;
+    if (platform_loadTexture( filename, texture, &data ))
     {
-		PNGImage pngImage = LoadImagePNG( filename );
+        DBG::info( "Loaded texture %s\n", filename );
+        GLuint textureId = 0;
+        glGenTextures( 1, &textureId );
+        glBindTexture( GL_TEXTURE_2D, textureId );
+        
+        // FIXME: make settable
+        glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
+        glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
+        
+        glTexImage2D( GL_TEXTURE_2D, 0, GL_RGBA, 
+                      texture->m_width, texture->m_height,
+                      0, GL_RGBA, GL_UNSIGNED_BYTE,
+                      data );
 
-        // Store the texture id
-		texture->m_texId = pngImage.textureId;        
-		texture->m_width = pngImage.widthPow2;
-		texture->m_height = pngImage.heightPow2;
-		texture->m_origWidth = pngImage.width;
-		texture->m_origHeight = pngImage.height;
-		
-        return true;        
+        texture->m_texId = textureId;
+        
+        // FIXME: use allocator
+        free( data );        
     }
-
-	// Unsupported format
-	DBG::warn( "Unsupported texture format '%s' for texture '%s'\n", 
-               ext, filename );
-
-	return false;
+    
+    return true;    
 }
 
-void unloadResource( TextureGL *texture )
+void unloadResource( luddite::TextureGL *texture )
 {
     // Release the texture from opengl
     glDeleteTextures( 1, &(texture->m_texId) );
@@ -67,6 +66,7 @@ HTexture TextureDB::getTexture( const char *name )
     return BaseTextureDB::getResource( name );    
 }
 
+#if 0
 HTexture TextureDB::buildTextureFromData( const char *name, 
                                           const GLubyte *data, 
                                           GLint width, GLint height )
@@ -95,6 +95,7 @@ HTexture TextureDB::buildTextureFromData( const char *name,
 	return hTex;
 	
 }
+#endif
 
 void TextureDB::freeTexture( HTexture hTex )
 {
@@ -118,6 +119,7 @@ GLuint TextureDB::getTextureId( HTexture hTex )
     return tex->m_texId;    
 }
 
+#if 0
 void TextureDB::reportTexture( const eastl::string &resName, unsigned int refCount, HTexture hTex )
 {
 	
@@ -127,7 +129,7 @@ void TextureDB::reportTexture( const eastl::string &resName, unsigned int refCou
 	DBG::info( "%10s|%3d|%4dx%-4d", resName.c_str(), refCount, 
 				tex->m_width, tex->m_height  );
 }
-	
+
 void TextureDB::reportUsage()
 {
 	DBG::info("=======================================\n" );
@@ -136,5 +138,5 @@ void TextureDB::reportUsage()
 
 	doReport( reportTexture );
 }
-
+#endif
 
