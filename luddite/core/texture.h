@@ -11,11 +11,7 @@
 # include <crtdbg.h>
 #endif
 
-#ifdef EA_PLATFORM_APPLE
-# include <OpenGL/gl.h>
-#else
-# include <GL/gl.h>
-#endif
+#include <luddite/platform/gl.h>
 
 #include <luddite/core/handle.h>
 #include <luddite/core/resource.h>

@@ -7,19 +7,15 @@
 #include <luddite/core/debug.h>
 #include <luddite/core/handle.h>
 #include <luddite/core/texture.h>
+#include <luddite/core/gbuff.h>
+
+// Opengl
+#include <luddite/platform/gl.h>
 
 // SDL
 #include <SDL.h>
 #include <SDL_endian.h>
 
-// opengl
-#ifdef EA_PLATFORM_APPLE
-#  include <OpenGL/gl.h>
-#  include <OpenGL/glu.h>
-#else
-#  include <GL/gl.h>
-#  include <GL/glu.h>
-#endif
 using namespace luddite;
 
 // 30 ticks per sim frame 
@@ -29,12 +25,47 @@ using namespace luddite;
 luddite::TextureDB g_texDB;
 luddite::HTexture g_htexGrid;
 
+struct TestVert
+{
+    float pos[3];
+    float st[2];
+};
+
+GBuff<TestVert> gbuff;
+
 // ===========================================================================
 void hello_init()
 {
     DBG::info( "Hello init\n" );
     
     g_htexGrid = luddite::TextureDB::singleton().getTexture( "gamedata/ash_uvgrid02.png" );    
+
+    CHECKGL( "before init..." );    
+
+    // populate gbuff
+    TestVert *tv = gbuff.addTriangles( 2 );
+    
+    tv[0].st[0] = 0; tv[0].st[1] = 0;
+    tv[0].pos[0] = 100.0; tv[0].pos[1] = 100.0; tv[0].pos[2] = 0.0;
+
+    tv[1].st[0] = 1; tv[1].st[1] = 0;
+    tv[1].pos[0] = 500.0; tv[1].pos[1] = 100.0; tv[1].pos[2] = 0.0;
+
+    tv[2].st[0] = 1; tv[2].st[1] = 1;
+    tv[2].pos[0] = 500.0; tv[2].pos[1] = 500.0; tv[2].pos[2] = 0.0;
+
+
+    tv[3].st[0] = 1; tv[3].st[1] = 1;
+    tv[3].pos[0] = 500.0; tv[3].pos[1] = 500.0; tv[3].pos[2] = 0.0;
+
+    tv[4].st[0] = 0; tv[4].st[1] = 0;
+    tv[4].pos[0] = 100.0; tv[4].pos[1] = 100.0; tv[4].pos[2] = 0.0;
+
+    tv[5].st[0] = 0; tv[5].st[1] = 1;
+    tv[5].pos[0] = 100.0; tv[5].pos[1] = 500.0; tv[5].pos[2] = 0.0;
+    
+    gbuff.update();
+    CHECKGL( "after init..." );    
 }
 
 // ===========================================================================
@@ -52,31 +83,30 @@ void hello_redraw()
     glOrtho( 0, 800, 0, 600, -1.0, 1.0 );    
     
     glMatrixMode( GL_MODELVIEW );
-    glLoadIdentity();
-    
-    glColor3f( 1.0, 1.0, 1.0 );    
+    glLoadIdentity();    
 
-    glEnable( GL_TEXTURE );
+    glDisable( GL_CULL_FACE );
+    CHECKGL( "prep redraw" );
+    
+    glColor3f( 1.0, 1.0, 1.0 );
     glEnable( GL_TEXTURE_2D );
+    CHECKGL( "enable texture" );
 
-    glBindTexture( GL_TEXTURE_2D, texId );    
+    glBindTexture( GL_TEXTURE_2D, texId );
 
-    glBegin( GL_QUADS );
+    glBindBuffer( GL_ARRAY_BUFFER, gbuff.vbo() );    
 
-    glTexCoord2f( 0.0, 0.0 );    
-    glVertex3f( 100, 100, 0.0 );
-
-    glTexCoord2f( 1.0, 0.0 );
-    glVertex3f( 500, 100, 0.0 );
-
-    glTexCoord2f( 1.0, 1.0 );
-    glVertex3f( 500, 500, 0.0 );
-
-    glTexCoord2f( 0.0, 1.0 );
-    glVertex3f( 100, 500, 0.0 );
-
-    glEnd();
+    glEnableClientState( GL_VERTEX_ARRAY );
+    glVertexPointer( 3, GL_FLOAT, sizeof(TestVert), 0 );
+    CHECKGL( "enable vert state" );    
     
+    glEnableClientState( GL_TEXTURE_COORD_ARRAY );
+    glTexCoordPointer( 2, GL_FLOAT, sizeof( TestVert), 
+                       (void*)(3*sizeof(GLfloat)) );
+    
+    glDrawArrays( GL_TRIANGLES, 0, gbuff.numVerts() );
+    CHECKGL( "draw arrays\n" );
+
 }
 
 

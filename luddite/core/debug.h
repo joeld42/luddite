@@ -59,7 +59,7 @@ bool AssertFunc( bool expr, char *desc, int line, char *file, bool *skip );
 	{ \
 		static bool _skipAlways = false; \
 		if (!_skipAlways) { \
-		if (DBG::AssertFunc( !!(expr), (desc), __LINE__, __FILE__, &_skipAlways ) ) { \
+            if (luddite::DBG::AssertFunc( !!(expr), (desc), __LINE__, __FILE__, &_skipAlways ) ) { \
 				{ __asm { int 3 }; } \
 			} \
 		} \
@@ -71,7 +71,7 @@ bool AssertFunc( bool expr, char *desc, int line, char *file, bool *skip );
 	{ \
 		static bool _skipAlways = false; \
 		if (!_skipAlways) { \
-		if (DBG::AssertFunc( !!(expr), (desc), __LINE__, __FILE__, &_skipAlways ) ) { \
+            if (luddite::DBG::AssertFunc( !!(expr), (desc), __LINE__, __FILE__, &_skipAlways ) ) { \
             { asm ("int $3"); }                                         \
 			} \
 		} \

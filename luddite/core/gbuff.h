@@ -1,6 +1,8 @@
 #ifndef GBUFF_H
 #define GBUFF_H
 
+#include <luddite/platform/gl.h>
+
 #include <luddite/core/debug.h>
 
 #include <EASTL/vector.h>
@@ -34,10 +36,20 @@ public:
     // returns the raw vert buffer
     VertexT *data();
 
-    // Gets a vbo ready to render
+    // number of verts
+    size_t numVerts() const;
 
-protected:
+    // Gets a vbo ready to render
+    void update();
+    
+    // gets the vbo
+    GLuint vbo();
+
+//protected:
     eastl::vector<VertexT> m_vertData;
+
+    // gl usage enum
+    GLuint m_usage;    
 
     // vbo data
     size_t m_vboSize;
@@ -45,8 +57,10 @@ protected:
 };
 
 template <typename VertexT>
-GBuff<VertexT>::GBuff( GLuint usage ) : m_vboSize( 0 ), 
-    m_vbo( 0 )
+GBuff<VertexT>::GBuff( GLuint usage ) : 
+    m_vboSize( 0 ), 
+    m_vbo( 0 ),
+    m_usage( usage )
 {
 }
 
@@ -60,7 +74,14 @@ GBuff<VertexT>::~GBuff()
 }
 
 template <typename VertexT>
-GBuff<VertexT>::addTriangles( int n )
+size_t GBuff<VertexT>::numVerts() const
+{
+    return m_vertData.size();    
+}
+
+
+template <typename VertexT>
+VertexT* GBuff<VertexT>::addTriangles( int n )
 {
     Assert( n > 0, "Can't add zero triangles" );
     
@@ -71,6 +92,56 @@ GBuff<VertexT>::addTriangles( int n )
     
 }
 
+template <typename VertexT>
+GLuint GBuff<VertexT>::vbo()
+{
+    Assert( m_vertData.size(), "Tried to get vbo from empty gbuff (did you call update()?)" );
+    return m_vbo;
+    
+}
+
+// call this after making any changes to vertex data to
+// update vbo on the card,
+template <typename VertexT>
+void GBuff<VertexT>::update()
+{
+    Assert( m_vertData.size(), "Tried to update an empty gbuff" );    
+
+    // size we need
+    size_t vboSize = sizeof( VertexT ) * m_vertData.size();
+
+
+    // have we not yet allocated the vbo?
+    if (m_vboSize == 0)
+    {
+        glGenBuffers( 1, &m_vbo );
+        glBindBuffer( GL_ARRAY_BUFFER, m_vbo );
+        CHECKGL( "a" );        
+        
+        // create the buffer
+        glBufferData( GL_ARRAY_BUFFER, vboSize, &(m_vertData[0]), m_usage );        
+        m_vboSize = vboSize;   
+        CHECKGL( "b" );
+
+    } 
+    else if ( vboSize > m_vboSize )
+    {
+        // buffer has grown, realloc it
+        glBufferData( GL_ARRAY_BUFFER, vboSize, &(m_vertData[0]), m_usage );
+        m_vboSize = vboSize;
+        CHECKGL( "c" );
+        
+    }    
+    else // if ( vboSize <= m_vboSize )
+    {
+        // buffer has shrunk, just subdata part of it
+        glBufferSubData( GL_ARRAY_BUFFER, 0, vboSize, &(m_vertData[0]) );
+        m_vboSize = vboSize;
+        CHECKGL( "d" );        
+    }
+
+    luddite::DBG::info("vbo updated (%d)\n", m_vboSize );    
+}
 
 
 #endif
