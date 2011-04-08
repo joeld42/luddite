@@ -45,7 +45,12 @@ public:
     // gets the vbo
     GLuint vbo();
 
-//protected:
+    // Draw our contents. The VertexT must have a
+    // "bind" method
+    void draw();
+    
+
+protected:
     eastl::vector<VertexT> m_vertData;
 
     // gl usage enum
@@ -96,9 +101,17 @@ template <typename VertexT>
 GLuint GBuff<VertexT>::vbo()
 {
     Assert( m_vertData.size(), "Tried to get vbo from empty gbuff (did you call update()?)" );
-    return m_vbo;
-    
+    return m_vbo;    
 }
+
+template <typename VertexT>
+void GBuff<VertexT>::draw()
+{
+    glBindBuffer( GL_ARRAY_BUFFER, this->vbo() );    
+    VertexT::bind();
+    glDrawArrays( GL_TRIANGLES, 0, numVerts() );    
+}
+
 
 // call this after making any changes to vertex data to
 // update vbo on the card,

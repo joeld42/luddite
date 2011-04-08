@@ -29,6 +29,16 @@ struct TestVert
 {
     float pos[3];
     float st[2];
+
+    // required, describe our layout to opengl
+    static void bind()
+    {
+        BIND_VERTEX( TestVert, pos );
+        BIND_TEXTURE_COORD( TestVert, st );        
+        
+    }
+
+    MAKE_BINDABLE( TestVert );    
 };
 
 GBuff<TestVert> gbuff;
@@ -92,6 +102,10 @@ void hello_redraw()
     glEnable( GL_TEXTURE_2D );
     CHECKGL( "enable texture" );
 
+    // Draw the gbuff
+    gbuff.draw();    
+
+#if 0
     glBindTexture( GL_TEXTURE_2D, texId );
 
     glBindBuffer( GL_ARRAY_BUFFER, gbuff.vbo() );    
@@ -106,6 +120,7 @@ void hello_redraw()
     
     glDrawArrays( GL_TRIANGLES, 0, gbuff.numVerts() );
     CHECKGL( "draw arrays\n" );
+#endif
 
 }
 
