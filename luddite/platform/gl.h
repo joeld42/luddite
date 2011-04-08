@@ -30,6 +30,24 @@ void checkVBO();
 // Helpers for bookkeeping vertex types
 // =================================================================
 
+// For example:
+//
+//  struct TestVert
+//  {
+//     float pos[3];
+//     float st[2];
+//
+//      static void bind()
+//      {  
+//          BIND_VERTEX( TestVert, pos );
+//          BIND_TEXTURE_COORD( TestVert, st );        
+//      }
+//
+//      MAKE_BINDABLE( TestVert );    
+//  };
+//
+//  GBuff<TestVert> gbuff;
+
 // This is for the BIND_ macros, to determine type, it never actually
 // gets used or instantiated anywhere. Workaround for issue described at
 // http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2007/n2253.html
@@ -47,5 +65,7 @@ void checkVBO();
     glTexCoordPointer( sizeof( VertType:: _example. member ) /sizeof(float),\
                        GL_FLOAT, sizeof( VertType ),                    \
                            (GLvoid*)offsetof( VertType, member ) )
+
+// TODO: color, etc..
 
 #endif
