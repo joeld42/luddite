@@ -48,7 +48,7 @@ void hello_init()
 {
     DBG::info( "Hello init\n" );
     
-    g_htexGrid = luddite::TextureDB::singleton().getTexture( "gamedata/ash_uvgrid02.png" );    
+    g_htexGrid = luddite::TextureDB::singleton().getTexture( "gamedata/ash_uvgrid03-1.png" );    
 
     CHECKGL( "before init..." );    
 

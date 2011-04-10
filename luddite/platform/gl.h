@@ -1,6 +1,8 @@
 #ifndef PLATFORM_GL_H
 #define PLATFORM_GL_H
 
+#include <EABase/eabase.h>
+
 // platform specific ways of including OpenGL
 
 // For now use GLee
