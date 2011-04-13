@@ -2,11 +2,18 @@
 
 #include <string>
 #include <vector>
+#include <algorithm>
 
 #include <png.h>
 
 #include <ft2build.h>
 #include FT_FREETYPE_H
+
+#include "image.h"
+
+
+#define ALL_PUNCTUATION "!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~"
+
 
 // ===========================================================================
 void doErrorMsg( const char *msg )
@@ -138,11 +145,72 @@ void Image::writePng( const char *filename )
     
 
 // ===========================================================================
-struct Glyph
-{
-    unsigned char m_char;
-    int m_xpos, m_ypos, m_baseline;
+struct Chip
+{    
+    // glyph info
+    char m_char;
+    int m_baseline;
+    
+    // sprite info
+    // TODO
+    
+    // layout info
+    int m_xpos, m_ypos;
+    int m_width, m_height;
+    
+    // the image data for this chip
+    FpImage *m_img;
+    
+    // constructors
+    static Chip *makeGlyph( FT_Library *ft, FT_Face face,
+                               int ch );
 };
+
+Chip *Chip::makeGlyph(  FT_Library *ft, FT_Face ftFace, int ch )
+{
+    Chip *chip = new Chip();
+    
+    int glyph_index = FT_Get_Char_Index( ftFace, ch );	
+	FT_GlyphSlot slot = ftFace->glyph;
+    
+	// draw the glyph without antialiasing to get the char size and
+	// to seed the border
+	FT_Load_Glyph( ftFace, glyph_index, FT_LOAD_MONOCHROME );
+	FT_Render_Glyph( ftFace->glyph, ft_render_mode_mono );
+    
+    chip->m_xpos = 0;
+    chip->m_ypos = 0;
+    chip->m_width  = slot->bitmap.width;
+    chip->m_height = slot->bitmap.rows;
+    chip->m_baseline = slot->bitmap_top;
+    
+    // TODO: border
+	//char_w += borderWidth*2;
+	//char_h += borderWidth*2;	    	
+
+    // TODO: background color
+    chip->m_img = new FpImage( chip->m_width, chip->m_height, 0xFF00FF );	
+
+#if 0
+    if (borderWidth) {
+        
+        img->pasteFTBitmap( &slot->bitmap, borderWidth, borderWidth, border, 1 );
+        
+        for (int b=0; b < borderWidth; b++) {		
+            img->thicken( bg );		 
+        }
+        
+    }
+	
+	// render the glyph again, antialiased, and put it on top of the border
+    FT_Load_Glyph( ftFace, glyph_index, FT_LOAD_RENDER );
+    FT_Render_Glyph( ftFace->glyph, ft_render_mode_normal );
+    
+    img->pasteFTBitmap( &slot->bitmap, borderWidth, borderWidth, fg, 0 );	 
+#endif
+    
+    return chip;
+}
 
 // ===========================================================================
 // Takes a pattern string like A-Z,a-z,0-9,1234,ASdsda){],comma and returns
@@ -170,10 +238,103 @@ std::string makeCharset( std::string pattern )
     while (ch)
     {
         printf( "PATTERN: %s\n", ch );
+        bool isPattern = false;
+        
+        if ( (!strcmp( ch, "A-Z" )) || (!strcmp( ch, "A-z" )) )
+        {
+            for ( char c='A'; c <= 'Z'; c++)
+            {
+                if (charset.find(c) == std::string::npos)
+                {
+                    charset.push_back( c );
+                }
+            }
+            isPattern = true;
+        }
+        
+        if ( (!strcmp( ch, "a-z" )) || (!strcmp( ch, "A-z" )) )
+        {
+            for ( char c='a'; c <= 'z'; c++)
+            {
+                if (charset.find(c) == std::string::npos)
+                {
+                    charset.push_back( c );
+                }
+            }
+            isPattern = true;
+        }
+        
+        if (!strcmp( ch, "0-9" ) )
+        {
+            for ( char c='0'; c <= '9'; c++)
+            {
+                if (charset.find(c) == std::string::npos)
+                {
+                    charset.push_back( c );
+                }
+            }
+            isPattern = true;
+        }
+        
+        if (!strcmp( ch, "punct" ))
+        {
+            for (const char *c = ALL_PUNCTUATION; *c; c++)
+            {
+                if (charset.find( *c) == std::string::npos)
+                {
+                    charset.push_back( *c );
+                }
+            }
+            isPattern = true;
+        }
+        
+        if (!strcmp( ch, "comma" ))
+        {
+            if (charset.find(',') == std::string::npos)
+            {
+                charset.push_back( ',' );
+            }
+            isPattern = true;
+        }    
+        
+        // all printable chars
+        if (!strcmp( ch, "all" ))
+        {
+            for (int c=0; c < 127; c++)
+            {
+                if (isprint(c) && (charset.find(c) == std::string::npos))
+                {
+                    charset.push_back( c );
+                }
+            }
+            isPattern = true;
+        }
+
+        // If this wasn't a pattern, add the characters directly
+        if (!isPattern)
+        {
+            
+            for (char *c = ch; *c; c++)
+            {
+                if (charset.find( *c) == std::string::npos)
+                {
+                    charset.push_back( *c );
+                }
+            }
+        }
+        
+        // next pattern
         ch = strtok( NULL, "," );
     }
     
+    // sort the charset just for tidyness
+    std::sort( charset.begin(), charset.end() );
+    
+    printf("Charset is %s\n", charset.c_str() );
+    
     free(patternStr);
+    
+    return charset;
 }
 
 // ===========================================================================
@@ -181,6 +342,7 @@ int main( int argc, char *argv[] )
 {
     FT_Library ftLibrary;
     FT_Init_FreeType( &ftLibrary );
+    FT_Face ftFace;
     
     //various outputs
     std::string outFontImg;
@@ -191,6 +353,9 @@ int main( int argc, char *argv[] )
     // Current charset
     std::string charSet = makeCharset( "A-Z" );
     
+    // List of 'chips' to pack
+    std::vector<Chip*> m_chipsToPack;
+    
     int ndx = 1;
     while (ndx < argc)
     {
@@ -198,7 +363,7 @@ int main( int argc, char *argv[] )
         if ((arg=="--font")||(arg=="-f"))
         {
             // make sure there is an arg available
-            if (ndx+1 >= argc)
+            if (ndx+1 > argc)
             {
                 errorMsg( "--font requires argument." );
             }
@@ -222,17 +387,39 @@ int main( int argc, char *argv[] )
             {
                 fontfile = fontArg;                
             }
-            
 
-            printf( "TODO: set font %s size %d\n",
-                    fontfile.c_str(),
-                    pxlSize );            
+            int ft_error = FT_New_Face( ftLibrary, fontfile.c_str(), 0, &ftFace );     
+            if (ft_error) {
+                errorMsg( "Can't load font %s, [FT_Error 0x%02X]",
+                         fontfile.c_str(), ft_error );
+            }
             
+            if (!ftFace->charmap) {
+                if (ftFace->num_charmaps==0) {
+                    errorMsg("Font '%s' has no charmaps [FT_Error 0x%02X]\n",
+                             fontfile.c_str(), ft_error );
+                } else {
+                    // use the first available charmap
+                    FT_Set_Charmap( ftFace, ftFace->charmaps[0] );	     
+                }
+            }
+            
+            // Font is loaded, set size
+            FT_Set_Pixel_Sizes( ftFace, 0, pxlSize );
+            
+            // Now rasterize and add the current charset to the list 
+            // to pack
+            for (std::string::iterator ch = charSet.begin();
+                 ch != charSet.end(); ch++)
+            {
+                Chip *glyphChip = Chip::makeGlyph( &ftLibrary, ftFace, *ch );
+                m_chipsToPack.push_back( glyphChip );
+            }
         }
         else if ((arg=="-o")||(arg=="--out"))
         {
             // make sure there is an arg available
-            if (ndx+1 >= argc)
+            if (ndx+1 > argc)
             {
                 errorMsg( "--out requires argument." );
             }
@@ -279,7 +466,7 @@ int main( int argc, char *argv[] )
         else if ((arg=="--charset")||(arg=="-c"))
         {
             // make sure there is an arg available
-            if (ndx+1 >= argc)
+            if (ndx+1 > argc)
             {
                 errorMsg( "--charset requires argument." );
             }
