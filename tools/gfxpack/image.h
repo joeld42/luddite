@@ -23,6 +23,9 @@ public:
     //void draw_FT_Bitmap( FT_Bitmap *glyph_bmp, int x, int y,
     //			 unsigned long color, int mono );
 
+    // save as a png
+    void writePng( const char *filename );
+    
     // "thicken"s the image by setting any pixel adjacent to a fg
     // to a fg color. Assumes image is 2-color (fg, bg) at this stage
     void thicken( unsigned long bgcolor );
@@ -39,7 +42,7 @@ public:
 	void pasteFTBitmap( FT_Bitmap *glyph_bmp, int x, int y,
 								 unsigned long color, int mono );
 
-    static bool selfTest();  
+    //static bool selfTest();  
 	
 	int getWidth() const { return w; }
 	int getHeight() const { return h; }

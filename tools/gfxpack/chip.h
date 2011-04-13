@@ -30,5 +30,5 @@ struct Chip
     
     // constructors
     static Chip *makeGlyph( FT_Library *ft, FT_Face face,
-                           int ch );
+                           int ch, int borderWidth );
 };

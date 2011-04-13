@@ -67,8 +67,6 @@ public:
     Image( int w, int h );
     ~Image();
     
-    void writePng( const char *filename );
-    
 protected:
     int m_width, m_height;
     unsigned char *m_data;
@@ -86,65 +84,6 @@ Image::~Image()
 {
     free(m_data);
 }
-
-void Image::writePng( const char *filename )
-{
-    FILE *fp = fopen( filename, "wb" );
-    if (!fp)
-    {
-        printf( "Error writing cache file %s\n", filename );
-        return;
-    }
-    
-    png_structp png_ptr = png_create_write_struct( PNG_LIBPNG_VER_STRING,
-                                                  NULL, NULL, NULL );
-    
-    if (!png_ptr)
-    {
-        errorMsg( "error creating png write struct\n" );
-    }   
-    
-    png_infop info_ptr = png_create_info_struct( png_ptr );
-    if (!info_ptr)
-    {
-        png_destroy_write_struct( &png_ptr, (png_infopp)NULL );
-        errorMsg( "error creating png info struct\n" );
-    }
-    
-    // init IO and compression
-    png_init_io( png_ptr, fp );
-    png_set_compression_level( png_ptr, Z_BEST_COMPRESSION );	
-    
-    // set content header
-    png_set_IHDR( png_ptr, info_ptr, m_width, m_height,
-                 8, PNG_COLOR_TYPE_RGB,
-                 PNG_INTERLACE_NONE,
-                 PNG_COMPRESSION_TYPE_DEFAULT,
-                 PNG_FILTER_TYPE_DEFAULT );
-    
-    // write header info
-    png_write_info(png_ptr, info_ptr);	
-    
-    // write the thing
-    png_byte *row_pointers[m_height];
-    for (int i=0; i < m_height; i++)
-    {
-        // flip 
-        //row_pointers[i] = &(data[(1023-i) * sz * 3]);
-        
-        row_pointers[i] = &(m_data[i * m_width * 4]);
-    }
-    png_write_image( png_ptr, row_pointers );
-    
-    png_write_end( png_ptr, info_ptr );
-    png_destroy_write_struct( &png_ptr, &info_ptr );
-    
-    fclose( fp );
-    
-    printf( "Wrote image %s\n", filename );
-}
-    
-
 
 
 // ===========================================================================
@@ -279,6 +218,9 @@ int main( int argc, char *argv[] )
     FT_Init_FreeType( &ftLibrary );
     FT_Face ftFace;
     
+    // appearance
+    int borderWidth = 0;
+    
     //various outputs
     std::string outFontImg;
     std::string outFinfoFile;
@@ -329,11 +271,15 @@ int main( int argc, char *argv[] )
                          fontfile.c_str(), ft_error );
             }
             
-            if (!ftFace->charmap) {
-                if (ftFace->num_charmaps==0) {
+            if (!ftFace->charmap) 
+            {
+                if (ftFace->num_charmaps==0) 
+                {
                     errorMsg("Font '%s' has no charmaps [FT_Error 0x%02X]\n",
                              fontfile.c_str(), ft_error );
-                } else {
+                } 
+                else
+                {
                     // use the first available charmap
                     FT_Set_Charmap( ftFace, ftFace->charmaps[0] );	     
                 }
@@ -347,7 +293,8 @@ int main( int argc, char *argv[] )
             for (std::string::iterator ch = charSet.begin();
                  ch != charSet.end(); ch++)
             {
-                Chip *glyphChip = Chip::makeGlyph( &ftLibrary, ftFace, *ch );
+                Chip *glyphChip = Chip::makeGlyph( &ftLibrary, ftFace, 
+                                                  *ch, borderWidth );
                 m_chipsToPack.push_back( glyphChip );
             }
         }
@@ -409,6 +356,14 @@ int main( int argc, char *argv[] )
             std::string pattern = argv[ndx++];
             charSet = makeCharset( pattern );
         }
+        else if ((arg=="--border") || (arg=="-b"))
+        {
+            if (ndx+1 > argc)
+            {
+                errorMsg( "--border requires argument." );
+            }
+            borderWidth = atoi( argv[ndx++] );
+        }
         else
         {
             errorMsg( "Unknown argument %s\n", argv[ndx] );
@@ -425,10 +380,15 @@ int main( int argc, char *argv[] )
     
     printf( "TODO: pack font\n" );
     
+    printf("Will pack %d glyphs\n", m_chipsToPack.size() );
+    
+    // save chip 0 for testing
+    m_chipsToPack[0]->m_img->writePng( "test.png" );
+    
     // output image
-    Image fontImg( 512, 512 );
+    //Image fontImg( 512, 512 );
     
     printf("Saving font image %s...\n", outFontImg.c_str() );
-    fontImg.writePng( outFontImg.c_str() );
+    //fontImg.writePng( outFontImg.c_str() );
     
 }

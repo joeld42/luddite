@@ -6,7 +6,11 @@
 #include <ft2build.h>
 #include FT_FREETYPE_H
 
+#include <png.h>
+
 #include "image.h"
+
+void errorMsg( const char *msg, ...);
 
 // This is kind of a mess because it was converted from earlier 
 // C code that was really a mess.
@@ -21,7 +25,7 @@ FpImage::FpImage( int width, int height, unsigned long color )
 {
     w = width;
     h = height;    
-    buf = (unsigned char *)malloc( w*h*3 );
+    buf = (unsigned char *)malloc( w*h*4 );
     clear( color );    
 }
 
@@ -41,7 +45,7 @@ FpImage::FpImage( const FpImage &other )
 
 FpImage &FpImage::operator=( const FpImage &other ) 
 {
-    buf = (unsigned char *)malloc(other.w*other.h*3 );
+    buf = (unsigned char *)malloc(other.w*other.h*4 );
     w = other.w;
     h = other.h;    
     paste( other, 0, 0 );
@@ -52,14 +56,16 @@ FpImage &FpImage::operator=( const FpImage &other )
 
 void FpImage::clear( unsigned long color )
 {
-    unsigned char r,g,b;    
+    unsigned char a,r,g,b;    
     unsigned char *p = buf;
     
+    a = (unsigned char)((color >> 24) & 0xff);
     r = (unsigned char)((color >> 16) & 0xff);
     g = (unsigned char)((color >> 8) & 0xff);
     b = (unsigned char)(color & 0xff);
     
     for (int i=0; i < w*h; i++) {
+        *(p++) = a;
 		*(p++) = r;
 		*(p++) = g;
 		*(p++) = b;
@@ -69,15 +75,16 @@ void FpImage::clear( unsigned long color )
 // swizzle color channel from BGR to RGB or back
 void FpImage::swapBR()
 {
-    unsigned char r,g,b;    
+    unsigned char r,g,b,a;    
     unsigned char *p = buf;       
     
     for (int i=0; i < w*h; i++) {
+        a = *(p+0);
+		b = *(p+1);
+		g = *(p+2);
+		r = *(p+3);
         
-		b = *p;
-		g = *(p+1);
-		r = *(p+2);
-        
+        *(p++) = a;
 		*(p++) = r;
 		*(p++) = g;
 		*(p++) = b;
@@ -95,9 +102,10 @@ void FpImage::paste( const FpImage &other, int pos_x, int pos_y )
             y = pos_y + j;
             if ((x >= 0) && (x <= w) &&
                 (y >= 0) && (y <= h) ) {
-                dest_p = buf + (x + (y*w))*3;
-                src_p  = other.buf + (i + (j*other.w))*3;
+                dest_p = buf + (x + (y*w))*4;
+                src_p  = other.buf + (i + (j*other.w))*4;
                 
+                *(dest_p++) = *(src_p++);
                 *(dest_p++) = *(src_p++);
                 *(dest_p++) = *(src_p++);
                 *(dest_p++) = *(src_p++);
@@ -125,7 +133,7 @@ void FpImage::pasteFTBitmap( FT_Bitmap *glyph_bmp, int x, int y,
 			jj = y + j;
 			
 			if ((ii>=0) && (ii<w)&&(jj>=0)&&(jj<h)) {
-				dest_p = buf + (ii + (jj * w))*3;
+				dest_p = buf + (ii + (jj * w))*4;
 				
 				if (mono) {
 					src_p = glyph_bmp->buffer +  (i/8) + (j*glyph_bmp->pitch);
@@ -140,12 +148,13 @@ void FpImage::pasteFTBitmap( FT_Bitmap *glyph_bmp, int x, int y,
 					t = (float)(*src_p) / 255.0f;		
 				}
 				
-				
-				dest_p[0] = (char)( (t * ((color >> 16) & 0xff)) +  
+				dest_p[0] = 255;
+                
+				dest_p[1] = (char)( (t * ((color >> 16) & 0xff)) +  
                                    ((1.0-t) * dest_p[0]) );
-				dest_p[1] = (char)( (t * ((color >> 8 ) & 0xff)) +  
+				dest_p[2] = (char)( (t * ((color >> 8 ) & 0xff)) +  
                                    ((1.0-t) * dest_p[1]) );
-				dest_p[2] = (char)( (t * (color & 0xff)) +  
+				dest_p[3] = (char)( (t * (color & 0xff)) +  
                                    ((1.0-t) * dest_p[2]) );
 			}
 			
@@ -156,10 +165,10 @@ void FpImage::pasteFTBitmap( FT_Bitmap *glyph_bmp, int x, int y,
 
 void FpImage::thicken( unsigned long bgcolor ) 
 {
-    unsigned char *img2 = (unsigned char *)malloc( w*h*3 ),
+    unsigned char *img2 = (unsigned char *)malloc( w*h*4 ),
 	*img_p, *img2_p;
     int x, y;    
-    unsigned char r, g, b;
+    unsigned char r, g, b, a;
     
     unsigned char bg_r,bg_g,bg_b;    
     bg_r = (unsigned char)((bgcolor >> 16) & 0xff);
@@ -178,10 +187,11 @@ void FpImage::thicken( unsigned long bgcolor )
                         x = i + ii;
                         y = j + jj;
                         if (( x>=0) && (x<w)&&(y>=0)&&(y<h)) {
-                            img_p = buf + ((y * w) + x)*3;
-                            r = img_p[0];
-                            g = img_p[1];
-                            b = img_p[2];
+                            img_p = buf + ((y * w) + x)*4;
+                            a = img_p[0];
+                            r = img_p[1];
+                            g = img_p[2];
+                            b = img_p[3];
                             
                             
                             if ((r!=bg_r)||(g!=bg_g)||(b!=bg_b)) {
@@ -195,23 +205,29 @@ void FpImage::thicken( unsigned long bgcolor )
                 if ((r!=bg_r)||(g!=bg_g)||(b!=bg_b))break;
             }
             
-            img2_p = img2 + ((j*w) + i)*3;
-            img2_p[0] = r;
-            img2_p[1] = g;
-            img2_p[2] = b;
+            img2_p = img2 + ((j*w) + i)*4;
+            
+            img2_p[0] = a;
+            img2_p[1] = r;
+            img2_p[2] = g;
+            img2_p[3] = b;
             
         }	
     }
     
-    memcpy( buf, img2, w*h*3 );
+    memcpy( buf, img2, w*h*4 );
     free(img2);
 }
 
+
+                         
 void FpImage::autoCrop( unsigned long bgcolor )
 {
     unsigned char *shrunk_img, *img_p, 
 	*img = buf;
     int x1, y1, x2, y2; 
+    
+    assert( 0 ); // FIXME: update for RGBA
     
     unsigned char bg_r,bg_g,bg_b;    
     bg_r = (unsigned char)((bgcolor >> 16) & 0xff);
@@ -319,7 +335,68 @@ void FpImage::autoCrop( unsigned long bgcolor )
 }
 
 
+void FpImage::writePng( const char *filename )
+{
+    FILE *fp = fopen( filename, "wb" );
+    if (!fp)
+    {
+        printf( "Error writing cache file %s\n", filename );
+        return;
+    }
+    
+    png_structp png_ptr = png_create_write_struct( PNG_LIBPNG_VER_STRING,
+                                                  NULL, NULL, NULL );
+    
+    if (!png_ptr)
+    {
+        errorMsg( "error creating png write struct\n" );
+    }   
+    
+    png_infop info_ptr = png_create_info_struct( png_ptr );
+    if (!info_ptr)
+    {
+        png_destroy_write_struct( &png_ptr, (png_infopp)NULL );
+        errorMsg( "error creating png info struct\n" );
+    }
+    
+    // init IO and compression
+    png_init_io( png_ptr, fp );
+    png_set_compression_level( png_ptr, Z_BEST_COMPRESSION );	
+    
+    // set content header
+    png_set_IHDR( png_ptr, info_ptr, w, h,
+                 8, PNG_COLOR_TYPE_RGB,
+                 PNG_INTERLACE_NONE,
+                 PNG_COMPRESSION_TYPE_DEFAULT,
+                 PNG_FILTER_TYPE_DEFAULT );
+    
+    // write header info
+    png_write_info(png_ptr, info_ptr);	
+    
+    // write the thing
+    png_byte *row_pointers[h];
+    for (int i=0; i < h; i++)
+    {
+        // flip 
+        //row_pointers[i] = &(data[(1023-i) * sz * 3]);
+        
+        row_pointers[i] = &(buf[i * w * 4]);
+    }
+    png_write_image( png_ptr, row_pointers );
+    
+    png_write_end( png_ptr, info_ptr );
+    png_destroy_write_struct( &png_ptr, &info_ptr );
+    
+    fclose( fp );
+    
+    printf( "Wrote image %s\n", filename );
+}
 
+
+
+
+
+#if 0
 // unit test for FpImage
 bool FpImage::selfTest()
 {
@@ -424,7 +501,7 @@ bool FpImage::selfTest()
     
     return true;    
 }
-
+#endif
 
 
 

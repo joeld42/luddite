@@ -9,8 +9,14 @@
 #include "chip.h"
 #include "image.h"
 
-Chip *Chip::makeGlyph(  FT_Library *ft, FT_Face ftFace, int ch )
+Chip *Chip::makeGlyph(  FT_Library *ft, FT_Face ftFace, 
+                      int ch, int borderWidth )
 {
+    // TODO: un-hardcode this
+    unsigned long borderColor = 0x000055;
+    unsigned long bgColor = 0xFF00FF;
+    unsigned long fgColor = 0xFFFFFF;
+    
     Chip *chip = new Chip();
     
     int glyph_index = FT_Get_Char_Index( ftFace, ch );	
@@ -21,36 +27,44 @@ Chip *Chip::makeGlyph(  FT_Library *ft, FT_Face ftFace, int ch )
 	FT_Load_Glyph( ftFace, glyph_index, FT_LOAD_MONOCHROME );
 	FT_Render_Glyph( ftFace->glyph, ft_render_mode_mono );
     
+    // packing info
     chip->m_xpos = 0;
     chip->m_ypos = 0;
     chip->m_width  = slot->bitmap.width;
     chip->m_height = slot->bitmap.rows;
+    
+    // font info
+    chip->m_char = ch;
     chip->m_baseline = slot->bitmap_top;
     
-    // TODO: border
-	//char_w += borderWidth*2;
-	//char_h += borderWidth*2;	    	
+    // make space for border
+	chip->m_width += borderWidth*2;
+	chip->m_height += borderWidth*2;	    	
     
     // TODO: background color
-    chip->m_img = new FpImage( chip->m_width, chip->m_height, 0xFF00FF );	
-    
+    chip->m_img = new FpImage( chip->m_width, chip->m_height, bgColor );
+	
 #if 0
     if (borderWidth) {
         
-        img->pasteFTBitmap( &slot->bitmap, borderWidth, borderWidth, border, 1 );
+        chip->m_img->pasteFTBitmap( &slot->bitmap, borderWidth, borderWidth, 
+                                   borderColor, 1 );
         
         for (int b=0; b < borderWidth; b++) {		
-            img->thicken( bg );		 
+            chip->m_img->thicken( borderColor );		 
         }
-        
     }
 	
 	// render the glyph again, antialiased, and put it on top of the border
     FT_Load_Glyph( ftFace, glyph_index, FT_LOAD_RENDER );
     FT_Render_Glyph( ftFace->glyph, ft_render_mode_normal );
     
-    img->pasteFTBitmap( &slot->bitmap, borderWidth, borderWidth, fg, 0 );	 
+    chip->m_img->pasteFTBitmap( &slot->bitmap, 
+                               borderWidth, borderWidth, 
+                               fgColor, 0 );	 
 #endif
     
+    printf("makeGlyph %c\n", ch );
+
     return chip;
 }
