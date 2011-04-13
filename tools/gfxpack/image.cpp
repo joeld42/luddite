@@ -323,7 +323,8 @@ void FpImage::autoCrop( unsigned long bgcolor )
 // unit test for FpImage
 bool FpImage::selfTest()
 {
-    int i,j,k;
+    int i,j;
+    unsigned int k;
     
     // create and clear an image
     printf("FpImage::selfTest().....Create and clear an image\n");    
