@@ -9,7 +9,7 @@
 #include "chip.h"
 #include "image.h"
 
-Chip *Chip::makeGlyph(  FT_Library *ft, FT_Face ftFace, 
+Chip *Chip::makeGlyph(  FT_Library *ft, FT_Face ftFace,
                         int ch, int borderWidth,
                         unsigned long fgColor,
                         unsigned long bgColor,
@@ -28,6 +28,7 @@ Chip *Chip::makeGlyph(  FT_Library *ft, FT_Face ftFace,
     // packing info
     chip->m_xpos = 0;
     chip->m_ypos = 0;
+    chip->m_pxlsize = 0; // don't know it here
     chip->m_width  = slot->bitmap.width;
     chip->m_height = slot->bitmap.rows;
     

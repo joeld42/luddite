@@ -18,6 +18,7 @@ struct Chip
 {    
     // glyph info
     char m_char;
+    int m_pxlsize;    
     int m_baseline;
     
     // sprite info
