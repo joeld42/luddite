@@ -111,6 +111,23 @@ PackNode *insertNode( Chip *c, PackNode *curr )
     return NULL;    
 }
 
+FpImage *drawChips( std::vector<Chip*> &chips, int pack_w, int pack_h,
+                    unsigned long bgColor)
+{
+    // TODO: option to enlarge to pow2
+
+    FpImage *img = new FpImage( pack_w, pack_h, bgColor );
+    
+    for (std::vector<Chip*>::iterator ci = chips.begin();
+         ci != chips.end(); ++ci )
+    {
+        img->paste( *(*ci)->m_img, (*ci)->m_xpos, (*ci)->m_ypos );        
+    }
+
+    return img;    
+    
+}
+
 
 void initializePack( std::vector<Chip*> &chips, std::vector<Chip*> &chipsLeft )
 {
@@ -118,7 +135,7 @@ void initializePack( std::vector<Chip*> &chips, std::vector<Chip*> &chipsLeft )
     chipsLeft.erase( chipsLeft.begin(), chipsLeft.end() );
     
     // copy the list into there
-    std::copy( chips.begin(), chips.end(), chipsLeft.begin() );
+    std::copy( chips.begin(), chips.end(), std::back_inserter( chipsLeft) );
 
     // Sort by max dimension
     std::sort( chipsLeft.begin(), chipsLeft.end(), _chipMaxDimLT );    
@@ -126,7 +143,7 @@ void initializePack( std::vector<Chip*> &chips, std::vector<Chip*> &chipsLeft )
 }
 
 
-FpImage *packChips( std::vector<Chip*> chips )
+FpImage *packChips( std::vector<Chip*> chips, unsigned long bgColor )
 {
     std::vector<Chip*> chipsLeft;
     
@@ -144,8 +161,10 @@ FpImage *packChips( std::vector<Chip*> chips )
     
     
     // just start with the size of the first glyph
-    pack_w = chips[0]->m_width;
-    pack_h = chips[0]->m_height;    
+    int maxDim = std::max( chips[0]->m_width, chips[0]->m_height );    
+    pack_w = maxDim;    
+    pack_h = maxDim;
+    
     
     while (!done)
     {        
@@ -166,8 +185,10 @@ FpImage *packChips( std::vector<Chip*> chips )
         {
             // TODO: make an image and paste nodes into it
             // TODO: delete tree
-            printf("Done!\n" );
-            return NULL; // FIXME: tmp            
+            printf("Done! Pack size is %d x %d\n", pack_w, pack_h );
+
+            return drawChips( chips, pack_w, pack_h, bgColor );
+            
         }
         
         // Get the next chip to pack

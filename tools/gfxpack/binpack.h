@@ -7,7 +7,8 @@
 #include "chip.h"
 
 // todo, options?
-FpImage *packChips( std::vector<Chip*> chips );
+FpImage *packChips( std::vector<Chip*> chips, 
+                    unsigned long bgColor );
 
 
 #endif

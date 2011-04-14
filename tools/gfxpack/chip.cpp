@@ -10,13 +10,11 @@
 #include "image.h"
 
 Chip *Chip::makeGlyph(  FT_Library *ft, FT_Face ftFace, 
-                      int ch, int borderWidth )
-{
-    // TODO: un-hardcode this
-    unsigned long borderColor = 0xffffaa33;
-    unsigned long bgColor = 0x00000000;
-    unsigned long fgColor = 0xFFaa4488;
-    
+                        int ch, int borderWidth,
+                        unsigned long fgColor,
+                        unsigned long bgColor,
+                        unsigned long borderColor )
+{    
     Chip *chip = new Chip();
     
     int glyph_index = FT_Get_Char_Index( ftFace, ch );	

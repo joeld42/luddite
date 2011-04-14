@@ -16,7 +16,7 @@
 #define ALL_PUNCTUATION "!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~"
 
 
-// ===========================================================================
+// ==========================================================================
 void doErrorMsg( const char *msg )
 {
     puts( "ERROR: " );
@@ -182,6 +182,96 @@ std::string makeCharset( std::string pattern )
     return charset;
 }
 
+
+// ===========================================================================
+unsigned long parseColor( std::string color )
+{
+    if (color.empty()) return 0xff000000;
+    int r, g, b;
+
+    char *colorErr = "Invalid color '%s', expected color of the form 'R,G,B', '#RRGGBB' or '#RGB'";    
+    
+    // 'web-style' hex value
+    if (color[0]=='#')
+    {
+        if (color.size()==4)
+        {
+            // #rgb 4-bpc
+            int num = strtol( color.c_str()+1, NULL, 16 );
+            r = (num & 0xf00) >> 8;
+            g = (num & 0x0f0) >> 4;
+            (b = num & 0x00f);
+            
+            // double them up, i.e. #fed -> #ffeedd
+            r = (r << 4) | r;
+            g = (g << 4) | g;
+            b = (b << 4) | b;            
+        }
+        else if (color.size()==7)
+        {
+            // rgb 8-bpc
+            int num = strtol( color.c_str()+1, NULL, 16 );
+            r = (num & 0xff0000) >> 16;
+            g = (num & 0x00ff00) >> 8;
+            b = (num & 0x0000ff);
+        }
+        else
+        {
+            errorMsg( colorErr, color.c_str() );            
+        }        
+    }
+    else
+    {
+        // "tuple" style color
+        char *colorStr = strdup( color.c_str() );
+
+        // replace everything that's not a hex digit with spaces
+        for (char *ch=colorStr; *ch; ++ch )
+        {
+            if (!( ((*ch>='0') && (*ch<='9')) ||
+                   ((*ch>='A') && (*ch<='F')) ||
+                   ((*ch>='a') && (*ch<='f')) ) )
+            {
+                // not a digit
+                *ch = ' ';                
+            }            
+        }
+
+        // now use strtok to split the string
+        r = g = b = 0;
+        char *ch = strtok( colorStr, " " );
+        int ndx =0;
+        while (ch)
+        {
+            int n = atoi(ch);
+            switch (ndx)            
+            {
+            case 0:
+                r = n;
+                break;
+            case 1:
+                g = n;
+                break;
+            case 2:
+                b = n;
+                break;
+            default:
+                errorMsg( colorErr, color.c_str() );
+                break;                
+            }            
+            
+            ndx++;            
+            ch = strtok( NULL, " " );            
+        }
+        
+
+        free(colorStr);        
+    }
+
+    return 0xff000000 | (r << 16) | (g << 8) | b;    
+}
+
+
 // ===========================================================================
 int main( int argc, char *argv[] )
 {
@@ -203,7 +293,12 @@ int main( int argc, char *argv[] )
     
     // List of 'chips' to pack
     std::vector<Chip*> m_chipsToPack;
-    
+
+    // colors
+    unsigned long bgColor = 0x00000000;
+    unsigned long borderColor = 0xff000000;
+    unsigned long fgColor = 0xffffffff;    
+
     int ndx = 1;
     while (ndx < argc)
     {
@@ -211,10 +306,7 @@ int main( int argc, char *argv[] )
         if ((arg=="--font")||(arg=="-f"))
         {
             // make sure there is an arg available
-            if (ndx+1 > argc)
-            {
-                errorMsg( "--font requires argument." );
-            }
+            if (ndx+1 > argc) errorMsg( "--font requires argument." );
             
             int pxlSize = 12;
             std::string fontArg = argv[ndx++];
@@ -265,17 +357,16 @@ int main( int argc, char *argv[] )
                  ch != charSet.end(); ch++)
             {
                 Chip *glyphChip = Chip::makeGlyph( &ftLibrary, ftFace, 
-                                                  *ch, borderWidth );
+                                                   *ch, borderWidth,
+                                                   fgColor, bgColor, borderColor );
+
                 m_chipsToPack.push_back( glyphChip );
             }
         }
         else if ((arg=="-o")||(arg=="--out"))
         {
             // make sure there is an arg available
-            if (ndx+1 > argc)
-            {
-                errorMsg( "--out requires argument." );
-            }
+            if (ndx+1 > argc) errorMsg( "--out requires argument." );            
             
             std::string outFile = argv[ndx++];
             
@@ -319,28 +410,37 @@ int main( int argc, char *argv[] )
         else if ((arg=="--charset")||(arg=="-c"))
         {
             // make sure there is an arg available
-            if (ndx+1 > argc)
-            {
-                errorMsg( "--charset requires argument." );
-            }
+            if (ndx+1 > argc) errorMsg( "--charset requires argument." );
             
             std::string pattern = argv[ndx++];
             charSet = makeCharset( pattern );
         }
         else if ((arg=="--border") || (arg=="-b"))
         {
-            if (ndx+1 > argc)
-            {
-                errorMsg( "--border requires argument." );
-            }
+            if (ndx+1 > argc) errorMsg( "--border requires argument." );
             borderWidth = atoi( argv[ndx++] );
         }
+        else if ((arg=="-fg") || (arg=="--foreground"))
+        {
+            if (ndx+1 > argc) errorMsg( "--foreground requires argument." );
+            fgColor = parseColor( argv[ndx++] );
+        }    
+        else if ((arg=="-bg") || (arg=="--background"))
+        {
+            if (ndx+1 > argc) errorMsg( "--background requires argument." );
+            bgColor = parseColor( argv[ndx++] );
+        }    
+        else if ((arg=="-bc") || (arg=="--bordercol"))
+        {
+            if (ndx+1 > argc) errorMsg( "--bordercol requires argument." );
+            borderColor = parseColor( argv[ndx++] );
+        }    
         else
         {
             errorMsg( "Unknown argument %s\n", argv[ndx] );
         }
     }
-    
+
     // Check for required args
     
     // out image
@@ -351,17 +451,21 @@ int main( int argc, char *argv[] )
     
     // pack the chips
     printf("Will pack %d glyphs\n", m_chipsToPack.size() );
-    FpImage *outImg = packChips( m_chipsToPack ); // porkChops?
+    FpImage *outImg = packChips( m_chipsToPack, bgColor ); // porkChops?
     
+    printf("Saving font image %s...\n", outFontImg.c_str() );
 
+    // save the resulting image
+    outImg->writePng( outFontImg.c_str() );
+    
     
     // save chip 0 for testing
-    m_chipsToPack[0]->m_img->writePng( "test.png" );
+    //m_chipsToPack[0]->m_img->writePng( "test.png" );
     
     // output image
     //Image fontImg( 512, 512 );
     
-    printf("Saving font image %s...\n", outFontImg.c_str() );
+    
     //fontImg.writePng( outFontImg.c_str() );
     
 }

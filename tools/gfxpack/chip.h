@@ -32,7 +32,10 @@ struct Chip
     
     // constructors
     static Chip *makeGlyph( FT_Library *ft, FT_Face face,
-                           int ch, int borderWidth );
+                            int ch, int borderWidth,
+                            unsigned long fgColor = 0xFFFFFFFF,
+                            unsigned long bgColor = 0x00000000,
+                            unsigned long borderColor = 0xFF000000 );
 };
 
 #endif
