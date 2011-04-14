@@ -1,3 +1,5 @@
+#ifndef CHIP_H
+#define CHIP_H
 //
 //  chip.h
 //  luddite
@@ -32,3 +34,5 @@ struct Chip
     static Chip *makeGlyph( FT_Library *ft, FT_Face face,
                            int ch, int borderWidth );
 };
+
+#endif

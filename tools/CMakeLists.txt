@@ -10,6 +10,7 @@ SET ( gfxpack_SRCS
 	 gfxpack/gfxpack.cpp
      gfxpack/chip.cpp
      gfxpack/image.cpp
+     gfxpack/binpack.cpp
 	 )	
 
 add_executable( gfxpack ${gfxpack_SRCS} )

@@ -11,7 +11,7 @@
 
 #include "image.h"
 #include "chip.h"
-
+#include "binpack.h"
 
 #define ALL_PUNCTUATION "!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~"
 
@@ -56,35 +56,6 @@ void errorMsg( const char *msg, ...)
     
 	va_end(args);	
 }
-
-
-
-// ===========================================================================
-// super-simple RGBA8 image class
-class Image
-{
-public:
-    Image( int w, int h );
-    ~Image();
-    
-protected:
-    int m_width, m_height;
-    unsigned char *m_data;
-};
-
-Image::Image( int w, int h ) :
-    m_width(w),
-    m_height(h)
-{
-    m_data = (unsigned char *)calloc( sizeof(unsigned char), 
-                                    m_width*m_height*4 );
-}
-
-Image::~Image()
-{
-    free(m_data);
-}
-
 
 // ===========================================================================
 // Takes a pattern string like A-Z,a-z,0-9,1234,ASdsda){],comma and returns
@@ -378,9 +349,11 @@ int main( int argc, char *argv[] )
         errorMsg( "No output image specified (use \"--out image.png\")" );
     }
     
-    printf( "TODO: pack font\n" );
-    
+    // pack the chips
     printf("Will pack %d glyphs\n", m_chipsToPack.size() );
+    FpImage *outImg = packChips( m_chipsToPack ); // porkChops?
+    
+
     
     // save chip 0 for testing
     m_chipsToPack[0]->m_img->writePng( "test.png" );
