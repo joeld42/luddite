@@ -13,9 +13,9 @@ Chip *Chip::makeGlyph(  FT_Library *ft, FT_Face ftFace,
                       int ch, int borderWidth )
 {
     // TODO: un-hardcode this
-    unsigned long borderColor = 0x000055;
-    unsigned long bgColor = 0xFF00FF;
-    unsigned long fgColor = 0xFFFFFF;
+    unsigned long borderColor = 0xffffaa33;
+    unsigned long bgColor = 0x00000000;
+    unsigned long fgColor = 0xFFaa4488;
     
     Chip *chip = new Chip();
     
@@ -44,14 +44,16 @@ Chip *Chip::makeGlyph(  FT_Library *ft, FT_Face ftFace,
     // TODO: background color
     chip->m_img = new FpImage( chip->m_width, chip->m_height, bgColor );
 	
-#if 0
     if (borderWidth) {
+        
+        printf("border width %d\n", borderWidth );
         
         chip->m_img->pasteFTBitmap( &slot->bitmap, borderWidth, borderWidth, 
                                    borderColor, 1 );
         
-        for (int b=0; b < borderWidth; b++) {		
-            chip->m_img->thicken( borderColor );		 
+        for (int b=0; b < borderWidth; b++) 
+        {		
+            chip->m_img->thicken( bgColor );
         }
     }
 	
@@ -62,7 +64,6 @@ Chip *Chip::makeGlyph(  FT_Library *ft, FT_Face ftFace,
     chip->m_img->pasteFTBitmap( &slot->bitmap, 
                                borderWidth, borderWidth, 
                                fgColor, 0 );	 
-#endif
     
     printf("makeGlyph %c\n", ch );
 

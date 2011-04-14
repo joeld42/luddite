@@ -3,10 +3,10 @@
 #include <string.h>
 #include <assert.h>
 
+#include <png.h>
+
 #include <ft2build.h>
 #include FT_FREETYPE_H
-
-#include <png.h>
 
 #include "image.h"
 
@@ -65,10 +65,10 @@ void FpImage::clear( unsigned long color )
     b = (unsigned char)(color & 0xff);
     
     for (int i=0; i < w*h; i++) {
-        *(p++) = a;
 		*(p++) = r;
 		*(p++) = g;
 		*(p++) = b;
+        *(p++) = a;
     } 
 }
 
@@ -79,15 +79,17 @@ void FpImage::swapBR()
     unsigned char *p = buf;       
     
     for (int i=0; i < w*h; i++) {
-        a = *(p+0);
-		b = *(p+1);
-		g = *(p+2);
-		r = *(p+3);
+
+		b = *(p+0);
+		g = *(p+1);
+		r = *(p+2);
+        a = *(p+3);
         
-        *(p++) = a;
 		*(p++) = r;
 		*(p++) = g;
 		*(p++) = b;
+        *(p++) = a;
+
     }
 }
 
@@ -147,15 +149,17 @@ void FpImage::pasteFTBitmap( FT_Bitmap *glyph_bmp, int x, int y,
 					src_p = glyph_bmp->buffer + i + (j*glyph_bmp->pitch);
 					t = (float)(*src_p) / 255.0f;		
 				}
-				
-				dest_p[0] = 255;
+
                 
-				dest_p[1] = (char)( (t * ((color >> 16) & 0xff)) +  
+				dest_p[0] = (char)( (t * ((color >> 16) & 0xff)) +  
                                    ((1.0-t) * dest_p[0]) );
-				dest_p[2] = (char)( (t * ((color >> 8 ) & 0xff)) +  
+				dest_p[1] = (char)( (t * ((color >> 8 ) & 0xff)) +  
                                    ((1.0-t) * dest_p[1]) );
-				dest_p[3] = (char)( (t * (color & 0xff)) +  
+				dest_p[2] = (char)( (t * (color & 0xff)) +  
                                    ((1.0-t) * dest_p[2]) );
+
+                dest_p[3] = ( (t*0xff) + ((1.0-t) * dest_p[3]) );
+
 			}
 			
 		}	
@@ -170,6 +174,8 @@ void FpImage::thicken( unsigned long bgcolor )
     int x, y;    
     unsigned char r, g, b, a;
     
+    // FIXME: this could be simpler now that there's an
+    // alpha channel
     unsigned char bg_r,bg_g,bg_b;    
     bg_r = (unsigned char)((bgcolor >> 16) & 0xff);
     bg_g = (unsigned char)((bgcolor >> 8) & 0xff);
@@ -188,12 +194,12 @@ void FpImage::thicken( unsigned long bgcolor )
                         y = j + jj;
                         if (( x>=0) && (x<w)&&(y>=0)&&(y<h)) {
                             img_p = buf + ((y * w) + x)*4;
-                            a = img_p[0];
-                            r = img_p[1];
-                            g = img_p[2];
-                            b = img_p[3];
-                            
-                            
+
+                            r = img_p[0];
+                            g = img_p[1];
+                            b = img_p[2];
+                            a = img_p[3];
+
                             if ((r!=bg_r)||(g!=bg_g)||(b!=bg_b)) {
                                 break;
                             }
@@ -206,12 +212,11 @@ void FpImage::thicken( unsigned long bgcolor )
             }
             
             img2_p = img2 + ((j*w) + i)*4;
-            
-            img2_p[0] = a;
-            img2_p[1] = r;
-            img2_p[2] = g;
-            img2_p[3] = b;
-            
+
+            img2_p[0] = r;
+            img2_p[1] = g;
+            img2_p[2] = b;
+            img2_p[3] = a;
         }	
     }
     
@@ -227,7 +232,8 @@ void FpImage::autoCrop( unsigned long bgcolor )
 	*img = buf;
     int x1, y1, x2, y2; 
     
-    assert( 0 ); // FIXME: update for RGBA
+    assert( 0 ); // FIXME: update for RGBA .. but I don't think this
+                 // is used anywhere.
     
     unsigned char bg_r,bg_g,bg_b;    
     bg_r = (unsigned char)((bgcolor >> 16) & 0xff);
@@ -365,7 +371,7 @@ void FpImage::writePng( const char *filename )
     
     // set content header
     png_set_IHDR( png_ptr, info_ptr, w, h,
-                 8, PNG_COLOR_TYPE_RGB,
+                 8, PNG_COLOR_TYPE_RGBA,
                  PNG_INTERLACE_NONE,
                  PNG_COMPRESSION_TYPE_DEFAULT,
                  PNG_FILTER_TYPE_DEFAULT );

@@ -8,6 +8,8 @@ include_directories( ${FREETYPE_INCLUDE_DIRS}
 # ----------------------------------------------------------------------------
 SET ( gfxpack_SRCS
 	 gfxpack/gfxpack.cpp
+     gfxpack/chip.cpp
+     gfxpack/image.cpp
 	 )	
 
 add_executable( gfxpack ${gfxpack_SRCS} )
