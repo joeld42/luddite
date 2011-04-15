@@ -8,6 +8,12 @@
 struct PackNode
 {
     PackNode() : left(NULL), right(NULL), chip(NULL) {}
+    ~PackNode()
+    {
+        delete left;
+        delete right;        
+    }
+    
     PackNode *left, *right;
     int w, h, x, y; // rect
     Chip *chip;
@@ -20,7 +26,6 @@ bool _chipMaxDimLT(  Chip *a,  Chip *b ) {
 
 	return am < bm;
 }
-
 
 PackNode *insertNode( Chip *c, PackNode *curr )
 {
@@ -114,8 +119,6 @@ PackNode *insertNode( Chip *c, PackNode *curr )
 FpImage *drawChips( std::vector<Chip*> &chips, int pack_w, int pack_h,
                     unsigned long bgColor)
 {
-    // TODO: option to enlarge to pow2
-
     FpImage *img = new FpImage( pack_w, pack_h, bgColor );
     
     for (std::vector<Chip*>::iterator ci = chips.begin();
@@ -183,10 +186,8 @@ FpImage *packChips( std::vector<Chip*> chips, unsigned long bgColor )
         // Is there anything left to pack?
         if (!chipsLeft.size())
         {
-            // TODO: make an image and paste nodes into it
-            // TODO: delete tree
-            printf("Done! Pack size is %d x %d\n", pack_w, pack_h );
-
+            // delete tree, positions are already copied into chips
+            delete root;            
             return drawChips( chips, pack_w, pack_h, bgColor );
             
         }
@@ -200,10 +201,8 @@ FpImage *packChips( std::vector<Chip*> chips, unsigned long bgColor )
             pack_w += 1;
             pack_h += 1;
 
-            printf("didn't fit, trying size %d %d\n", pack_w, pack_h );
-            
             // reset the layout
-            // FIXME: delete root
+            delete root;            
             root = NULL;            
         }
         else

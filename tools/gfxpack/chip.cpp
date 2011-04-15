@@ -40,12 +40,9 @@ Chip *Chip::makeGlyph(  FT_Library *ft, FT_Face ftFace,
 	chip->m_width += borderWidth*2;
 	chip->m_height += borderWidth*2;	    	
     
-    // TODO: background color
     chip->m_img = new FpImage( chip->m_width, chip->m_height, bgColor );
 	
     if (borderWidth) {
-        
-        printf("border width %d\n", borderWidth );
         
         chip->m_img->pasteFTBitmap( &slot->bitmap, borderWidth, borderWidth, 
                                    borderColor, 1 );
@@ -64,7 +61,5 @@ Chip *Chip::makeGlyph(  FT_Library *ft, FT_Face ftFace,
                                borderWidth, borderWidth, 
                                fgColor, 0 );	 
     
-    printf("makeGlyph %c\n", ch );
-
     return chip;
 }

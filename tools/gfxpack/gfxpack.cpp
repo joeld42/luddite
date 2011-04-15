@@ -334,9 +334,194 @@ void outputFontInfo( std::vector<Chip*> &chips, std::string filename, std::strin
                  c->m_width, c->m_height );
     }
     fclose( fp );    
-    
 }
 
+// ===========================================================================
+void outputCppFile( std::vector<Chip*> &chips, std::string filename, 
+                    int res, std::string banner )
+{
+    FILE *fp = fopen( filename.c_str(), "wt" );
+    std::vector<int> pxlsizes;
+
+    float pixelres = (float)res;    
+    
+    // first, collect all the pixel sizes
+    for (std::vector<Chip*>::iterator ci = chips.begin();
+         ci != chips.end(); ++ci )
+    {
+        // do we already know about this size?
+        if ( std::find( pxlsizes.begin(), pxlsizes.end(), 
+                        (*ci)->m_pxlsize ) == pxlsizes.end() )
+        {
+            // nope, add it
+            pxlsizes.push_back( (*ci)->m_pxlsize );            
+        }        
+    }
+
+    std::sort( pxlsizes.begin(), pxlsizes.end() );    
+
+    // use the c++ filename as the font name
+    size_t startpos = filename.rfind( "/" );
+    if (startpos == std::string::npos) startpos = 0;
+    else startpos++;    
+    
+    size_t endpos = filename.rfind( "." );
+    if ((endpos != 0) && (endpos != std::string::npos)) endpos -= 2;
+    
+    printf( "startpos %d endpos %d\n", startpos, endpos );
+
+    std::string fontname = filename.substr( startpos, endpos );
+
+    // "header part"
+    // now generate a function decl for each pixel size
+    fprintf( fp, "#include <luddite/core/font.h>\n" );
+    fprintf( fp, "#include <luddite/core/texture.h>\n\n" );
+
+    std::stringstream ss(banner);
+    std::string line;
+
+    // add banner info
+    while (std::getline( ss, line ))
+    {
+        fprintf( fp, "// %s\n", line.c_str() );        
+    }
+
+    fprintf( fp, "\n\n// Paste this into a header somewhere:\n" );
+    for (int i=0; i < pxlsizes.size(); i++)
+    {
+        fprintf( fp, "Font *makeFont_%s_%d( luddite::HTexture hFontTex );\n", fontname.c_str(), pxlsizes[i] );
+    }
+    
+    fprintf( fp, "\n\n" );
+    
+    // now generate the functions themselves
+    for (int i=0; i < pxlsizes.size(); i++)
+    {        
+        fprintf( fp, "Font *makeFont_%s_%d( luddite::HTexture hFontTex )\n", fontname.c_str(), pxlsizes[i] );
+        fprintf( fp, "{\n    luddite::Font *font = new luddite::Font( hFontText, %d );\n\n", pxlsizes[i] );
+        
+        // include all the characters for this point size
+        for (std::vector<Chip*>::iterator ci = chips.begin();
+             ci != chips.end(); ++ci )
+        {
+            Chip *c = *ci;
+
+            // only look at chars in this pixel size
+            if (c->m_pxlsize != pxlsizes[i]) continue;            
+
+            float s, t;
+            s = (float)c->m_xpos/pixelres;
+            t = (float)c->m_ypos/pixelres;
+            fprintf( fp, "    font->addGlyph( %3d,%4d,%3d,%3d, %f, %f, %f, %f ); // '%c'\n",
+                     c->m_char,
+                     c->m_baseline,
+                     c->m_width, c->m_height,
+                     s, t, 
+                     s + ((float)c->m_width/pixelres),
+                     t + ((float)c->m_height/pixelres),
+                     c->m_char );            
+        }
+
+        fprintf ( fp, "\n    return font;\n" );
+        fprintf( fp, "}\n\n" );        
+    }
+}
+
+// ===========================================================================
+// output an xml file -- I'm not actually using this for anything so
+// it could be totally broken
+void outputXmlFile( std::vector<Chip*> &chips, std::string filename, 
+                    int w, int h, std::string banner )
+{
+    FILE *fp = fopen( filename.c_str(), "wt" );
+    std::vector<int> pxlsizes;
+
+    float pixelresW = (float)w;
+    float pixelresH = (float)h;
+    
+    // first, collect all the pixel sizes
+    for (std::vector<Chip*>::iterator ci = chips.begin();
+         ci != chips.end(); ++ci )
+    {
+        // do we already know about this size?
+        if ( std::find( pxlsizes.begin(), pxlsizes.end(), 
+                        (*ci)->m_pxlsize ) == pxlsizes.end() )
+        {
+            // nope, add it
+            pxlsizes.push_back( (*ci)->m_pxlsize );            
+        }        
+    }
+
+    std::sort( pxlsizes.begin(), pxlsizes.end() );    
+
+    // use the xml filename as the font name
+    size_t startpos = filename.rfind( "/" );
+    if (startpos == std::string::npos) startpos = 0;
+    else startpos++;
+    size_t endpos = filename.rfind( "." );
+    if ((endpos != 0) && (endpos != std::string::npos)) endpos -= 2;    
+    std::string fontname = filename.substr( startpos, endpos );
+
+
+    fprintf( fp, "<fontset name=\"%s\" imgres=\"%d,%d\" >\n", 
+             fontname.c_str(), w, h );
+
+    // add banner info
+    fprintf( fp, "<!--\n" );
+    fprintf( fp, banner.c_str() );
+    fprintf( fp, "-->\n" );
+    
+    // now generate a block for each pointsize
+    for (int i=0; i < pxlsizes.size(); i++)
+    {        
+        fprintf( fp, "\n    <font pxlsize=\"%d\">\n", pxlsizes[i] );        
+        
+        // include all the characters for this point size
+        for (std::vector<Chip*>::iterator ci = chips.begin();
+             ci != chips.end(); ++ci )
+        {
+            Chip *c = *ci;
+
+            // only look at chars in this pixel size
+            if (c->m_pxlsize != pxlsizes[i]) continue;            
+
+            float s, t;
+            s = (float)c->m_xpos/pixelresW;
+            t = (float)c->m_ypos/pixelresH;
+
+            // make xml-friendly glyph, escaping if needed
+            char *glyph;
+            char buf[3];
+            if (c->m_char=='"') glyph = "&quot;";
+
+            // not sure if these need to be escaped when quoted, but
+            // just in case
+            else if (c->m_char=='\'') glyph = "&apos;";
+            else if (c->m_char=='<') glyph = "&lt;";
+            else if (c->m_char=='>') glyph = "&gt;";
+            else if (c->m_char=='&') glyph = "&amp;";
+            else
+            {                
+                sprintf( buf,"%c", c->m_char);
+                glyph = buf;
+            }                
+                    
+
+            fprintf( fp, "        <glyph char=\"\%s\" baseline=\"%d\" "
+                         "size=\"%d,%d\" texcoords=\"%f, %f, %f, %f\" />\n",
+                     glyph,
+                     c->m_baseline,
+                     c->m_width, c->m_height,
+                     s, t, 
+                     s + ((float)c->m_width/pixelresW),
+                     t + ((float)c->m_height/pixelresH),
+                     c->m_char );            
+        }
+
+        fprintf( fp, "\n    </font>\n" );        
+    }
+    fprintf( fp, "\n</fontset>\n" );        
+}
 
 // ===========================================================================
 int main( int argc, char *argv[] )
@@ -347,11 +532,13 @@ int main( int argc, char *argv[] )
     
     // appearance
     int borderWidth = 0;
+
+    // TODO: needs help/usage
     
     //various outputs
     std::string outFontImg;
     std::string outFinfoFile;
-    std::string outCFile;
+    std::string outCPPFile;
     std::string outXmlFile;
 
     // Current charset
@@ -365,8 +552,8 @@ int main( int argc, char *argv[] )
     unsigned long borderColor = 0xff000000;
     unsigned long fgColor = 0xffffffff;    
 
-    // list of font names
-    std::vector<std::string> fontNames;    
+    // options
+    bool enlargePow2 = false;    
     
     int ndx = 1;
     while (ndx < argc)
@@ -462,7 +649,7 @@ int main( int argc, char *argv[] )
                 }
                 else if ((ext=="cpp")||(ext=="c"))
                 {
-                    outCFile = outFile;
+                    outCPPFile = outFile;
                 }
                 else if (ext=="xml")
                 {
@@ -475,8 +662,6 @@ int main( int argc, char *argv[] )
                              outFile.c_str() );
                 }
             }
-            
-            printf( "TODO: output %s\n", outFile.c_str() );
         }
         else if ((arg=="--charset")||(arg=="-c"))
         {
@@ -506,6 +691,10 @@ int main( int argc, char *argv[] )
             if (ndx+1 > argc) errorMsg( "--bordercol requires argument." );
             borderColor = parseColor( argv[ndx++] );
         }    
+        else if ((arg=="-2") || (arg=="--pow2"))
+        {
+            enlargePow2 = true;            
+        }        
         else
         {
             errorMsg( "Unknown argument %s\n", argv[ndx] );
@@ -523,6 +712,22 @@ int main( int argc, char *argv[] )
     // pack the chips
     printf("Will pack %d glyphs\n", m_chipsToPack.size() );
     FpImage *outImg = packChips( m_chipsToPack, bgColor ); // porkChops?
+
+    // make pow2?
+    if (enlargePow2)
+    {
+        // get the next power of 2
+        size_t nextPow2 = 1;
+        while (nextPow2 < outImg->getWidth()) nextPow2 <<= 1;
+        
+        // copy the image into a new larger one
+        FpImage *pow2Img = new FpImage( nextPow2, nextPow2, bgColor );
+        pow2Img->paste( *outImg, 0, 0 );
+        
+        // replace
+        delete outImg;        
+        outImg = pow2Img;        
+    }    
     
     printf("Saving font image %s...\n", outFontImg.c_str() );
 
@@ -531,7 +736,6 @@ int main( int argc, char *argv[] )
 
     // make a info banner for the text outputs
     std::string banner = makeBanner( argc, argv );
-    printf ("Banner:\n%s\n", banner.c_str() );
 
     // Output finfo if requested
     if (!outFinfoFile.empty())
@@ -540,7 +744,20 @@ int main( int argc, char *argv[] )
         outputFontInfo( m_chipsToPack, outFinfoFile, banner );        
     }
     
+    // Output cpp if requested
+    if (!outCPPFile.empty())
+    {
+        printf("Saving .cpp file %s...\n", outCPPFile.c_str() );
+        outputCppFile( m_chipsToPack, outCPPFile, outImg->getWidth(), banner );        
+    }
 
-    
-    
+    // Output xml if requested
+    if (!outXmlFile.empty())
+    {
+        printf("Saving .xml file %s...\n", outXmlFile.c_str() );
+        outputXmlFile( m_chipsToPack, outXmlFile, 
+                       outImg->getWidth(), 
+                       outImg->getHeight(),
+                       banner );        
+    }    
 }
