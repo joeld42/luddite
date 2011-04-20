@@ -13,20 +13,6 @@ namespace luddite
 // SpriteSheet is a collection of sprites that share a texture.
 class Sprite;
 
-// ========================================================================
-struct SpriteVert
-{
-    GLfloat m_pos[2];
-    GLfloat m_st[2];
-
-    static void bind()
-    {
-        BIND_VERTEX( SpriteVert, m_pos );
-        BIND_TEXTURE_COORD( SpriteVert, m_st );        
-    }    
-
-    MAKE_BINDABLE( SpriteVert );
-};
 
 // ========================================================================
 class SpriteSheet : public GBuff<SpriteVert>

@@ -8,6 +8,8 @@
 #include <luddite/core/handle.h>
 #include <luddite/core/texture.h>
 #include <luddite/core/gbuff.h>
+#include <luddite/core/sprite.h>
+#include <luddite/core/spritesheet.h>
 
 // Opengl
 #include <luddite/platform/gl.h>
@@ -75,6 +77,13 @@ void hello_init()
     tv[5].pos[0] = 100.0; tv[5].pos[1] = 500.0; tv[5].pos[2] = 0.0;
     
     gbuff.update();
+    CHECKGL( "after gbuff" );
+    
+    // Make a sprite from one of the squares
+    luddite::SpriteSheet *sheet = new luddite::SpriteSheet( g_htexGrid );
+    luddite::Sprite *sprite = sheet->makeSprite( 0.0, 0.0, 0.1, 0.1 );
+    
+    
     CHECKGL( "after init..." );    
 }
 

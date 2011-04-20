@@ -620,6 +620,22 @@ int main( int argc, char *argv[] )
                 
                 m_chipsToPack.push_back( glyphChip );
             }
+            
+            // Kerning table 
+            //bool hasKerning = FT_HAS_KERNING(ftFace);
+            // Most ttf fonts have kerning in 'GPOS' tables, which
+            // freetype doesn't handle. So we do some brute force
+            // pseudo kerning here...
+                int glyph_index = FT_Get_Char_Index( ftFace, 'A');	
+                FT_GlyphSlot slot = ftFace->glyph;
+                
+                for (char c2 = 'A'; c2 <= 'Z'; c2++ )
+                {
+                    printf( "kern A -> %c :\n", c2 );
+                }
+
+            
+            
         }
         else if ((arg=="-o")||(arg=="--out"))
         {
