@@ -72,6 +72,19 @@ void FpImage::clear( unsigned long color )
     } 
 }
 
+void FpImage::setPixel( int x, int y, unsigned long color )
+{
+    unsigned char *p = buf + (x + (y* w))*4;
+    
+    
+    *(p+0) = (unsigned char)((color >> 16) & 0xff);
+    *(p+1) = (unsigned char)((color >> 8) & 0xff);
+    *(p+2) = (unsigned char)((color >> 0) & 0xff);
+    *(p+3) = (unsigned char)((color >> 24) & 0xff);
+    
+}
+
+
 // swizzle color channel from BGR to RGB or back
 void FpImage::swapBR()
 {

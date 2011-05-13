@@ -63,3 +63,44 @@ Chip *Chip::makeGlyph(  FT_Library *ft, FT_Face ftFace,
     
     return chip;
 }
+
+
+// TODO: draw char code in box
+Chip *Chip::makeExtra( int ch, int w, int h, int pxlsize,
+                       unsigned long fgColor,
+                       unsigned long bgColor )
+{
+    // add some extras
+    Chip *extraChip = new Chip();
+    
+    // packing info
+    extraChip->m_xpos = 0;
+    extraChip->m_ypos = 0;
+    extraChip->m_pxlsize = 8;
+    extraChip->m_width  = 10;
+    extraChip->m_height = 10;
+    
+    // font info
+    extraChip->m_char = ch;
+    extraChip->m_baseline = 0;
+    
+    // make image for the chip
+    extraChip->m_img = new FpImage( 
+         extraChip->m_width, extraChip->m_height, bgColor );
+    
+    // draw border (CBB: move into image)
+    for (int ii=0; ii < extraChip->m_img->getWidth(); ii++)
+    {
+        extraChip->m_img->setPixel( ii, 0, fgColor );
+        extraChip->m_img->setPixel( ii, extraChip->m_img->getHeight()-1, fgColor );
+    }
+    
+    for (int jj=1; jj < extraChip->m_img->getHeight()-1; jj++)
+    {
+        extraChip->m_img->setPixel( 0, jj, fgColor );
+        extraChip->m_img->setPixel( extraChip->m_img->getWidth()-1, jj, fgColor );
+    }
+
+    
+    return extraChip;
+}

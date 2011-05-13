@@ -17,7 +17,10 @@ public:
     FpImage( const FpImage &other );
     virtual ~FpImage();
 
-    FpImage &operator=( const FpImage &other );    
+    FpImage &operator=( const FpImage &other );  
+    
+    // simple pixel access
+    void setPixel( int x, int y, unsigned long color );
 
     void clear( unsigned long color );
     //void draw_FT_Bitmap( FT_Bitmap *glyph_bmp, int x, int y,

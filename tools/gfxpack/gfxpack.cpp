@@ -548,12 +548,13 @@ int main( int argc, char *argv[] )
     std::vector<Chip*> m_chipsToPack;
 
     // colors
-    unsigned long bgColor = 0x00000000;
+    unsigned long bgColor = 0xffff00ff;
     unsigned long borderColor = 0xff000000;
     unsigned long fgColor = 0xffffffff;    
 
     // options
-    bool enlargePow2 = false;    
+    bool enlargePow2 = false;
+    int numExtras = 0;
     
     int ndx = 1;
     while (ndx < argc)
@@ -620,6 +621,18 @@ int main( int argc, char *argv[] )
                 
                 m_chipsToPack.push_back( glyphChip );
             }
+            
+            
+            // Add any extra chips
+            printf("Pack extra chips: %d\n", numExtras );
+            // TODO: make colors configurable
+            for (int i=0; i < numExtras; i++)
+            {
+                Chip *extraChip = Chip::makeExtra( 28+i, 10, 10, 8 );
+                m_chipsToPack.push_back( extraChip );
+            }
+            
+            
             
             // Kerning table 
             //bool hasKerning = FT_HAS_KERNING(ftFace);
@@ -711,6 +724,10 @@ int main( int argc, char *argv[] )
         {
             enlargePow2 = true;            
         }        
+        else if ((arg=="-x") || (arg=="--extra"))
+        {
+            numExtras = atoi( argv[ndx++] );
+        }
         else
         {
             errorMsg( "Unknown argument %s\n", argv[ndx] );
@@ -728,10 +745,16 @@ int main( int argc, char *argv[] )
     // pack the chips
     printf("Will pack %d glyphs\n", m_chipsToPack.size() );
     FpImage *outImg = packChips( m_chipsToPack, bgColor ); // porkChops?
+    
+    printf("Before expand %s [%dx%d]...\n", 
+           outFontImg.c_str(), 
+           outImg->getWidth(), outImg->getHeight() );
 
     // make pow2?
     if (enlargePow2)
     {
+        printf("Do pow2\n" );
+        
         // get the next power of 2
         size_t nextPow2 = 1;
         while (nextPow2 < outImg->getWidth()) nextPow2 <<= 1;
@@ -745,7 +768,9 @@ int main( int argc, char *argv[] )
         outImg = pow2Img;        
     }    
     
-    printf("Saving font image %s...\n", outFontImg.c_str() );
+    printf("Saving font image %s [%dx%d]...\n", 
+           outFontImg.c_str(), 
+          outImg->getWidth(), outImg->getHeight() );
 
     // save the resulting image
     outImg->writePng( outFontImg.c_str() );

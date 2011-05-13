@@ -37,6 +37,17 @@ struct Chip
                             unsigned long fgColor = 0xFFFFFFFF,
                             unsigned long bgColor = 0x00000000,
                             unsigned long borderColor = 0xFF000000 );
+    
+    // an "extra" chip is a blank glyph with an outline and
+    // the code drawn into it. It is intended that in the final font
+    // image, special images (such as a heart or coin, etc..) will be
+    // drawn replacing the chip. 
+    //
+    // TODO: Add the ability to import extra chip images directly.. 
+    static Chip *makeExtra( int ch, int w, int h, int pxlsize,
+                            unsigned long fgColor=0xFF8888AA,
+                            unsigned long bgColor=0xFF444488 );
+    
 };
 
 #endif

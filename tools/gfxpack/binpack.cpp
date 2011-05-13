@@ -200,7 +200,7 @@ FpImage *packChips( std::vector<Chip*> chips, unsigned long bgColor )
             // can't make it fit, grow the space and start over
             pack_w += 1;
             pack_h += 1;
-
+            
             // reset the layout
             delete root;            
             root = NULL;            
