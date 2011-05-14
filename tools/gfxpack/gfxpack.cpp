@@ -337,7 +337,9 @@ void outputFontInfo( std::vector<Chip*> &chips, std::string filename, std::strin
 }
 
 // ===========================================================================
-void outputCppFile( std::vector<Chip*> &chips, std::string filename, 
+void outputCppFile( std::vector<Chip*> &chips, 
+                    std::string filename, 
+                    std::string fontname,
                     int res, std::string banner )
 {
     FILE *fp = fopen( filename.c_str(), "wt" );
@@ -360,23 +362,31 @@ void outputCppFile( std::vector<Chip*> &chips, std::string filename,
 
     std::sort( pxlsizes.begin(), pxlsizes.end() );    
 
-    // use the c++ filename as the font name
-    size_t startpos = filename.rfind( "/" );
-    if (startpos == std::string::npos) startpos = 0;
-    else startpos++;    
-    
-    size_t endpos = filename.rfind( "." );
-    if ((endpos != 0) && (endpos != std::string::npos)) endpos -= 2;
-    
-    printf( "startpos %d endpos %d\n", startpos, endpos );
+    // use the c++ filename as the font name if none is given
+    if (fontname.empty())
+    {
+        size_t startpos = filename.rfind( "/" );
+        if (startpos == std::string::npos) startpos = 0;
+        else startpos++;    
+        
+        size_t endpos = filename.rfind( "." );
+        if (endpos==std::string::npos) endpos = filename.size();
+        printf( "startpos %d endpos %d\n", startpos, endpos );
 
-    std::string fontname = filename.substr( startpos, endpos );
-
+        fontname = filename.substr( startpos, endpos-startpos );
+        printf("fontname is %s\n", fontname.c_str() );
+    }
+    
     // "header part"
     // now generate a function decl for each pixel size
-    fprintf( fp, "#include <luddite/core/font.h>\n" );
-    fprintf( fp, "#include <luddite/core/texture.h>\n\n" );
-
+    // FIXME: need some kind of templating system.. for now
+    // hack this for pmines
+    //fprintf( fp, "#include <luddite/core/font.h>\n" );
+    //fprintf( fp, "#include <luddite/core/texture.h>\n\n" );
+    fprintf( fp, "#include \"font.h\"\n" );
+    fprintf( fp, "#include \"texture.h\"\n\n" );
+    fprintf( fp, "using namespace Luddite;\n\n" );
+    
     std::stringstream ss(banner);
     std::string line;
 
@@ -389,7 +399,8 @@ void outputCppFile( std::vector<Chip*> &chips, std::string filename,
     fprintf( fp, "\n\n// Paste this into a header somewhere:\n" );
     for (int i=0; i < pxlsizes.size(); i++)
     {
-        fprintf( fp, "Font *makeFont_%s_%d( luddite::HTexture hFontTex );\n", fontname.c_str(), pxlsizes[i] );
+        fprintf( fp, "Luddite::Font *makeFont_%s_%d( Luddite::HTexture hFontTex );\n", fontname.c_str(), pxlsizes[i] );
+        //fprintf( fp, "Luddite::Font *makeFont_%s_%d( luddite::HTexture hFontTex );\n", fontname.c_str(), pxlsizes[i] );
     }
     
     fprintf( fp, "\n\n" );
@@ -397,8 +408,16 @@ void outputCppFile( std::vector<Chip*> &chips, std::string filename,
     // now generate the functions themselves
     for (int i=0; i < pxlsizes.size(); i++)
     {        
-        fprintf( fp, "Font *makeFont_%s_%d( luddite::HTexture hFontTex )\n", fontname.c_str(), pxlsizes[i] );
-        fprintf( fp, "{\n    luddite::Font *font = new luddite::Font( hFontText, %d );\n\n", pxlsizes[i] );
+        //fprintf( fp, "Font *makeFont_%s_%d( luddite::HTexture hFontTex )\n", fontname.c_str(), pxlsizes[i] );
+        //fprintf( fp, "{\n    luddite::Font *font = new luddite::Font( hFontTex, %d );\n\n", pxlsizes[i] );
+        
+        fprintf( fp, "Luddite::Font *makeFont_%s_%d( HTexture hTex )\n", fontname.c_str(), pxlsizes[i] );
+        fprintf( fp, "{\n    Luddite::Font *font = new Luddite::Font( hTex, %d );\n\n", pxlsizes[i] );
+
+        //Luddite::Font *makeFont_MostraB_12( HTexture hTex )
+        //{
+        //    Luddite::Font *font = new Luddite::Font( hTex, 12);
+
         
         // include all the characters for this point size
         for (std::vector<Chip*>::iterator ci = chips.begin();
@@ -412,14 +431,23 @@ void outputCppFile( std::vector<Chip*> &chips, std::string filename,
             float s, t;
             s = (float)c->m_xpos/pixelres;
             t = (float)c->m_ypos/pixelres;
-            fprintf( fp, "    font->addGlyph( %3d,%4d,%3d,%3d, %f, %f, %f, %f ); // '%c'\n",
+            char comment[10];
+            if (isprint(c->m_char))
+            {
+                sprintf( comment, "'%c'", c->m_char );
+            }
+            else
+            {
+                sprintf( comment, "0x%02X", c->m_char );
+            }
+            fprintf( fp, "    font->addGlyph( %3d,%4d,%3d,%3d, %f, %f, %f, %f ); // %s\n",
                      c->m_char,
                      c->m_baseline,
                      c->m_width, c->m_height,
                      s, t, 
                      s + ((float)c->m_width/pixelres),
                      t + ((float)c->m_height/pixelres),
-                     c->m_char );            
+                     comment );            
         }
 
         fprintf ( fp, "\n    return font;\n" );
@@ -536,6 +564,8 @@ int main( int argc, char *argv[] )
     // TODO: needs help/usage
     
     //various outputs
+    std::string outFontId; // font identifier name 
+    
     std::string outFontImg;
     std::string outFinfoFile;
     std::string outCPPFile;
@@ -548,7 +578,7 @@ int main( int argc, char *argv[] )
     std::vector<Chip*> m_chipsToPack;
 
     // colors
-    unsigned long bgColor = 0xffff00ff;
+    unsigned long bgColor = 0x00ffffff;
     unsigned long borderColor = 0xff000000;
     unsigned long fgColor = 0xffffffff;    
 
@@ -625,7 +655,7 @@ int main( int argc, char *argv[] )
             
             // Add any extra chips
             printf("Pack extra chips: %d\n", numExtras );
-            // TODO: make colors configurable
+            // TODO: make colors & size & char code configurable
             for (int i=0; i < numExtras; i++)
             {
                 Chip *extraChip = Chip::makeExtra( 28+i, 10, 10, 8 );
@@ -633,12 +663,12 @@ int main( int argc, char *argv[] )
             }
             
             
-            
+#if 0
             // Kerning table 
             //bool hasKerning = FT_HAS_KERNING(ftFace);
             // Most ttf fonts have kerning in 'GPOS' tables, which
             // freetype doesn't handle. So we do some brute force
-            // pseudo kerning here...
+            // pseudo kerning here... TODO
                 int glyph_index = FT_Get_Char_Index( ftFace, 'A');	
                 FT_GlyphSlot slot = ftFace->glyph;
                 
@@ -646,8 +676,7 @@ int main( int argc, char *argv[] )
                 {
                     printf( "kern A -> %c :\n", c2 );
                 }
-
-            
+#endif
             
         }
         else if ((arg=="-o")||(arg=="--out"))
@@ -728,6 +757,11 @@ int main( int argc, char *argv[] )
         {
             numExtras = atoi( argv[ndx++] );
         }
+        else if ((arg=="-I") || (arg=="--id"))
+        {
+            outFontId = argv[ndx++];
+            printf("Out ID: %s\n", outFontId.c_str() );
+        }
         else
         {
             errorMsg( "Unknown argument %s\n", argv[ndx] );
@@ -768,6 +802,8 @@ int main( int argc, char *argv[] )
         outImg = pow2Img;        
     }    
     
+    printf("bgcolor is #%08X\n", bgColor );
+    
     printf("Saving font image %s [%dx%d]...\n", 
            outFontImg.c_str(), 
           outImg->getWidth(), outImg->getHeight() );
@@ -789,7 +825,7 @@ int main( int argc, char *argv[] )
     if (!outCPPFile.empty())
     {
         printf("Saving .cpp file %s...\n", outCPPFile.c_str() );
-        outputCppFile( m_chipsToPack, outCPPFile, outImg->getWidth(), banner );        
+        outputCppFile( m_chipsToPack, outCPPFile, outFontId, outImg->getWidth(), banner );        
     }
 
     // Output xml if requested
