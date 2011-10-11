@@ -31,6 +31,7 @@ Chip *Chip::makeGlyph(  FT_Library *ft, FT_Face ftFace,
     chip->m_pxlsize = 0; // don't know it here
     chip->m_width  = slot->bitmap.width;
     chip->m_height = slot->bitmap.rows;
+    chip->m_role = ChipRole_GLYPH;
     
     // font info
     chip->m_char = ch;
@@ -79,6 +80,7 @@ Chip *Chip::makeExtra( int ch, int w, int h, int pxlsize,
     extraChip->m_pxlsize = 8;
     extraChip->m_width  = 10;
     extraChip->m_height = 10;
+    extraChip->m_role = ChipRole_GLYPH;
     
     // font info
     extraChip->m_char = ch;
@@ -103,4 +105,27 @@ Chip *Chip::makeExtra( int ch, int w, int h, int pxlsize,
 
     
     return extraChip;
+}
+
+Chip *Chip::makeSprite( const char *spriteName, FpImage *srcImg )
+{
+    Chip *spriteChip = new Chip();
+    
+    // packing info
+    spriteChip->m_xpos = 0;
+    spriteChip->m_ypos = 0;
+    spriteChip->m_pxlsize = 8;
+    spriteChip->m_width  = srcImg->getWidth();
+    spriteChip->m_height = srcImg->getHeight();
+    spriteChip->m_role = ChipRole_SPRITE;
+    spriteChip->m_spriteName = strdup( spriteName );
+    
+    // clip ext
+    char *ch = strrchr( spriteChip->m_spriteName, '.');
+    if (ch) *ch = '\0';
+    
+    spriteChip->m_img = srcImg;
+    
+    return spriteChip;
+    
 }

@@ -10,6 +10,8 @@
 
 #include "image.h"
 
+#define PNG_HEADER_SIZE (8)
+
 void errorMsg( const char *msg, ...);
 
 // This is kind of a mess because it was converted from earlier 
@@ -27,6 +29,11 @@ FpImage::FpImage( int width, int height, unsigned long color )
     h = height;    
     buf = (unsigned char *)malloc( w*h*4 );
     clear( color );    
+}
+
+FpImage::FpImage( const char *filename )
+{
+    _loadPng( filename );
 }
 
 FpImage::~FpImage()
@@ -411,8 +418,148 @@ void FpImage::writePng( const char *filename )
     printf( "Wrote image %s\n", filename );
 }
 
+void FpImage::_errorImage()
+{
+    w = 1;
+    h = 1;    
+    buf = (unsigned char *)malloc( w*h*4 );
+    clear( 0xFF0000 );    
+   
+}
 
-
+void FpImage::_loadPng( const char *filename )
+{
+    // right now just load PNG
+    FILE *fpPng = fopen( filename, "rb");
+    
+    if (!fpPng) 
+    {
+        printf("load_png: file not found %s\n", filename );
+        _errorImage();
+        return;
+    }
+    
+    unsigned char PNG_header[ PNG_HEADER_SIZE ];
+    fread (PNG_header, 1, PNG_HEADER_SIZE, fpPng );
+    if (png_sig_cmp( PNG_header, 0, PNG_HEADER_SIZE ) != 0)
+    {
+        printf( "%s is not a PNG file\n", filename );
+        _errorImage();
+        return;
+    }
+    
+    png_structp PNG_reader = png_create_read_struct( PNG_LIBPNG_VER_STRING, NULL, NULL, NULL);
+    if (PNG_reader == NULL)
+    {
+        printf("Can't start reading PNG file %s\n", filename );
+        fclose(fpPng);
+        _errorImage();
+        return;
+    
+    }
+    
+    png_infop PNG_info = png_create_info_struct(PNG_reader);
+    if (PNG_info == NULL)
+    {
+        printf("Can't get info for PNG file %s\n", filename);
+        
+        png_destroy_read_struct(&PNG_reader, NULL, NULL);
+        fclose(fpPng);
+        _errorImage();
+        return;    
+    }
+    
+    png_infop PNG_end_info = png_create_info_struct(PNG_reader);
+    if (PNG_end_info == NULL)
+    {
+        printf("Can't get end info for PNG file %s\n", filename);
+        
+        png_destroy_read_struct(&PNG_reader, &PNG_info, NULL);
+        fclose(fpPng);
+        _errorImage();
+        return;  
+    }
+    
+    if (setjmp(png_jmpbuf(PNG_reader)))
+    {
+        printf("Can't load PNG file %s\n", filename);
+        
+        png_destroy_read_struct(&PNG_reader, &PNG_info, &PNG_end_info);
+        fclose(fpPng);
+        _errorImage();
+        return;     
+    }
+    
+    png_init_io(PNG_reader, fpPng);
+    png_set_sig_bytes(PNG_reader, PNG_HEADER_SIZE);
+    
+    png_read_info(PNG_reader, PNG_info);
+        
+    png_uint_32 width, height;
+    int bit_depth, color_type;
+    
+    png_get_IHDR(PNG_reader, PNG_info, &width, &height, &bit_depth, &color_type,NULL, NULL, NULL);
+    
+    if (color_type == PNG_COLOR_TYPE_PALETTE)
+    {
+        png_set_palette_to_rgb(PNG_reader);
+    }
+    
+    if (color_type == PNG_COLOR_TYPE_GRAY && bit_depth < 8) 
+    {
+        png_set_gray_1_2_4_to_8(PNG_reader);
+    }
+    
+    if (color_type == PNG_COLOR_TYPE_GRAY ||
+        color_type == PNG_COLOR_TYPE_GRAY_ALPHA)
+    {
+        png_set_gray_to_rgb(PNG_reader);
+    }
+    
+    if (png_get_valid(PNG_reader, PNG_info, PNG_INFO_tRNS))
+    {
+        png_set_tRNS_to_alpha(PNG_reader);
+    }
+    else
+    {
+        png_set_filler(PNG_reader, 0xff, PNG_FILLER_AFTER);
+    }
+    
+    
+    if (bit_depth == 16)
+    {
+        png_set_strip_16(PNG_reader);
+    }
+    
+    png_read_update_info(PNG_reader, PNG_info);
+    
+    png_byte* PNG_image_buffer = (png_byte*)malloc(4 * width * height);
+    memset(PNG_image_buffer,0,4*width*height); // clear image buffer
+    png_byte** PNG_rows = (png_byte**)malloc(height * sizeof(png_byte*));
+    
+    
+    png_uint_32 rowBytes = width*4;
+    
+    // load the image
+    unsigned int row;
+    for (row = 0; row < height; ++row)
+    {
+        PNG_rows[row] = PNG_image_buffer + (row * rowBytes);
+    }
+    png_read_image(PNG_reader, PNG_rows);
+    
+    free(PNG_rows);
+    
+    png_destroy_read_struct(&PNG_reader, &PNG_info, &PNG_end_info);
+    fclose(fpPng);
+    
+    // fill in the texture info
+    w = width;
+    h = height;
+        
+    // return the texture data
+    buf = PNG_image_buffer;    
+}
 
 
 #if 0

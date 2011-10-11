@@ -215,5 +215,5 @@ FpImage *packChips( std::vector<Chip*> chips, unsigned long bgColor )
         
     }
     
-    
+    return NULL;
 }

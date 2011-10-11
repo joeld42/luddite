@@ -192,7 +192,7 @@ unsigned long parseColor( std::string color )
     if (color.empty()) return 0xff000000;
     int r, g, b;
 
-    char *colorErr = "Invalid color '%s', expected color of the form 'R,G,B', '#RRGGBB' or '#RGB'";    
+    const char *colorErr = "Invalid color '%s', expected color of the form 'R,G,B', '#RRGGBB' or '#RGB'";    
     
     // 'web-style' hex value
     if (color[0]=='#')
@@ -371,7 +371,7 @@ void outputCppFile( std::vector<Chip*> &chips,
         
         size_t endpos = filename.rfind( "." );
         if (endpos==std::string::npos) endpos = filename.size();
-        printf( "startpos %d endpos %d\n", startpos, endpos );
+        printf( "startpos %lu endpos %lu\n", startpos, endpos );
 
         fontname = filename.substr( startpos, endpos-startpos );
         printf("fontname is %s\n", fontname.c_str() );
@@ -397,7 +397,7 @@ void outputCppFile( std::vector<Chip*> &chips,
     }
 
     fprintf( fp, "\n\n// Paste this into a header somewhere:\n" );
-    for (int i=0; i < pxlsizes.size(); i++)
+    for (size_t i=0; i < pxlsizes.size(); i++)
     {
         fprintf( fp, "Luddite::Font *makeFont_%s_%d( Luddite::HTexture hFontTex );\n", fontname.c_str(), pxlsizes[i] );
         //fprintf( fp, "Luddite::Font *makeFont_%s_%d( luddite::HTexture hFontTex );\n", fontname.c_str(), pxlsizes[i] );
@@ -406,7 +406,7 @@ void outputCppFile( std::vector<Chip*> &chips,
     fprintf( fp, "\n\n" );
     
     // now generate the functions themselves
-    for (int i=0; i < pxlsizes.size(); i++)
+    for (size_t i=0; i < pxlsizes.size(); i++)
     {        
         //fprintf( fp, "Font *makeFont_%s_%d( luddite::HTexture hFontTex )\n", fontname.c_str(), pxlsizes[i] );
         //fprintf( fp, "{\n    luddite::Font *font = new luddite::Font( hFontTex, %d );\n\n", pxlsizes[i] );
@@ -431,14 +431,24 @@ void outputCppFile( std::vector<Chip*> &chips,
             float s, t;
             s = (float)c->m_xpos/pixelres;
             t = (float)c->m_ypos/pixelres;
-            char comment[10];
-            if (isprint(c->m_char))
+            char comment[1024];
+            
+            printf("Role %lu spriteName %s\n", c->m_role, c->m_spriteName );
+            
+            if (c->m_role == ChipRole_GLYPH)
             {
-                sprintf( comment, "'%c'", c->m_char );
+                if (isprint(c->m_char))
+                {
+                    sprintf( comment, "'%c'", c->m_char );
+                }
+                else
+                {
+                    sprintf( comment, "0x%02X", c->m_char );
+                }
             }
             else
             {
-                sprintf( comment, "0x%02X", c->m_char );
+                sprintf( comment, "Sprite: '%s'", c->m_spriteName );
             }
             fprintf( fp, "    font->addGlyph( %3d,%4d,%3d,%3d, %f, %f, %f, %f ); // %s\n",
                      c->m_char,
@@ -453,6 +463,53 @@ void outputCppFile( std::vector<Chip*> &chips,
         fprintf ( fp, "\n    return font;\n" );
         fprintf( fp, "}\n\n" );        
     }
+}
+
+// ===========================================================================
+// Output a json file -- this is a specific hack right now for something, and
+// needs to be generalized
+void outputJsonFile(std::vector<Chip*> &chips, 
+                   std::string filename, int res )
+
+{
+    FILE *fp = fopen( filename.c_str(), "wt" );
+    fprintf( fp, "{\n  \"chips\": [\n" );
+    
+    float pixelres = (float)res;
+    
+    for (std::vector<Chip*>::iterator ci = chips.begin();
+         ci != chips.end(); ++ci )
+    {
+        // output glyphs as sprites for now
+        Chip *c = *ci;
+        std::string chipname;
+        
+        if (c->m_role == ChipRole_GLYPH)
+        {
+            chipname = c->m_char;
+        }
+        else
+        {
+            chipname = c->m_spriteName;
+        }
+        
+        float s, t;
+        s = (float)c->m_xpos/pixelres;
+        t = (float)c->m_ypos/pixelres;
+        
+        fprintf( fp, "    {\n    \"name\" : \"%s\",\n", chipname.c_str() );
+        fprintf( fp, "        \"size\" : [ %3d, %3d ],\n", c->m_width, c->m_height );
+        fprintf( fp, "        \"texcoords\" : [ %f, %f, %f, %f ]\n", 
+                            s, t, 
+                            s + ((float)c->m_width/pixelres),
+                            t + ((float)c->m_height/pixelres) );
+        
+        fprintf( fp, "    }%s\n", (c==chips.back()?"":",") );
+                
+        
+    }
+    
+    fprintf( fp, "  ]\n}\n" );
 }
 
 // ===========================================================================
@@ -496,11 +553,11 @@ void outputXmlFile( std::vector<Chip*> &chips, std::string filename,
 
     // add banner info
     fprintf( fp, "<!--\n" );
-    fprintf( fp, banner.c_str() );
+    fputs( banner.c_str(), fp );
     fprintf( fp, "-->\n" );
     
     // now generate a block for each pointsize
-    for (int i=0; i < pxlsizes.size(); i++)
+    for (size_t i=0; i < pxlsizes.size(); i++)
     {        
         fprintf( fp, "\n    <font pxlsize=\"%d\">\n", pxlsizes[i] );        
         
@@ -518,7 +575,7 @@ void outputXmlFile( std::vector<Chip*> &chips, std::string filename,
             t = (float)c->m_ypos/pixelresH;
 
             // make xml-friendly glyph, escaping if needed
-            char *glyph;
+            const char *glyph;
             char buf[3];
             if (c->m_char=='"') glyph = "&quot;";
 
@@ -542,8 +599,8 @@ void outputXmlFile( std::vector<Chip*> &chips, std::string filename,
                      c->m_width, c->m_height,
                      s, t, 
                      s + ((float)c->m_width/pixelresW),
-                     t + ((float)c->m_height/pixelresH),
-                     c->m_char );            
+                     t + ((float)c->m_height/pixelresH)
+                    );            
         }
 
         fprintf( fp, "\n    </font>\n" );        
@@ -570,6 +627,7 @@ int main( int argc, char *argv[] )
     std::string outFinfoFile;
     std::string outCPPFile;
     std::string outXmlFile;
+    std::string outJsonFile;
 
     // Current charset
     std::string charSet = makeCharset( "A-Z" );
@@ -585,6 +643,9 @@ int main( int argc, char *argv[] )
     // options
     bool enlargePow2 = false;
     int numExtras = 0;
+    
+    // sprites to pack separately
+    std::vector<std::string> spritesToPack;
     
     int ndx = 1;
     while (ndx < argc)
@@ -662,6 +723,14 @@ int main( int argc, char *argv[] )
                 m_chipsToPack.push_back( extraChip );
             }
             
+            // Add any sprites
+            for (std::vector<std::string>::iterator spi = spritesToPack.begin();
+                 spi != spritesToPack.end(); ++spi )
+            {
+                FpImage *img = new FpImage( (*spi).c_str() );
+                Chip *spriteChip = Chip::makeSprite( (*spi).c_str(), img );
+                m_chipsToPack.push_back( spriteChip );
+            }
             
 #if 0
             // Kerning table 
@@ -713,6 +782,10 @@ int main( int argc, char *argv[] )
                 {
                     outXmlFile = outFile;
                 }
+                else if (ext=="json")
+                {
+                    outJsonFile = outFile;
+                }
                 else
                 {
                     errorMsg( "Unknown output type '%s' for --out %s",
@@ -757,6 +830,10 @@ int main( int argc, char *argv[] )
         {
             numExtras = atoi( argv[ndx++] );
         }
+        else if ((arg=="-s") || (arg=="--sprite"))
+        {
+            spritesToPack.push_back( argv[ndx++] );
+        }
         else if ((arg=="-I") || (arg=="--id"))
         {
             outFontId = argv[ndx++];
@@ -777,7 +854,7 @@ int main( int argc, char *argv[] )
     }
     
     // pack the chips
-    printf("Will pack %d glyphs\n", m_chipsToPack.size() );
+    printf("Will pack %lu glyphs\n", m_chipsToPack.size() );
     FpImage *outImg = packChips( m_chipsToPack, bgColor ); // porkChops?
     
     printf("Before expand %s [%dx%d]...\n", 
@@ -791,7 +868,7 @@ int main( int argc, char *argv[] )
         
         // get the next power of 2
         size_t nextPow2 = 1;
-        while (nextPow2 < outImg->getWidth()) nextPow2 <<= 1;
+        while (nextPow2 < (size_t)(outImg->getWidth())) nextPow2 <<= 1;
         
         // copy the image into a new larger one
         FpImage *pow2Img = new FpImage( nextPow2, nextPow2, bgColor );
@@ -802,7 +879,7 @@ int main( int argc, char *argv[] )
         outImg = pow2Img;        
     }    
     
-    printf("bgcolor is #%08X\n", bgColor );
+    printf("bgcolor is #%08lu\n", bgColor );
     
     printf("Saving font image %s [%dx%d]...\n", 
            outFontImg.c_str(), 
@@ -837,4 +914,11 @@ int main( int argc, char *argv[] )
                        outImg->getHeight(),
                        banner );        
     }    
+    
+    // Output json 
+    if (!outJsonFile.empty())
+    {
+        printf("Saving .json file %s...\n", outJsonFile.c_str() );
+        outputJsonFile( m_chipsToPack, outJsonFile, outImg->getWidth() );
+    }
 }

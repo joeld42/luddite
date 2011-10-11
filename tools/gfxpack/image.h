@@ -13,6 +13,7 @@ class FpImage
 {
 public:
     FpImage();
+    FpImage( const char *filename );
     FpImage( int width, int height, unsigned long color );
     FpImage( const FpImage &other );
     virtual ~FpImage();
@@ -55,6 +56,10 @@ public:
 protected:    
     int w, h;
     unsigned char *buf;
+    
+private:
+    void _loadPng( const char *filename );
+    void _errorImage(); // Initialize the image to a valid, but error, state
 };
 
 

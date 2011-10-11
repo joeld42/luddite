@@ -13,16 +13,25 @@
 
 #include "image.h"
 
+enum 
+{
+    ChipRole_GLYPH  = 0x01,   // Chip will be included in font exports 
+    ChipRole_SPRITE = 0x02    // Chip will be included in sprite exports
+};
+
 // ===========================================================================
 struct Chip
-{    
+{   
+    // role
+    size_t m_role;
+    
     // glyph info
     char m_char;
     int m_pxlsize;    
     int m_baseline;
     
     // sprite info
-    // TODO
+    char *m_spriteName;
     
     // layout info
     int m_xpos, m_ypos;
@@ -43,10 +52,20 @@ struct Chip
     // image, special images (such as a heart or coin, etc..) will be
     // drawn replacing the chip. 
     //
-    // TODO: Add the ability to import extra chip images directly.. 
     static Chip *makeExtra( int ch, int w, int h, int pxlsize,
                             unsigned long fgColor=0xFF8888AA,
                             unsigned long bgColor=0xFF444488 );
+    
+    
+    // An "extra" chip can be added by packing an image directly. This
+    // can be used for sprites or HUD elements or similar
+    /// TOD
+//    static Chip *makeExtra( int ch, int pxlsize,
+//                           FpImage *srcImg );
+    
+    // Pack a sprite
+    static Chip *makeSprite( const char *spriteName, FpImage *srcImg );
+    
     
 };
 
