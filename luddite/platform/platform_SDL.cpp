@@ -98,7 +98,7 @@ bool platform_loadTexture( const char *filename,
 	
     if (color_type == PNG_COLOR_TYPE_GRAY && bit_depth < 8) 
     {
-        png_set_gray_1_2_4_to_8(PNG_reader);
+        png_set_expand_gray_1_2_4_to_8(PNG_reader);
     }
     
     if (color_type == PNG_COLOR_TYPE_GRAY ||
@@ -169,6 +169,7 @@ bool platform_loadTexture( const char *filename,
     // return the texture data
     *out_pixelData = PNG_image_buffer;    
     
+    return true;
 }
 
 // pre-multiply the color channels by the alpha

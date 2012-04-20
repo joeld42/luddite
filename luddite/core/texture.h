@@ -14,8 +14,16 @@
 #include <luddite/platform/gl.h>
 
 #include <luddite/core/handle.h>
-#include <luddite/core/resource.h>
 #include <luddite/core/singleton.h>
+
+// FIXME: resource.h needs a forward declaration of this with clang.
+// Find a less ugly way.
+namespace luddite {
+    struct TextureGL;
+}
+bool loadResource( const char *filename, luddite::TextureGL *texture );
+void unloadResource( luddite::TextureGL *texture );
+#include <luddite/core/resource.h>
 
 namespace luddite
 {

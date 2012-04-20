@@ -64,8 +64,8 @@ protected:
 template <typename VertexT>
 GBuff<VertexT>::GBuff( GLuint usage ) : 
     m_vboSize( 0 ), 
-    m_vbo( 0 ),
-    m_usage( usage )
+    m_usage( usage ),
+    m_vbo( 0 )
 {
 }
 

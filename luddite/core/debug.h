@@ -50,7 +50,7 @@ void _dbgtext_GetProjection();
 
 //---[ Assert ]------------------------------------
 
-bool AssertFunc( bool expr, char *desc, int line, char *file, bool *skip );
+bool AssertFunc( bool expr, const char *desc, int line, const char *file, bool *skip );
 
 // Note this is a #define so you don't need DBG:: namespace
 #ifdef WIN32

@@ -80,8 +80,8 @@ void hello_init()
     CHECKGL( "after gbuff" );
     
     // Make a sprite from one of the squares
-    luddite::SpriteSheet *sheet = new luddite::SpriteSheet( g_htexGrid );
-    luddite::Sprite *sprite = sheet->makeSprite( 0.0, 0.0, 0.1, 0.1 );
+//    luddite::SpriteSheet *sheet = new luddite::SpriteSheet( g_htexGrid );
+//    luddite::Sprite *sprite = sheet->makeSprite( 0.0, 0.0, 0.1, 0.1 );
     
     
     CHECKGL( "after init..." );    
@@ -93,7 +93,8 @@ void hello_redraw()
     luddite::TextureDB &texDB = luddite::TextureDB::singleton();    
     
     GLuint texId = texDB.getTextureId( g_htexGrid );    
-
+    glBindTexture( GL_TEXTURE_2D, texId );
+    
     glClearColor( 0.2f, 0.2f, 0.4f, 1.0f );
     glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );    
 

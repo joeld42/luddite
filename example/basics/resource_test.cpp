@@ -3,10 +3,13 @@
 
 #include <luddite/core/debug.h>
 #include <luddite/core/handle.h>
-#include <luddite/core/resource.h>
 #include <luddite/core/singleton.h>
 
 #include <EASTL/string.h>
+
+struct Waffle;
+bool loadResource( const char *filename, Waffle *item );
+#include <luddite/core/resource.h>
 
 // ---------------------------------------
 // A silly dummy resource to test with

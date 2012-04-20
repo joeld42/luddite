@@ -82,7 +82,7 @@ void vmessage( int message_level, const char *fmt, va_list args) {
 		if (g_colorterm) {			
 			
 #ifndef WIN32
-			printf( catcolor[message_level] );
+			puts( catcolor[message_level] );
 #else
 			if (hStdOut==INVALID_HANDLE_VALUE) {
 				hStdOut = GetStdHandle( STD_OUTPUT_HANDLE );
@@ -96,10 +96,12 @@ void vmessage( int message_level, const char *fmt, va_list args) {
 #endif
 		}
 
+#ifdef WIN32
 message_part:
-
+#endif      
+        
 		//output message
-		printf(catname[message_level]);
+		puts(catname[message_level]);
 		vprintf(fmt, args);  
 
 		// reset color
@@ -382,7 +384,7 @@ bool DBG::AssertFunc( bool expr, char *desc, int line, char *file, bool *skip )
 #else
 
 // uber-assert, linux style
-bool DBG::AssertFunc( bool expr, char *desc, int line, char *file, bool *skip )
+bool DBG::AssertFunc( bool expr, const char *desc, int line, const char *file, bool *skip )
 {
  	if (expr) return false; // don't break if expr is good
 
