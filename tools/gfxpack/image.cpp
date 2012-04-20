@@ -387,7 +387,7 @@ void FpImage::writePng( const char *filename )
     
     // init IO and compression
     png_init_io( png_ptr, fp );
-    png_set_compression_level( png_ptr, Z_BEST_COMPRESSION );	
+    png_set_compression_level( png_ptr, 6 /* Compression level, 0..9 */ );	
     
     // set content header
     png_set_IHDR( png_ptr, info_ptr, w, h,
@@ -507,7 +507,7 @@ void FpImage::_loadPng( const char *filename )
     
     if (color_type == PNG_COLOR_TYPE_GRAY && bit_depth < 8) 
     {
-        png_set_gray_1_2_4_to_8(PNG_reader);
+        png_set_expand_gray_1_2_4_to_8(PNG_reader);
     }
     
     if (color_type == PNG_COLOR_TYPE_GRAY ||
