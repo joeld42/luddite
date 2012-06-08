@@ -1,0 +1,294 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		6DB5678D1581D2D8000A59ED /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DB5678C1581D2D8000A59ED /* Foundation.framework */; };
+		6DB567A91581D3CC000A59ED /* allocator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6DB567A21581D3CC000A59ED /* allocator.cpp */; };
+		6DB567AA1581D3CC000A59ED /* debug.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6DB567A31581D3CC000A59ED /* debug.cpp */; };
+		6DB567AB1581D3CC000A59ED /* debug.h in Headers */ = {isa = PBXBuildFile; fileRef = 6DB567A41581D3CC000A59ED /* debug.h */; };
+		6DB567AD1581D3CC000A59ED /* platform.h in Headers */ = {isa = PBXBuildFile; fileRef = 6DB567A81581D3CC000A59ED /* platform.h */; };
+		6DF342471581D6BB008FBD40 /* ios_debug.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6DF342461581D6BB008FBD40 /* ios_debug.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		6DB567891581D2D8000A59ED /* libluddite_ios.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libluddite_ios.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		6DB5678C1581D2D8000A59ED /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		6DB567901581D2D8000A59ED /* luddite_ios-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "luddite_ios-Prefix.pch"; sourceTree = "<group>"; };
+		6DB567A01581D3CC000A59ED /* CMakeLists.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CMakeLists.txt; sourceTree = "<group>"; };
+		6DB567A21581D3CC000A59ED /* allocator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = allocator.cpp; sourceTree = "<group>"; };
+		6DB567A31581D3CC000A59ED /* debug.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = debug.cpp; sourceTree = "<group>"; };
+		6DB567A41581D3CC000A59ED /* debug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = debug.h; sourceTree = "<group>"; };
+		6DB567A81581D3CC000A59ED /* platform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = platform.h; sourceTree = "<group>"; };
+		6DF342461581D6BB008FBD40 /* ios_debug.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ios_debug.cpp; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		6DB567861581D2D8000A59ED /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6DB5678D1581D2D8000A59ED /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		6DB5677E1581D2D8000A59ED = {
+			isa = PBXGroup;
+			children = (
+				6DB5679F1581D3CC000A59ED /* luddite */,
+				6DB5678E1581D2D8000A59ED /* luddite_ios */,
+				6DB5678B1581D2D8000A59ED /* Frameworks */,
+				6DB5678A1581D2D8000A59ED /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		6DB5678A1581D2D8000A59ED /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6DB567891581D2D8000A59ED /* libluddite_ios.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		6DB5678B1581D2D8000A59ED /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6DB5678C1581D2D8000A59ED /* Foundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6DB5678E1581D2D8000A59ED /* luddite_ios */ = {
+			isa = PBXGroup;
+			children = (
+				6DB5678F1581D2D8000A59ED /* Supporting Files */,
+			);
+			path = luddite_ios;
+			sourceTree = "<group>";
+		};
+		6DB5678F1581D2D8000A59ED /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				6DB567901581D2D8000A59ED /* luddite_ios-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		6DB5679F1581D3CC000A59ED /* luddite */ = {
+			isa = PBXGroup;
+			children = (
+				6DB567A01581D3CC000A59ED /* CMakeLists.txt */,
+				6DB567A11581D3CC000A59ED /* common */,
+				6DB567A51581D3CC000A59ED /* platform */,
+			);
+			name = luddite;
+			path = ../luddite;
+			sourceTree = "<group>";
+		};
+		6DB567A11581D3CC000A59ED /* common */ = {
+			isa = PBXGroup;
+			children = (
+				6DB567A21581D3CC000A59ED /* allocator.cpp */,
+				6DB567A31581D3CC000A59ED /* debug.cpp */,
+				6DB567A41581D3CC000A59ED /* debug.h */,
+			);
+			path = common;
+			sourceTree = "<group>";
+		};
+		6DB567A51581D3CC000A59ED /* platform */ = {
+			isa = PBXGroup;
+			children = (
+				6DF342451581D6BB008FBD40 /* ios */,
+				6DB567A81581D3CC000A59ED /* platform.h */,
+			);
+			path = platform;
+			sourceTree = "<group>";
+		};
+		6DF342451581D6BB008FBD40 /* ios */ = {
+			isa = PBXGroup;
+			children = (
+				6DF342461581D6BB008FBD40 /* ios_debug.cpp */,
+			);
+			path = ios;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		6DB567871581D2D8000A59ED /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6DB567AB1581D3CC000A59ED /* debug.h in Headers */,
+				6DB567AD1581D3CC000A59ED /* platform.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		6DB567881581D2D8000A59ED /* luddite_ios */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6DB567961581D2D8000A59ED /* Build configuration list for PBXNativeTarget "luddite_ios" */;
+			buildPhases = (
+				6DB567851581D2D8000A59ED /* Sources */,
+				6DB567861581D2D8000A59ED /* Frameworks */,
+				6DB567871581D2D8000A59ED /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = luddite_ios;
+			productName = luddite_ios;
+			productReference = 6DB567891581D2D8000A59ED /* libluddite_ios.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		6DB567801581D2D8000A59ED /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0430;
+				ORGANIZATIONNAME = "Joel Davis";
+			};
+			buildConfigurationList = 6DB567831581D2D8000A59ED /* Build configuration list for PBXProject "luddite_ios" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 6DB5677E1581D2D8000A59ED;
+			productRefGroup = 6DB5678A1581D2D8000A59ED /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				6DB567881581D2D8000A59ED /* luddite_ios */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		6DB567851581D2D8000A59ED /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6DB567A91581D3CC000A59ED /* allocator.cpp in Sources */,
+				6DB567AA1581D3CC000A59ED /* debug.cpp in Sources */,
+				6DF342471581D6BB008FBD40 /* ios_debug.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		6DB567941581D2D8000A59ED /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = "";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"${SRCROOT}/../luddite/",
+					"$(SRCROOT)/../extern/eastl/include/",
+					"$(SRCROOT)/../",
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		6DB567951581D2D8000A59ED /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				COPY_PHASE_STRIP = YES;
+				FRAMEWORK_SEARCH_PATHS = "";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"${SRCROOT}/../luddite/",
+					"$(SRCROOT)/../extern/eastl/include/",
+					"$(SRCROOT)/../",
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		6DB567971581D2D8000A59ED /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/luddite_ios.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "luddite_ios/luddite_ios-Prefix.pch";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		6DB567981581D2D8000A59ED /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/luddite_ios.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "luddite_ios/luddite_ios-Prefix.pch";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		6DB567831581D2D8000A59ED /* Build configuration list for PBXProject "luddite_ios" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6DB567941581D2D8000A59ED /* Debug */,
+				6DB567951581D2D8000A59ED /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6DB567961581D2D8000A59ED /* Build configuration list for PBXNativeTarget "luddite_ios" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6DB567971581D2D8000A59ED /* Debug */,
+				6DB567981581D2D8000A59ED /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 6DB567801581D2D8000A59ED /* Project object */;
+}

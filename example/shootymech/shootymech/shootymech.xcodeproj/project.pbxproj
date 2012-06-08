@@ -1,0 +1,328 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		6DB567301581AF1A000A59ED /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DB5672F1581AF1A000A59ED /* UIKit.framework */; };
+		6DB567321581AF1A000A59ED /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DB567311581AF1A000A59ED /* Foundation.framework */; };
+		6DB567341581AF1A000A59ED /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DB567331581AF1A000A59ED /* CoreGraphics.framework */; };
+		6DB567361581AF1A000A59ED /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DB567351581AF1A000A59ED /* GLKit.framework */; };
+		6DB567381581AF1A000A59ED /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DB567371581AF1A000A59ED /* OpenGLES.framework */; };
+		6DB5673E1581AF1A000A59ED /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6DB5673C1581AF1A000A59ED /* InfoPlist.strings */; };
+		6DB567401581AF1A000A59ED /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DB5673F1581AF1A000A59ED /* main.m */; };
+		6DB567441581AF1A000A59ED /* MechAppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6DB567431581AF1A000A59ED /* MechAppDelegate.mm */; };
+		6DB567461581AF1A000A59ED /* Shader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 6DB567451581AF1A000A59ED /* Shader.fsh */; };
+		6DB567481581AF1A000A59ED /* Shader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 6DB567471581AF1A000A59ED /* Shader.vsh */; };
+		6DB5674B1581AF1B000A59ED /* MechViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6DB5674A1581AF1B000A59ED /* MechViewController.mm */; };
+		6DB5674E1581AF1B000A59ED /* MechViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6DB5674C1581AF1B000A59ED /* MechViewController.xib */; };
+		6DF0DAA41581D8EC00AD6F73 /* libluddite_ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DF0DAA31581D8EC00AD6F73 /* libluddite_ios.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		6DB5672B1581AF1A000A59ED /* shootymech.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = shootymech.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6DB5672F1581AF1A000A59ED /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		6DB567311581AF1A000A59ED /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		6DB567331581AF1A000A59ED /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		6DB567351581AF1A000A59ED /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
+		6DB567371581AF1A000A59ED /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		6DB5673B1581AF1A000A59ED /* shootymech-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "shootymech-Info.plist"; sourceTree = "<group>"; };
+		6DB5673D1581AF1A000A59ED /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		6DB5673F1581AF1A000A59ED /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		6DB567411581AF1A000A59ED /* shootymech-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "shootymech-Prefix.pch"; sourceTree = "<group>"; };
+		6DB567421581AF1A000A59ED /* MechAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MechAppDelegate.h; sourceTree = "<group>"; };
+		6DB567431581AF1A000A59ED /* MechAppDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = MechAppDelegate.mm; sourceTree = "<group>"; };
+		6DB567451581AF1A000A59ED /* Shader.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = Shader.fsh; path = Shaders/Shader.fsh; sourceTree = "<group>"; };
+		6DB567471581AF1A000A59ED /* Shader.vsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = Shader.vsh; path = Shaders/Shader.vsh; sourceTree = "<group>"; };
+		6DB567491581AF1B000A59ED /* MechViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MechViewController.h; sourceTree = "<group>"; };
+		6DB5674A1581AF1B000A59ED /* MechViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = MechViewController.mm; sourceTree = "<group>"; };
+		6DB5674D1581AF1B000A59ED /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MechViewController.xib; sourceTree = "<group>"; };
+		6DF0DAA31581D8EC00AD6F73 /* libluddite_ios.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libluddite_ios.a; path = "../../../luddite_ios/build/Debug-iphoneos/libluddite_ios.a"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		6DB567281581AF1A000A59ED /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6DB567301581AF1A000A59ED /* UIKit.framework in Frameworks */,
+				6DB567321581AF1A000A59ED /* Foundation.framework in Frameworks */,
+				6DB567341581AF1A000A59ED /* CoreGraphics.framework in Frameworks */,
+				6DB567361581AF1A000A59ED /* GLKit.framework in Frameworks */,
+				6DB567381581AF1A000A59ED /* OpenGLES.framework in Frameworks */,
+				6DF0DAA41581D8EC00AD6F73 /* libluddite_ios.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		6DB567201581AF1A000A59ED = {
+			isa = PBXGroup;
+			children = (
+				6DB567391581AF1A000A59ED /* shootymech */,
+				6DB5672E1581AF1A000A59ED /* Frameworks */,
+				6DB5672C1581AF1A000A59ED /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		6DB5672C1581AF1A000A59ED /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6DB5672B1581AF1A000A59ED /* shootymech.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		6DB5672E1581AF1A000A59ED /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6DB5672F1581AF1A000A59ED /* UIKit.framework */,
+				6DB567311581AF1A000A59ED /* Foundation.framework */,
+				6DB567331581AF1A000A59ED /* CoreGraphics.framework */,
+				6DB567351581AF1A000A59ED /* GLKit.framework */,
+				6DB567371581AF1A000A59ED /* OpenGLES.framework */,
+				6DF0DAA31581D8EC00AD6F73 /* libluddite_ios.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6DB567391581AF1A000A59ED /* shootymech */ = {
+			isa = PBXGroup;
+			children = (
+				6DB567421581AF1A000A59ED /* MechAppDelegate.h */,
+				6DB567431581AF1A000A59ED /* MechAppDelegate.mm */,
+				6DB567451581AF1A000A59ED /* Shader.fsh */,
+				6DB567471581AF1A000A59ED /* Shader.vsh */,
+				6DB567491581AF1B000A59ED /* MechViewController.h */,
+				6DB5674A1581AF1B000A59ED /* MechViewController.mm */,
+				6DB5674C1581AF1B000A59ED /* MechViewController.xib */,
+				6DB5673A1581AF1A000A59ED /* Supporting Files */,
+			);
+			path = shootymech;
+			sourceTree = "<group>";
+		};
+		6DB5673A1581AF1A000A59ED /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				6DB5673B1581AF1A000A59ED /* shootymech-Info.plist */,
+				6DB5673C1581AF1A000A59ED /* InfoPlist.strings */,
+				6DB5673F1581AF1A000A59ED /* main.m */,
+				6DB567411581AF1A000A59ED /* shootymech-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		6DB5672A1581AF1A000A59ED /* shootymech */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6DB567511581AF1B000A59ED /* Build configuration list for PBXNativeTarget "shootymech" */;
+			buildPhases = (
+				6DB567271581AF1A000A59ED /* Sources */,
+				6DB567281581AF1A000A59ED /* Frameworks */,
+				6DB567291581AF1A000A59ED /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = shootymech;
+			productName = shootymech;
+			productReference = 6DB5672B1581AF1A000A59ED /* shootymech.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		6DB567221581AF1A000A59ED /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = Mech;
+				LastUpgradeCheck = 0430;
+				ORGANIZATIONNAME = "Joel Davis";
+			};
+			buildConfigurationList = 6DB567251581AF1A000A59ED /* Build configuration list for PBXProject "shootymech" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 6DB567201581AF1A000A59ED;
+			productRefGroup = 6DB5672C1581AF1A000A59ED /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				6DB5672A1581AF1A000A59ED /* shootymech */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		6DB567291581AF1A000A59ED /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6DB5673E1581AF1A000A59ED /* InfoPlist.strings in Resources */,
+				6DB567461581AF1A000A59ED /* Shader.fsh in Resources */,
+				6DB567481581AF1A000A59ED /* Shader.vsh in Resources */,
+				6DB5674E1581AF1B000A59ED /* MechViewController.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		6DB567271581AF1A000A59ED /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6DB567401581AF1A000A59ED /* main.m in Sources */,
+				6DB567441581AF1A000A59ED /* MechAppDelegate.mm in Sources */,
+				6DB5674B1581AF1B000A59ED /* MechViewController.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		6DB5673C1581AF1A000A59ED /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6DB5673D1581AF1A000A59ED /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		6DB5674C1581AF1B000A59ED /* MechViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6DB5674D1581AF1B000A59ED /* en */,
+			);
+			name = MechViewController.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		6DB5674F1581AF1B000A59ED /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"${SRCROOT}/../../../luddite/",
+					"$(SRCROOT)/../../../extern/eastl/include/",
+					"$(SRCROOT)/../../..",
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+			};
+			name = Debug;
+		};
+		6DB567501581AF1B000A59ED /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"${SRCROOT}/../../../luddite/",
+					"$(SRCROOT)/../../../extern/eastl/include/",
+					"$(SRCROOT)/../../..",
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		6DB567521581AF1B000A59ED /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "shootymech/shootymech-Prefix.pch";
+				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
+				INFOPLIST_FILE = "shootymech/shootymech-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../../luddite_ios/build/Debug-iphonesimulator\"",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		6DB567531581AF1B000A59ED /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "shootymech/shootymech-Prefix.pch";
+				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
+				INFOPLIST_FILE = "shootymech/shootymech-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../../luddite_ios/build/Debug-iphonesimulator\"",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		6DB567251581AF1A000A59ED /* Build configuration list for PBXProject "shootymech" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6DB5674F1581AF1B000A59ED /* Debug */,
+				6DB567501581AF1B000A59ED /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6DB567511581AF1B000A59ED /* Build configuration list for PBXNativeTarget "shootymech" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6DB567521581AF1B000A59ED /* Debug */,
+				6DB567531581AF1B000A59ED /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 6DB567221581AF1A000A59ED /* Project object */;
+}
