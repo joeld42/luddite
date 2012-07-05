@@ -8,6 +8,11 @@
 
 #import "MechViewController.h"
 
+#import <luddite/common/debug.h>
+#import <luddite/game/gameloop.h>
+
+using namespace luddite;
+
 #define BUFFER_OFFSET(i) ((char *)NULL + (i))
 
 // Uniform index.
@@ -83,7 +88,11 @@ GLfloat gCubeVertexData[216] =
     
     GLuint _vertexArray;
     GLuint _vertexBuffer;
+    
+ 
+    luddite::GameLoop *_gameLoop;
 }
+
 @property (strong, nonatomic) EAGLContext *context;
 @property (strong, nonatomic) GLKBaseEffect *effect;
 
@@ -94,6 +103,7 @@ GLfloat gCubeVertexData[216] =
 - (BOOL)compileShader:(GLuint *)shader type:(GLenum)type file:(NSString *)file;
 - (BOOL)linkProgram:(GLuint)prog;
 - (BOOL)validateProgram:(GLuint)prog;
+
 @end
 
 @implementation MechViewController
@@ -114,6 +124,9 @@ GLfloat gCubeVertexData[216] =
     GLKView *view = (GLKView *)self.view;
     view.context = self.context;
     view.drawableDepthFormat = GLKViewDrawableDepthFormat24;
+    
+    // create game objects
+    _gameLoop = new luddite::GameLoop();
     
     [self setupGL];
 }
@@ -191,6 +204,27 @@ GLfloat gCubeVertexData[216] =
 
 - (void)update
 {
+    // game loop
+    TimeInterval dt;
+    while ((dt=_gameLoop->simStep()) >= 0.0)
+    {
+       // DO GAME SIM STEP HERE
+       
+       // dt will always be a fixed value here (1.0/stepTime) for stability
+       // but it's a good idea to use dt anyways.
+       
+        DBG::info( "Fixed timestep: %f\n", dt );
+    }
+        
+    // DO DYNAMIC SYM STEP HERE
+           
+    // Good for stuff like particles that works well with a variable timestep.
+    // Avoid putting gameplay-dependant stuff here
+    dt = _gameLoop->dynamicStep();
+    DBG::info( "Dynamic timestep: %f\n", dt );
+
+    
+    // GLK sample code update
     float aspect = fabsf(self.view.bounds.size.width / self.view.bounds.size.height);
     GLKMatrix4 projectionMatrix = GLKMatrix4MakePerspective(GLKMathDegreesToRadians(65.0f), aspect, 0.1f, 100.0f);
     

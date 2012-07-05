@@ -1,6 +1,8 @@
 #ifndef PLATFORM_H
 #define PLATFORM_H
 
+#include <stdarg.h>
+
 //---[ Assert ]------------------------------------
 
 #ifdef WIN32

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6D35122C15A56F71000CA0C3 /* gameloop.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6D35122B15A56F71000CA0C3 /* gameloop.cpp */; };
 		6DB5678D1581D2D8000A59ED /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DB5678C1581D2D8000A59ED /* Foundation.framework */; };
 		6DB567A91581D3CC000A59ED /* allocator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6DB567A21581D3CC000A59ED /* allocator.cpp */; };
 		6DB567AA1581D3CC000A59ED /* debug.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6DB567A31581D3CC000A59ED /* debug.cpp */; };
@@ -16,6 +17,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6D35122915A56B99000CA0C3 /* gameloop.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = gameloop.h; path = game/gameloop.h; sourceTree = "<group>"; };
+		6D35122B15A56F71000CA0C3 /* gameloop.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = gameloop.cpp; path = game/gameloop.cpp; sourceTree = "<group>"; };
 		6DB567891581D2D8000A59ED /* libluddite_ios.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libluddite_ios.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		6DB5678C1581D2D8000A59ED /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		6DB567901581D2D8000A59ED /* luddite_ios-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "luddite_ios-Prefix.pch"; sourceTree = "<group>"; };
@@ -39,6 +42,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6D35122D15A56F7E000CA0C3 /* game */ = {
+			isa = PBXGroup;
+			children = (
+				6D35122915A56B99000CA0C3 /* gameloop.h */,
+				6D35122B15A56F71000CA0C3 /* gameloop.cpp */,
+			);
+			name = game;
+			sourceTree = "<group>";
+		};
 		6DB5677E1581D2D8000A59ED = {
 			isa = PBXGroup;
 			children = (
@@ -87,6 +99,7 @@
 				6DB567A01581D3CC000A59ED /* CMakeLists.txt */,
 				6DB567A11581D3CC000A59ED /* common */,
 				6DB567A51581D3CC000A59ED /* platform */,
+				6D35122D15A56F7E000CA0C3 /* game */,
 			);
 			name = luddite;
 			path = ../luddite;
@@ -185,6 +198,7 @@
 				6DB567A91581D3CC000A59ED /* allocator.cpp in Sources */,
 				6DB567AA1581D3CC000A59ED /* debug.cpp in Sources */,
 				6DF342471581D6BB008FBD40 /* ios_debug.cpp in Sources */,
+				6D35122C15A56F71000CA0C3 /* gameloop.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
