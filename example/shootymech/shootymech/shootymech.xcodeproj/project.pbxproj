@@ -234,6 +234,7 @@
 					"${SRCROOT}/../../../luddite/",
 					"$(SRCROOT)/../../../extern/eastl/include/",
 					"$(SRCROOT)/../../..",
+					"$(SRCROOT)/../../../extern/",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				SDKROOT = iphoneos;
@@ -258,6 +259,7 @@
 					"${SRCROOT}/../../../luddite/",
 					"$(SRCROOT)/../../../extern/eastl/include/",
 					"$(SRCROOT)/../../..",
+					"$(SRCROOT)/../../../extern/",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
@@ -276,7 +278,7 @@
 				INFOPLIST_FILE = "shootymech/shootymech-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/../../../luddite_ios/build/Debug-iphonesimulator\"",
+					"\"$(SRCROOT)/../../../luddite_ios/build/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -293,7 +295,7 @@
 				INFOPLIST_FILE = "shootymech/shootymech-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/../../../luddite_ios/build/Debug-iphonesimulator\"",
+					"\"$(SRCROOT)/../../../luddite_ios/build/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";

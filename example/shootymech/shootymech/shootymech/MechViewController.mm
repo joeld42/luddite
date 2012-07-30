@@ -11,6 +11,10 @@
 #import <luddite/common/debug.h>
 #import <luddite/game/gameloop.h>
 
+#import <luddite/render/gbuff.h>
+#import <luddite/render/gbuff_prim.h>
+#import <luddite/render/render_device_es2.h>
+
 using namespace luddite;
 
 #define BUFFER_OFFSET(i) ((char *)NULL + (i))
@@ -40,8 +44,8 @@ GLfloat gCubeVertexData[216] =
     0.5f, 0.5f, -0.5f,         1.0f, 0.0f, 0.0f,
     0.5f, -0.5f, 0.5f,         1.0f, 0.0f, 0.0f,
     0.5f, -0.5f, 0.5f,         1.0f, 0.0f, 0.0f,
-    0.5f, 0.5f, -0.5f,          1.0f, 0.0f, 0.0f,
-    0.5f, 0.5f, 0.5f,         1.0f, 0.0f, 0.0f,
+    0.5f, 0.5f, -0.5f,         1.0f, 0.0f, 0.0f,
+    0.5f, 0.5f, 0.5f,          1.0f, 0.0f, 0.0f,
     
     0.5f, 0.5f, -0.5f,         0.0f, 1.0f, 0.0f,
     -0.5f, 0.5f, -0.5f,        0.0f, 1.0f, 0.0f,
@@ -91,6 +95,10 @@ GLfloat gCubeVertexData[216] =
     
  
     luddite::GameLoop *_gameLoop;
+
+    luddite::RenderDevice *_renderDevice;
+    luddite::GBuff *_gbuffCube;
+    
 }
 
 @property (strong, nonatomic) EAGLContext *context;
@@ -162,6 +170,11 @@ GLfloat gCubeVertexData[216] =
 {
     [EAGLContext setCurrentContext:self.context];
     
+    // Set up luddite stuff
+    _renderDevice = new luddite::RenderDeviceES2();
+    _gbuffCube = luddite::gbuff_cube();
+    
+    // Set up apple example stuff
     [self loadShaders];
     
     self.effect = [[GLKBaseEffect alloc] init];
@@ -213,7 +226,7 @@ GLfloat gCubeVertexData[216] =
        // dt will always be a fixed value here (1.0/stepTime) for stability
        // but it's a good idea to use dt anyways.
        
-        DBG::info( "Fixed timestep: %f\n", dt );
+//        DBG::info( "Fixed timestep: %f\n", dt );
     }
         
     // DO DYNAMIC SYM STEP HERE
@@ -221,14 +234,14 @@ GLfloat gCubeVertexData[216] =
     // Good for stuff like particles that works well with a variable timestep.
     // Avoid putting gameplay-dependant stuff here
     dt = _gameLoop->dynamicStep();
-    DBG::info( "Dynamic timestep: %f\n", dt );
+//    DBG::info( "Dynamic timestep: %f\n", dt );
 
     
     // GLK sample code update
     float aspect = fabsf(self.view.bounds.size.width / self.view.bounds.size.height);
     GLKMatrix4 projectionMatrix = GLKMatrix4MakePerspective(GLKMathDegreesToRadians(65.0f), aspect, 0.1f, 100.0f);
     
-    self.effect.transform.projectionMatrix = projectionMatrix;
+//    self.effect.transform.projectionMatrix = projectionMatrix;
     
     GLKMatrix4 baseModelViewMatrix = GLKMatrix4MakeTranslation(0.0f, 0.0f, -4.0f);
     baseModelViewMatrix = GLKMatrix4Rotate(baseModelViewMatrix, _rotation, 0.0f, 1.0f, 0.0f);
@@ -238,7 +251,7 @@ GLfloat gCubeVertexData[216] =
     modelViewMatrix = GLKMatrix4Rotate(modelViewMatrix, _rotation, 1.0f, 1.0f, 1.0f);
     modelViewMatrix = GLKMatrix4Multiply(baseModelViewMatrix, modelViewMatrix);
     
-    self.effect.transform.modelviewMatrix = modelViewMatrix;
+//    self.effect.transform.modelviewMatrix = modelViewMatrix;
     
     // Compute the model view matrix for the object rendered with ES2
     modelViewMatrix = GLKMatrix4MakeTranslation(0.0f, 0.0f, 1.5f);
@@ -260,9 +273,8 @@ GLfloat gCubeVertexData[216] =
     glBindVertexArrayOES(_vertexArray);
     
     // Render the object with GLKit
-    [self.effect prepareToDraw];
-    
-    glDrawArrays(GL_TRIANGLES, 0, 36);
+//    [self.effect prepareToDraw];    
+//    glDrawArrays(GL_TRIANGLES, 0, 36);
     
     // Render the object again with ES2
     glUseProgram(_program);
@@ -270,7 +282,12 @@ GLfloat gCubeVertexData[216] =
     glUniformMatrix4fv(uniforms[UNIFORM_MODELVIEWPROJECTION_MATRIX], 1, 0, _modelViewProjectionMatrix.m);
     glUniformMatrix3fv(uniforms[UNIFORM_NORMAL_MATRIX], 1, 0, _normalMatrix.m);
     
-    glDrawArrays(GL_TRIANGLES, 0, 36);
+    
+    //glDrawArrays(GL_TRIANGLES, 0, 36);
+    
+    // draw using luddite
+    _renderDevice->addGBuff( _gbuffCube );
+    _renderDevice->renderFrame();
 }
 
 #pragma mark -  OpenGL ES 2 shader compilation
@@ -305,8 +322,13 @@ GLfloat gCubeVertexData[216] =
     
     // Bind attribute locations.
     // This needs to be done prior to linking.
-    glBindAttribLocation(_program, ATTRIB_VERTEX, "position");
-    glBindAttribLocation(_program, ATTRIB_NORMAL, "normal");
+//    glBindAttribLocation(_program, ATTRIB_VERTEX, "position");
+//    glBindAttribLocation(_program, ATTRIB_NORMAL, "normal");
+    
+    // Hack use attribs from luddite
+    glBindAttribLocation(_program, VertexAttrib_POSITION, "position");
+    glBindAttribLocation(_program, VertexAttrib_NORMAL, "normal");
+
     
     // Link program.
     if (![self linkProgram:_program]) {
@@ -341,6 +363,7 @@ GLfloat gCubeVertexData[216] =
         glDetachShader(_program, fragShader);
         glDeleteShader(fragShader);
     }
+    
     
     return YES;
 }

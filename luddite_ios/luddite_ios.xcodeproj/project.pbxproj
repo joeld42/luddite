@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		6D35122C15A56F71000CA0C3 /* gameloop.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6D35122B15A56F71000CA0C3 /* gameloop.cpp */; };
+		6DA6D49F15C60AC000168010 /* gbuff.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6DA6D49E15C60AC000168010 /* gbuff.cpp */; };
+		6DA6D4A115C60B2400168010 /* render_device.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6DA6D4A015C60B2400168010 /* render_device.cpp */; };
+		6DA6D4A615C616A100168010 /* gbuff_prim.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6DA6D4A515C616A100168010 /* gbuff_prim.cpp */; };
+		6DA6D4AC15C62C0700168010 /* render_device_es2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6DA6D4AB15C62C0700168010 /* render_device_es2.cpp */; };
 		6DB5678D1581D2D8000A59ED /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DB5678C1581D2D8000A59ED /* Foundation.framework */; };
 		6DB567A91581D3CC000A59ED /* allocator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6DB567A21581D3CC000A59ED /* allocator.cpp */; };
 		6DB567AA1581D3CC000A59ED /* debug.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6DB567A31581D3CC000A59ED /* debug.cpp */; };
@@ -19,6 +23,15 @@
 /* Begin PBXFileReference section */
 		6D35122915A56B99000CA0C3 /* gameloop.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = gameloop.h; path = game/gameloop.h; sourceTree = "<group>"; };
 		6D35122B15A56F71000CA0C3 /* gameloop.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = gameloop.cpp; path = game/gameloop.cpp; sourceTree = "<group>"; };
+		6DA6D49C15C6080A00168010 /* gbuff.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = gbuff.h; path = render/gbuff.h; sourceTree = "<group>"; };
+		6DA6D49E15C60AC000168010 /* gbuff.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = gbuff.cpp; path = render/gbuff.cpp; sourceTree = "<group>"; };
+		6DA6D4A015C60B2400168010 /* render_device.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = render_device.cpp; path = render/render_device.cpp; sourceTree = "<group>"; };
+		6DA6D4A215C60B3D00168010 /* render_device.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = render_device.h; path = render/render_device.h; sourceTree = "<group>"; };
+		6DA6D4A315C60DFF00168010 /* drawvert.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = drawvert.h; path = render/drawvert.h; sourceTree = "<group>"; };
+		6DA6D4A415C6161000168010 /* gbuff_prim.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = gbuff_prim.h; path = render/gbuff_prim.h; sourceTree = "<group>"; };
+		6DA6D4A515C616A100168010 /* gbuff_prim.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = gbuff_prim.cpp; path = render/gbuff_prim.cpp; sourceTree = "<group>"; };
+		6DA6D4A815C62B0200168010 /* render_device_es2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = render_device_es2.h; path = render/render_device_es2.h; sourceTree = "<group>"; };
+		6DA6D4AB15C62C0700168010 /* render_device_es2.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = render_device_es2.cpp; path = render/render_device_es2.cpp; sourceTree = "<group>"; };
 		6DB567891581D2D8000A59ED /* libluddite_ios.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libluddite_ios.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		6DB5678C1581D2D8000A59ED /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		6DB567901581D2D8000A59ED /* luddite_ios-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "luddite_ios-Prefix.pch"; sourceTree = "<group>"; };
@@ -49,6 +62,22 @@
 				6D35122B15A56F71000CA0C3 /* gameloop.cpp */,
 			);
 			name = game;
+			sourceTree = "<group>";
+		};
+		6DA6D49A15C6079E00168010 /* render */ = {
+			isa = PBXGroup;
+			children = (
+				6DA6D49C15C6080A00168010 /* gbuff.h */,
+				6DA6D49E15C60AC000168010 /* gbuff.cpp */,
+				6DA6D4A215C60B3D00168010 /* render_device.h */,
+				6DA6D4A015C60B2400168010 /* render_device.cpp */,
+				6DA6D4A315C60DFF00168010 /* drawvert.h */,
+				6DA6D4A415C6161000168010 /* gbuff_prim.h */,
+				6DA6D4A515C616A100168010 /* gbuff_prim.cpp */,
+				6DA6D4A815C62B0200168010 /* render_device_es2.h */,
+				6DA6D4AB15C62C0700168010 /* render_device_es2.cpp */,
+			);
+			name = render;
 			sourceTree = "<group>";
 		};
 		6DB5677E1581D2D8000A59ED = {
@@ -99,6 +128,7 @@
 				6DB567A01581D3CC000A59ED /* CMakeLists.txt */,
 				6DB567A11581D3CC000A59ED /* common */,
 				6DB567A51581D3CC000A59ED /* platform */,
+				6DA6D49A15C6079E00168010 /* render */,
 				6D35122D15A56F7E000CA0C3 /* game */,
 			);
 			name = luddite;
@@ -199,6 +229,10 @@
 				6DB567AA1581D3CC000A59ED /* debug.cpp in Sources */,
 				6DF342471581D6BB008FBD40 /* ios_debug.cpp in Sources */,
 				6D35122C15A56F71000CA0C3 /* gameloop.cpp in Sources */,
+				6DA6D49F15C60AC000168010 /* gbuff.cpp in Sources */,
+				6DA6D4A115C60B2400168010 /* render_device.cpp in Sources */,
+				6DA6D4A615C616A100168010 /* gbuff_prim.cpp in Sources */,
+				6DA6D4AC15C62C0700168010 /* render_device_es2.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -228,6 +262,7 @@
 					"${SRCROOT}/../luddite/",
 					"$(SRCROOT)/../extern/eastl/include/",
 					"$(SRCROOT)/../",
+					"$(SRCROOT)/../extern/",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				SDKROOT = iphoneos;
@@ -250,6 +285,7 @@
 					"${SRCROOT}/../luddite/",
 					"$(SRCROOT)/../extern/eastl/include/",
 					"$(SRCROOT)/../",
+					"$(SRCROOT)/../extern/",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				SDKROOT = iphoneos;

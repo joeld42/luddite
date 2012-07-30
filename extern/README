@@ -2,7 +2,7 @@ External libraries used into this project.
 
 These files are from other open-source projects and included here for
 convienance. Note they may have slightly different licensing (but they
-are all BSD-compatible as far as I know) and these not be the most
+are all BSD-compatible as far as I know) and these may not be the most
 current copies.
 
 
@@ -10,3 +10,13 @@ EASTL
 https://github.com/paulhodge/EASTL
 ---------------
 EA's game-friendly STL replacement. Released under a BSD-ish license.
+
+TinyXML
+http://www.grinninglizard.com/tinyxml/
+---------------
+Lightweight c++ xml parser
+
+PRMath
+http://www.twilight3d.com/downloads.html
+-------
+Small, self contained math library from the Prophecy SDK
