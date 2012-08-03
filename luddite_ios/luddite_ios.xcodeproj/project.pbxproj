@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		6D35122C15A56F71000CA0C3 /* gameloop.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6D35122B15A56F71000CA0C3 /* gameloop.cpp */; };
+		6D9352F515CBB27900F24ED5 /* scene_node.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6D9352F415CBB27900F24ED5 /* scene_node.cpp */; };
+		6D9352F815CBBAFD00F24ED5 /* gbatch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6D9352F715CBBAFD00F24ED5 /* gbatch.cpp */; };
 		6DA6D49F15C60AC000168010 /* gbuff.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6DA6D49E15C60AC000168010 /* gbuff.cpp */; };
 		6DA6D4A115C60B2400168010 /* render_device.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6DA6D4A015C60B2400168010 /* render_device.cpp */; };
 		6DA6D4A615C616A100168010 /* gbuff_prim.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6DA6D4A515C616A100168010 /* gbuff_prim.cpp */; };
@@ -23,6 +25,10 @@
 /* Begin PBXFileReference section */
 		6D35122915A56B99000CA0C3 /* gameloop.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = gameloop.h; path = game/gameloop.h; sourceTree = "<group>"; };
 		6D35122B15A56F71000CA0C3 /* gameloop.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = gameloop.cpp; path = game/gameloop.cpp; sourceTree = "<group>"; };
+		6D9352F215CBB26100F24ED5 /* scene_node.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = scene_node.h; path = render/scene_node.h; sourceTree = "<group>"; };
+		6D9352F415CBB27900F24ED5 /* scene_node.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = scene_node.cpp; path = render/scene_node.cpp; sourceTree = "<group>"; };
+		6D9352F615CBBA7600F24ED5 /* gbatch.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = gbatch.h; path = render/gbatch.h; sourceTree = "<group>"; };
+		6D9352F715CBBAFD00F24ED5 /* gbatch.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = gbatch.cpp; path = render/gbatch.cpp; sourceTree = "<group>"; };
 		6DA6D49C15C6080A00168010 /* gbuff.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = gbuff.h; path = render/gbuff.h; sourceTree = "<group>"; };
 		6DA6D49E15C60AC000168010 /* gbuff.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = gbuff.cpp; path = render/gbuff.cpp; sourceTree = "<group>"; };
 		6DA6D4A015C60B2400168010 /* render_device.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = render_device.cpp; path = render/render_device.cpp; sourceTree = "<group>"; };
@@ -76,6 +82,10 @@
 				6DA6D4A515C616A100168010 /* gbuff_prim.cpp */,
 				6DA6D4A815C62B0200168010 /* render_device_es2.h */,
 				6DA6D4AB15C62C0700168010 /* render_device_es2.cpp */,
+				6D9352F215CBB26100F24ED5 /* scene_node.h */,
+				6D9352F415CBB27900F24ED5 /* scene_node.cpp */,
+				6D9352F615CBBA7600F24ED5 /* gbatch.h */,
+				6D9352F715CBBAFD00F24ED5 /* gbatch.cpp */,
 			);
 			name = render;
 			sourceTree = "<group>";
@@ -233,6 +243,8 @@
 				6DA6D4A115C60B2400168010 /* render_device.cpp in Sources */,
 				6DA6D4A615C616A100168010 /* gbuff_prim.cpp in Sources */,
 				6DA6D4AC15C62C0700168010 /* render_device_es2.cpp in Sources */,
+				6D9352F515CBB27900F24ED5 /* scene_node.cpp in Sources */,
+				6D9352F815CBBAFD00F24ED5 /* gbatch.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
