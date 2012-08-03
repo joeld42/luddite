@@ -127,7 +127,7 @@ GLfloat gCubeVertexData[216] =
 
     if (!self.context) {
         NSLog(@"Failed to create ES context");
-    }
+    }    
     
     GLKView *view = (GLKView *)self.view;
     view.context = self.context;
@@ -164,6 +164,7 @@ GLfloat gCubeVertexData[216] =
     } else {
         return YES;
     }
+    
 }
 
 - (void)setupGL
@@ -172,7 +173,9 @@ GLfloat gCubeVertexData[216] =
     
     // Set up luddite stuff
     _renderDevice = new luddite::RenderDeviceES2();
-    _gbuffCube = luddite::gbuff_cube();
+    
+//    _gbuffCube = luddite::gbuff_cube( 1.0, vec3f( 0.0, -0.5, 0.0) );
+    _gbuffCube = luddite::gbuff_cylinder();
     
     // Set up apple example stuff
     [self loadShaders];
@@ -195,7 +198,7 @@ GLfloat gCubeVertexData[216] =
     glEnableVertexAttribArray(GLKVertexAttribNormal);
     glVertexAttribPointer(GLKVertexAttribNormal, 3, GL_FLOAT, GL_FALSE, 24, BUFFER_OFFSET(12));
     
-    glBindVertexArrayOES(0);
+    glBindVertexArrayOES(0);    
 }
 
 - (void)tearDownGL

@@ -22,7 +22,7 @@ void RenderDevice::addGBuff( luddite::GBuff *gbuff )
 void RenderDevice::renderFrame()
 {
     // TODO
-    DBG::info( "In renderFrame, will draw %d gbuffs\n", m_gbuffs.size()  );
+//    DBG::info( "In renderFrame, will draw %d gbuffs\n", m_gbuffs.size()  );
     
 //    eastl::sort( m_gbuffs.begin(), m_gbuffs.end(), GBuff::cmp_ptr );
     
