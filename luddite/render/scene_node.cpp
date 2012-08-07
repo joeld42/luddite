@@ -6,7 +6,16 @@
 //  Copyright (c) 2012 Joel Davis. All rights reserved.
 //
 
+#include <EASTL/string.h>
+
 #include <luddite/render/scene_node.h>
+
+// FIXME: move this somewhere else
+namespace eastl
+{
+EASTL_API EmptyString gEmptyString;
+}
+
 
 using namespace luddite;
 
@@ -37,6 +46,10 @@ void SceneNode::setName( const eastl::string &name )
     m_name = name;
 }
 
+void SceneNode::addGBatch( GBatch *batch )
+{
+    m_shapes.push_back( batch );
+}
 
 void SceneNode::addChild( SceneNode *child )
 {

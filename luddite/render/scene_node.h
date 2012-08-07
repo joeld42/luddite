@@ -32,6 +32,13 @@ public:
     // ----------------------------------------
     const eastl::string &name();
     void setName( const eastl::string &name );
+
+    // ----------------------------------------
+    //  Binding Gbuff (for shape nodes)
+    // ----------------------------------------
+
+    // Low level bindings
+    void addGBatch( GBatch *batch );                                      
     
     // ----------------------------------------
     // Child Nodes and Scene Graph Traversal

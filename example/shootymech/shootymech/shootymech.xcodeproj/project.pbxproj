@@ -35,8 +35,8 @@
 		6DB567411581AF1A000A59ED /* shootymech-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "shootymech-Prefix.pch"; sourceTree = "<group>"; };
 		6DB567421581AF1A000A59ED /* MechAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MechAppDelegate.h; sourceTree = "<group>"; };
 		6DB567431581AF1A000A59ED /* MechAppDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = MechAppDelegate.mm; sourceTree = "<group>"; };
-		6DB567451581AF1A000A59ED /* Shader.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = Shader.fsh; path = Shaders/Shader.fsh; sourceTree = "<group>"; };
-		6DB567471581AF1A000A59ED /* Shader.vsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = Shader.vsh; path = Shaders/Shader.vsh; sourceTree = "<group>"; };
+		6DB567451581AF1A000A59ED /* Shader.fsh */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; name = Shader.fsh; path = Shaders/Shader.fsh; sourceTree = "<group>"; };
+		6DB567471581AF1A000A59ED /* Shader.vsh */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; name = Shader.vsh; path = Shaders/Shader.vsh; sourceTree = "<group>"; };
 		6DB567491581AF1B000A59ED /* MechViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MechViewController.h; sourceTree = "<group>"; };
 		6DB5674A1581AF1B000A59ED /* MechViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = MechViewController.mm; sourceTree = "<group>"; };
 		6DB5674D1581AF1B000A59ED /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MechViewController.xib; sourceTree = "<group>"; };

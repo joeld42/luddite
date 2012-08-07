@@ -17,11 +17,16 @@
 
 namespace luddite
 {
+    // -------------------------------
+    //   Primitives
+    // -------------------------------
     luddite::GBuff *gbuff_cube( float size=1.0, vec3f center=vec3f(0.0,0.0,0.0) );
     
     luddite::GBuff *gbuff_cylinder( int nsegments=12, 
                                    float radius=0.5, float height=1.0,
                                    vec3f center=vec3f(0.0, 0.0, 0.0 ) );    
+
+    void gbuff_setColorConstant( GBuff *gbuff, const vec4f &color );
     
 }; // namespace luddite
 

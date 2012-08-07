@@ -148,3 +148,16 @@ GBuff *luddite::gbuff_cylinder( int nsegments, float radius,
     
     return gbuff;
 }
+
+void luddite::gbuff_setColorConstant( GBuff *gbuff, const vec4f &color )
+{
+    for (eastl::vector<luddite::DrawVert>::iterator vi = gbuff->m_vertData.begin();
+         vi != gbuff->m_vertData.end(); ++vi )
+    {
+        luddite::DrawVert &vert = (*vi);
+        vert.m_color[0] = color.r * 0xff;
+        vert.m_color[1] = color.g * 0xff;
+        vert.m_color[2] = color.b * 0xff;
+        vert.m_color[3] = color.a * 0xff;
+    }
+}
