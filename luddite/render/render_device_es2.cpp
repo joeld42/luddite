@@ -19,9 +19,12 @@
 
 using namespace luddite;
 
-void RenderDeviceES2::_drawGBuff( luddite::GBuff *gbuff )
+void RenderDeviceES2::_drawGBatch( luddite::GBatch *gbatch )
 {
-    // TODO: check for last bound buff and don't rebind
+    luddite::GBuff *gbuff = gbatch->m_gbuff;
+    
+    // Set transform and shader params from gbatch
+    // TODO
     
     // Create gbo for this gbuff if not set up
     if (gbuff->m_vbo==0)

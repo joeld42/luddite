@@ -18,6 +18,9 @@
 namespace luddite
 {
 
+class SceneNode;
+typedef eastl::list<SceneNode*> SceneNodeList;
+    
 // A SceneNode is a node in the scene graph. All Scene Nodes are
 // transform nodes. A scene node may have one or more GBatch
 // attached which is the gbuff+material bindings for it that it should draw
@@ -39,6 +42,8 @@ public:
 
     // Low level bindings
     void addGBatch( GBatch *batch );                                      
+
+    const GBatchList &batches();
     
     // ----------------------------------------
     // Child Nodes and Scene Graph Traversal
@@ -47,6 +52,8 @@ public:
     void removeChild( SceneNode *child );
     
     SceneNode *findNamedChild( const eastl::string &targetName );
+     
+    const SceneNodeList &childs();
         
     // ----------------------------------------
     //  Locations and Transform
@@ -64,8 +71,8 @@ protected:
     eastl::string m_name;
     SceneNode *m_parent;
     
-    eastl::list<GBatch*> m_shapes;
-    eastl::list<SceneNode*> m_childs;
+    GBatchList m_shapes;
+    SceneNodeList m_childs;
     
     // Cached transforms
     // TODO: dirty flag, etc...
@@ -73,7 +80,8 @@ protected:
     matrix4x4f m_xformInv;
     
 };
-    
+
+
 };
 
 #endif

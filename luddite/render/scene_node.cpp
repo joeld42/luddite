@@ -24,6 +24,10 @@ SceneNode::SceneNode( SceneNode *parent ) :
     m_pos( 0.0, 0.0, 0.0 ),
     m_rot( 0.0, 0.0, 0.0, 1.0 )
 {
+    if (parent)
+    {
+        parent->addChild( this );
+    }
 }
 
 SceneNode::SceneNode( const eastl::string &name, 
@@ -33,7 +37,10 @@ SceneNode::SceneNode( const eastl::string &name,
     m_pos( 0.0, 0.0, 0.0 ),
     m_rot( 0.0, 0.0, 0.0, 1.0 )
 {
-    
+    if (parent)
+    {
+        parent->addChild( this );
+    }
 }
 
 const eastl::string &SceneNode::name()
@@ -51,14 +58,27 @@ void SceneNode::addGBatch( GBatch *batch )
     m_shapes.push_back( batch );
 }
 
+const eastl::list<GBatch*> &SceneNode::batches()
+{
+    return m_shapes;
+}
+
 void SceneNode::addChild( SceneNode *child )
 {
+    child->m_parent = this;
     m_childs.push_back( child );
 }
 
 void SceneNode::removeChild( SceneNode *child )
 {
+    // TODO: make sure child exists in childs
+    child->m_parent = NULL;
     m_childs.remove( child );
+}
+
+const SceneNodeList &SceneNode::childs()
+{
+    return m_childs;
 }
 
 SceneNode *SceneNode::findNamedChild( const eastl::string &targetName )
@@ -78,7 +98,7 @@ vec3f SceneNode::worldPos()
 
 vec3f SceneNode::localToWorld( const vec3f &localPos )
 {
-    // todo.. figure out where combined xform lives
+
 }
 
 vec3f SceneNode::worldToLocal( const vec4f &worldPos )

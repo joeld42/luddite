@@ -11,6 +11,7 @@
 
 #include <EASTL/vector.h> 
 #include <luddite/render/gbuff.h>
+#include <luddite/render/gbatch.h>
 
 namespace luddite
 {
@@ -18,15 +19,15 @@ namespace luddite
 class RenderDevice
 {
 public:    
-    void addGBuff( luddite::GBuff *gbuff );
+    void addGBatch( luddite::GBatch *gbatch );
 
     // empties and draws the gbuff list
     void renderFrame();
     
 protected:
     
-    virtual void _drawGBuff( luddite::GBuff *gbuff )=0; 
-    eastl::vector<luddite::GBuff*> m_gbuffs; 
+    virtual void _drawGBatch( luddite::GBatch *gbatch )=0; 
+    eastl::vector<luddite::GBatch*> m_gbatches; 
 };
     
 }; // namespace luddite

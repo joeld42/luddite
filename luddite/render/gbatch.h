@@ -9,6 +9,8 @@
 #ifndef luddite_gbatch_h
 #define luddite_gbatch_h
 
+#include <EASTL/list.h>
+
 #include <prmath/prmath.hpp>
 #include <luddite/render/gbuff.h>
 
@@ -16,6 +18,8 @@
 // can be used as regular shader params
 #define kGBatchNumTex (4)
 
+namespace luddite {
+    
 // A gbatch is a gbuff bound to an xform and a material
 // and textures. (TODO should textures live on the material??)
 struct GBatch 
@@ -30,4 +34,9 @@ struct GBatch
     // TODO
 //    luddite::Material m_mtl;
 };
+  
+typedef eastl::list<GBatch*> GBatchList;
+    
+}; // namespace luddite
+
 #endif

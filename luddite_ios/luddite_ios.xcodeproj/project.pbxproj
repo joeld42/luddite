@@ -11,6 +11,7 @@
 		6D9352F515CBB27900F24ED5 /* scene_node.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6D9352F415CBB27900F24ED5 /* scene_node.cpp */; };
 		6D9352F815CBBAFD00F24ED5 /* gbatch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6D9352F715CBBAFD00F24ED5 /* gbatch.cpp */; };
 		6D9352FC15D0F48700F24ED5 /* color_util.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6D9352FB15D0F48700F24ED5 /* color_util.cpp */; };
+		6D93530015D153D500F24ED5 /* scene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6D9352FF15D153D400F24ED5 /* scene.cpp */; };
 		6DA6D49F15C60AC000168010 /* gbuff.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6DA6D49E15C60AC000168010 /* gbuff.cpp */; };
 		6DA6D4A115C60B2400168010 /* render_device.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6DA6D4A015C60B2400168010 /* render_device.cpp */; };
 		6DA6D4A615C616A100168010 /* gbuff_prim.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6DA6D4A515C616A100168010 /* gbuff_prim.cpp */; };
@@ -33,6 +34,8 @@
 		6D9352FA15D0F45700F24ED5 /* color_util.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = color_util.h; path = render/color_util.h; sourceTree = "<group>"; };
 		6D9352FB15D0F48700F24ED5 /* color_util.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = color_util.cpp; path = render/color_util.cpp; sourceTree = "<group>"; };
 		6D9352FD15D0F53E00F24ED5 /* util.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = util.h; sourceTree = "<group>"; };
+		6D9352FE15D153B900F24ED5 /* scene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = scene.h; path = render/scene.h; sourceTree = "<group>"; };
+		6D9352FF15D153D400F24ED5 /* scene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = scene.cpp; path = render/scene.cpp; sourceTree = "<group>"; };
 		6DA6D49C15C6080A00168010 /* gbuff.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = gbuff.h; path = render/gbuff.h; sourceTree = "<group>"; };
 		6DA6D49E15C60AC000168010 /* gbuff.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = gbuff.cpp; path = render/gbuff.cpp; sourceTree = "<group>"; };
 		6DA6D4A015C60B2400168010 /* render_device.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = render_device.cpp; path = render/render_device.cpp; sourceTree = "<group>"; };
@@ -79,6 +82,8 @@
 			children = (
 				6DA6D49C15C6080A00168010 /* gbuff.h */,
 				6DA6D49E15C60AC000168010 /* gbuff.cpp */,
+				6D9352F615CBBA7600F24ED5 /* gbatch.h */,
+				6D9352F715CBBAFD00F24ED5 /* gbatch.cpp */,
 				6DA6D4A215C60B3D00168010 /* render_device.h */,
 				6DA6D4A015C60B2400168010 /* render_device.cpp */,
 				6DA6D4A315C60DFF00168010 /* drawvert.h */,
@@ -88,8 +93,8 @@
 				6DA6D4AB15C62C0700168010 /* render_device_es2.cpp */,
 				6D9352F215CBB26100F24ED5 /* scene_node.h */,
 				6D9352F415CBB27900F24ED5 /* scene_node.cpp */,
-				6D9352F615CBBA7600F24ED5 /* gbatch.h */,
-				6D9352F715CBBAFD00F24ED5 /* gbatch.cpp */,
+				6D9352FE15D153B900F24ED5 /* scene.h */,
+				6D9352FF15D153D400F24ED5 /* scene.cpp */,
 				6D9352FA15D0F45700F24ED5 /* color_util.h */,
 				6D9352FB15D0F48700F24ED5 /* color_util.cpp */,
 			);
@@ -253,6 +258,7 @@
 				6D9352F515CBB27900F24ED5 /* scene_node.cpp in Sources */,
 				6D9352F815CBBAFD00F24ED5 /* gbatch.cpp in Sources */,
 				6D9352FC15D0F48700F24ED5 /* color_util.cpp in Sources */,
+				6D93530015D153D500F24ED5 /* scene.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

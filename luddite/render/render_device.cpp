@@ -11,28 +11,26 @@
 
 using namespace luddite;
 
-void RenderDevice::addGBuff( luddite::GBuff *gbuff )
+void RenderDevice::addGBatch( luddite::GBatch *gbatch )
 {
-    m_gbuffs.push_back( gbuff );
-//    eastl::push_heap(m_gbuffs.begin(), m_gbuffs.end() );
-//    m_gbuff.push_heap(m_gbuff.begin(), m_gbuff.end(), m_gbuff.cmp_ptr );
+    m_gbatches.push_back( gbatch );
 }
 
 // empties and draws the gbuff list
 void RenderDevice::renderFrame()
 {
     // TODO
-//    DBG::info( "In renderFrame, will draw %d gbuffs\n", m_gbuffs.size()  );
+    DBG::info( "In renderFrame, will draw %d gbatches\n", m_gbatches.size()  );
     
 //    eastl::sort( m_gbuffs.begin(), m_gbuffs.end(), GBuff::cmp_ptr );
     
-    for( eastl::vector<GBuff*>::iterator gbi = m_gbuffs.begin();
-        gbi != m_gbuffs.end(); ++gbi)
+    for( eastl::vector<GBatch*>::iterator gbi = m_gbatches.begin();
+        gbi != m_gbatches.end(); ++gbi)
     {
         // Let the device-specific subclass draw the buffer
-        _drawGBuff( *gbi );
+        _drawGBatch( *gbi );
     }
     
-    m_gbuffs.clear();    
+    m_gbatches.clear();    
 }
 

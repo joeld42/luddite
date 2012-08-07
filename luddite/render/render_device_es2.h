@@ -18,7 +18,7 @@ class RenderDeviceES2 : public luddite::RenderDevice
 {
     
 protected:
-  virtual void _drawGBuff( luddite::GBuff *gbuff );
+  virtual void _drawGBatch( luddite::GBatch *gbatch );
     
 };
     

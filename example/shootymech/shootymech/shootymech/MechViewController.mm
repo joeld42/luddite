@@ -14,8 +14,10 @@
 #include <luddite/render/gbuff.h>
 #include <luddite/render/gbuff_prim.h>
 #include <luddite/render/render_device_es2.h>
+#include <luddite/render/scene.h>
 #include <luddite/render/scene_node.h>
 #include <luddite/render/color_util.h>
+
 
 using namespace luddite;
 
@@ -101,7 +103,7 @@ GLfloat gCubeVertexData[216] =
     luddite::RenderDevice *_renderDevice;
     luddite::GBuff *_gbuffCube;
     
-    luddite::SceneNode *_worldRoot;
+    luddite::Scene *_scene;
     
 }
 
@@ -181,21 +183,28 @@ GLfloat gCubeVertexData[216] =
 //    _gbuffCube = luddite::gbuff_cube( 1.0, vec3f( 0.0, -0.5, 0.0) );
     _gbuffCube = luddite::gbuff_cylinder();
     
+    GBatch *cubeBatch = new GBatch();
+    cubeBatch->m_gbuff = _gbuffCube;
+    
     // test .. set cube to purple
     gbuff_setColorConstant( _gbuffCube, vec4f( 1.0, 0.0, 1.0, 1.0) );
     
     // Build scene graph
-    _worldRoot = new luddite::SceneNode();
+    luddite::SceneNode *worldRoot = new luddite::SceneNode( "worldRoot" );
     
     // make a ring of cube around the world root
     for (float t=0.0; t <= 2.0*M_PI; t += ( 20.0 * M_PI ) / 180.0 )
     {
         vec3f cubePos = vec3f( cos(t)*2.0, 0.0, sin(t)*2.0 );
-        luddite::SceneNode *cubeNode = new luddite::SceneNode( _worldRoot );
+        luddite::SceneNode *cubeNode = new luddite::SceneNode( worldRoot );
         cubeNode->m_pos = cubePos;
         
-        // TODO.. bind gbuff to scene node
+        // bind gbuff to scene node
+        cubeNode->addGBatch( cubeBatch );
     }
+    
+    // Create scene
+    _scene = new luddite::Scene( worldRoot );
     
     // Set up apple example stuff
     [self loadShaders];
@@ -309,8 +318,14 @@ GLfloat gCubeVertexData[216] =
     //glDrawArrays(GL_TRIANGLES, 0, 36);
     
     // draw using luddite
-    _renderDevice->addGBuff( _gbuffCube );
+//    _renderDevice->addGBuff( _gbuffCube );
+//    _renderDevice->renderFrame();
+    
+    // Draw scene
+    NSLog( @"eval/draw scene" );
+    _scene->eval( _renderDevice );
     _renderDevice->renderFrame();
+    
 }
 
 #pragma mark -  OpenGL ES 2 shader compilation
