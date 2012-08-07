@@ -24,8 +24,9 @@ void RenderDeviceES2::_drawGBatch( luddite::GBatch *gbatch )
     luddite::GBuff *gbuff = gbatch->m_gbuff;
     
     // Set transform and shader params from gbatch
-    // TODO
-    
+    glUniformMatrix4fv(uparam_modelViewProjection, 1, 0, gbatch->m_xform.m16 );
+//    glUniformMatrix3fv(uparam_normalMat, 1, 0, _normalMatrix.m);
+
     // Create gbo for this gbuff if not set up
     if (gbuff->m_vbo==0)
     {

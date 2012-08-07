@@ -96,6 +96,20 @@ vec3f SceneNode::worldPos()
     return localToWorld(vec3f(0.0,0.0,0.0) );
 }
 
+matrix4x4f SceneNode::localXForm()
+{
+    matrix4x4f xform;
+    matrix4x4f rot;
+    
+    xform.Identity();
+    xform.Translate(m_pos);
+    
+    rot = m_rot; // quat to matrix
+    xform = xform * rot;
+    
+    return xform;
+}
+
 vec3f SceneNode::localToWorld( const vec3f &localPos )
 {
 

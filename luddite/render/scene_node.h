@@ -65,6 +65,9 @@ public:
     // TODO wrap with accessors for dirty flag?
     vec3f  m_pos;
     quat4f m_rot;
+    
+    // Build the current xform
+    matrix4x4f localXForm();
         
     
 protected:
@@ -72,13 +75,7 @@ protected:
     SceneNode *m_parent;
     
     GBatchList m_shapes;
-    SceneNodeList m_childs;
-    
-    // Cached transforms
-    // TODO: dirty flag, etc...
-    matrix4x4f m_xform;
-    matrix4x4f m_xformInv;
-    
+    SceneNodeList m_childs;        
 };
 
 

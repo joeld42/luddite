@@ -32,24 +32,36 @@ SceneNode *Scene::root()
 void Scene::eval( RenderDevice *device )
 {
     // TODO: use visibilty for traversal..
-    _evalNode( device, m_sceneRoot );
+    matrix4x4f rootXform;
+    rootXform.Identity();
+    _evalNode( device, m_sceneRoot, rootXform );
 }
 
-void Scene::_evalNode( RenderDevice *device, SceneNode *node )
+void Scene::_evalNode( RenderDevice *device, SceneNode *node, matrix4x4f currXform )
 {
+    // update the transform for this batch
+    matrix4x4f nodeXform = node->localXForm();
+    nodeXform = nodeXform * currXform;
+    
     // Add the gbatch for this node
     // For now just add everything, need to be smarter about traversal
     for ( GBatchList::const_iterator gbi = node->batches().begin();
          gbi != node->batches().end(); ++gbi )
     {
-        device->addGBatch( *gbi );
+        GBatch *gbatch = *gbi;
+        
+        gbatch->m_xform = nodeXform;
+        // TODO: xformInv
+        
+        // Add this batch
+        device->addGBatch( gbatch );
     }
     
     // Now add all the child nodes
     for ( SceneNodeList::const_iterator ni = node->childs().begin();
          ni != node->childs().end(); ++ni )
     {
-        _evalNode( device, (*ni) );
+        _evalNode( device, (*ni), nodeXform );
     }
          
 }

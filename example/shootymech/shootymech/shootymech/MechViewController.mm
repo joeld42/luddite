@@ -32,6 +32,7 @@ enum
 };
 GLint uniforms[NUM_UNIFORMS];
 
+
 // Attribute index.
 enum
 {
@@ -100,7 +101,7 @@ GLfloat gCubeVertexData[216] =
  
     luddite::GameLoop *_gameLoop;
 
-    luddite::RenderDevice *_renderDevice;
+    luddite::RenderDeviceES2 *_renderDevice;
     luddite::GBuff *_gbuffCube;
     
     luddite::Scene *_scene;
@@ -314,6 +315,9 @@ GLfloat gCubeVertexData[216] =
     glUniformMatrix4fv(uniforms[UNIFORM_MODELVIEWPROJECTION_MATRIX], 1, 0, _modelViewProjectionMatrix.m);
     glUniformMatrix3fv(uniforms[UNIFORM_NORMAL_MATRIX], 1, 0, _normalMatrix.m);
     
+    // HACK
+    _renderDevice->uparam_modelViewProjection = uniforms[UNIFORM_MODELVIEWPROJECTION_MATRIX];
+    _renderDevice->uparam_normalMat = uniforms[UNIFORM_NORMAL_MATRIX];
     
     //glDrawArrays(GL_TRIANGLES, 0, 36);
     
