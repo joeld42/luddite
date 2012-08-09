@@ -6,6 +6,7 @@
 //  Copyright (c) 2012 Joel Davis. All rights reserved.
 //
 
+#include <luddite/common/debug.h>
 #include <luddite/render/scene.h>
 
 using namespace luddite;
@@ -52,6 +53,32 @@ void Scene::_evalNode( RenderDevice *device, SceneNode *node, matrix4x4f currXfo
         
         gbatch->m_xform = nodeXform;
         // TODO: xformInv
+        
+//        DBG::info( "node [%s] xform %3.2f %3.2f %3.2f %3.2f\n"
+//                   "              %3.2f %3.2f %3.2f %3.2f\n"
+//                   "              %3.2f %3.2f %3.2f %3.2f\n"
+//                   "              %3.2f %3.2f %3.2f %3.2f\n",                  
+//                  node->name().c_str(),
+//
+//                  nodeXform.m16[0],
+//                  nodeXform.m16[1],
+//                  nodeXform.m16[2],
+//                  nodeXform.m16[3],
+//                  
+//                  nodeXform.m16[4],
+//                  nodeXform.m16[5],
+//                  nodeXform.m16[6],
+//                  nodeXform.m16[7],
+//                  
+//                  nodeXform.m16[8],
+//                  nodeXform.m16[9],
+//                  nodeXform.m16[10],
+//                  nodeXform.m16[11],
+//                  
+//                  nodeXform.m16[12],
+//                  nodeXform.m16[13],
+//                  nodeXform.m16[14],
+//                  nodeXform.m16[15] );
         
         // Add this batch
         device->addGBatch( gbatch );

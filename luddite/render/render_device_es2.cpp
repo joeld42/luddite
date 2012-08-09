@@ -9,6 +9,7 @@
 #import <OpenGLES/ES2/gl.h>
 #import <OpenGLES/ES2/glext.h>
 
+#include <luddite/common/debug.h>
 #include <luddite/render/render_device_es2.h>
 
 // offsetof() gives a warning about non-POD types with xcode, so use these old
@@ -22,9 +23,42 @@ using namespace luddite;
 void RenderDeviceES2::_drawGBatch( luddite::GBatch *gbatch )
 {
     luddite::GBuff *gbuff = gbatch->m_gbuff;
+
+
+    
+    matrix4x4f mresult = /*gbatch->m_xform * */matBaseModelView;
+    mresult =  matBaseModelView * matProjection;
+//    mresult =  matProjection * matBaseModelView;
+    
+    matrix4x4f &nodeXform = mresult;
+    DBG::info( "\nmatproj2      %3.2f %3.2f %3.2f %3.2f\n"
+               "              %3.2f %3.2f %3.2f %3.2f\n"
+               "              %3.2f %3.2f %3.2f %3.2f\n"
+               "              %3.2f %3.2f %3.2f %3.2f\n",                  
+              
+              nodeXform.m16[0],
+              nodeXform.m16[1],
+              nodeXform.m16[2],
+              nodeXform.m16[3],
+              
+              nodeXform.m16[4],
+              nodeXform.m16[5],
+              nodeXform.m16[6],
+              nodeXform.m16[7],
+              
+              nodeXform.m16[8],
+              nodeXform.m16[9],
+              nodeXform.m16[10],
+              nodeXform.m16[11],
+              
+              nodeXform.m16[12],
+              nodeXform.m16[13],
+              nodeXform.m16[14],
+              nodeXform.m16[15] );
+
     
     // Set transform and shader params from gbatch
-    glUniformMatrix4fv(uparam_modelViewProjection, 1, 0, gbatch->m_xform.m16 );
+    glUniformMatrix4fv(uparam_modelViewProjection, 1, 0, mresult.m16 );
 //    glUniformMatrix3fv(uparam_normalMat, 1, 0, _normalMatrix.m);
 
     // Create gbo for this gbuff if not set up

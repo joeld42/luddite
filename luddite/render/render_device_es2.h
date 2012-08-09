@@ -21,7 +21,12 @@ public:
     GLint uparam_modelViewProjection;
     GLint uparam_normalMat;
     
+    // TODO: have a camera object
+    matrix4x4f matBaseModelView; // camera 
+    matrix4x4f matProjection;
+    
 protected:
+    
   virtual void _drawGBatch( luddite::GBatch *gbatch );
     
 };

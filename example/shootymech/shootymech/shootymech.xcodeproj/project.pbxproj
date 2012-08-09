@@ -19,7 +19,7 @@
 		6DB567481581AF1A000A59ED /* Shader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 6DB567471581AF1A000A59ED /* Shader.vsh */; };
 		6DB5674B1581AF1B000A59ED /* MechViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6DB5674A1581AF1B000A59ED /* MechViewController.mm */; };
 		6DB5674E1581AF1B000A59ED /* MechViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6DB5674C1581AF1B000A59ED /* MechViewController.xib */; };
-		6DF0DAA41581D8EC00AD6F73 /* libluddite_ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DF0DAA31581D8EC00AD6F73 /* libluddite_ios.a */; };
+		6DD2411515D3A0C5004C9360 /* libluddite_ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DD2411415D3A0C5004C9360 /* libluddite_ios.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,7 +40,7 @@
 		6DB567491581AF1B000A59ED /* MechViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MechViewController.h; sourceTree = "<group>"; };
 		6DB5674A1581AF1B000A59ED /* MechViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = MechViewController.mm; sourceTree = "<group>"; };
 		6DB5674D1581AF1B000A59ED /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MechViewController.xib; sourceTree = "<group>"; };
-		6DF0DAA31581D8EC00AD6F73 /* libluddite_ios.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libluddite_ios.a; path = "../../../luddite_ios/build/Debug-iphoneos/libluddite_ios.a"; sourceTree = "<group>"; };
+		6DD2411415D3A0C5004C9360 /* libluddite_ios.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libluddite_ios.a; path = "../../../luddite_ios/build/Debug-iphoneos/libluddite_ios.a"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -48,12 +48,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6DD2411515D3A0C5004C9360 /* libluddite_ios.a in Frameworks */,
 				6DB567301581AF1A000A59ED /* UIKit.framework in Frameworks */,
 				6DB567321581AF1A000A59ED /* Foundation.framework in Frameworks */,
 				6DB567341581AF1A000A59ED /* CoreGraphics.framework in Frameworks */,
 				6DB567361581AF1A000A59ED /* GLKit.framework in Frameworks */,
 				6DB567381581AF1A000A59ED /* OpenGLES.framework in Frameworks */,
-				6DF0DAA41581D8EC00AD6F73 /* libluddite_ios.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -63,6 +63,7 @@
 		6DB567201581AF1A000A59ED = {
 			isa = PBXGroup;
 			children = (
+				6DD2411415D3A0C5004C9360 /* libluddite_ios.a */,
 				6DB567391581AF1A000A59ED /* shootymech */,
 				6DB5672E1581AF1A000A59ED /* Frameworks */,
 				6DB5672C1581AF1A000A59ED /* Products */,
@@ -85,7 +86,6 @@
 				6DB567331581AF1A000A59ED /* CoreGraphics.framework */,
 				6DB567351581AF1A000A59ED /* GLKit.framework */,
 				6DB567371581AF1A000A59ED /* OpenGLES.framework */,
-				6DF0DAA31581D8EC00AD6F73 /* libluddite_ios.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -279,6 +279,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../../../luddite_ios/build/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"",
+					"\"$(SRCROOT)/../../../luddite_ios/build/Debug-iphoneos\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -296,6 +297,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../../../luddite_ios/build/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"",
+					"\"$(SRCROOT)/../../../luddite_ios/build/Debug-iphoneos\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
