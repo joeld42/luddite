@@ -23,34 +23,34 @@ using namespace luddite;
 void RenderDeviceES2::_drawGBatch( luddite::GBatch *gbatch )
 {
     luddite::GBuff *gbuff = gbatch->m_gbuff;    
-    matrix4x4f mresult =  matBaseModelView * gbatch->m_xform;
+    matrix4x4f mresult =  gbatch->m_xform * matBaseModelView;
     mresult = mresult * matProjection;
     
-    matrix4x4f &nodeXform = gbatch->m_xform;
-    DBG::info( "\nodeXForm      %3.2f %3.2f %3.2f %3.2f\n"
-               "              %3.2f %3.2f %3.2f %3.2f\n"
-               "              %3.2f %3.2f %3.2f %3.2f\n"
-               "              %3.2f %3.2f %3.2f %3.2f\n",                  
-              
-              nodeXform.m16[0],
-              nodeXform.m16[1],
-              nodeXform.m16[2],
-              nodeXform.m16[3],
-              
-              nodeXform.m16[4],
-              nodeXform.m16[5],
-              nodeXform.m16[6],
-              nodeXform.m16[7],
-              
-              nodeXform.m16[8],
-              nodeXform.m16[9],
-              nodeXform.m16[10],
-              nodeXform.m16[11],
-              
-              nodeXform.m16[12],
-              nodeXform.m16[13],
-              nodeXform.m16[14],
-              nodeXform.m16[15] );
+//    matrix4x4f &nodeXform = gbatch->m_xform;
+//    DBG::info( "nodeXForm      %3.2f %3.2f %3.2f %3.2f\n"
+//               "              %3.2f %3.2f %3.2f %3.2f\n"
+//               "              %3.2f %3.2f %3.2f %3.2f\n"
+//               "              %3.2f %3.2f %3.2f %3.2f\n",                  
+//              
+//              nodeXform.m16[0],
+//              nodeXform.m16[1],
+//              nodeXform.m16[2],
+//              nodeXform.m16[3],
+//              
+//              nodeXform.m16[4],
+//              nodeXform.m16[5],
+//              nodeXform.m16[6],
+//              nodeXform.m16[7],
+//              
+//              nodeXform.m16[8],
+//              nodeXform.m16[9],
+//              nodeXform.m16[10],
+//              nodeXform.m16[11],
+//              
+//              nodeXform.m16[12],
+//              nodeXform.m16[13],
+//              nodeXform.m16[14],
+//              nodeXform.m16[15] );
 
     
     // Set transform and shader params from gbatch

@@ -181,17 +181,19 @@ GLfloat gCubeVertexData[216] =
     // Set up luddite stuff
     _renderDevice = new luddite::RenderDeviceES2();
     
-//    _gbuffCube = luddite::gbuff_cube( 1.0, vec3f( 0.0, -0.5, 0.0) );
-    _gbuffCube = luddite::gbuff_cylinder();
-        
-    // test .. set cube to purple
-    gbuff_setColorConstant( _gbuffCube, vec4f( 1.0, 0.0, 1.0, 1.0) );
+    luddite::GBuff *gbuffCube = luddite::gbuff_cube( 1.0, vec3f( 0.0, 0.5, 0.0) );
+    gbuff_setColorConstant( gbuffCube, vec4f( 1.0, 0.0, 1.0, 1.0) );
+    
+    luddite::GBuff *gbuffCyl = luddite::gbuff_cylinder();
+    gbuff_setColorConstant( gbuffCyl, vec4f( 0.0, 1.0, 0.0, 1.0) );
+    
     
     // Build scene graph
     luddite::SceneNode *worldRoot = new luddite::SceneNode( "worldRoot" );
         
     // make a ring of cube around the world root
-    for (float t=0.0; t <= 2.0*M_PI; t += ( 100.0 * M_PI ) / 180.0 )
+    bool cube = true;
+    for (float t=0.0; t <= 2.0*M_PI; t += 20.0 * (M_PI/180.0 ) )
     {
         vec3f cubePos = vec3f( cos(t)*2.0, 0.0, sin(t)*2.0 );
         luddite::SceneNode *cubeNode = new luddite::SceneNode( worldRoot );
@@ -199,10 +201,20 @@ GLfloat gCubeVertexData[216] =
         NSLog( @"cube pos is %f %f %f", cubePos.x, cubePos.y, cubePos.z );
         
         // bind gbuff to a new gbatch, attach that to scene node
-        GBatch *cubeBatch = new GBatch();
-        cubeBatch->m_gbuff = _gbuffCube;
-        cubeNode->addGBatch( cubeBatch );
+        GBatch *currBatch = new GBatch();
+        if (cube)
+        {
+            
+            currBatch->m_gbuff = gbuffCube;
+        }
+        else
+        {
+            cubeNode->m_pos.y = sin(t*3) * 0.25;
+            currBatch->m_gbuff = gbuffCyl;            
+        }
+        cube = !cube;
         
+        cubeNode->addGBatch( currBatch );        
     }
     
     // Create scene
@@ -278,9 +290,10 @@ GLfloat gCubeVertexData[216] =
     
 //    self.effect.transform.projectionMatrix = projectionMatrix;
     
-    GLKMatrix4 baseModelViewMatrix = GLKMatrix4MakeTranslation(0.0f, 0.0f, -15.0f);
+    GLKMatrix4 baseModelViewMatrix = GLKMatrix4MakeTranslation(0.0f, 0.0f, -8.0f);
     
-    baseModelViewMatrix = GLKMatrix4Rotate(baseModelViewMatrix, _rotation, 0.0f, 1.0f, 0.0f);
+    baseModelViewMatrix = GLKMatrix4Rotate(baseModelViewMatrix, 40.0 * (M_PI/180.0), 1.0f, 0.0f, 0.0f);
+    baseModelViewMatrix = GLKMatrix4Rotate(baseModelViewMatrix, _rotation * 0.5, 0.0f, 1.0f, 0.0f);
     
 //    _renderDevice->matProjection = matrix4x4f( baseModelViewMatrix.m );
     
