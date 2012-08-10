@@ -21,6 +21,7 @@
 		6DB567AA1581D3CC000A59ED /* debug.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6DB567A31581D3CC000A59ED /* debug.cpp */; };
 		6DB567AB1581D3CC000A59ED /* debug.h in Headers */ = {isa = PBXBuildFile; fileRef = 6DB567A41581D3CC000A59ED /* debug.h */; };
 		6DB567AD1581D3CC000A59ED /* platform.h in Headers */ = {isa = PBXBuildFile; fileRef = 6DB567A81581D3CC000A59ED /* platform.h */; };
+		6DD2414015D5616D004C9360 /* scene_objfile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6DD2413F15D5616D004C9360 /* scene_objfile.cpp */; };
 		6DF342471581D6BB008FBD40 /* ios_debug.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6DF342461581D6BB008FBD40 /* ios_debug.cpp */; };
 /* End PBXBuildFile section */
 
@@ -53,6 +54,8 @@
 		6DB567A31581D3CC000A59ED /* debug.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = debug.cpp; sourceTree = "<group>"; };
 		6DB567A41581D3CC000A59ED /* debug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = debug.h; sourceTree = "<group>"; };
 		6DB567A81581D3CC000A59ED /* platform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = platform.h; sourceTree = "<group>"; };
+		6DD2413D15D56154004C9360 /* scene_objfile.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = scene_objfile.h; path = render/scene_objfile.h; sourceTree = "<group>"; };
+		6DD2413F15D5616D004C9360 /* scene_objfile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = scene_objfile.cpp; path = render/scene_objfile.cpp; sourceTree = "<group>"; };
 		6DF342461581D6BB008FBD40 /* ios_debug.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ios_debug.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -84,17 +87,19 @@
 				6DA6D49E15C60AC000168010 /* gbuff.cpp */,
 				6D9352F615CBBA7600F24ED5 /* gbatch.h */,
 				6D9352F715CBBAFD00F24ED5 /* gbatch.cpp */,
-				6DA6D4A215C60B3D00168010 /* render_device.h */,
-				6DA6D4A015C60B2400168010 /* render_device.cpp */,
 				6DA6D4A315C60DFF00168010 /* drawvert.h */,
 				6DA6D4A415C6161000168010 /* gbuff_prim.h */,
 				6DA6D4A515C616A100168010 /* gbuff_prim.cpp */,
+				6DA6D4A215C60B3D00168010 /* render_device.h */,
+				6DA6D4A015C60B2400168010 /* render_device.cpp */,
 				6DA6D4A815C62B0200168010 /* render_device_es2.h */,
 				6DA6D4AB15C62C0700168010 /* render_device_es2.cpp */,
-				6D9352F215CBB26100F24ED5 /* scene_node.h */,
-				6D9352F415CBB27900F24ED5 /* scene_node.cpp */,
 				6D9352FE15D153B900F24ED5 /* scene.h */,
 				6D9352FF15D153D400F24ED5 /* scene.cpp */,
+				6D9352F215CBB26100F24ED5 /* scene_node.h */,
+				6D9352F415CBB27900F24ED5 /* scene_node.cpp */,
+				6DD2413D15D56154004C9360 /* scene_objfile.h */,
+				6DD2413F15D5616D004C9360 /* scene_objfile.cpp */,
 				6D9352FA15D0F45700F24ED5 /* color_util.h */,
 				6D9352FB15D0F48700F24ED5 /* color_util.cpp */,
 			);
@@ -259,6 +264,7 @@
 				6D9352F815CBBAFD00F24ED5 /* gbatch.cpp in Sources */,
 				6D9352FC15D0F48700F24ED5 /* color_util.cpp in Sources */,
 				6D93530015D153D500F24ED5 /* scene.cpp in Sources */,
+				6DD2414015D5616D004C9360 /* scene_objfile.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

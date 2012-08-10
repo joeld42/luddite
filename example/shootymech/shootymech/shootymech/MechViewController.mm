@@ -193,10 +193,11 @@ GLfloat gCubeVertexData[216] =
         
     // make a ring of cube around the world root
     bool cube = true;
+    luddite::SceneNode *cubeNode;
     for (float t=0.0; t <= 2.0*M_PI; t += 20.0 * (M_PI/180.0 ) )
     {
         vec3f cubePos = vec3f( cos(t)*2.0, 0.0, sin(t)*2.0 );
-        luddite::SceneNode *cubeNode = new luddite::SceneNode( worldRoot );
+        cubeNode = new luddite::SceneNode( worldRoot );
         cubeNode->m_pos = cubePos;
         NSLog( @"cube pos is %f %f %f", cubePos.x, cubePos.y, cubePos.z );
         
@@ -216,7 +217,7 @@ GLfloat gCubeVertexData[216] =
         
         cubeNode->addGBatch( currBatch );        
     }
-    
+        
     // Create scene
     _scene = new luddite::Scene( worldRoot );
     

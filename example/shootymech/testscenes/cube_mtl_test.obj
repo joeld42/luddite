@@ -1,0 +1,22 @@
+# Blender v2.62 (sub 0) OBJ File: 'cube_mtl_test.blend'
+# www.blender.org
+mtllib cube_mtl_test.mtl
+o Cube
+v 1.000000 -1.000000 -1.000000
+v 1.000000 -1.000000 1.000000
+v -1.000000 -1.000000 1.000000
+v -1.000000 -1.000000 -1.000000
+v 1.000000 1.000000 -0.999999
+v 0.999999 1.000000 1.000001
+v -1.000000 1.000000 1.000000
+v -1.000000 1.000000 -1.000000
+usemtl mtl.one
+s off
+f 1 2 3 4
+f 2 6 7 3
+f 5 1 4 8
+usemtl mtl.three
+f 5 8 7 6
+usemtl mtl.two
+f 1 5 6 2
+f 3 7 8 4
