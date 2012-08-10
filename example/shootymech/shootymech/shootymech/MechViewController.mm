@@ -183,10 +183,7 @@ GLfloat gCubeVertexData[216] =
     
 //    _gbuffCube = luddite::gbuff_cube( 1.0, vec3f( 0.0, -0.5, 0.0) );
     _gbuffCube = luddite::gbuff_cylinder();
-    
-    GBatch *cubeBatch = new GBatch();
-    cubeBatch->m_gbuff = _gbuffCube;
-    
+        
     // test .. set cube to purple
     gbuff_setColorConstant( _gbuffCube, vec4f( 1.0, 0.0, 1.0, 1.0) );
     
@@ -194,18 +191,18 @@ GLfloat gCubeVertexData[216] =
     luddite::SceneNode *worldRoot = new luddite::SceneNode( "worldRoot" );
         
     // make a ring of cube around the world root
-    for (float t=0.0; t <= 2.0*M_PI; t += ( 20.0 * M_PI ) / 180.0 )
+    for (float t=0.0; t <= 2.0*M_PI; t += ( 100.0 * M_PI ) / 180.0 )
     {
         vec3f cubePos = vec3f( cos(t)*2.0, 0.0, sin(t)*2.0 );
         luddite::SceneNode *cubeNode = new luddite::SceneNode( worldRoot );
         cubeNode->m_pos = cubePos;
         NSLog( @"cube pos is %f %f %f", cubePos.x, cubePos.y, cubePos.z );
         
-        // bind gbuff to scene node
+        // bind gbuff to a new gbatch, attach that to scene node
+        GBatch *cubeBatch = new GBatch();
+        cubeBatch->m_gbuff = _gbuffCube;
         cubeNode->addGBatch( cubeBatch );
         
-        // DBG
-        break;
     }
     
     // Create scene
@@ -281,7 +278,7 @@ GLfloat gCubeVertexData[216] =
     
 //    self.effect.transform.projectionMatrix = projectionMatrix;
     
-    GLKMatrix4 baseModelViewMatrix = GLKMatrix4MakeTranslation(0.0f, 0.0f, -4.0f);
+    GLKMatrix4 baseModelViewMatrix = GLKMatrix4MakeTranslation(0.0f, 0.0f, -15.0f);
     
     baseModelViewMatrix = GLKMatrix4Rotate(baseModelViewMatrix, _rotation, 0.0f, 1.0f, 0.0f);
     
@@ -295,9 +292,9 @@ GLfloat gCubeVertexData[216] =
 //    self.effect.transform.modelviewMatrix = modelViewMatrix;
     
     // Compute the model view matrix for the object rendered with ES2
-//    GLKMatrix4 modelViewMatrix = GLKMatrix4MakeTranslation(0.0f, 0.0f, 0.0f);
-//    modelViewMatrix = GLKMatrix4Rotate(modelViewMatrix, _rotation, 1.0f, 1.0f, 1.0f);
-//    modelViewMatrix = GLKMatrix4Multiply(baseModelViewMatrix, modelViewMatrix);
+    GLKMatrix4 modelViewMatrix = GLKMatrix4MakeTranslation(0.0f, 0.0f, -1.5f);
+    modelViewMatrix = GLKMatrix4Rotate(modelViewMatrix, _rotation, 1.0f, 1.0f, 1.0f);
+    modelViewMatrix = GLKMatrix4Multiply(baseModelViewMatrix, modelViewMatrix);
     
     _normalMatrix = GLKMatrix3InvertAndTranspose(GLKMatrix4GetMatrix3(baseModelViewMatrix), NULL);
     
@@ -306,7 +303,6 @@ GLfloat gCubeVertexData[216] =
     // HACK: get the modelview to the renderdevice
     _renderDevice->matBaseModelView = matrix4x4f( baseModelViewMatrix.m );
     _renderDevice->matProjection    = matrix4x4f( projectionMatrix.m );
-
     
     _rotation += self.timeSinceLastUpdate * 0.5f;
 }
@@ -325,7 +321,7 @@ GLfloat gCubeVertexData[216] =
     // Render the object again with ES2
     glUseProgram(_program);
     
-    glUniformMatrix4fv(uniforms[UNIFORM_MODELVIEWPROJECTION_MATRIX], 1, 0, _modelViewProjectionMatrix.m);
+//    glUniformMatrix4fv(uniforms[UNIFORM_MODELVIEWPROJECTION_MATRIX], 1, 0, _modelViewProjectionMatrix.m);
     glUniformMatrix3fv(uniforms[UNIFORM_NORMAL_MATRIX], 1, 0, _normalMatrix.m);
     
     // HACK

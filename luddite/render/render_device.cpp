@@ -31,6 +31,8 @@ void RenderDevice::renderFrame()
         _drawGBatch( *gbi );
     }
     
+    DBG::info( "---------- renderFrame done -----------" );
+    
     m_gbatches.clear();    
 }
 

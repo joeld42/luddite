@@ -102,6 +102,11 @@ namespace prmath
 			m44[2][0] = 0; m44[2][1] = 0; m44[2][2] = s; m44[2][3] = 0;
 			m44[3][0] = 0; m44[3][1] = 0; m44[3][2] = 0; m44[3][3] = 1;
 		}
+        
+        Matrix4x4( const T *mdata )
+        {            
+            memcpy( m16, mdata, sizeof(T)*16 );
+        }
 
 		Matrix4x4(const Matrix4x4& u)
 		{

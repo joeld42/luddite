@@ -79,7 +79,7 @@ void Scene::_evalNode( RenderDevice *device, SceneNode *node, matrix4x4f currXfo
 //                  nodeXform.m16[13],
 //                  nodeXform.m16[14],
 //                  nodeXform.m16[15] );
-        
+//        
         // Add this batch
         device->addGBatch( gbatch );
     }

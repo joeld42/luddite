@@ -20,6 +20,9 @@ GameLoop::GameLoop( TimeInterval stepTime ) :
 //    Assert( stepTime==0.0, "Steptime must be non-zero" );
     m_dtFixed = (1.0 / stepTime);
     m_simTime = 0;
+    
+    m_timeLeftover = 0.0;
+    m_dtRaw = 0.0;
 }
 
 

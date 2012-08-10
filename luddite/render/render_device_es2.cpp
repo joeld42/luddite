@@ -22,16 +22,12 @@ using namespace luddite;
 
 void RenderDeviceES2::_drawGBatch( luddite::GBatch *gbatch )
 {
-    luddite::GBuff *gbuff = gbatch->m_gbuff;
-
-
+    luddite::GBuff *gbuff = gbatch->m_gbuff;    
+    matrix4x4f mresult =  matBaseModelView * gbatch->m_xform;
+    mresult = mresult * matProjection;
     
-    matrix4x4f mresult = /*gbatch->m_xform * */matBaseModelView;
-    mresult =  matBaseModelView * matProjection;
-//    mresult =  matProjection * matBaseModelView;
-    
-    matrix4x4f &nodeXform = mresult;
-    DBG::info( "\nmatprojJ      %3.2f %3.2f %3.2f %3.2f\n"
+    matrix4x4f &nodeXform = gbatch->m_xform;
+    DBG::info( "\nodeXForm      %3.2f %3.2f %3.2f %3.2f\n"
                "              %3.2f %3.2f %3.2f %3.2f\n"
                "              %3.2f %3.2f %3.2f %3.2f\n"
                "              %3.2f %3.2f %3.2f %3.2f\n",                  
