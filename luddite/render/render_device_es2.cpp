@@ -31,7 +31,7 @@ void RenderDeviceES2::_drawGBatch( luddite::GBatch *gbatch )
 //    mresult =  matProjection * matBaseModelView;
     
     matrix4x4f &nodeXform = mresult;
-    DBG::info( "\nmatproj2      %3.2f %3.2f %3.2f %3.2f\n"
+    DBG::info( "\nmatprojJ      %3.2f %3.2f %3.2f %3.2f\n"
                "              %3.2f %3.2f %3.2f %3.2f\n"
                "              %3.2f %3.2f %3.2f %3.2f\n"
                "              %3.2f %3.2f %3.2f %3.2f\n",                  

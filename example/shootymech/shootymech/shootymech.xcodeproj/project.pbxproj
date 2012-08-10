@@ -19,8 +19,25 @@
 		6DB567481581AF1A000A59ED /* Shader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 6DB567471581AF1A000A59ED /* Shader.vsh */; };
 		6DB5674B1581AF1B000A59ED /* MechViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6DB5674A1581AF1B000A59ED /* MechViewController.mm */; };
 		6DB5674E1581AF1B000A59ED /* MechViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6DB5674C1581AF1B000A59ED /* MechViewController.xib */; };
-		6DD2411515D3A0C5004C9360 /* libluddite_ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DD2411415D3A0C5004C9360 /* libluddite_ios.a */; };
+		6DD2413C15D4D1A6004C9360 /* libluddite_ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DD2413815D4D181004C9360 /* libluddite_ios.a */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		6DD2413715D4D181004C9360 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6DD2413015D4D181004C9360 /* luddite_ios.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 6DB567891581D2D8000A59ED;
+			remoteInfo = luddite_ios;
+		};
+		6DD2413A15D4D19B004C9360 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6DD2413015D4D181004C9360 /* luddite_ios.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 6DB567881581D2D8000A59ED;
+			remoteInfo = luddite_ios;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		6DB5672B1581AF1A000A59ED /* shootymech.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = shootymech.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -40,7 +57,7 @@
 		6DB567491581AF1B000A59ED /* MechViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MechViewController.h; sourceTree = "<group>"; };
 		6DB5674A1581AF1B000A59ED /* MechViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = MechViewController.mm; sourceTree = "<group>"; };
 		6DB5674D1581AF1B000A59ED /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MechViewController.xib; sourceTree = "<group>"; };
-		6DD2411415D3A0C5004C9360 /* libluddite_ios.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libluddite_ios.a; path = "../../../luddite_ios/build/Debug-iphoneos/libluddite_ios.a"; sourceTree = "<group>"; };
+		6DD2413015D4D181004C9360 /* luddite_ios.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = luddite_ios.xcodeproj; path = ../../../luddite_ios/luddite_ios.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -48,7 +65,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6DD2411515D3A0C5004C9360 /* libluddite_ios.a in Frameworks */,
+				6DD2413C15D4D1A6004C9360 /* libluddite_ios.a in Frameworks */,
 				6DB567301581AF1A000A59ED /* UIKit.framework in Frameworks */,
 				6DB567321581AF1A000A59ED /* Foundation.framework in Frameworks */,
 				6DB567341581AF1A000A59ED /* CoreGraphics.framework in Frameworks */,
@@ -63,10 +80,10 @@
 		6DB567201581AF1A000A59ED = {
 			isa = PBXGroup;
 			children = (
-				6DD2411415D3A0C5004C9360 /* libluddite_ios.a */,
 				6DB567391581AF1A000A59ED /* shootymech */,
 				6DB5672E1581AF1A000A59ED /* Frameworks */,
 				6DB5672C1581AF1A000A59ED /* Products */,
+				6DD2413015D4D181004C9360 /* luddite_ios.xcodeproj */,
 			);
 			sourceTree = "<group>";
 		};
@@ -116,6 +133,14 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		6DD2413115D4D181004C9360 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6DD2413815D4D181004C9360 /* libluddite_ios.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -130,6 +155,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				6DD2413B15D4D19B004C9360 /* PBXTargetDependency */,
 			);
 			name = shootymech;
 			productName = shootymech;
@@ -156,12 +182,28 @@
 			mainGroup = 6DB567201581AF1A000A59ED;
 			productRefGroup = 6DB5672C1581AF1A000A59ED /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 6DD2413115D4D181004C9360 /* Products */;
+					ProjectRef = 6DD2413015D4D181004C9360 /* luddite_ios.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				6DB5672A1581AF1A000A59ED /* shootymech */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		6DD2413815D4D181004C9360 /* libluddite_ios.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libluddite_ios.a;
+			remoteRef = 6DD2413715D4D181004C9360 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		6DB567291581AF1A000A59ED /* Resources */ = {
@@ -189,6 +231,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		6DD2413B15D4D19B004C9360 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = luddite_ios;
+			targetProxy = 6DD2413A15D4D19B004C9360 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		6DB5673C1581AF1A000A59ED /* InfoPlist.strings */ = {
