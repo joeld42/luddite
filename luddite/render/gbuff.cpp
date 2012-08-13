@@ -31,7 +31,7 @@ luddite::DrawVert *GBuff::addVerts( size_t numVerts )
     
     // Grow the array
     size_t oldSize = m_vertData.size();
-    m_vertData.resize( oldSize + numVerts );
+    m_vertData.resize( oldSize + numVerts, defaultVert );
     
     // Return the first of the new verts
     return &(m_vertData[oldSize]);

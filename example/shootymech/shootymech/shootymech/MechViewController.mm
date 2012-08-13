@@ -17,7 +17,7 @@
 #include <luddite/render/scene.h>
 #include <luddite/render/scene_node.h>
 #include <luddite/render/color_util.h>
-
+#include <luddite/render/scene_objfile.h>
 
 using namespace luddite;
 
@@ -217,9 +217,24 @@ GLfloat gCubeVertexData[216] =
         
         cubeNode->addGBatch( currBatch );        
     }
-        
+    
+    // Load the obj file in the center
+//    NSString* filePath = [[NSBundle mainBundle] pathForResource:@"cube_mtl_test" ofType:@"obj"];
+//    NSString* filePath = [[NSBundle mainBundle] pathForResource:@"cube_mtl_test_nrm" ofType:@"obj"];
+//    NSString* filePath = [[NSBundle mainBundle] pathForResource:@"cube_mtl_test_nrm_st" ofType:@"obj"];
+//    NSString* filePath = [[NSBundle mainBundle] pathForResource:@"cube_subd_nrm_st" ofType:@"obj"];
+    NSString* filePath = [[NSBundle mainBundle] pathForResource:@"suzanne" ofType:@"obj"];
+    NSLog( @"Loading OBJ from file path %@", filePath );
+    
+    luddite::SceneNode *objNode = scene_objfile( [filePath UTF8String] );
+    if (objNode)
+    {
+        worldRoot->addChild( objNode );
+    }
+    
     // Create scene
     _scene = new luddite::Scene( worldRoot );
+        
     
     // Set up apple example stuff
     [self loadShaders];
@@ -344,12 +359,7 @@ GLfloat gCubeVertexData[216] =
     
     //glDrawArrays(GL_TRIANGLES, 0, 36);
     
-    // draw using luddite
-//    _renderDevice->addGBuff( _gbuffCube );
-//    _renderDevice->renderFrame();
-    
     // Draw scene
-    NSLog( @"eval/draw scene" );
     _scene->eval( _renderDevice );
     _renderDevice->renderFrame();
     

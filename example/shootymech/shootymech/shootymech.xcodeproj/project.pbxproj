@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6D938AEC15D8DEED0000A795 /* suzanne.obj in Resources */ = {isa = PBXBuildFile; fileRef = 6D938AEB15D8DEED0000A795 /* suzanne.obj */; };
 		6DB567301581AF1A000A59ED /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DB5672F1581AF1A000A59ED /* UIKit.framework */; };
 		6DB567321581AF1A000A59ED /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DB567311581AF1A000A59ED /* Foundation.framework */; };
 		6DB567341581AF1A000A59ED /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DB567331581AF1A000A59ED /* CoreGraphics.framework */; };
@@ -20,6 +21,10 @@
 		6DB5674B1581AF1B000A59ED /* MechViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6DB5674A1581AF1B000A59ED /* MechViewController.mm */; };
 		6DB5674E1581AF1B000A59ED /* MechViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6DB5674C1581AF1B000A59ED /* MechViewController.xib */; };
 		6DD2413C15D4D1A6004C9360 /* libluddite_ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DD2413815D4D181004C9360 /* libluddite_ios.a */; };
+		6DD2414615D62B46004C9360 /* cube_mtl_test_nrm_st.obj in Resources */ = {isa = PBXBuildFile; fileRef = 6DD2414215D62B46004C9360 /* cube_mtl_test_nrm_st.obj */; };
+		6DD2414715D62B46004C9360 /* cube_mtl_test_nrm.obj in Resources */ = {isa = PBXBuildFile; fileRef = 6DD2414315D62B46004C9360 /* cube_mtl_test_nrm.obj */; };
+		6DD2414815D62B46004C9360 /* cube_mtl_test.obj in Resources */ = {isa = PBXBuildFile; fileRef = 6DD2414415D62B46004C9360 /* cube_mtl_test.obj */; };
+		6DD2414915D62B46004C9360 /* cube_subd_nrm_st.obj in Resources */ = {isa = PBXBuildFile; fileRef = 6DD2414515D62B46004C9360 /* cube_subd_nrm_st.obj */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +45,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6D938AEB15D8DEED0000A795 /* suzanne.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = suzanne.obj; path = ../../testscenes/suzanne.obj; sourceTree = "<group>"; };
 		6DB5672B1581AF1A000A59ED /* shootymech.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = shootymech.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6DB5672F1581AF1A000A59ED /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		6DB567311581AF1A000A59ED /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -58,6 +64,10 @@
 		6DB5674A1581AF1B000A59ED /* MechViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = MechViewController.mm; sourceTree = "<group>"; };
 		6DB5674D1581AF1B000A59ED /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MechViewController.xib; sourceTree = "<group>"; };
 		6DD2413015D4D181004C9360 /* luddite_ios.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = luddite_ios.xcodeproj; path = ../../../luddite_ios/luddite_ios.xcodeproj; sourceTree = "<group>"; };
+		6DD2414215D62B46004C9360 /* cube_mtl_test_nrm_st.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = cube_mtl_test_nrm_st.obj; path = ../../testscenes/cube_mtl_test_nrm_st.obj; sourceTree = "<group>"; };
+		6DD2414315D62B46004C9360 /* cube_mtl_test_nrm.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = cube_mtl_test_nrm.obj; path = ../../testscenes/cube_mtl_test_nrm.obj; sourceTree = "<group>"; };
+		6DD2414415D62B46004C9360 /* cube_mtl_test.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = cube_mtl_test.obj; path = ../../testscenes/cube_mtl_test.obj; sourceTree = "<group>"; };
+		6DD2414515D62B46004C9360 /* cube_subd_nrm_st.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = cube_subd_nrm_st.obj; path = ../../testscenes/cube_subd_nrm_st.obj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +128,7 @@
 				6DB5674A1581AF1B000A59ED /* MechViewController.mm */,
 				6DB5674C1581AF1B000A59ED /* MechViewController.xib */,
 				6DB5673A1581AF1A000A59ED /* Supporting Files */,
+				6DD2414115D62B16004C9360 /* gamedata */,
 			);
 			path = shootymech;
 			sourceTree = "<group>";
@@ -139,6 +150,18 @@
 				6DD2413815D4D181004C9360 /* libluddite_ios.a */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		6DD2414115D62B16004C9360 /* gamedata */ = {
+			isa = PBXGroup;
+			children = (
+				6D938AEB15D8DEED0000A795 /* suzanne.obj */,
+				6DD2414215D62B46004C9360 /* cube_mtl_test_nrm_st.obj */,
+				6DD2414315D62B46004C9360 /* cube_mtl_test_nrm.obj */,
+				6DD2414415D62B46004C9360 /* cube_mtl_test.obj */,
+				6DD2414515D62B46004C9360 /* cube_subd_nrm_st.obj */,
+			);
+			name = gamedata;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -214,6 +237,11 @@
 				6DB567461581AF1A000A59ED /* Shader.fsh in Resources */,
 				6DB567481581AF1A000A59ED /* Shader.vsh in Resources */,
 				6DB5674E1581AF1B000A59ED /* MechViewController.xib in Resources */,
+				6DD2414615D62B46004C9360 /* cube_mtl_test_nrm_st.obj in Resources */,
+				6DD2414715D62B46004C9360 /* cube_mtl_test_nrm.obj in Resources */,
+				6DD2414815D62B46004C9360 /* cube_mtl_test.obj in Resources */,
+				6DD2414915D62B46004C9360 /* cube_subd_nrm_st.obj in Resources */,
+				6D938AEC15D8DEED0000A795 /* suzanne.obj in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

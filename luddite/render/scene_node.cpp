@@ -102,7 +102,7 @@ matrix4x4f SceneNode::localXForm()
     matrix4x4f xform;
     matrix4x4f rot;
     
-    DBG::info( "[%s] m_pos is %f %f %f\n", m_name.c_str(), m_pos.x, m_pos.y, m_pos.z );
+//    DBG::info( "[%s] m_pos is %f %f %f\n", m_name.c_str(), m_pos.x, m_pos.y, m_pos.z );
     
     xform.Identity();
     xform.Translate(m_pos);

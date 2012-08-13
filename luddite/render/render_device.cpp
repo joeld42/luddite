@@ -20,7 +20,7 @@ void RenderDevice::addGBatch( luddite::GBatch *gbatch )
 void RenderDevice::renderFrame()
 {
     // TODO
-    DBG::info( "In renderFrame, will draw %d gbatches\n", m_gbatches.size()  );
+//    DBG::info( "In renderFrame, will draw %d gbatches\n", m_gbatches.size()  );
     
 //    eastl::sort( m_gbuffs.begin(), m_gbuffs.end(), GBuff::cmp_ptr );
     
@@ -29,10 +29,7 @@ void RenderDevice::renderFrame()
     {
         // Let the device-specific subclass draw the buffer
         _drawGBatch( *gbi );
-    }
-    
-    DBG::info( "---------- renderFrame done -----------" );
-    
+    }    
     m_gbatches.clear();    
 }
 
