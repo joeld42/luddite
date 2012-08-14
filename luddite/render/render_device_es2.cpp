@@ -9,6 +9,8 @@
 #import <OpenGLES/ES2/gl.h>
 #import <OpenGLES/ES2/glext.h>
 
+#import <glsw/glsw.h>
+
 #include <luddite/common/debug.h>
 #include <luddite/render/render_device_es2.h>
 
@@ -54,8 +56,21 @@ void RenderDeviceES2::_drawGBatch( luddite::GBatch *gbatch )
 
     
     // Set transform and shader params from gbatch
-    glUniformMatrix4fv(uparam_modelViewProjection, 1, 0, mresult.m16 );
+    
+    if (!gbatch->m_mtl)
+    {
+        // Use default material    
+        glUniformMatrix4fv(uparam_modelViewProjection, 1, 0, mresult.m16 );
 //    glUniformMatrix3fv(uparam_normalMat, 1, 0, _normalMatrix.m);
+    }
+    else
+    {
+        // use gbatch material
+        glUseProgram(gbatch->m_mtl->m_program);
+        
+        GLint mvp = glGetUniformLocation( gbatch->m_mtl->m_program, "matrixPMV");
+        glUniformMatrix4fv( mvp, 1, 0, mresult.m16 );        
+    }
 
     // Create gbo for this gbuff if not set up
     if (gbuff->m_vbo==0)
@@ -95,3 +110,139 @@ void RenderDeviceES2::_drawGBatch( luddite::GBatch *gbatch )
     glDrawArrays(GL_TRIANGLES, 0, gbuff->m_vertData.size() );
 
 }
+
+int32_t RenderDeviceES2::loadShader( const eastl::string &shaderKey )
+{
+    GLint program;
+	printf("loadShader %s ...", shaderKey.c_str() );
+	
+    // Create shader program
+    program = glCreateProgram();
+    
+    // vertex and fragment shaders
+    GLuint vertShader, fragShader;    
+    
+    // Get the vertex shader part
+    const char *vertShaderText = glswGetShader( (shaderKey+".Vertex").c_str() );
+    if (!vertShaderText)
+    {
+        printf("Couldn't find shader key: %s.Vertex\n", shaderKey.c_str() );
+		return SHADER_FAIL;
+    }
+    
+    // Compile the vertex shader
+    vertShader = _compileShader( vertShaderText, GL_VERTEX_SHADER );
+    
+    // Get fragment shader
+    const char *fragShaderText = glswGetShader( (shaderKey+".Fragment").c_str() );
+    if (!fragShaderText)
+    {
+        printf("Couldn't find shader key: %s.Fragment\n", shaderKey.c_str() );
+		return SHADER_FAIL;
+    }
+    
+    printf( "compile fragment shader" );
+    
+    // Compile the fragment shader
+    fragShader = _compileShader( fragShaderText, GL_FRAGMENT_SHADER );
+    
+    // Attach shaders
+    glAttachShader( program, vertShader );
+    glAttachShader( program, fragShader );
+    
+    printf("... bind attrs\n" );
+	
+	// Bind Attrs (todo put in subclass)
+	// FIXME: some shaders dont have all these attrs..
+	glBindAttribLocation( program, VertexAttrib_POSITION, "position" );
+	glBindAttribLocation( program, VertexAttrib_TEXCOORD, "texcoord" );
+	glBindAttribLocation( program, VertexAttrib_NORMAL,   "normal" );    
+	glBindAttribLocation( program, VertexAttrib_COLOR,   "color" );
+	
+    
+    //  Link Shader
+    printf("... links shaders\n" );
+    _link( program );
+    
+    // Release vert and frag shaders
+    glDeleteShader( vertShader );
+    glDeleteShader( fragShader );    
+    
+	
+	// print shader params
+	printf(" ----- %s ------\n", shaderKey.c_str() );
+	int activeUniforms;
+	glGetProgramiv( program, GL_ACTIVE_UNIFORMS, &activeUniforms );	
+	printf(" Active Uniforms: %d\n", activeUniforms );
+	
+    // done
+    return program;    
+}
+
+int32_t RenderDeviceES2::_compileShader( const char *shaderText, 
+                                         uint32_t shaderType )
+{
+    GLint status;    
+    GLuint shader;
+    shader = glCreateShader( shaderType );
+    
+    // compile the shader
+    glShaderSource( shader, 1, &shaderText, NULL );
+    glCompileShader( shader );
+    
+    // Check for errors
+    GLint logLength;
+    glGetShaderiv( shader, GL_INFO_LOG_LENGTH, &logLength );
+    if (logLength > 0)
+    {
+        char *log = (char *)malloc(logLength);
+        glGetShaderInfoLog( shader, logLength, &logLength, log );
+        
+        printf("Error compiling shader:\n%s\n", log );
+        free(log);        
+    }
+    
+    glGetShaderiv( shader,GL_COMPILE_STATUS, &status );
+    if (status==0)
+    {
+        glDeleteShader( shader );
+        
+        // TODO: better handle errors
+        printf("Compile status is bad\n" );
+        
+        return 0;        
+    }
+    
+    return shader;    
+}
+
+void RenderDeviceES2::_printShaderLog( int32_t program )
+{
+	GLint logLength;
+    glGetProgramiv( program, GL_INFO_LOG_LENGTH, &logLength );
+    if (logLength > 0 )
+    {
+        char *log = (char*)malloc(logLength);
+        glGetProgramInfoLog( program, logLength, &logLength, log );
+        printf ("Link Log:\n%s\n", log );
+        free(log);        
+    }
+	
+}
+
+void RenderDeviceES2::_link( int32_t program )
+{
+    GLint status;
+    
+    glLinkProgram( program );
+	
+	_printShaderLog( program );
+	
+    glGetProgramiv( program, GL_LINK_STATUS, &status);
+    if (status==0)
+    {
+        printf("ERROR Linking shader\n");        
+    }    
+}
+
+

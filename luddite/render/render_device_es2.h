@@ -25,9 +25,16 @@ public:
     matrix4x4f matBaseModelView; // camera 
     matrix4x4f matProjection;
     
+    virtual int32_t loadShader( const eastl::string &shaderKey );
+    
 protected:
     
-  virtual void _drawGBatch( luddite::GBatch *gbatch );
+    virtual void _drawGBatch( luddite::GBatch *gbatch );
+    
+    // TODO: put this crap in an pimpl class
+    int32_t _compileShader( const char *shaderText, uint32_t shaderType );
+    void _printShaderLog( int32_t program );
+    void _link( int32_t program );
     
 };
     

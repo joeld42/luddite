@@ -12,6 +12,19 @@
 		6D9352F815CBBAFD00F24ED5 /* gbatch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6D9352F715CBBAFD00F24ED5 /* gbatch.cpp */; };
 		6D9352FC15D0F48700F24ED5 /* color_util.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6D9352FB15D0F48700F24ED5 /* color_util.cpp */; };
 		6D93530015D153D500F24ED5 /* scene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6D9352FF15D153D400F24ED5 /* scene.cpp */; };
+		6D938AF415D9D76D0000A795 /* bstrlib.c in Sources */ = {isa = PBXBuildFile; fileRef = 6D938AF015D9D76D0000A795 /* bstrlib.c */; };
+		6D938AF515D9D76D0000A795 /* bstrlib.h in Headers */ = {isa = PBXBuildFile; fileRef = 6D938AF115D9D76D0000A795 /* bstrlib.h */; };
+		6D938AF615D9D76D0000A795 /* glsw.c in Sources */ = {isa = PBXBuildFile; fileRef = 6D938AF215D9D76D0000A795 /* glsw.c */; };
+		6D938AF715D9D76D0000A795 /* glsw.h in Headers */ = {isa = PBXBuildFile; fileRef = 6D938AF315D9D76D0000A795 /* glsw.h */; };
+		6D938B0715D9E2B50000A795 /* tinystr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6D938B0115D9E2B50000A795 /* tinystr.cpp */; };
+		6D938B0815D9E2B50000A795 /* tinystr.h in Headers */ = {isa = PBXBuildFile; fileRef = 6D938B0215D9E2B50000A795 /* tinystr.h */; };
+		6D938B0915D9E2B50000A795 /* tinyxml.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6D938B0315D9E2B50000A795 /* tinyxml.cpp */; };
+		6D938B0A15D9E2B50000A795 /* tinyxml.h in Headers */ = {isa = PBXBuildFile; fileRef = 6D938B0415D9E2B50000A795 /* tinyxml.h */; };
+		6D938B0B15D9E2B50000A795 /* tinyxmlerror.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6D938B0515D9E2B50000A795 /* tinyxmlerror.cpp */; };
+		6D938B0C15D9E2B50000A795 /* tinyxmlparser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6D938B0615D9E2B50000A795 /* tinyxmlparser.cpp */; };
+		6D938B0F15DA16810000A795 /* material.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6D938B0D15DA16800000A795 /* material.cpp */; };
+		6D938B1015DA16810000A795 /* material.h in Headers */ = {isa = PBXBuildFile; fileRef = 6D938B0E15DA16800000A795 /* material.h */; };
+		6D938B1315DA1B580000A795 /* param.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6D938B1215DA1B580000A795 /* param.cpp */; };
 		6DA6D49F15C60AC000168010 /* gbuff.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6DA6D49E15C60AC000168010 /* gbuff.cpp */; };
 		6DA6D4A115C60B2400168010 /* render_device.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6DA6D4A015C60B2400168010 /* render_device.cpp */; };
 		6DA6D4A615C616A100168010 /* gbuff_prim.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6DA6D4A515C616A100168010 /* gbuff_prim.cpp */; };
@@ -37,6 +50,20 @@
 		6D9352FD15D0F53E00F24ED5 /* util.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = util.h; sourceTree = "<group>"; };
 		6D9352FE15D153B900F24ED5 /* scene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = scene.h; path = render/scene.h; sourceTree = "<group>"; };
 		6D9352FF15D153D400F24ED5 /* scene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = scene.cpp; path = render/scene.cpp; sourceTree = "<group>"; };
+		6D938AF015D9D76D0000A795 /* bstrlib.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = bstrlib.c; sourceTree = "<group>"; };
+		6D938AF115D9D76D0000A795 /* bstrlib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bstrlib.h; sourceTree = "<group>"; };
+		6D938AF215D9D76D0000A795 /* glsw.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glsw.c; sourceTree = "<group>"; };
+		6D938AF315D9D76D0000A795 /* glsw.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = glsw.h; sourceTree = "<group>"; };
+		6D938B0115D9E2B50000A795 /* tinystr.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = tinystr.cpp; path = ../extern/tinyxml/tinystr.cpp; sourceTree = "<group>"; };
+		6D938B0215D9E2B50000A795 /* tinystr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = tinystr.h; path = ../extern/tinyxml/tinystr.h; sourceTree = "<group>"; };
+		6D938B0315D9E2B50000A795 /* tinyxml.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = tinyxml.cpp; path = ../extern/tinyxml/tinyxml.cpp; sourceTree = "<group>"; };
+		6D938B0415D9E2B50000A795 /* tinyxml.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = tinyxml.h; path = ../extern/tinyxml/tinyxml.h; sourceTree = "<group>"; };
+		6D938B0515D9E2B50000A795 /* tinyxmlerror.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = tinyxmlerror.cpp; path = ../extern/tinyxml/tinyxmlerror.cpp; sourceTree = "<group>"; };
+		6D938B0615D9E2B50000A795 /* tinyxmlparser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = tinyxmlparser.cpp; path = ../extern/tinyxml/tinyxmlparser.cpp; sourceTree = "<group>"; };
+		6D938B0D15DA16800000A795 /* material.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = material.cpp; path = render/material.cpp; sourceTree = "<group>"; };
+		6D938B0E15DA16800000A795 /* material.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = material.h; path = render/material.h; sourceTree = "<group>"; };
+		6D938B1115DA1B1B0000A795 /* param.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = param.h; path = render/param.h; sourceTree = "<group>"; };
+		6D938B1215DA1B580000A795 /* param.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = param.cpp; path = render/param.cpp; sourceTree = "<group>"; };
 		6DA6D49C15C6080A00168010 /* gbuff.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = gbuff.h; path = render/gbuff.h; sourceTree = "<group>"; };
 		6DA6D49E15C60AC000168010 /* gbuff.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = gbuff.cpp; path = render/gbuff.cpp; sourceTree = "<group>"; };
 		6DA6D4A015C60B2400168010 /* render_device.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = render_device.cpp; path = render/render_device.cpp; sourceTree = "<group>"; };
@@ -80,16 +107,54 @@
 			name = game;
 			sourceTree = "<group>";
 		};
+		6D938AED15D9D6E70000A795 /* extern */ = {
+			isa = PBXGroup;
+			children = (
+				6D938B0015D9E2900000A795 /* tinyxml */,
+				6D938AEF15D9D76D0000A795 /* glsw */,
+			);
+			name = extern;
+			sourceTree = "<group>";
+		};
+		6D938AEF15D9D76D0000A795 /* glsw */ = {
+			isa = PBXGroup;
+			children = (
+				6D938AF015D9D76D0000A795 /* bstrlib.c */,
+				6D938AF115D9D76D0000A795 /* bstrlib.h */,
+				6D938AF215D9D76D0000A795 /* glsw.c */,
+				6D938AF315D9D76D0000A795 /* glsw.h */,
+			);
+			name = glsw;
+			path = ../extern/glsw;
+			sourceTree = "<group>";
+		};
+		6D938B0015D9E2900000A795 /* tinyxml */ = {
+			isa = PBXGroup;
+			children = (
+				6D938B0115D9E2B50000A795 /* tinystr.cpp */,
+				6D938B0215D9E2B50000A795 /* tinystr.h */,
+				6D938B0315D9E2B50000A795 /* tinyxml.cpp */,
+				6D938B0415D9E2B50000A795 /* tinyxml.h */,
+				6D938B0515D9E2B50000A795 /* tinyxmlerror.cpp */,
+				6D938B0615D9E2B50000A795 /* tinyxmlparser.cpp */,
+			);
+			name = tinyxml;
+			sourceTree = "<group>";
+		};
 		6DA6D49A15C6079E00168010 /* render */ = {
 			isa = PBXGroup;
 			children = (
+				6D9352FA15D0F45700F24ED5 /* color_util.h */,
+				6D9352FB15D0F48700F24ED5 /* color_util.cpp */,
+				6DA6D4A315C60DFF00168010 /* drawvert.h */,
 				6DA6D49C15C6080A00168010 /* gbuff.h */,
 				6DA6D49E15C60AC000168010 /* gbuff.cpp */,
 				6D9352F615CBBA7600F24ED5 /* gbatch.h */,
 				6D9352F715CBBAFD00F24ED5 /* gbatch.cpp */,
-				6DA6D4A315C60DFF00168010 /* drawvert.h */,
 				6DA6D4A415C6161000168010 /* gbuff_prim.h */,
 				6DA6D4A515C616A100168010 /* gbuff_prim.cpp */,
+				6D938B0E15DA16800000A795 /* material.h */,
+				6D938B0D15DA16800000A795 /* material.cpp */,
 				6DA6D4A215C60B3D00168010 /* render_device.h */,
 				6DA6D4A015C60B2400168010 /* render_device.cpp */,
 				6DA6D4A815C62B0200168010 /* render_device_es2.h */,
@@ -100,8 +165,8 @@
 				6D9352F415CBB27900F24ED5 /* scene_node.cpp */,
 				6DD2413D15D56154004C9360 /* scene_objfile.h */,
 				6DD2413F15D5616D004C9360 /* scene_objfile.cpp */,
-				6D9352FA15D0F45700F24ED5 /* color_util.h */,
-				6D9352FB15D0F48700F24ED5 /* color_util.cpp */,
+				6D938B1115DA1B1B0000A795 /* param.h */,
+				6D938B1215DA1B580000A795 /* param.cpp */,
 			);
 			name = render;
 			sourceTree = "<group>";
@@ -152,6 +217,7 @@
 			isa = PBXGroup;
 			children = (
 				6DB567A01581D3CC000A59ED /* CMakeLists.txt */,
+				6D938AED15D9D6E70000A795 /* extern */,
 				6DB567A11581D3CC000A59ED /* common */,
 				6DB567A51581D3CC000A59ED /* platform */,
 				6DA6D49A15C6079E00168010 /* render */,
@@ -198,6 +264,11 @@
 			files = (
 				6DB567AB1581D3CC000A59ED /* debug.h in Headers */,
 				6DB567AD1581D3CC000A59ED /* platform.h in Headers */,
+				6D938AF515D9D76D0000A795 /* bstrlib.h in Headers */,
+				6D938AF715D9D76D0000A795 /* glsw.h in Headers */,
+				6D938B0815D9E2B50000A795 /* tinystr.h in Headers */,
+				6D938B0A15D9E2B50000A795 /* tinyxml.h in Headers */,
+				6D938B1015DA16810000A795 /* material.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -265,6 +336,14 @@
 				6D9352FC15D0F48700F24ED5 /* color_util.cpp in Sources */,
 				6D93530015D153D500F24ED5 /* scene.cpp in Sources */,
 				6DD2414015D5616D004C9360 /* scene_objfile.cpp in Sources */,
+				6D938AF415D9D76D0000A795 /* bstrlib.c in Sources */,
+				6D938AF615D9D76D0000A795 /* glsw.c in Sources */,
+				6D938B0715D9E2B50000A795 /* tinystr.cpp in Sources */,
+				6D938B0915D9E2B50000A795 /* tinyxml.cpp in Sources */,
+				6D938B0B15D9E2B50000A795 /* tinyxmlerror.cpp in Sources */,
+				6D938B0C15D9E2B50000A795 /* tinyxmlparser.cpp in Sources */,
+				6D938B0F15DA16810000A795 /* material.cpp in Sources */,
+				6D938B1315DA1B580000A795 /* param.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

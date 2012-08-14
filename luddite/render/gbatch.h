@@ -13,6 +13,7 @@
 
 #include <prmath/prmath.hpp>
 #include <luddite/render/gbuff.h>
+#include <luddite/render/material.h>
 
 // Number of textures assign with the batch. More 
 // can be used as regular shader params
@@ -30,9 +31,7 @@ struct GBatch
     uint32_t m_tex[kGBatchNumTex];
     
     luddite::GBuff *m_gbuff;
-    
-    // TODO
-//    luddite::Material m_mtl;
+    luddite::Material *m_mtl;
 };
   
 typedef eastl::list<GBatch*> GBatchList;

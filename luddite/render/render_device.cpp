@@ -33,3 +33,8 @@ void RenderDevice::renderFrame()
     m_gbatches.clear();    
 }
 
+
+int32_t RenderDevice::loadShader( const eastl::string &shaderKey )
+{
+    return SHADER_FAIL;
+}

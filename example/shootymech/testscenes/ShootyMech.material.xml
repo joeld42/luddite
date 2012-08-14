@@ -1,0 +1,12 @@
+<MaterialList>
+
+	<Material name="mtl.one" shader="ShootyMech.Plastic">
+		<param name="Kd" value="#ff00ff" />
+		<param name="roughness" value="25.0" />		
+	</Material>
+
+	<Material name="mtl.two" shader="ShootyMech.Plastic" parent="mtl.one">
+		<param name="Kd" value="#ff0000" />
+	</Material>
+
+</MaterialList>

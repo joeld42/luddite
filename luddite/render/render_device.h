@@ -13,6 +13,8 @@
 #include <luddite/render/gbuff.h>
 #include <luddite/render/gbatch.h>
 
+#define SHADER_FAIL (0)
+
 namespace luddite
 {
     
@@ -23,6 +25,12 @@ public:
 
     // empties and draws the gbuff list
     void renderFrame();
+    
+    //--- Material support
+    
+    // returns an opaque handle to a shader, or SHADER_FAIL if there
+    // was an error loading shader. 
+    virtual int32_t loadShader( const eastl::string &shaderKey );
     
 protected:
     

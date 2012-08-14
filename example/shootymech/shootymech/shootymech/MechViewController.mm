@@ -18,6 +18,7 @@
 #include <luddite/render/scene_node.h>
 #include <luddite/render/color_util.h>
 #include <luddite/render/scene_objfile.h>
+#include <luddite/render/material.h>
 
 using namespace luddite;
 
@@ -181,16 +182,31 @@ GLfloat gCubeVertexData[216] =
     // Set up luddite stuff
     _renderDevice = new luddite::RenderDeviceES2();
     
+    // Init luddite material db
+    NSBundle *bundle = [NSBundle mainBundle];
+    NSString *resPath = [[bundle resourcePath] stringByAppendingString: @"/"];    
+    NSLog( @"Resource Path is %@\n", resPath );
+
+    luddite::Material::initMaterialDB([resPath UTF8String] );
+    
     luddite::GBuff *gbuffCube = luddite::gbuff_cube( 1.0, vec3f( 0.0, 0.5, 0.0) );
     gbuff_setColorConstant( gbuffCube, vec4f( 1.0, 0.0, 1.0, 1.0) );
     
     luddite::GBuff *gbuffCyl = luddite::gbuff_cylinder();
     gbuff_setColorConstant( gbuffCyl, vec4f( 0.0, 1.0, 0.0, 1.0) );
-    
-    
+        
     // Build scene graph
     luddite::SceneNode *worldRoot = new luddite::SceneNode( "worldRoot" );
-        
+    
+    // Make a material
+    luddite::Material *mtl = luddite::Material::_materialWithKey( _renderDevice,
+                                                                 "ShootyMech.Plastic" );    
+
+    // Set color
+    luddite::Param Kd("Kd");
+    Kd = vec3f( 1.0f, 0.6f, 0.0f );
+    mtl->setParam( Kd );
+    
     // make a ring of cube around the world root
     bool cube = true;
     luddite::SceneNode *cubeNode;
@@ -199,19 +215,19 @@ GLfloat gCubeVertexData[216] =
         vec3f cubePos = vec3f( cos(t)*2.0, 0.0, sin(t)*2.0 );
         cubeNode = new luddite::SceneNode( worldRoot );
         cubeNode->m_pos = cubePos;
-        NSLog( @"cube pos is %f %f %f", cubePos.x, cubePos.y, cubePos.z );
+//        NSLog( @"cube pos is %f %f %f", cubePos.x, cubePos.y, cubePos.z );
         
         // bind gbuff to a new gbatch, attach that to scene node
         GBatch *currBatch = new GBatch();
+        currBatch->m_mtl = NULL;
         if (cube)
-        {
-            
+        {            
             currBatch->m_gbuff = gbuffCube;
         }
         else
         {
             cubeNode->m_pos.y = sin(t*3) * 0.25;
-            currBatch->m_gbuff = gbuffCyl;            
+            currBatch->m_gbuff = gbuffCyl;    
         }
         cube = !cube;
         
@@ -227,8 +243,17 @@ GLfloat gCubeVertexData[216] =
     NSLog( @"Loading OBJ from file path %@", filePath );
     
     luddite::SceneNode *objNode = scene_objfile( [filePath UTF8String] );
+    
     if (objNode)
     {
+        // DBG: hardcode the mtl to all the obj file's batches
+        for (GBatchList::const_iterator bi = objNode->batches().begin(); 
+             bi != objNode->batches().end(); ++bi )
+        {
+            (*bi)->m_mtl = mtl;
+        }
+            
+        
         worldRoot->addChild( objNode );
     }
     
