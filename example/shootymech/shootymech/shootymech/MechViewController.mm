@@ -19,6 +19,7 @@
 #include <luddite/render/color_util.h>
 #include <luddite/render/scene_objfile.h>
 #include <luddite/render/material.h>
+#include <luddite/render/material_db.h>
 
 using namespace luddite;
 
@@ -106,6 +107,7 @@ GLfloat gCubeVertexData[216] =
     luddite::GBuff *_gbuffCube;
     
     luddite::Scene *_scene;
+    luddite::MaterialDB *_mtlDB;
     
 }
 
@@ -187,7 +189,12 @@ GLfloat gCubeVertexData[216] =
     NSString *resPath = [[bundle resourcePath] stringByAppendingString: @"/"];    
     NSLog( @"Resource Path is %@\n", resPath );
 
-    luddite::Material::initMaterialDB([resPath UTF8String] );
+    // Initialize shader DB
+    _mtlDB = new luddite::MaterialDB();
+    _mtlDB->initShaderDB([resPath UTF8String] );
+    
+    // Add material def files
+    _mtlDB->addMaterialDefs("ShootyMech.material.xml" );
     
     luddite::GBuff *gbuffCube = luddite::gbuff_cube( 1.0, vec3f( 0.0, 0.5, 0.0) );
     gbuff_setColorConstant( gbuffCube, vec4f( 1.0, 0.0, 1.0, 1.0) );
@@ -199,8 +206,8 @@ GLfloat gCubeVertexData[216] =
     luddite::SceneNode *worldRoot = new luddite::SceneNode( "worldRoot" );
     
     // Make a material
-    luddite::Material *mtl = luddite::Material::_materialWithKey( _renderDevice,
-                                                                 "ShootyMech.Plastic" );    
+    luddite::Material *mtl = _mtlDB->_materialWithKey( _renderDevice,
+                                                        "ShootyMech.Plastic" );    
 
     // Set color
     luddite::Param Kd("Kd");

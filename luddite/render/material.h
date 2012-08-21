@@ -29,16 +29,10 @@ public:
 
     // TODO params
     
-    // Material "Database"
-    static void initMaterialDB( const char *resourcePath );
-    static Material *getNamedMaterial( RenderDevice *device, const eastl::string &mtlName );
-    
-    // TODO: make private
-    static Material *_materialWithKey( RenderDevice *device, const eastl::string &mtlKey );
     
     void setParam( const Param &p );
     
-protected:    
+//protected:    
     eastl::vector<Param> m_params;
     
     eastl::string m_shaderKey; // name of the shader in GLSW format

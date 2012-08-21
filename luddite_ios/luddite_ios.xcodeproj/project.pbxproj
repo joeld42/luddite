@@ -25,6 +25,11 @@
 		6D938B0F15DA16810000A795 /* material.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6D938B0D15DA16800000A795 /* material.cpp */; };
 		6D938B1015DA16810000A795 /* material.h in Headers */ = {isa = PBXBuildFile; fileRef = 6D938B0E15DA16800000A795 /* material.h */; };
 		6D938B1315DA1B580000A795 /* param.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6D938B1215DA1B580000A795 /* param.cpp */; };
+		6D938B3515E1B2050000A795 /* rapidxml.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6D938B3115E1B2040000A795 /* rapidxml.hpp */; };
+		6D938B3615E1B2050000A795 /* rapidxml_iterators.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6D938B3215E1B2040000A795 /* rapidxml_iterators.hpp */; };
+		6D938B3715E1B2050000A795 /* rapidxml_print.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6D938B3315E1B2040000A795 /* rapidxml_print.hpp */; };
+		6D938B3815E1B2050000A795 /* rapidxml_utils.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6D938B3415E1B2040000A795 /* rapidxml_utils.hpp */; };
+		6D938B3D15E35DC80000A795 /* material_db.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6D938B3C15E35DC80000A795 /* material_db.cpp */; };
 		6DA6D49F15C60AC000168010 /* gbuff.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6DA6D49E15C60AC000168010 /* gbuff.cpp */; };
 		6DA6D4A115C60B2400168010 /* render_device.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6DA6D4A015C60B2400168010 /* render_device.cpp */; };
 		6DA6D4A615C616A100168010 /* gbuff_prim.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6DA6D4A515C616A100168010 /* gbuff_prim.cpp */; };
@@ -64,6 +69,12 @@
 		6D938B0E15DA16800000A795 /* material.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = material.h; path = render/material.h; sourceTree = "<group>"; };
 		6D938B1115DA1B1B0000A795 /* param.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = param.h; path = render/param.h; sourceTree = "<group>"; };
 		6D938B1215DA1B580000A795 /* param.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = param.cpp; path = render/param.cpp; sourceTree = "<group>"; };
+		6D938B3115E1B2040000A795 /* rapidxml.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = rapidxml.hpp; sourceTree = "<group>"; };
+		6D938B3215E1B2040000A795 /* rapidxml_iterators.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = rapidxml_iterators.hpp; sourceTree = "<group>"; };
+		6D938B3315E1B2040000A795 /* rapidxml_print.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = rapidxml_print.hpp; sourceTree = "<group>"; };
+		6D938B3415E1B2040000A795 /* rapidxml_utils.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = rapidxml_utils.hpp; sourceTree = "<group>"; };
+		6D938B3B15E35DAE0000A795 /* material_db.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = material_db.h; path = render/material_db.h; sourceTree = "<group>"; };
+		6D938B3C15E35DC80000A795 /* material_db.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = material_db.cpp; path = render/material_db.cpp; sourceTree = "<group>"; };
 		6DA6D49C15C6080A00168010 /* gbuff.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = gbuff.h; path = render/gbuff.h; sourceTree = "<group>"; };
 		6DA6D49E15C60AC000168010 /* gbuff.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = gbuff.cpp; path = render/gbuff.cpp; sourceTree = "<group>"; };
 		6DA6D4A015C60B2400168010 /* render_device.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = render_device.cpp; path = render/render_device.cpp; sourceTree = "<group>"; };
@@ -110,6 +121,7 @@
 		6D938AED15D9D6E70000A795 /* extern */ = {
 			isa = PBXGroup;
 			children = (
+				6D938B2E15E1B2040000A795 /* rapidxml-1.13 */,
 				6D938B0015D9E2900000A795 /* tinyxml */,
 				6D938AEF15D9D76D0000A795 /* glsw */,
 			);
@@ -141,6 +153,18 @@
 			name = tinyxml;
 			sourceTree = "<group>";
 		};
+		6D938B2E15E1B2040000A795 /* rapidxml-1.13 */ = {
+			isa = PBXGroup;
+			children = (
+				6D938B3115E1B2040000A795 /* rapidxml.hpp */,
+				6D938B3215E1B2040000A795 /* rapidxml_iterators.hpp */,
+				6D938B3315E1B2040000A795 /* rapidxml_print.hpp */,
+				6D938B3415E1B2040000A795 /* rapidxml_utils.hpp */,
+			);
+			name = "rapidxml-1.13";
+			path = "../extern/rapidxml-1.13";
+			sourceTree = "<group>";
+		};
 		6DA6D49A15C6079E00168010 /* render */ = {
 			isa = PBXGroup;
 			children = (
@@ -155,6 +179,8 @@
 				6DA6D4A515C616A100168010 /* gbuff_prim.cpp */,
 				6D938B0E15DA16800000A795 /* material.h */,
 				6D938B0D15DA16800000A795 /* material.cpp */,
+				6D938B3B15E35DAE0000A795 /* material_db.h */,
+				6D938B3C15E35DC80000A795 /* material_db.cpp */,
 				6DA6D4A215C60B3D00168010 /* render_device.h */,
 				6DA6D4A015C60B2400168010 /* render_device.cpp */,
 				6DA6D4A815C62B0200168010 /* render_device_es2.h */,
@@ -269,6 +295,10 @@
 				6D938B0815D9E2B50000A795 /* tinystr.h in Headers */,
 				6D938B0A15D9E2B50000A795 /* tinyxml.h in Headers */,
 				6D938B1015DA16810000A795 /* material.h in Headers */,
+				6D938B3515E1B2050000A795 /* rapidxml.hpp in Headers */,
+				6D938B3615E1B2050000A795 /* rapidxml_iterators.hpp in Headers */,
+				6D938B3715E1B2050000A795 /* rapidxml_print.hpp in Headers */,
+				6D938B3815E1B2050000A795 /* rapidxml_utils.hpp in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -344,6 +374,7 @@
 				6D938B0C15D9E2B50000A795 /* tinyxmlparser.cpp in Sources */,
 				6D938B0F15DA16810000A795 /* material.cpp in Sources */,
 				6D938B1315DA1B580000A795 /* param.cpp in Sources */,
+				6D938B3D15E35DC80000A795 /* material_db.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

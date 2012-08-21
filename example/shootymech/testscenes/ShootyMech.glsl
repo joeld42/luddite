@@ -63,6 +63,8 @@ void main()
 
 -- Plastic.Fragment ------------------------------------------
 
+uniform mediump vec4 dbgColor;
+
 varying lowp vec3 diffuseColor;
 varying lowp vec3 specColor;
 varying mediump vec2 st;
@@ -75,9 +77,10 @@ void main()
 	gl_FragColor.rgb = (diffuseColor * dif0.rgb )+specColor;
 	gl_FragColor.a = dif0.a;
     	
-	//gl_FragColor = texture2D( sampler_dif0, st );
-	//gl_FragColor = colorVarying;
+//    gl_FragColor = texture2D( sampler_dif0, st );
+//    gl_FragColor = colorVarying;
     
     // DBG
     gl_FragColor = vec4( 1.0, 0.0, 1.0, 1.0 ); 
+//    gl_FragColor = dbgColor;
 }
