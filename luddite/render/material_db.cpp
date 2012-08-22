@@ -61,8 +61,38 @@ void MaterialDB::addMaterialDefs( const char *materialFile )
     rapidxml::xml_node<> *currMtl = mtlList->first_node( "Material" );
     while (currMtl)
     {
+        // Material name
+        eastl::string mtlName;
+        rapidxml::xml_attribute<> *mtlNameAttr = currMtl->first_attribute( "name" );
+        if (!mtlNameAttr)
+        {
+            // Skip the material since we can't look it up to use it for 
+            // anything without a name.
+            DBG::warn( "Material missing required attribute 'name'.\n" );
+            currMtl = currMtl->next_sibling( "Material" );
+            continue;
+        }
+        mtlName = mtlNameAttr->value();
+        DBG::info( "Material: %s\n", mtlName.c_str() );
+        
+        // Get the parent material if there is one
+        Material *parentMtl = NULL;
+        rapidxml::xml_attribute<> *parentMtlAttr = currMtl->first_attribute("parent" );
+        if (parentMtlAttr)
+        {
+            parentMtl = _lookupMaterial( parentMtlAttr->value() );
+            if (!parentMtl)
+            {
+                DBG::warn( "Didn't find parent material '%s' for material '%s'.\n",
+                          parentMtlAttr->value(), mtlName.c_str() );
+            }
+        }
+        
+        // All parameters...
         rapidxml::xml_attribute<> *attr = currMtl->first_attribute();
-        DBG::info( "Material: %s\n", currMtl->name() );
+        Material *material;
+        if (parentMtl) material = new Material( *parentMtl );
+        
         while (attr != currMtl->last_attribute())
         {
             DBG::info( "Attr: %s value %s\n", attr->name(), attr->value() );
@@ -83,6 +113,13 @@ Material *MaterialDB::getNamedMaterial( RenderDevice *device, const eastl::strin
     // TODO
     return NULL;
 }
+
+// Looks up a material or returns NULL if not exists
+Material *MaterialDB::_lookupMaterial( const eastl::string &mtlName )
+{
+    
+}
+
 
 // This gets the "base" material without a specific instance of parameter 
 // assignments.

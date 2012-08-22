@@ -10,6 +10,7 @@
 #define luddite_material_db_h
 
 #include <EASTL/string.h>
+#include <EASTL/hash_map.h>
 
 namespace luddite
 {
@@ -33,8 +34,10 @@ public:
     
 //private:
     Material *_materialWithKey( RenderDevice *device, const eastl::string &mtlKey );
+    Material *_lookupMaterial( const eastl::string &mtlName );
     
     eastl::string m_resourcePath;
+    eastl::hash_map<eastl::string,luddite::Material*> m_materials;
   
 };
 
