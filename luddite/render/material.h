@@ -22,22 +22,21 @@
 namespace luddite {
 
 class RenderDevice;
+
     
 class Material
 {
 public:
 
     // TODO params
-    
-    
     void setParam( const Param &p );
     
 //protected:    
     eastl::vector<Param> m_params;
     
     eastl::string m_shaderKey; // name of the shader in GLSW format
-    eastl::string m_materialName; // name of the specific material instance    
-    
+    eastl::string m_materialName; // name of the specific material instance
+
     //DBG
 public:
     int32_t m_program; // shader program    

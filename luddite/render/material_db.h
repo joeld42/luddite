@@ -38,6 +38,7 @@ public:
     
     eastl::string m_resourcePath;
     eastl::hash_map<eastl::string,luddite::Material*> m_materials;
+    eastl::hash_map<eastl::string,int32_t> m_shaderPrograms; // shader programs, indexed by shaderKey
   
 };
 

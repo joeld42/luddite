@@ -74,6 +74,11 @@ void MaterialDB::addMaterialDefs( const char *materialFile )
         }
         mtlName = mtlNameAttr->value();
         DBG::info( "Material: %s\n", mtlName.c_str() );
+
+        // Shader Key
+        eastl::string shaderKey;
+        rapidxml::xml_attribute<> *shaderKeyAttr = currMtl->first_attribute( "shader" );
+        if (shaderKeyAttr) shaderKey = shaderKeyAttr->value();
         
         // Get the parent material if there is one
         Material *parentMtl = NULL;
@@ -87,18 +92,43 @@ void MaterialDB::addMaterialDefs( const char *materialFile )
                           parentMtlAttr->value(), mtlName.c_str() );
             }
         }
-        
+
+        // Materials need to specify either a shader or a parent. If they specify both, the shader
+        // must match the parent's shader
+        Material *material = NULL;
+        if (parentMtl) {
+            if (!shaderKey.empty() && parentMtl->m_shaderKey != shaderKey) {
+                DBG::warn("Material '%s' specifies shader '%s' which doesn't match parent (%s/%s)",
+                        mtlName.c_str(), shaderKey.c_str(),
+                        parentMtl->m_materialName.c_str(),
+                        parentMtl->m_shaderKey.c_str() );
+            }
+            material = new Material( *parentMtl );
+        } else if (!shaderKey.empty()) {
+            material = new Material();
+
+//            material = _materialWithKey(hmm don't have device here, shaderKey )
+        } else {
+            DBG::error( "Material '%s' doesn't specify a shader or a parent material.");
+        }
+
         // All parameters...
         rapidxml::xml_attribute<> *attr = currMtl->first_attribute();
-        Material *material;
-        if (parentMtl) material = new Material( *parentMtl );
-        
+
+
         while (attr != currMtl->last_attribute())
         {
             DBG::info( "Attr: %s value %s\n", attr->name(), attr->value() );
             attr = attr->next_attribute();
         }
-        
+
+        // TODO: params
+
+
+        // Add to db
+        m_materials[mtlName] = material;
+
+        // Next material in file
         currMtl = currMtl->next_sibling( "Material" );
     }
     
@@ -117,7 +147,13 @@ Material *MaterialDB::getNamedMaterial( RenderDevice *device, const eastl::strin
 // Looks up a material or returns NULL if not exists
 Material *MaterialDB::_lookupMaterial( const eastl::string &mtlName )
 {
+    auto mtlIter = m_materials.find(mtlName);
+    if (mtlIter != m_materials.end())
+    {
+        return (*mtlIter).second;
+    }
     return NULL;
+
 }
 
 
@@ -125,13 +161,26 @@ Material *MaterialDB::_lookupMaterial( const eastl::string &mtlName )
 // assignments.
 Material *MaterialDB::_materialWithKey( RenderDevice *device, const eastl::string &mtlKey )
 {
-    // TODO: look up material, create only if not exist
-    
+    // look up material, create only if not exist
+    int32_t shaderProg;
+    auto pIter = m_shaderPrograms.find( mtlKey );
+    if (pIter != m_shaderPrograms.end()) {
+        shaderProg = (*pIter).second;
+    } else {
+        // Load the shader
+        // HMM... FIXME: need to not do this until the shader is actually used
+        shaderProg = device->loadShader( mtlKey );
+
+        // TODO: if there's an error loading the shader, load a built-in error shader
+        // if (!shaderProg) return _materialWithKey( device, "Luddite.Error" );
+    }
+
+    // Make a material for this
     Material *mtl = new Material();
     mtl->m_shaderKey = mtlKey;
     mtl->m_materialName = mtlKey; 
     
-    mtl->m_program = device->loadShader( mtlKey );
-    
+    mtl->m_program = shaderProg;
+
     return mtl;
 }
