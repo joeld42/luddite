@@ -115,11 +115,13 @@ matrix4x4f SceneNode::localXForm()
 
 vec3f SceneNode::localToWorld( const vec3f &localPos )
 {
-
+    // TODO
+    return localPos;
 }
 
-vec3f SceneNode::worldToLocal( const vec4f &worldPos )
+vec3f SceneNode::worldToLocal( const vec3f &worldPos )
 {
-    
+    // TODO
+    return worldPos;
 }
 

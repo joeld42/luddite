@@ -60,7 +60,7 @@ public:
     // ----------------------------------------    
     vec3f worldPos();
     vec3f localToWorld( const vec3f &localPos );
-    vec3f worldToLocal( const vec4f &worldPos );
+    vec3f worldToLocal( const vec3f &worldPos );
     
     // TODO wrap with accessors for dirty flag?
     vec3f  m_pos;

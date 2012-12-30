@@ -6,8 +6,8 @@
 //  Copyright (c) 2012 Joel Davis. All rights reserved.
 //
 
-#include "gameloop.h"
-#include "debug.h"
+#include <luddite/common/debug.h>
+#include <luddite/game/gameloop.h>
 
 // TMP until platform time
 #include <CoreFoundation/CoreFoundation.h>

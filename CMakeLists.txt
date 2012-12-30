@@ -19,10 +19,32 @@ FIND_PACKAGE( Freetype )
 include_directories( . )
 link_directories( ${luddite_BINARY_DIR}/luddite )
 
+# =========================================================
+#  extern libs included in the project
+# =========================================================
+
+# Add prmath (header only)
+include_directories( extern )
+include_directories( extern/prmath )
+
+# Add RapidXML (header only)
+include_directories( extern/rapidxml )
+
 # Add EASTL
 include_directories( extern/eastl/include )
 link_directories( ${luddite_BINARY_DIR}/eastl )
 ADD_SUBDIRECTORY( extern/eastl )
+
+# Add GLSW
+include_directories( extern/glsw )
+link_directories( ${luddite_BINARY_DIR}/glsw )
+ADD_SUBDIRECTORY( extern/glsw )
+
+# Not using TinyXML at the moment
+
+# =========================================================
+#  Luddite code
+# =========================================================
 
 # Main Library
 ADD_SUBDIRECTORY( luddite )
@@ -32,3 +54,4 @@ ADD_SUBDIRECTORY( tools )
 
 # Examples
 ADD_SUBDIRECTORY( example/basics )
+#ADD_SUBDIRECTORY( example/shootymech )

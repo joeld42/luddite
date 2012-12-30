@@ -7,7 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		609B99F773A5529FA834B6BC /* rapidxml.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 609B91B0BF21173BE16849F2 /* rapidxml.hpp */; };
+		609B9C119CBA7B91DB9F786A /* rapidxml_print.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 609B947F1C1B7DAC1C0AAF70 /* rapidxml_print.hpp */; };
+		609B9CE7CAD3BA137BE58687 /* rapidxml_utils.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 609B9F36127D4BD6AFC46011 /* rapidxml_utils.hpp */; };
+		609B9F065827CE9B0D1E3188 /* rapidxml_iterators.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 609B9F631E5B077FD59849D0 /* rapidxml_iterators.hpp */; };
 		6D35122C15A56F71000CA0C3 /* gameloop.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6D35122B15A56F71000CA0C3 /* gameloop.cpp */; };
+		6D7167261690147D007D0B5F /* allocator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6D7167201690147D007D0B5F /* allocator.cpp */; };
+		6D7167271690147D007D0B5F /* assert.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6D7167211690147D007D0B5F /* assert.cpp */; };
+		6D7167281690147D007D0B5F /* fixed_pool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6D7167221690147D007D0B5F /* fixed_pool.cpp */; };
+		6D7167291690147D007D0B5F /* hashtable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6D7167231690147D007D0B5F /* hashtable.cpp */; };
+		6D71672A1690147D007D0B5F /* red_black_tree.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6D7167241690147D007D0B5F /* red_black_tree.cpp */; };
+		6D71672B1690147D007D0B5F /* string.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6D7167251690147D007D0B5F /* string.cpp */; };
 		6D9352F515CBB27900F24ED5 /* scene_node.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6D9352F415CBB27900F24ED5 /* scene_node.cpp */; };
 		6D9352F815CBBAFD00F24ED5 /* gbatch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6D9352F715CBBAFD00F24ED5 /* gbatch.cpp */; };
 		6D9352FC15D0F48700F24ED5 /* color_util.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6D9352FB15D0F48700F24ED5 /* color_util.cpp */; };
@@ -25,10 +35,6 @@
 		6D938B0F15DA16810000A795 /* material.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6D938B0D15DA16800000A795 /* material.cpp */; };
 		6D938B1015DA16810000A795 /* material.h in Headers */ = {isa = PBXBuildFile; fileRef = 6D938B0E15DA16800000A795 /* material.h */; };
 		6D938B1315DA1B580000A795 /* param.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6D938B1215DA1B580000A795 /* param.cpp */; };
-		6D938B3515E1B2050000A795 /* rapidxml.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6D938B3115E1B2040000A795 /* rapidxml.hpp */; };
-		6D938B3615E1B2050000A795 /* rapidxml_iterators.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6D938B3215E1B2040000A795 /* rapidxml_iterators.hpp */; };
-		6D938B3715E1B2050000A795 /* rapidxml_print.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6D938B3315E1B2040000A795 /* rapidxml_print.hpp */; };
-		6D938B3815E1B2050000A795 /* rapidxml_utils.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6D938B3415E1B2040000A795 /* rapidxml_utils.hpp */; };
 		6D938B3D15E35DC80000A795 /* material_db.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6D938B3C15E35DC80000A795 /* material_db.cpp */; };
 		6DA6D49F15C60AC000168010 /* gbuff.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6DA6D49E15C60AC000168010 /* gbuff.cpp */; };
 		6DA6D4A115C60B2400168010 /* render_device.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6DA6D4A015C60B2400168010 /* render_device.cpp */; };
@@ -44,8 +50,18 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		609B91B0BF21173BE16849F2 /* rapidxml.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = rapidxml.hpp; path = ../extern/rapidxml/rapidxml.hpp; sourceTree = "<group>"; };
+		609B947F1C1B7DAC1C0AAF70 /* rapidxml_print.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = rapidxml_print.hpp; path = ../extern/rapidxml/rapidxml_print.hpp; sourceTree = "<group>"; };
+		609B9F36127D4BD6AFC46011 /* rapidxml_utils.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = rapidxml_utils.hpp; path = ../extern/rapidxml/rapidxml_utils.hpp; sourceTree = "<group>"; };
+		609B9F631E5B077FD59849D0 /* rapidxml_iterators.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = rapidxml_iterators.hpp; path = ../extern/rapidxml/rapidxml_iterators.hpp; sourceTree = "<group>"; };
 		6D35122915A56B99000CA0C3 /* gameloop.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = gameloop.h; path = game/gameloop.h; sourceTree = "<group>"; };
 		6D35122B15A56F71000CA0C3 /* gameloop.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = gameloop.cpp; path = game/gameloop.cpp; sourceTree = "<group>"; };
+		6D7167201690147D007D0B5F /* allocator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = allocator.cpp; sourceTree = "<group>"; };
+		6D7167211690147D007D0B5F /* assert.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = assert.cpp; sourceTree = "<group>"; };
+		6D7167221690147D007D0B5F /* fixed_pool.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = fixed_pool.cpp; sourceTree = "<group>"; };
+		6D7167231690147D007D0B5F /* hashtable.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = hashtable.cpp; sourceTree = "<group>"; };
+		6D7167241690147D007D0B5F /* red_black_tree.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = red_black_tree.cpp; sourceTree = "<group>"; };
+		6D7167251690147D007D0B5F /* string.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = string.cpp; sourceTree = "<group>"; };
 		6D9352F215CBB26100F24ED5 /* scene_node.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = scene_node.h; path = render/scene_node.h; sourceTree = "<group>"; };
 		6D9352F415CBB27900F24ED5 /* scene_node.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = scene_node.cpp; path = render/scene_node.cpp; sourceTree = "<group>"; };
 		6D9352F615CBBA7600F24ED5 /* gbatch.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = gbatch.h; path = render/gbatch.h; sourceTree = "<group>"; };
@@ -69,10 +85,6 @@
 		6D938B0E15DA16800000A795 /* material.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = material.h; path = render/material.h; sourceTree = "<group>"; };
 		6D938B1115DA1B1B0000A795 /* param.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = param.h; path = render/param.h; sourceTree = "<group>"; };
 		6D938B1215DA1B580000A795 /* param.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = param.cpp; path = render/param.cpp; sourceTree = "<group>"; };
-		6D938B3115E1B2040000A795 /* rapidxml.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = rapidxml.hpp; sourceTree = "<group>"; };
-		6D938B3215E1B2040000A795 /* rapidxml_iterators.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = rapidxml_iterators.hpp; sourceTree = "<group>"; };
-		6D938B3315E1B2040000A795 /* rapidxml_print.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = rapidxml_print.hpp; sourceTree = "<group>"; };
-		6D938B3415E1B2040000A795 /* rapidxml_utils.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = rapidxml_utils.hpp; sourceTree = "<group>"; };
 		6D938B3B15E35DAE0000A795 /* material_db.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = material_db.h; path = render/material_db.h; sourceTree = "<group>"; };
 		6D938B3C15E35DC80000A795 /* material_db.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = material_db.cpp; path = render/material_db.cpp; sourceTree = "<group>"; };
 		6DA6D49C15C6080A00168010 /* gbuff.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = gbuff.h; path = render/gbuff.h; sourceTree = "<group>"; };
@@ -109,6 +121,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		609B9E132816898B074FEB58 /* rapidxml */ = {
+			isa = PBXGroup;
+			children = (
+				609B91B0BF21173BE16849F2 /* rapidxml.hpp */,
+				609B9F631E5B077FD59849D0 /* rapidxml_iterators.hpp */,
+				609B947F1C1B7DAC1C0AAF70 /* rapidxml_print.hpp */,
+				609B9F36127D4BD6AFC46011 /* rapidxml_utils.hpp */,
+			);
+			name = rapidxml;
+			sourceTree = "<group>";
+		};
 		6D35122D15A56F7E000CA0C3 /* game */ = {
 			isa = PBXGroup;
 			children = (
@@ -118,12 +141,27 @@
 			name = game;
 			sourceTree = "<group>";
 		};
+		6D71671F1690147D007D0B5F /* eastl */ = {
+			isa = PBXGroup;
+			children = (
+				6D7167201690147D007D0B5F /* allocator.cpp */,
+				6D7167211690147D007D0B5F /* assert.cpp */,
+				6D7167221690147D007D0B5F /* fixed_pool.cpp */,
+				6D7167231690147D007D0B5F /* hashtable.cpp */,
+				6D7167241690147D007D0B5F /* red_black_tree.cpp */,
+				6D7167251690147D007D0B5F /* string.cpp */,
+			);
+			name = eastl;
+			path = ../extern/eastl/src;
+			sourceTree = "<group>";
+		};
 		6D938AED15D9D6E70000A795 /* extern */ = {
 			isa = PBXGroup;
 			children = (
-				6D938B2E15E1B2040000A795 /* rapidxml-1.13 */,
+				6D71671F1690147D007D0B5F /* eastl */,
 				6D938B0015D9E2900000A795 /* tinyxml */,
 				6D938AEF15D9D76D0000A795 /* glsw */,
+				609B9E132816898B074FEB58 /* rapidxml */,
 			);
 			name = extern;
 			sourceTree = "<group>";
@@ -151,18 +189,6 @@
 				6D938B0615D9E2B50000A795 /* tinyxmlparser.cpp */,
 			);
 			name = tinyxml;
-			sourceTree = "<group>";
-		};
-		6D938B2E15E1B2040000A795 /* rapidxml-1.13 */ = {
-			isa = PBXGroup;
-			children = (
-				6D938B3115E1B2040000A795 /* rapidxml.hpp */,
-				6D938B3215E1B2040000A795 /* rapidxml_iterators.hpp */,
-				6D938B3315E1B2040000A795 /* rapidxml_print.hpp */,
-				6D938B3415E1B2040000A795 /* rapidxml_utils.hpp */,
-			);
-			name = "rapidxml-1.13";
-			path = "../extern/rapidxml-1.13";
 			sourceTree = "<group>";
 		};
 		6DA6D49A15C6079E00168010 /* render */ = {
@@ -295,10 +321,10 @@
 				6D938B0815D9E2B50000A795 /* tinystr.h in Headers */,
 				6D938B0A15D9E2B50000A795 /* tinyxml.h in Headers */,
 				6D938B1015DA16810000A795 /* material.h in Headers */,
-				6D938B3515E1B2050000A795 /* rapidxml.hpp in Headers */,
-				6D938B3615E1B2050000A795 /* rapidxml_iterators.hpp in Headers */,
-				6D938B3715E1B2050000A795 /* rapidxml_print.hpp in Headers */,
-				6D938B3815E1B2050000A795 /* rapidxml_utils.hpp in Headers */,
+				609B99F773A5529FA834B6BC /* rapidxml.hpp in Headers */,
+				609B9F065827CE9B0D1E3188 /* rapidxml_iterators.hpp in Headers */,
+				609B9C119CBA7B91DB9F786A /* rapidxml_print.hpp in Headers */,
+				609B9CE7CAD3BA137BE58687 /* rapidxml_utils.hpp in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -375,6 +401,12 @@
 				6D938B0F15DA16810000A795 /* material.cpp in Sources */,
 				6D938B1315DA1B580000A795 /* param.cpp in Sources */,
 				6D938B3D15E35DC80000A795 /* material_db.cpp in Sources */,
+				6D7167261690147D007D0B5F /* allocator.cpp in Sources */,
+				6D7167271690147D007D0B5F /* assert.cpp in Sources */,
+				6D7167281690147D007D0B5F /* fixed_pool.cpp in Sources */,
+				6D7167291690147D007D0B5F /* hashtable.cpp in Sources */,
+				6D71672A1690147D007D0B5F /* red_black_tree.cpp in Sources */,
+				6D71672B1690147D007D0B5F /* string.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -402,10 +434,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
-					"${SRCROOT}/../luddite/",
-					"$(SRCROOT)/../extern/eastl/include/",
-					"$(SRCROOT)/../",
-					"$(SRCROOT)/../extern/",
+					"\"${SRCROOT}/../luddite/\"",
+					"\"$(SRCROOT)/../extern/eastl/include/\"",
+					"\"$(SRCROOT)/../\"",
+					"\"$(SRCROOT)/../extern/\"",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				SDKROOT = iphoneos;
@@ -426,10 +458,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
-					"${SRCROOT}/../luddite/",
-					"$(SRCROOT)/../extern/eastl/include/",
-					"$(SRCROOT)/../",
-					"$(SRCROOT)/../extern/",
+					"\"${SRCROOT}/../luddite/\"",
+					"\"$(SRCROOT)/../extern/eastl/include/\"",
+					"\"$(SRCROOT)/../\"",
+					"\"$(SRCROOT)/../extern/\"",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				SDKROOT = iphoneos;
@@ -443,6 +475,13 @@
 				DSTROOT = /tmp/luddite_ios.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "luddite_ios/luddite_ios-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"\"${SRCROOT}/../luddite/\"",
+					"\"$(SRCROOT)/../extern/eastl/include/\"",
+					"\"$(SRCROOT)/../\"",
+					"\"$(SRCROOT)/../extern/\"",
+					"\"$(SRCROOT)/../extern/rapidxml\"",
+				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -455,6 +494,13 @@
 				DSTROOT = /tmp/luddite_ios.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "luddite_ios/luddite_ios-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"\"${SRCROOT}/../luddite/\"",
+					"\"$(SRCROOT)/../extern/eastl/include/\"",
+					"\"$(SRCROOT)/../\"",
+					"\"$(SRCROOT)/../extern/\"",
+					"\"$(SRCROOT)/../extern/rapidxml\"",
+				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;

@@ -30,6 +30,7 @@ static size_t _paramDataSize( int paramType )
     }
     
 //    DBG::Assert( false, "Unknown paramType" );
+    return 0;
 }
 
 Param::Param()

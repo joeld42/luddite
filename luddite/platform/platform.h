@@ -8,15 +8,14 @@
 #ifdef WIN32
 # define TRIGGER_BREAKPOINT { __asm { int 3 }; }
 #elif __APPLE__
-# include "TargetConditionals.h"
+#  include "TargetConditionals.h"
 #  if TARGET_CPU_ARM
-
 //   iOS
 #    define TRIGGER_BREAKPOINT { asm("trap"); }
 
-#  elif TARGET_CPU_X86
+#  elif TARGET_CPU_X86 | TARGET_CPU_X86_64
 
-//    iOS Simulator
+//    iOS Simulator or OSX
 #     define TRIGGER_BREAKPOINT { asm ("int $3"); }
 
 # endif

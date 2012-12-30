@@ -117,7 +117,7 @@ Material *MaterialDB::getNamedMaterial( RenderDevice *device, const eastl::strin
 // Looks up a material or returns NULL if not exists
 Material *MaterialDB::_lookupMaterial( const eastl::string &mtlName )
 {
-    
+    return NULL;
 }
 
 
