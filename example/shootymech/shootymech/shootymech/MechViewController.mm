@@ -206,8 +206,10 @@ GLfloat gCubeVertexData[216] =
     luddite::SceneNode *worldRoot = new luddite::SceneNode( "worldRoot" );
     
     // Make a material
-    luddite::Material *mtl = _mtlDB->_materialWithKey( _renderDevice,
-                                                        "ShootyMech.Plastic" );    
+    luddite::Material *mtl = _mtlDB->_materialWithKey( "ShootyMech.Plastic" );
+
+    // fixme.. this is temporary, shouldn't need to do this
+    _mtlDB->useAllShaders( _renderDevice );
 
     // Set color
     luddite::Param Kd("Kd");

@@ -14,6 +14,7 @@
 #include <EASTL/string.h>
 
 #include <luddite/render/param.h>
+#include "shader.h"
 
 // Here's where the "renderdevice" abstraction starts to leak a little bit..
 // the shader classes assume a GL-like shader structure, down to the handle
@@ -22,7 +23,7 @@
 namespace luddite {
 
 class RenderDevice;
-
+class Shader;
     
 class Material
 {
@@ -33,14 +34,13 @@ public:
     
 //protected:    
     eastl::vector<Param> m_params;
-    
-    eastl::string m_shaderKey; // name of the shader in GLSW format
     eastl::string m_materialName; // name of the specific material instance
 
-    //DBG
+    Shader *m_shader;
+
 public:
-    int32_t m_program; // shader program    
-    
+    const eastl::string &shaderKey();
+
 private:
     bool _loadShader( const char *shaderKey );
 };

@@ -7,7 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		609B95964B23C64061260BE0 /* shader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 609B960B9600F3A51DAC960D /* shader.cpp */; };
 		609B99F773A5529FA834B6BC /* rapidxml.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 609B91B0BF21173BE16849F2 /* rapidxml.hpp */; };
+		609B9B58B947E00AA4C163D7 /* shader.h in Headers */ = {isa = PBXBuildFile; fileRef = 609B97BB4CAB7F4D24E58F72 /* shader.h */; };
 		609B9C119CBA7B91DB9F786A /* rapidxml_print.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 609B947F1C1B7DAC1C0AAF70 /* rapidxml_print.hpp */; };
 		609B9CE7CAD3BA137BE58687 /* rapidxml_utils.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 609B9F36127D4BD6AFC46011 /* rapidxml_utils.hpp */; };
 		609B9F065827CE9B0D1E3188 /* rapidxml_iterators.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 609B9F631E5B077FD59849D0 /* rapidxml_iterators.hpp */; };
@@ -52,6 +54,8 @@
 /* Begin PBXFileReference section */
 		609B91B0BF21173BE16849F2 /* rapidxml.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = rapidxml.hpp; path = ../extern/rapidxml/rapidxml.hpp; sourceTree = "<group>"; };
 		609B947F1C1B7DAC1C0AAF70 /* rapidxml_print.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = rapidxml_print.hpp; path = ../extern/rapidxml/rapidxml_print.hpp; sourceTree = "<group>"; };
+		609B960B9600F3A51DAC960D /* shader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = shader.cpp; path = render/shader.cpp; sourceTree = "<group>"; };
+		609B97BB4CAB7F4D24E58F72 /* shader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = shader.h; path = render/shader.h; sourceTree = "<group>"; };
 		609B9F36127D4BD6AFC46011 /* rapidxml_utils.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = rapidxml_utils.hpp; path = ../extern/rapidxml/rapidxml_utils.hpp; sourceTree = "<group>"; };
 		609B9F631E5B077FD59849D0 /* rapidxml_iterators.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = rapidxml_iterators.hpp; path = ../extern/rapidxml/rapidxml_iterators.hpp; sourceTree = "<group>"; };
 		6D35122915A56B99000CA0C3 /* gameloop.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = gameloop.h; path = game/gameloop.h; sourceTree = "<group>"; };
@@ -219,6 +223,8 @@
 				6DD2413F15D5616D004C9360 /* scene_objfile.cpp */,
 				6D938B1115DA1B1B0000A795 /* param.h */,
 				6D938B1215DA1B580000A795 /* param.cpp */,
+				609B960B9600F3A51DAC960D /* shader.cpp */,
+				609B97BB4CAB7F4D24E58F72 /* shader.h */,
 			);
 			name = render;
 			sourceTree = "<group>";
@@ -325,6 +331,7 @@
 				609B9F065827CE9B0D1E3188 /* rapidxml_iterators.hpp in Headers */,
 				609B9C119CBA7B91DB9F786A /* rapidxml_print.hpp in Headers */,
 				609B9CE7CAD3BA137BE58687 /* rapidxml_utils.hpp in Headers */,
+				609B9B58B947E00AA4C163D7 /* shader.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -407,6 +414,7 @@
 				6D7167291690147D007D0B5F /* hashtable.cpp in Sources */,
 				6D71672A1690147D007D0B5F /* red_black_tree.cpp in Sources */,
 				6D71672B1690147D007D0B5F /* string.cpp in Sources */,
+				609B95964B23C64061260BE0 /* shader.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

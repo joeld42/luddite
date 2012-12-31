@@ -16,6 +16,7 @@ namespace luddite
 {
     
 class Material;
+class Shader;
     
 class MaterialDB
 {
@@ -31,14 +32,18 @@ public:
     // Looks up a named material. If the shader hasn't been instantiated yet,
     // compiles it. TODO: prewarm
     Material *getNamedMaterial( RenderDevice *device, const eastl::string &mtlName );
+
+    // Loads all shaders used by any material. Probably not the best, need to figure
+    // out what materials we're actually using and use that. But for now this works
+    void useAllShaders( RenderDevice *device );
     
 //private:
-    Material *_materialWithKey( RenderDevice *device, const eastl::string &mtlKey );
+    Material *_materialWithKey( const eastl::string &mtlKey );
     Material *_lookupMaterial( const eastl::string &mtlName );
     
     eastl::string m_resourcePath;
     eastl::hash_map<eastl::string,luddite::Material*> m_materials;
-    eastl::hash_map<eastl::string,int32_t> m_shaderPrograms; // shader programs, indexed by shaderKey
+    eastl::hash_map<eastl::string,Shader*> m_shaders; // shader programs, indexed by shaderKey
   
 };
 

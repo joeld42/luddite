@@ -66,9 +66,9 @@ void RenderDeviceES2::_drawGBatch( luddite::GBatch *gbatch )
     else
     {
         // use gbatch material
-        glUseProgram(gbatch->m_mtl->m_program);
+        glUseProgram(gbatch->m_mtl->m_shader->shaderProgram() );
         
-        GLint mvp = glGetUniformLocation( gbatch->m_mtl->m_program, "matrixPMV");
+        GLint mvp = glGetUniformLocation( gbatch->m_mtl->m_shader->shaderProgram(), "matrixPMV");
         glUniformMatrix4fv( mvp, 1, 0, mresult.m16 );        
     }
 

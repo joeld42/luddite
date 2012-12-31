@@ -97,33 +97,39 @@ void MaterialDB::addMaterialDefs( const char *materialFile )
         // must match the parent's shader
         Material *material = NULL;
         if (parentMtl) {
-            if (!shaderKey.empty() && parentMtl->m_shaderKey != shaderKey) {
+            if (!shaderKey.empty() && parentMtl->shaderKey() != shaderKey) {
                 DBG::warn("Material '%s' specifies shader '%s' which doesn't match parent (%s/%s)",
                         mtlName.c_str(), shaderKey.c_str(),
                         parentMtl->m_materialName.c_str(),
-                        parentMtl->m_shaderKey.c_str() );
+                        parentMtl->shaderKey().c_str() );
             }
             material = new Material( *parentMtl );
         } else if (!shaderKey.empty()) {
-            material = new Material();
-
-//            material = _materialWithKey(hmm don't have device here, shaderKey )
+            material = _materialWithKey( shaderKey );
         } else {
-            DBG::error( "Material '%s' doesn't specify a shader or a parent material.");
+            DBG::error( "Material '%s' doesn't specify a shader or a parent material. Skipping.");
+            currMtl = currMtl->next_sibling( "Material" );
+            continue;
         }
 
-        // All parameters...
-        rapidxml::xml_attribute<> *attr = currMtl->first_attribute();
+        // All attrs...
+//        rapidxml::xml_attribute<> *attr = currMtl->first_attribute();
+//        while (attr != currMtl->last_attribute())
+//        {
+//            DBG::info( "Attr: %s value %s\n", attr->name(), attr->value() );
+//            attr = attr->next_attribute();
+//        }
 
-
-        while (attr != currMtl->last_attribute())
+        // Params
+        // FIXME: make this case-insensive
+        rapidxml::xml_node<> *currParam = currMtl->first_node( "param" );
+        while (currParam)
         {
-            DBG::info( "Attr: %s value %s\n", attr->name(), attr->value() );
-            attr = attr->next_attribute();
+            rapidxml::xml_attribute<> *attrName = currParam->first_attribute( "name" );
+            rapidxml::xml_attribute<> *attrValue = currParam->first_attribute( "value" );
+            printf("  param: %s value %s\n", attrName?attrName->value():"(null)", attrValue?attrValue->value():"(null)" );
+            currParam = currParam->next_sibling("param");
         }
-
-        // TODO: params
-
 
         // Add to db
         m_materials[mtlName] = material;
@@ -156,31 +162,34 @@ Material *MaterialDB::_lookupMaterial( const eastl::string &mtlName )
 
 }
 
-
 // This gets the "base" material without a specific instance of parameter 
 // assignments.
-Material *MaterialDB::_materialWithKey( RenderDevice *device, const eastl::string &mtlKey )
+Material *MaterialDB::_materialWithKey( const eastl::string &mtlKey )
 {
     // look up material, create only if not exist
-    int32_t shaderProg;
-    auto pIter = m_shaderPrograms.find( mtlKey );
-    if (pIter != m_shaderPrograms.end()) {
-        shaderProg = (*pIter).second;
+    Shader *shader;
+    auto pIter = m_shaders.find( mtlKey );
+    if (pIter != m_shaders.end()) {
+        shader = (*pIter).second;
     } else {
         // Load the shader
-        // HMM... FIXME: need to not do this until the shader is actually used
-        shaderProg = device->loadShader( mtlKey );
-
-        // TODO: if there's an error loading the shader, load a built-in error shader
-        // if (!shaderProg) return _materialWithKey( device, "Luddite.Error" );
+        shader = new Shader( mtlKey );
+        m_shaders[mtlKey] = shader;
     }
 
-    // Make a material for this
+    // Make a material for this shader
     Material *mtl = new Material();
-    mtl->m_shaderKey = mtlKey;
+    mtl->m_shader = shader;
     mtl->m_materialName = mtlKey; 
-    
-    mtl->m_program = shaderProg;
 
     return mtl;
+}
+
+void MaterialDB::useAllShaders(RenderDevice *device)
+{
+    printf("in useAllShaders...\n" );
+    for ( auto shader : m_shaders )
+    {
+        shader.second->load(device);
+    }
 }

@@ -34,3 +34,8 @@ void Material::setParam( const Param &p )
     m_params.push_back( p );
 }
 
+
+eastl::string const & Material::shaderKey()
+{
+    return m_shader->shaderKey();
+}
