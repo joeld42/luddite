@@ -40,6 +40,8 @@ public:
 //private:
     Material *_materialWithKey( const eastl::string &mtlKey );
     Material *_lookupMaterial( const eastl::string &mtlName );
+
+    void _parseParam( Material *mtl, const eastl::string &paramName, const char *value );
     
     eastl::string m_resourcePath;
     eastl::hash_map<eastl::string,luddite::Material*> m_materials;

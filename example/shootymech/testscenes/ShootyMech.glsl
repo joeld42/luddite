@@ -81,6 +81,6 @@ void main()
 //    gl_FragColor = colorVarying;
     
     // DBG
-    gl_FragColor = vec4( 1.0, 0.0, 1.0, 1.0 ); 
-//    gl_FragColor = dbgColor;
+ //   gl_FragColor = vec4( 1.0, 0.0, 1.0, 1.0 );
+   gl_FragColor = dbgColor;
 }

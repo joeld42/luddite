@@ -128,6 +128,12 @@ void MaterialDB::addMaterialDefs( const char *materialFile )
             rapidxml::xml_attribute<> *attrName = currParam->first_attribute( "name" );
             rapidxml::xml_attribute<> *attrValue = currParam->first_attribute( "value" );
             printf("  param: %s value %s\n", attrName?attrName->value():"(null)", attrValue?attrValue->value():"(null)" );
+
+            if ((attrName)&&(attrValue))
+            {
+                _parseParam( material, attrName->value(), attrValue->value() );
+            }
+
             currParam = currParam->next_sibling("param");
         }
 
@@ -142,12 +148,50 @@ void MaterialDB::addMaterialDefs( const char *materialFile )
     free(xmlText );
 }
 
-// Looks up a specific material instance in the material list, from a 
+void MaterialDB::_parseParam(Material *mtl, eastl::string const & paramName, char const *value)
+{
+    Param p(paramName);
+
+    // TODO: better value parser
+    if ((value[0]=='#') && (strlen(value)==7))
+    {
+        // html style color like #ff00ee
+        uint32_t color;
+        uint8_t r,g,b;
+        sscanf( value, "#%X", &color );
+        r = (color & 0xff0000) >> 16;
+        g = (color & 0xff00) >> 8;
+        b = (color & 0xff);
+
+
+        printf("setting param %s:%s (%s) to %d (%d %d %d)\n", mtl->m_materialName.c_str(), value,
+                paramName.c_str(), color, r, g, b );
+
+        p = vec4f( (float)r/255.0, (float)g/255.0, (float)b/255.0, 1.0 );
+    }
+    // TODO: more formats
+    else
+    {
+        DBG::warn( "Unknown format: for param %s '%s'\n", paramName.c_str(), value );
+    }
+
+    // Add the param
+    mtl->setParam( p );
+}
+
+
+// Looks up a specific material instance in the material list, from a
 // set of xml files with parameters.
 Material *MaterialDB::getNamedMaterial( RenderDevice *device, const eastl::string &mtlName )
-{    
-    // TODO
-    return NULL;
+{
+    // Lookup the material
+    Material *mtl = _lookupMaterial( mtlName );
+
+    if (mtl) {
+        mtl->m_shader->load( device );
+    }
+
+    return mtl;
 }
 
 // Looks up a material or returns NULL if not exists

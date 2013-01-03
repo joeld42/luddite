@@ -31,7 +31,10 @@ public:
 
     // TODO params
     void setParam( const Param &p );
-    
+
+    const eastl::vector<Param> &params();
+    eastl::vector<Param> &mutable_params();
+
 //protected:    
     eastl::vector<Param> m_params;
     eastl::string m_materialName; // name of the specific material instance

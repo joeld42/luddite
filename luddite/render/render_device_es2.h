@@ -35,7 +35,8 @@ protected:
     int32_t _compileShader( const char *shaderText, uint32_t shaderType );
     void _printShaderLog( int32_t program );
     void _link( int32_t program );
-    
+
+    void _param( const Param &p );
 };
     
 //    vec3f m_pos;

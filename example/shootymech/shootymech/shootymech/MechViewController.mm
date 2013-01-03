@@ -206,15 +206,31 @@ GLfloat gCubeVertexData[216] =
     luddite::SceneNode *worldRoot = new luddite::SceneNode( "worldRoot" );
     
     // Make a material
-    luddite::Material *mtl = _mtlDB->_materialWithKey( "ShootyMech.Plastic" );
+    //luddite::Material *mtl = _mtlDB->_materialWithKey( "ShootyMech.Plastic" );
+    luddite::Material *mtl = _mtlDB->getNamedMaterial( _renderDevice, "mtl.one" );
+    luddite::Material *mtl2 = _mtlDB->getNamedMaterial( _renderDevice, "mtl.two" );
+    luddite::Material *mtl3 = _mtlDB->getNamedMaterial( _renderDevice, "mtl.three" );
+
+    // DBG
+//    Param pDbgColor("dbgColor");
+//    pDbgColor = vec4f( 1.0, 1.0, 0.0, 1.0 );
+//    mtl->setParam(pDbgColor);
+//
 
     // fixme.. this is temporary, shouldn't need to do this
     _mtlDB->useAllShaders( _renderDevice );
 
     // Set color
-    luddite::Param Kd("Kd");
-    Kd = vec3f( 1.0f, 0.6f, 0.0f );
-    mtl->setParam( Kd );
+//    luddite::Param Kd("Kd");
+//    Kd = vec4f( 1.0f, 0.6f, 0.0f, 1.0 );
+//    mtl->setParam( Kd );
+//    printf("Set up param %s\n", Kd.m_name.c_str() );
+
+
+    for (Param &p : mtl->m_params)
+    {
+        printf("Param '%s'\n", p.m_name.c_str() );
+    }
     
     // make a ring of cube around the world root
     bool cube = true;
@@ -232,11 +248,13 @@ GLfloat gCubeVertexData[216] =
         if (cube)
         {            
             currBatch->m_gbuff = gbuffCube;
+            currBatch->m_mtl = mtl2;
         }
         else
         {
             cubeNode->m_pos.y = sin(t*3) * 0.25;
-            currBatch->m_gbuff = gbuffCyl;    
+            currBatch->m_gbuff = gbuffCyl;
+            currBatch->m_mtl = mtl3;
         }
         cube = !cube;
         

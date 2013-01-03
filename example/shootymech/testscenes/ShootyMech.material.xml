@@ -7,12 +7,12 @@
 	</Material>
 
 	<Material name="mtl.two" shader="ShootyMech.Plastic" parent="mtl.one">
-        <param name="dbgColor" value="#0000ff" />
+        <param name="dbgColor" value="#00ff00" />
 		<param name="Kd" value="#ff0000" />
 	</Material>
 
     <Material name="mtl.three" shader="ShootyMech.Plastic" parent="mtl.one">
-        <param name="dbgColor" value="#00ffff" />
+        <param name="dbgColor" value="#ff00ff" />
 		<param name="Kd" value="#ff0000" />
 	</Material>
 

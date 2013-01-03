@@ -13,6 +13,7 @@
 
 #include <luddite/common/debug.h>
 #include <luddite/render/render_device_es2.h>
+#include "param.h"
 
 // offsetof() gives a warning about non-POD types with xcode, so use these old
 // school macros. This is OK because while VertType is non-POD, it doesn't have
@@ -21,6 +22,38 @@
 #define offset_s(t,f)    offset_d((t*)1000, f)
 
 using namespace luddite;
+
+
+void RenderDeviceES2::_param(Param const & p)
+{
+    switch (p.m_paramType)
+    {
+        case ParamType_SCALAR:
+            glUniform1f( p.m_glParam, p.m_val.scalar );
+            break;
+
+        case ParamType_VEC2:
+            glUniform2fv( p.m_glParam, 1, p.m_val.data );
+            break;
+
+        case ParamType_VEC3:
+            glUniform3fv( p.m_glParam, 1, p.m_val.data );
+            break;
+
+        case ParamType_VEC4:
+            glUniform4fv( p.m_glParam, 1, p.m_val.data );
+            break;
+
+        case ParamType_MATRIX3:
+            glUniformMatrix3fv( p.m_glParam, 1, GL_FALSE, p.m_val.data );
+            break;
+
+        case ParamType_MATRIX4:
+            glUniformMatrix4fv( p.m_glParam, 1, GL_FALSE, p.m_val.data );
+            break;
+    }
+}
+
 
 void RenderDeviceES2::_drawGBatch( luddite::GBatch *gbatch )
 {
@@ -69,7 +102,22 @@ void RenderDeviceES2::_drawGBatch( luddite::GBatch *gbatch )
         glUseProgram(gbatch->m_mtl->m_shader->shaderProgram() );
         
         GLint mvp = glGetUniformLocation( gbatch->m_mtl->m_shader->shaderProgram(), "matrixPMV");
-        glUniformMatrix4fv( mvp, 1, 0, mresult.m16 );        
+        glUniformMatrix4fv( mvp, 1, 0, mresult.m16 );
+
+        // Set params from mtl
+        for (Param &p : gbatch->m_mtl->mutable_params() )
+        {
+            // Does param need to be initialized?
+            if (p.m_glParam==PARAM_UNINITIALIZED)
+            {
+                // find it
+                p.m_glParam = glGetUniformLocation( gbatch->m_mtl->m_shader->shaderProgram(),
+                                                     p.m_name.c_str() );
+                printf("Got param %s (loc: %d)\n", p.m_name.c_str(), p.m_glParam );
+            }
+
+            _param( p );
+        }
     }
 
     // Create gbo for this gbuff if not set up

@@ -25,6 +25,12 @@ enum
     ParamType_MATRIX4
 };
 
+// Special values for gl param
+enum {
+    PARAM_UNINITIALIZED = -100,
+    PARAM_ERROR         = -101
+};
+
 struct Param
 {
     Param();
@@ -49,6 +55,9 @@ struct Param
     const Param &operator= (const vec4f &value );
     //    const Param &operator= (const matrix3x3f &value );
     const Param &operator= (const matrix4x4f &value );
+
+    // param in GL shader.
+    int32_t m_glParam;
     
 };
 

@@ -14,6 +14,14 @@
 using namespace luddite;
 
 
+const eastl::vector<Param>  & Material::params() {
+    return m_params;
+}
+
+eastl::vector<Param>  & Material::mutable_params() {
+    return m_params;
+}
+
 
 void Material::setParam( const Param &p )
 {
@@ -25,12 +33,14 @@ void Material::setParam( const Param &p )
         if ((*pi).m_name == p.m_name)
         {
             // Yep. Just replace it.
+            printf("Setting param %s\n", p.m_name.c_str() );
             (*pi) = p;
             return;
         }
     }
     
     // Nope, add it as a new param
+    printf("Param %s not found, adding\n", p.m_name.c_str() );
     m_params.push_back( p );
 }
 

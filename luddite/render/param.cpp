@@ -37,6 +37,7 @@ Param::Param()
 {
     m_paramType = ParamType_SCALAR;
     m_val.scalar = 0.0;
+    m_glParam = PARAM_UNINITIALIZED;
 }
 
 Param::~Param()
@@ -66,6 +67,13 @@ Param::Param( const Param &other )
 
 const Param &Param::operator= (const Param &other )
 {
+    // Copy basic stuff
+    m_name = other.m_name;
+
+    // Set to uninitialized in case this is assigning into a different shader
+    m_glParam = PARAM_UNINITIALIZED;
+
+
     // Is this the same type as "other"?
     if (m_paramType == other.m_paramType)
     {
