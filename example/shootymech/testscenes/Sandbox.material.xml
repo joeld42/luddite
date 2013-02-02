@@ -1,0 +1,20 @@
+<MaterialList>
+
+	<Material name="mtl.one" shader="Sandbox.Plastic">
+		<param name="Kd" value="#ff00ff" />
+        <param name="dbgColor" value="#ff0000" />
+		<param name="roughness" value="25.0" />		
+	</Material>
+
+	<Material name="mtl.two" shader="Sandbox.Plastic" parent="mtl.one">
+        <param name="dbgColor" value="#00ff00" />
+		<param name="Kd" value="#ff0000" />
+	</Material>
+
+    <Material name="mtl.three" shader="Sandbox.Plastic" parent="mtl.one">
+        <param name="dbgColor" value="#ff00ff" />
+		<param name="Kd" value="#ff0000" />
+	</Material>
+
+    
+</MaterialList>

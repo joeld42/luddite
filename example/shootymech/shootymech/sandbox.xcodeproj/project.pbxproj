@@ -1,0 +1,419 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		6D938AEC15D8DEED0000A795 /* suzanne.obj in Resources */ = {isa = PBXBuildFile; fileRef = 6D938AEB15D8DEED0000A795 /* suzanne.obj */; };
+		6D938B1515DA200F0000A795 /* Sandbox.material.xml in Resources */ = {isa = PBXBuildFile; fileRef = 6D938B1415DA200F0000A795 /* Sandbox.material.xml */; };
+		6D938B1715DA20510000A795 /* Sandbox.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 6D938B1615DA20510000A795 /* Sandbox.glsl */; };
+		6DB567301581AF1A000A59ED /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DB5672F1581AF1A000A59ED /* UIKit.framework */; };
+		6DB567321581AF1A000A59ED /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DB567311581AF1A000A59ED /* Foundation.framework */; };
+		6DB567341581AF1A000A59ED /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DB567331581AF1A000A59ED /* CoreGraphics.framework */; };
+		6DB567361581AF1A000A59ED /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DB567351581AF1A000A59ED /* GLKit.framework */; };
+		6DB567381581AF1A000A59ED /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DB567371581AF1A000A59ED /* OpenGLES.framework */; };
+		6DB5673E1581AF1A000A59ED /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6DB5673C1581AF1A000A59ED /* InfoPlist.strings */; };
+		6DB567401581AF1A000A59ED /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DB5673F1581AF1A000A59ED /* main.m */; };
+		6DB567441581AF1A000A59ED /* SandboxAppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6DB567431581AF1A000A59ED /* SandboxAppDelegate.mm */; };
+		6DB567461581AF1A000A59ED /* Shader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 6DB567451581AF1A000A59ED /* Shader.fsh */; };
+		6DB567481581AF1A000A59ED /* Shader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 6DB567471581AF1A000A59ED /* Shader.vsh */; };
+		6DB5674B1581AF1B000A59ED /* SandboxViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6DB5674A1581AF1B000A59ED /* SandboxViewController.mm */; };
+		6DB5674E1581AF1B000A59ED /* SandboxViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6DB5674C1581AF1B000A59ED /* SandboxViewController.xib */; };
+		6DD2413C15D4D1A6004C9360 /* libluddite_ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DD2413815D4D181004C9360 /* libluddite_ios.a */; };
+		6DD2414615D62B46004C9360 /* cube_mtl_test_nrm_st.obj in Resources */ = {isa = PBXBuildFile; fileRef = 6DD2414215D62B46004C9360 /* cube_mtl_test_nrm_st.obj */; };
+		6DD2414715D62B46004C9360 /* cube_mtl_test_nrm.obj in Resources */ = {isa = PBXBuildFile; fileRef = 6DD2414315D62B46004C9360 /* cube_mtl_test_nrm.obj */; };
+		6DD2414815D62B46004C9360 /* cube_mtl_test.obj in Resources */ = {isa = PBXBuildFile; fileRef = 6DD2414415D62B46004C9360 /* cube_mtl_test.obj */; };
+		6DD2414915D62B46004C9360 /* cube_subd_nrm_st.obj in Resources */ = {isa = PBXBuildFile; fileRef = 6DD2414515D62B46004C9360 /* cube_subd_nrm_st.obj */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		6DD2413715D4D181004C9360 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6DD2413015D4D181004C9360 /* luddite_ios.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 6DB567891581D2D8000A59ED;
+			remoteInfo = luddite_ios;
+		};
+		6DD2413A15D4D19B004C9360 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6DD2413015D4D181004C9360 /* luddite_ios.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 6DB567881581D2D8000A59ED;
+			remoteInfo = luddite_ios;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		6D938AEB15D8DEED0000A795 /* suzanne.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = suzanne.obj; path = ../../testscenes/suzanne.obj; sourceTree = "<group>"; };
+		6D938B1415DA200F0000A795 /* Sandbox.material.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = Sandbox.material.xml; path = ../../testscenes/Sandbox.material.xml; sourceTree = "<group>"; };
+		6D938B1615DA20510000A795 /* Sandbox.glsl */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; name = Sandbox.glsl; path = ../../testscenes/Sandbox.glsl; sourceTree = "<group>"; };
+		6DB5672B1581AF1A000A59ED /* sandbox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = sandbox.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6DB5672F1581AF1A000A59ED /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		6DB567311581AF1A000A59ED /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		6DB567331581AF1A000A59ED /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		6DB567351581AF1A000A59ED /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
+		6DB567371581AF1A000A59ED /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		6DB5673B1581AF1A000A59ED /* sandbox-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "sandbox-Info.plist"; sourceTree = "<group>"; };
+		6DB5673D1581AF1A000A59ED /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		6DB5673F1581AF1A000A59ED /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		6DB567411581AF1A000A59ED /* sandbox-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "sandbox-Prefix.pch"; sourceTree = "<group>"; };
+		6DB567421581AF1A000A59ED /* SandboxAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SandboxAppDelegate.h; sourceTree = "<group>"; };
+		6DB567431581AF1A000A59ED /* SandboxAppDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = SandboxAppDelegate.mm; sourceTree = "<group>"; };
+		6DB567451581AF1A000A59ED /* Shader.fsh */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; name = Shader.fsh; path = Shaders/Shader.fsh; sourceTree = "<group>"; };
+		6DB567471581AF1A000A59ED /* Shader.vsh */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; name = Shader.vsh; path = Shaders/Shader.vsh; sourceTree = "<group>"; };
+		6DB567491581AF1B000A59ED /* SandboxViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SandboxViewController.h; sourceTree = "<group>"; };
+		6DB5674A1581AF1B000A59ED /* SandboxViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = SandboxViewController.mm; sourceTree = "<group>"; };
+		6DB5674D1581AF1B000A59ED /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/SandboxViewController.xib; sourceTree = "<group>"; };
+		6DD2413015D4D181004C9360 /* luddite_ios.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = luddite_ios.xcodeproj; path = ../../../luddite_ios/luddite_ios.xcodeproj; sourceTree = "<group>"; };
+		6DD2414215D62B46004C9360 /* cube_mtl_test_nrm_st.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = cube_mtl_test_nrm_st.obj; path = ../../testscenes/cube_mtl_test_nrm_st.obj; sourceTree = "<group>"; };
+		6DD2414315D62B46004C9360 /* cube_mtl_test_nrm.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = cube_mtl_test_nrm.obj; path = ../../testscenes/cube_mtl_test_nrm.obj; sourceTree = "<group>"; };
+		6DD2414415D62B46004C9360 /* cube_mtl_test.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = cube_mtl_test.obj; path = ../../testscenes/cube_mtl_test.obj; sourceTree = "<group>"; };
+		6DD2414515D62B46004C9360 /* cube_subd_nrm_st.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = cube_subd_nrm_st.obj; path = ../../testscenes/cube_subd_nrm_st.obj; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		6DB567281581AF1A000A59ED /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6DD2413C15D4D1A6004C9360 /* libluddite_ios.a in Frameworks */,
+				6DB567301581AF1A000A59ED /* UIKit.framework in Frameworks */,
+				6DB567321581AF1A000A59ED /* Foundation.framework in Frameworks */,
+				6DB567341581AF1A000A59ED /* CoreGraphics.framework in Frameworks */,
+				6DB567361581AF1A000A59ED /* GLKit.framework in Frameworks */,
+				6DB567381581AF1A000A59ED /* OpenGLES.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		6DB567201581AF1A000A59ED = {
+			isa = PBXGroup;
+			children = (
+				6DB567391581AF1A000A59ED /* sandbox */,
+				6DB5672E1581AF1A000A59ED /* Frameworks */,
+				6DB5672C1581AF1A000A59ED /* Products */,
+				6DD2413015D4D181004C9360 /* luddite_ios.xcodeproj */,
+			);
+			sourceTree = "<group>";
+		};
+		6DB5672C1581AF1A000A59ED /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6DB5672B1581AF1A000A59ED /* sandbox.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		6DB5672E1581AF1A000A59ED /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6DB5672F1581AF1A000A59ED /* UIKit.framework */,
+				6DB567311581AF1A000A59ED /* Foundation.framework */,
+				6DB567331581AF1A000A59ED /* CoreGraphics.framework */,
+				6DB567351581AF1A000A59ED /* GLKit.framework */,
+				6DB567371581AF1A000A59ED /* OpenGLES.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6DB567391581AF1A000A59ED /* sandbox */ = {
+			isa = PBXGroup;
+			children = (
+				6DB567421581AF1A000A59ED /* SandboxAppDelegate.h */,
+				6DB567431581AF1A000A59ED /* SandboxAppDelegate.mm */,
+				6DB567451581AF1A000A59ED /* Shader.fsh */,
+				6DB567471581AF1A000A59ED /* Shader.vsh */,
+				6DB567491581AF1B000A59ED /* SandboxViewController.h */,
+				6DB5674A1581AF1B000A59ED /* SandboxViewController.mm */,
+				6DB5674C1581AF1B000A59ED /* SandboxViewController.xib */,
+				6DB5673A1581AF1A000A59ED /* Supporting Files */,
+				6DD2414115D62B16004C9360 /* gamedata */,
+			);
+			name = sandbox;
+			path = shootymech;
+			sourceTree = "<group>";
+		};
+		6DB5673A1581AF1A000A59ED /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				6DB5673B1581AF1A000A59ED /* sandbox-Info.plist */,
+				6DB5673C1581AF1A000A59ED /* InfoPlist.strings */,
+				6DB5673F1581AF1A000A59ED /* main.m */,
+				6DB567411581AF1A000A59ED /* sandbox-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		6DD2413115D4D181004C9360 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6DD2413815D4D181004C9360 /* libluddite_ios.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		6DD2414115D62B16004C9360 /* gamedata */ = {
+			isa = PBXGroup;
+			children = (
+				6D938B1615DA20510000A795 /* Sandbox.glsl */,
+				6D938B1415DA200F0000A795 /* Sandbox.material.xml */,
+				6D938AEB15D8DEED0000A795 /* suzanne.obj */,
+				6DD2414215D62B46004C9360 /* cube_mtl_test_nrm_st.obj */,
+				6DD2414315D62B46004C9360 /* cube_mtl_test_nrm.obj */,
+				6DD2414415D62B46004C9360 /* cube_mtl_test.obj */,
+				6DD2414515D62B46004C9360 /* cube_subd_nrm_st.obj */,
+			);
+			name = gamedata;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		6DB5672A1581AF1A000A59ED /* sandbox */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6DB567511581AF1B000A59ED /* Build configuration list for PBXNativeTarget "sandbox" */;
+			buildPhases = (
+				6DB567271581AF1A000A59ED /* Sources */,
+				6DB567281581AF1A000A59ED /* Frameworks */,
+				6DB567291581AF1A000A59ED /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6DD2413B15D4D19B004C9360 /* PBXTargetDependency */,
+			);
+			name = sandbox;
+			productName = shootymech;
+			productReference = 6DB5672B1581AF1A000A59ED /* sandbox.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		6DB567221581AF1A000A59ED /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = SB;
+				LastUpgradeCheck = 0430;
+				ORGANIZATIONNAME = "Joel Davis";
+			};
+			buildConfigurationList = 6DB567251581AF1A000A59ED /* Build configuration list for PBXProject "sandbox" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 6DB567201581AF1A000A59ED;
+			productRefGroup = 6DB5672C1581AF1A000A59ED /* Products */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 6DD2413115D4D181004C9360 /* Products */;
+					ProjectRef = 6DD2413015D4D181004C9360 /* luddite_ios.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				6DB5672A1581AF1A000A59ED /* sandbox */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		6DD2413815D4D181004C9360 /* libluddite_ios.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libluddite_ios.a;
+			remoteRef = 6DD2413715D4D181004C9360 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXResourcesBuildPhase section */
+		6DB567291581AF1A000A59ED /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6DB5673E1581AF1A000A59ED /* InfoPlist.strings in Resources */,
+				6DB567461581AF1A000A59ED /* Shader.fsh in Resources */,
+				6DB567481581AF1A000A59ED /* Shader.vsh in Resources */,
+				6DB5674E1581AF1B000A59ED /* SandboxViewController.xib in Resources */,
+				6DD2414615D62B46004C9360 /* cube_mtl_test_nrm_st.obj in Resources */,
+				6DD2414715D62B46004C9360 /* cube_mtl_test_nrm.obj in Resources */,
+				6DD2414815D62B46004C9360 /* cube_mtl_test.obj in Resources */,
+				6DD2414915D62B46004C9360 /* cube_subd_nrm_st.obj in Resources */,
+				6D938AEC15D8DEED0000A795 /* suzanne.obj in Resources */,
+				6D938B1515DA200F0000A795 /* Sandbox.material.xml in Resources */,
+				6D938B1715DA20510000A795 /* Sandbox.glsl in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		6DB567271581AF1A000A59ED /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6DB567401581AF1A000A59ED /* main.m in Sources */,
+				6DB567441581AF1A000A59ED /* SandboxAppDelegate.mm in Sources */,
+				6DB5674B1581AF1B000A59ED /* SandboxViewController.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		6DD2413B15D4D19B004C9360 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = luddite_ios;
+			targetProxy = 6DD2413A15D4D19B004C9360 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		6DB5673C1581AF1A000A59ED /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6DB5673D1581AF1A000A59ED /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		6DB5674C1581AF1B000A59ED /* SandboxViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6DB5674D1581AF1B000A59ED /* en */,
+			);
+			name = SandboxViewController.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		6DB5674F1581AF1B000A59ED /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"${SRCROOT}/../../../luddite/",
+					"$(SRCROOT)/../../../extern/eastl/include/",
+					"$(SRCROOT)/../../..",
+					"$(SRCROOT)/../../../extern/",
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+			};
+			name = Debug;
+		};
+		6DB567501581AF1B000A59ED /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"${SRCROOT}/../../../luddite/",
+					"$(SRCROOT)/../../../extern/eastl/include/",
+					"$(SRCROOT)/../../..",
+					"$(SRCROOT)/../../../extern/",
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		6DB567521581AF1B000A59ED /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "shootymech/sandbox-Prefix.pch";
+				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
+				INFOPLIST_FILE = "shootymech/sandbox-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../../luddite_ios/build/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"",
+					"\"$(SRCROOT)/../../../luddite_ios/build/Debug-iphoneos\"",
+				);
+				PRODUCT_NAME = sandbox;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		6DB567531581AF1B000A59ED /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "shootymech/sandbox-Prefix.pch";
+				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
+				INFOPLIST_FILE = "shootymech/sandbox-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../../luddite_ios/build/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"",
+					"\"$(SRCROOT)/../../../luddite_ios/build/Debug-iphoneos\"",
+				);
+				PRODUCT_NAME = sandbox;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		6DB567251581AF1A000A59ED /* Build configuration list for PBXProject "sandbox" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6DB5674F1581AF1B000A59ED /* Debug */,
+				6DB567501581AF1B000A59ED /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6DB567511581AF1B000A59ED /* Build configuration list for PBXNativeTarget "sandbox" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6DB567521581AF1B000A59ED /* Debug */,
+				6DB567531581AF1B000A59ED /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 6DB567221581AF1A000A59ED /* Project object */;
+}
