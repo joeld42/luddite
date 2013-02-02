@@ -134,8 +134,7 @@
 				6DB5673A1581AF1A000A59ED /* Supporting Files */,
 				6DD2414115D62B16004C9360 /* gamedata */,
 			);
-			name = sandbox;
-			path = shootymech;
+			path = sandbox;
 			sourceTree = "<group>";
 		};
 		6DB5673A1581AF1A000A59ED /* Supporting Files */ = {
@@ -188,7 +187,7 @@
 				6DD2413B15D4D19B004C9360 /* PBXTargetDependency */,
 			);
 			name = sandbox;
-			productName = shootymech;
+			productName = sandbox;
 			productReference = 6DB5672B1581AF1A000A59ED /* sandbox.app */;
 			productType = "com.apple.product-type.application";
 		};
@@ -360,9 +359,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "shootymech/sandbox-Prefix.pch";
+				GCC_PREFIX_HEADER = "sandbox/sandbox-Prefix.pch";
 				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
-				INFOPLIST_FILE = "shootymech/sandbox-Info.plist";
+				INFOPLIST_FILE = "sandbox/sandbox-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../../../luddite_ios/build/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"",
@@ -378,9 +377,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "shootymech/sandbox-Prefix.pch";
+				GCC_PREFIX_HEADER = "sandbox/sandbox-Prefix.pch";
 				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
-				INFOPLIST_FILE = "shootymech/sandbox-Info.plist";
+				INFOPLIST_FILE = "sandbox/sandbox-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../../../luddite_ios/build/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"",
