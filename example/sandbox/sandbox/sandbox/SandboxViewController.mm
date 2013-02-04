@@ -283,10 +283,16 @@ GLfloat gCubeVertexData[216] =
         
         worldRoot->addChild( objNode );
     }
+
+    // Load the terrain file
+    NSString* terrainPath = [[NSBundle mainBundle] pathForResource:@"sbox_island" ofType:@"obj"];
+    NSLog( @"Loading OBJ from file path %@", terrainPath );
+
+    luddite::SceneNode *terrainNode = scene_objfile( [terrainPath UTF8String] );
+    worldRoot->addChild( terrainNode );
     
     // Create scene
     _scene = new luddite::Scene( worldRoot );
-        
     
     // Set up apple example stuff
     [self loadShaders];
