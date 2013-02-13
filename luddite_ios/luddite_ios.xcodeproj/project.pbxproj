@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		609B95964B23C64061260BE0 /* shader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 609B960B9600F3A51DAC960D /* shader.cpp */; };
+		609B992DA1099F42DF8DE874 /* ios_gfxutil.mm in Sources */ = {isa = PBXBuildFile; fileRef = 609B9CF90A69C4D2CC7D683E /* ios_gfxutil.mm */; };
 		609B99F773A5529FA834B6BC /* rapidxml.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 609B91B0BF21173BE16849F2 /* rapidxml.hpp */; };
 		609B9B58B947E00AA4C163D7 /* shader.h in Headers */ = {isa = PBXBuildFile; fileRef = 609B97BB4CAB7F4D24E58F72 /* shader.h */; };
 		609B9C119CBA7B91DB9F786A /* rapidxml_print.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 609B947F1C1B7DAC1C0AAF70 /* rapidxml_print.hpp */; };
@@ -56,6 +57,7 @@
 		609B947F1C1B7DAC1C0AAF70 /* rapidxml_print.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = rapidxml_print.hpp; path = ../extern/rapidxml/rapidxml_print.hpp; sourceTree = "<group>"; };
 		609B960B9600F3A51DAC960D /* shader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = shader.cpp; path = render/shader.cpp; sourceTree = "<group>"; };
 		609B97BB4CAB7F4D24E58F72 /* shader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = shader.h; path = render/shader.h; sourceTree = "<group>"; };
+		609B9CF90A69C4D2CC7D683E /* ios_gfxutil.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ios_gfxutil.mm; sourceTree = "<group>"; };
 		609B9F36127D4BD6AFC46011 /* rapidxml_utils.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = rapidxml_utils.hpp; path = ../extern/rapidxml/rapidxml_utils.hpp; sourceTree = "<group>"; };
 		609B9F631E5B077FD59849D0 /* rapidxml_iterators.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = rapidxml_iterators.hpp; path = ../extern/rapidxml/rapidxml_iterators.hpp; sourceTree = "<group>"; };
 		6D35122915A56B99000CA0C3 /* gameloop.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = gameloop.h; path = game/gameloop.h; sourceTree = "<group>"; };
@@ -309,6 +311,7 @@
 			isa = PBXGroup;
 			children = (
 				6DF342461581D6BB008FBD40 /* ios_debug.cpp */,
+				609B9CF90A69C4D2CC7D683E /* ios_gfxutil.mm */,
 			);
 			path = ios;
 			sourceTree = "<group>";
@@ -415,6 +418,7 @@
 				6D71672A1690147D007D0B5F /* red_black_tree.cpp in Sources */,
 				6D71672B1690147D007D0B5F /* string.cpp in Sources */,
 				609B95964B23C64061260BE0 /* shader.cpp in Sources */,
+				609B992DA1099F42DF8DE874 /* ios_gfxutil.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

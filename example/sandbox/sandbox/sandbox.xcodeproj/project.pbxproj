@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		609B90363AEF603B90E12383 /* grid10x10.obj in Resources */ = {isa = PBXBuildFile; fileRef = 609B9F429924257949C711B9 /* grid10x10.obj */; };
+		609B9631EAE3B00751760D65 /* stripes.png in Resources */ = {isa = PBXBuildFile; fileRef = 609B9AF5E0F5027C20ECC62B /* stripes.png */; };
+		609B9DB4C17A2D32FAB32669 /* stripes2.png in Resources */ = {isa = PBXBuildFile; fileRef = 609B9C7611DB48DD73A78CA2 /* stripes2.png */; };
 		6D938AEC15D8DEED0000A795 /* suzanne.obj in Resources */ = {isa = PBXBuildFile; fileRef = 6D938AEB15D8DEED0000A795 /* suzanne.obj */; };
 		6D938B1515DA200F0000A795 /* Sandbox.material.xml in Resources */ = {isa = PBXBuildFile; fileRef = 6D938B1415DA200F0000A795 /* Sandbox.material.xml */; };
 		6D938B1715DA20510000A795 /* Sandbox.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 6D938B1615DA20510000A795 /* Sandbox.glsl */; };
@@ -50,6 +53,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		609B9AF5E0F5027C20ECC62B /* stripes.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stripes.png; sourceTree = "<group>"; };
+		609B9C7611DB48DD73A78CA2 /* stripes2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stripes2.png; sourceTree = "<group>"; };
+		609B9F429924257949C711B9 /* grid10x10.obj */ = {isa = PBXFileReference; lastKnownFileType = file.obj; path = grid10x10.obj; sourceTree = "<group>"; };
 		6D938AEB15D8DEED0000A795 /* suzanne.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = suzanne.obj; path = ../../testscenes/suzanne.obj; sourceTree = "<group>"; };
 		6D938B1415DA200F0000A795 /* Sandbox.material.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = Sandbox.material.xml; path = ../../testscenes/Sandbox.material.xml; sourceTree = "<group>"; };
 		6D938B1615DA20510000A795 /* Sandbox.glsl */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; name = Sandbox.glsl; path = ../../testscenes/Sandbox.glsl; sourceTree = "<group>"; };
@@ -175,6 +181,9 @@
 				6DD2414315D62B46004C9360 /* cube_mtl_test_nrm.obj */,
 				6DD2414415D62B46004C9360 /* cube_mtl_test.obj */,
 				6DD2414515D62B46004C9360 /* cube_subd_nrm_st.obj */,
+				609B9AF5E0F5027C20ECC62B /* stripes.png */,
+				609B9C7611DB48DD73A78CA2 /* stripes2.png */,
+				609B9F429924257949C711B9 /* grid10x10.obj */,
 			);
 			name = gamedata;
 			sourceTree = "<group>";
@@ -262,6 +271,9 @@
 				6DF3ABF116BF8BB600A0FE3A /* grass.png in Resources */,
 				6DF3ABF216BF8BB600A0FE3A /* rock1.png in Resources */,
 				6DF3ABF316BF8BB600A0FE3A /* sbox_island.obj in Resources */,
+				609B9631EAE3B00751760D65 /* stripes.png in Resources */,
+				609B9DB4C17A2D32FAB32669 /* stripes2.png in Resources */,
+				609B90363AEF603B90E12383 /* grid10x10.obj in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

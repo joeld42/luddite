@@ -2,6 +2,7 @@
 #define PLATFORM_H
 
 #include <stdarg.h>
+#include <stdint.h>
 
 //---[ Assert ]------------------------------------
 
@@ -37,7 +38,6 @@
 // Shorthand for checking a pointer is non-null
 #define AssertPtr( ptr ) Assert( ((ptr)!=NULL), #ptr " is NULL" ) 
 
-
 // Platform specific assert function, used by assert macros. Don't call
 // directly, use Assert() instead.
 // -- If expr is true, do nothing. If expr is false print out desc and 
@@ -47,5 +47,12 @@ bool pfAssertFunc( bool expr, const char *desc, int line, const char *file, bool
 //---[ Debug Print ]------------------------------------
 // Prints a message at the given severity level
 void pfVMessage( int message_level, const char *fmt, va_list args);
-    
+
+//---[ Graphics/texture stuff ]------------------------------------
+
+// Loads a texture and returns a GL handle to it.
+// Returns 0 on error
+uint32_t pfLoadTexture( const char *filename );
+
+
 #endif

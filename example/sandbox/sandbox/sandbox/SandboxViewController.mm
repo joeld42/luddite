@@ -237,7 +237,7 @@ GLfloat gCubeVertexData[216] =
     luddite::SceneNode *cubeNode;
     for (float t=0.0; t <= 2.0*M_PI; t += 20.0 * (M_PI/180.0 ) )
     {
-        vec3f cubePos = vec3f( cos(t)*2.0, 0.0, sin(t)*2.0 );
+        vec3f cubePos = vec3f( cos(t)*2.0, 0.3, sin(t)*2.0 );
         cubeNode = new luddite::SceneNode( worldRoot );
         cubeNode->m_pos = cubePos;
 //        NSLog( @"cube pos is %f %f %f", cubePos.x, cubePos.y, cubePos.z );
@@ -284,11 +284,25 @@ GLfloat gCubeVertexData[216] =
         worldRoot->addChild( objNode );
     }
 
+    // Load the grass texture
+    uint32_t texGrass = pfLoadTexture( "grass.png" );
+    NSLog( @"loaded grass texture, result is %d", texGrass );
+
     // Load the terrain file
-    NSString* terrainPath = [[NSBundle mainBundle] pathForResource:@"sbox_island" ofType:@"obj"];
+    NSString* terrainPath = [[NSBundle mainBundle] pathForResource:@"grid10x10" ofType:@"obj"];
     NSLog( @"Loading OBJ from file path %@", terrainPath );
 
     luddite::SceneNode *terrainNode = scene_objfile( [terrainPath UTF8String] );
+
+    // for now, just stuff the texture into the batches
+    const eastl::list<GBatch*> &terrBatches = terrainNode->batches();
+    for (auto bi=terrBatches.begin(); bi != terrBatches.end(); ++bi )
+    {
+        GBatch *batch = (*bi);
+        batch->m_tex[0] = texGrass;
+    }
+
+
     worldRoot->addChild( terrainNode );
     
     // Create scene

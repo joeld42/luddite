@@ -135,7 +135,12 @@ void RenderDeviceES2::_drawGBatch( luddite::GBatch *gbatch )
         // Buffer is already created, just bind it
         glBindBuffer( GL_ARRAY_BUFFER, gbuff->m_vbo );
     }
-    
+
+    // Bind textures
+    // TODO: don't rebind if batches share the same texture
+    // TODO: support more than 1 texture
+    glBindTexture(GL_TEXTURE_2D, gbatch->m_tex[0]);
+
     // Bind buffer data
     glEnableVertexAttribArray( VertexAttrib_TEXCOORD );
     glVertexAttribPointer( VertexAttrib_TEXCOORD, 2, GL_FLOAT, GL_FALSE, 
