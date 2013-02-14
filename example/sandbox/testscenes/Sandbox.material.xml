@@ -3,8 +3,9 @@
 	<Material name="mtl.one" shader="Sandbox.Plastic">
 		<param name="Kd" value="#ff00ff" />
         <param name="dbgColor" value="#ff0000" />
-		<param name="roughness" value="25.0" />		
-	</Material>
+		<param name="roughness" value="25.0" />
+        <texture slot="0" filename="rock1.png" />
+    </Material>
 
 	<Material name="mtl.two" shader="Sandbox.Plastic" parent="mtl.one">
         <param name="dbgColor" value="#00ff00" />
@@ -14,6 +15,14 @@
     <Material name="mtl.three" shader="Sandbox.Plastic" parent="mtl.one">
         <param name="dbgColor" value="#ff00ff" />
 		<param name="Kd" value="#ff0000" />
+        <texture slot="0" filename="stripes.png" />
 	</Material>
+
+    <Material name="mtl.Ground" shader="Sandbox.Plastic">
+        <param name="dbgColor" value="#005500" />
+        <param name="Kd" value="#005555" />
+        <texture slot="0" filename="grass.png" />
+    </Material>
+
 
 </MaterialList>

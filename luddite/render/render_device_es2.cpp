@@ -13,7 +13,8 @@
 
 #include <luddite/common/debug.h>
 #include <luddite/render/render_device_es2.h>
-#include "param.h"
+#include <luddite/render/texture_info.h>
+#include <luddite/render/param.h>
 
 // offsetof() gives a warning about non-POD types with xcode, so use these old
 // school macros. This is OK because while VertType is non-POD, it doesn't have
@@ -139,7 +140,7 @@ void RenderDeviceES2::_drawGBatch( luddite::GBatch *gbatch )
     // Bind textures
     // TODO: don't rebind if batches share the same texture
     // TODO: support more than 1 texture
-    glBindTexture(GL_TEXTURE_2D, gbatch->m_tex[0]);
+    glBindTexture(GL_TEXTURE_2D, gbatch->m_mtl->m_tex[0]->m_texId );
 
     // Bind buffer data
     glEnableVertexAttribArray( VertexAttrib_TEXCOORD );

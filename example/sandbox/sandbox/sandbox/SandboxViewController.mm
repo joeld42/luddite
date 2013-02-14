@@ -20,6 +20,7 @@
 #include <luddite/render/scene_objfile.h>
 #include <luddite/render/material.h>
 #include <luddite/render/material_db.h>
+#include <luddite/render/texture_info.h>
 
 using namespace luddite;
 
@@ -206,10 +207,25 @@ GLfloat gCubeVertexData[216] =
     luddite::SceneNode *worldRoot = new luddite::SceneNode( "worldRoot" );
     
     // Make a material
-    //luddite::Material *mtl = _mtlDB->_materialWithKey( "Sandbox.Plastic" );
+    luddite::Material *Material = _mtlDB->_materialWithKey( "Sandbox.Plastic" );
     luddite::Material *mtl = _mtlDB->getNamedMaterial( _renderDevice, "mtl.one" );
     luddite::Material *mtl2 = _mtlDB->getNamedMaterial( _renderDevice, "mtl.two" );
     luddite::Material *mtl3 = _mtlDB->getNamedMaterial( _renderDevice, "mtl.three" );
+
+
+    printf("mtl %s tex[0] %p (%s)\n", mtl->m_materialName.c_str(),
+            mtl->m_tex[0],
+            mtl->m_tex[0]?mtl->m_tex[0]->m_filename.c_str():"none");
+
+    printf("mtl2 %s tex[0] %p (%s)\n", mtl->m_materialName.c_str(),
+            mtl2->m_tex[0],
+            mtl2->m_tex[0]?mtl->m_tex[0]->m_filename.c_str():"none");
+
+    printf("mtl3 %s tex[0] %p (%s)\n", mtl3->m_materialName.c_str(),
+            mtl3->m_tex[0],
+            mtl3->m_tex[0]?mtl3->m_tex[0]->m_filename.c_str():"none");
+
+
 
     // DBG
 //    Param pDbgColor("dbgColor");
@@ -217,8 +233,6 @@ GLfloat gCubeVertexData[216] =
 //    mtl->setParam(pDbgColor);
 //
 
-    // fixme.. this is temporary, shouldn't need to do this
-    _mtlDB->useAllShaders( _renderDevice );
 
     // Set color
 //    luddite::Param Kd("Kd");
@@ -227,10 +241,10 @@ GLfloat gCubeVertexData[216] =
 //    printf("Set up param %s\n", Kd.m_name.c_str() );
 
 
-    for (Param &p : mtl->m_params)
-    {
-        printf("Param '%s'\n", p.m_name.c_str() );
-    }
+//    for (Param &p : mtl->m_params)
+//    {
+//        printf("Param '%s'\n", p.m_name.c_str() );
+//    }
     
     // make a ring of cube around the world root
     bool cube = true;
@@ -269,42 +283,46 @@ GLfloat gCubeVertexData[216] =
     NSString* filePath = [[NSBundle mainBundle] pathForResource:@"suzanne" ofType:@"obj"];
     NSLog( @"Loading OBJ from file path %@", filePath );
     
-    luddite::SceneNode *objNode = scene_objfile( [filePath UTF8String] );
+    luddite::SceneNode *objNode = scene_objfile([filePath UTF8String], _renderDevice, _mtlDB );
     
     if (objNode)
     {
-        // DBG: hardcode the mtl to all the obj file's batches
-        for (GBatchList::const_iterator bi = objNode->batches().begin(); 
-             bi != objNode->batches().end(); ++bi )
-        {
-            (*bi)->m_mtl = mtl;
-        }
+//        // DBG: hardcode the mtl to all the obj file's batches
+//        for (GBatchList::const_iterator bi = objNode->batches().begin();
+//             bi != objNode->batches().end(); ++bi )
+//        {
+//            (*bi)->m_mtl = mtl;
+//        }
             
         
         worldRoot->addChild( objNode );
     }
 
     // Load the grass texture
-    uint32_t texGrass = pfLoadTexture( "grass.png" );
-    NSLog( @"loaded grass texture, result is %d", texGrass );
+//    uint32_t texGrass = pfLoadTexture( "grass.png" );
+//    NSLog( @"loaded grass texture, result is %d", texGrass );
 
     // Load the terrain file
     NSString* terrainPath = [[NSBundle mainBundle] pathForResource:@"grid10x10" ofType:@"obj"];
     NSLog( @"Loading OBJ from file path %@", terrainPath );
 
-    luddite::SceneNode *terrainNode = scene_objfile( [terrainPath UTF8String] );
+    luddite::SceneNode *terrainNode = scene_objfile([terrainPath UTF8String], _renderDevice, _mtlDB );
 
     // for now, just stuff the texture into the batches
-    const eastl::list<GBatch*> &terrBatches = terrainNode->batches();
-    for (auto bi=terrBatches.begin(); bi != terrBatches.end(); ++bi )
-    {
-        GBatch *batch = (*bi);
-        batch->m_tex[0] = texGrass;
-    }
+//    const eastl::list<GBatch*> &terrBatches = terrainNode->batches();
+//    for (auto bi=terrBatches.begin(); bi != terrBatches.end(); ++bi )
+//    {
+//        GBatch *batch = (*bi);
+//        batch->m_tex[0] = texGrass;
+//    }
 
 
     worldRoot->addChild( terrainNode );
-    
+
+    // fixme.. this is temporary, shouldn't need to do this
+    _mtlDB->useAllShaders( _renderDevice );
+
+
     // Create scene
     _scene = new luddite::Scene( worldRoot );
     

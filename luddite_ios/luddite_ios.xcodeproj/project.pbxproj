@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		609B95964B23C64061260BE0 /* shader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 609B960B9600F3A51DAC960D /* shader.cpp */; };
+		609B9670829AD51CB4FFCC9F /* texture_info.h in Headers */ = {isa = PBXBuildFile; fileRef = 609B9751889D329F8F321501 /* texture_info.h */; };
+		609B990E8DBFB4482BB040F4 /* texture_info.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 609B90FB1C32E62410985755 /* texture_info.cpp */; };
 		609B992DA1099F42DF8DE874 /* ios_gfxutil.mm in Sources */ = {isa = PBXBuildFile; fileRef = 609B9CF90A69C4D2CC7D683E /* ios_gfxutil.mm */; };
 		609B99F773A5529FA834B6BC /* rapidxml.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 609B91B0BF21173BE16849F2 /* rapidxml.hpp */; };
 		609B9B58B947E00AA4C163D7 /* shader.h in Headers */ = {isa = PBXBuildFile; fileRef = 609B97BB4CAB7F4D24E58F72 /* shader.h */; };
@@ -53,9 +55,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		609B90FB1C32E62410985755 /* texture_info.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = texture_info.cpp; path = render/texture_info.cpp; sourceTree = "<group>"; };
 		609B91B0BF21173BE16849F2 /* rapidxml.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = rapidxml.hpp; path = ../extern/rapidxml/rapidxml.hpp; sourceTree = "<group>"; };
 		609B947F1C1B7DAC1C0AAF70 /* rapidxml_print.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = rapidxml_print.hpp; path = ../extern/rapidxml/rapidxml_print.hpp; sourceTree = "<group>"; };
 		609B960B9600F3A51DAC960D /* shader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = shader.cpp; path = render/shader.cpp; sourceTree = "<group>"; };
+		609B9751889D329F8F321501 /* texture_info.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = texture_info.h; path = render/texture_info.h; sourceTree = "<group>"; };
 		609B97BB4CAB7F4D24E58F72 /* shader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = shader.h; path = render/shader.h; sourceTree = "<group>"; };
 		609B9CF90A69C4D2CC7D683E /* ios_gfxutil.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ios_gfxutil.mm; sourceTree = "<group>"; };
 		609B9F36127D4BD6AFC46011 /* rapidxml_utils.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = rapidxml_utils.hpp; path = ../extern/rapidxml/rapidxml_utils.hpp; sourceTree = "<group>"; };
@@ -227,6 +231,8 @@
 				6D938B1215DA1B580000A795 /* param.cpp */,
 				609B960B9600F3A51DAC960D /* shader.cpp */,
 				609B97BB4CAB7F4D24E58F72 /* shader.h */,
+				609B90FB1C32E62410985755 /* texture_info.cpp */,
+				609B9751889D329F8F321501 /* texture_info.h */,
 			);
 			name = render;
 			sourceTree = "<group>";
@@ -335,6 +341,7 @@
 				609B9C119CBA7B91DB9F786A /* rapidxml_print.hpp in Headers */,
 				609B9CE7CAD3BA137BE58687 /* rapidxml_utils.hpp in Headers */,
 				609B9B58B947E00AA4C163D7 /* shader.h in Headers */,
+				609B9670829AD51CB4FFCC9F /* texture_info.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -419,6 +426,7 @@
 				6D71672B1690147D007D0B5F /* string.cpp in Sources */,
 				609B95964B23C64061260BE0 /* shader.cpp in Sources */,
 				609B992DA1099F42DF8DE874 /* ios_gfxutil.mm in Sources */,
+				609B990E8DBFB4482BB040F4 /* texture_info.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

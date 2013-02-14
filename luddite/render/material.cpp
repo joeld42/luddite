@@ -13,6 +13,11 @@
 
 using namespace luddite;
 
+Material::Material() :
+    m_shader(NULL)
+{
+    memset( m_tex, 0, kMaxTextureSlot*sizeof(uint32_t) );
+}
 
 const eastl::vector<Param>  & Material::params() {
     return m_params;

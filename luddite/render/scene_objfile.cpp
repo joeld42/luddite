@@ -11,6 +11,8 @@
 #include <luddite/common/debug.h>
 #include <luddite/render/scene_objfile.h>
 #include <luddite/render/gbuff_prim.h>
+#include <luddite/render/material.h>
+#include <luddite/render/material_db.h>
 
 using namespace luddite;
 
@@ -29,6 +31,8 @@ struct _MtlGroup
 static _MtlGroup *findOrCreateMtl( eastl::vector<_MtlGroup*> &mtlGroups,
                                   const char *mtlName )
 {
+    printf( "findOrCreateMtl: %s\n", mtlName );
+
     // try to find the material
     _MtlGroup *mtl = NULL;
     for (eastl::vector<_MtlGroup*>::iterator mi = mtlGroups.begin(); mi != mtlGroups.end(); ++mi )
@@ -48,13 +52,14 @@ static _MtlGroup *findOrCreateMtl( eastl::vector<_MtlGroup*> &mtlGroups,
         mtl->mtlName = mtlName;
         mtl->gbuff = new GBuff;
         mtlGroups.push_back(mtl);
+        printf("creating new mtl %s\n", mtlName);
     }
     
     return mtl;    
 }
 
 // The last obj loader I will ever write. I hope. But probably not.
-luddite::SceneNode *luddite::scene_objfile( const char *filename )
+SceneNode *luddite::scene_objfile(char const *filename, RenderDevice *renderDevice, MaterialDB *mtlDB)
 {
     // Vert, st and norms are shared for all gbuffs in the
     // obj file
@@ -239,23 +244,12 @@ luddite::SceneNode *luddite::scene_objfile( const char *filename )
          mi != mtlGroups.end(); ++mi )
     {
         GBatch *mtlBatch = new GBatch();
-        
-        // DBG -- hardcode colors based one material names
-        if ((*mi)->mtlName == "mtl.one")
-        {
-            gbuff_setColorConstant( (*mi)->gbuff, vec4f( 0.6, 0.6, 0.0, 1.0 ) );
-        }
-        else if ((*mi)->mtlName == "mtl.two")
-        {
-              gbuff_setColorConstant( (*mi)->gbuff, vec4f( 0.6, 0.0, 0.6, 1.0 ) );      
-        }
-        else if ((*mi)->mtlName == "mtl.three")
-        {
-            gbuff_setColorConstant( (*mi)->gbuff, vec4f( 0.0, 0.6, 0.6, 1.0 ) );      
-        }
 
-        
+//        luddite::Material *mtl = _mtlDB->getNamedMaterial( _renderDevice, "mtl.one" );
+        Material *mtl = mtlDB->getNamedMaterial( renderDevice, (*mi)->mtlName );
+
         mtlBatch->m_gbuff = (*mi)->gbuff;
+        mtlBatch->m_mtl = mtl;
         
         objNode->addGBatch( mtlBatch );
     }

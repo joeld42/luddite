@@ -14,8 +14,11 @@
 #include <luddite/render/material.h>
 #include <luddite/render/material_db.h>
 #include <luddite/render/render_device.h>
+#include <luddite/render/texture_info.h>
+#include "texture_info.h"
 
 using namespace luddite;
+
 
 void MaterialDB::initShaderDB( const char *resourcePath )
 {
@@ -104,6 +107,14 @@ void MaterialDB::addMaterialDefs( const char *materialFile )
                         parentMtl->shaderKey().c_str() );
             }
             material = new Material( *parentMtl );
+
+            printf( "parent material is %s\n", parentMtl->m_materialName.c_str());
+
+            luddite::TextureInfo *texInfo = parentMtl->m_tex[0];
+            printf("parent texInfo is %p, (%s)\n", texInfo, texInfo->m_filename.c_str() );
+            texInfo = material->m_tex[0];
+            printf("mtl    texInfo is %p, (%s)\n", texInfo, texInfo->m_filename.c_str() );
+
         } else if (!shaderKey.empty()) {
             material = _materialWithKey( shaderKey );
         } else {
@@ -137,6 +148,29 @@ void MaterialDB::addMaterialDefs( const char *materialFile )
             currParam = currParam->next_sibling("param");
         }
 
+        // Set texture slots for the material
+        rapidxml::xml_node<> *currTexture = currMtl->first_node( "texture" );
+        while (currTexture)
+        {
+            rapidxml::xml_attribute<> *attrFilename = currTexture->first_attribute( "filename" );
+            rapidxml::xml_attribute<> *attrSlot = currTexture->first_attribute( "slot" );
+            printf("texture: %s value %s\n", attrFilename?attrFilename->value():"(null)", attrSlot?attrSlot->value():"(null)" );
+
+            if (attrSlot)
+            {
+                int slot = atoi(attrSlot->value());
+                if ((attrFilename) && (slot >=0) && (slot < kMaxTextureSlot))
+                {
+                    TextureInfo *texInfo = _lookupTexture( attrFilename->value() );
+                    material->m_tex[slot] = texInfo;
+                }
+            }
+
+
+            currTexture = currTexture->next_sibling("texture");
+        }
+
+
         // Add to db
         m_materials[mtlName] = material;
 
@@ -159,9 +193,9 @@ void MaterialDB::_parseParam(Material *mtl, eastl::string const & paramName, cha
         uint32_t color;
         uint8_t r,g,b;
         sscanf( value, "#%X", &color );
-        r = (color & 0xff0000) >> 16;
-        g = (color & 0xff00) >> 8;
-        b = (color & 0xff);
+        r = (uint8_t)((color & 0xff0000) >> 16);
+        g = (uint8_t)((color & 0xff00) >> 8);
+        b = (uint8_t)(color & 0xff);
 
 
         printf("setting param %s:%s (%s) to %d (%d %d %d)\n", mtl->m_materialName.c_str(), value,
@@ -229,11 +263,47 @@ Material *MaterialDB::_materialWithKey( const eastl::string &mtlKey )
     return mtl;
 }
 
+luddite::TextureInfo *MaterialDB::_lookupTexture( const eastl::string &filename )
+{
+    TextureInfo *texInfo;
+    auto texIter = m_textures.find( filename );
+    if (texIter != m_textures.end())
+    {
+        texInfo = (*texIter).second;
+    }
+    else
+    {
+        // didn't find, create new
+        texInfo = new TextureInfo();
+        texInfo->m_filename = filename;
+        m_textures[filename] = texInfo;
+    }
+
+    return texInfo;
+}
+
+
 void MaterialDB::useAllShaders(RenderDevice *device)
 {
     printf("in useAllShaders...\n" );
+
     for ( auto shader : m_shaders )
     {
+        // load the shader
         shader.second->load(device);
     }
+
+    for (auto itex : m_textures )
+    {
+        TextureInfo *texInfo = itex.second;
+        if (texInfo->m_texId==0)
+        {
+            // Texture not loaded yet..
+            // TODO: load w/h and other stuff here ...
+            texInfo->m_texId = pfLoadTexture( texInfo->m_filename.c_str() );
+        }
+    }
+
+    printf("useAllShader done...\n" );
+
 }

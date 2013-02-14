@@ -17,7 +17,9 @@ namespace luddite
     
 class Material;
 class Shader;
-    
+
+class TextureInfo;
+
 class MaterialDB
 {
 
@@ -41,12 +43,16 @@ public:
     Material *_materialWithKey( const eastl::string &mtlKey );
     Material *_lookupMaterial( const eastl::string &mtlName );
 
+    luddite::TextureInfo *_lookupTexture( const eastl::string &filename );
+
     void _parseParam( Material *mtl, const eastl::string &paramName, const char *value );
     
     eastl::string m_resourcePath;
     eastl::hash_map<eastl::string,luddite::Material*> m_materials;
     eastl::hash_map<eastl::string,Shader*> m_shaders; // shader programs, indexed by shaderKey
-  
+
+    // store textures
+    eastl::hash_map<eastl::string,TextureInfo*> m_textures;
 };
 
 } // namespace luddite

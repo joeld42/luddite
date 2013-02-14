@@ -16,18 +16,24 @@
 #include <luddite/render/param.h>
 #include "shader.h"
 
+
+#define kMaxTextureSlot (4)
+
 // Here's where the "renderdevice" abstraction starts to leak a little bit..
 // the shader classes assume a GL-like shader structure, down to the handle
-// types and everything. 
+// types and everything.
+
 
 namespace luddite {
 
 class RenderDevice;
 class Shader;
-    
+class TextureInfo;
+
 class Material
 {
 public:
+    Material();
 
     // TODO params
     void setParam( const Param &p );
@@ -40,6 +46,8 @@ public:
     eastl::string m_materialName; // name of the specific material instance
 
     Shader *m_shader;
+
+    luddite::TextureInfo* m_tex[kMaxTextureSlot];
 
 public:
     const eastl::string &shaderKey();

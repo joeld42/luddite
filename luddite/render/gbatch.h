@@ -15,9 +15,6 @@
 #include <luddite/render/gbuff.h>
 #include <luddite/render/material.h>
 
-// Number of textures assign with the batch. More 
-// can be used as regular shader params
-#define kGBatchNumTex (4)
 
 namespace luddite {
     
@@ -27,9 +24,7 @@ struct GBatch
 {
     matrix4x4f m_xform;
     matrix4x4f m_xformInv;
-    
-    uint32_t m_tex[kGBatchNumTex];
-    
+
     luddite::GBuff *m_gbuff;
     luddite::Material *m_mtl;
 };

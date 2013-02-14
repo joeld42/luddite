@@ -12,12 +12,13 @@
 #include <EASTL/list.h>
 #include <luddite/render/scene.h>
 #include <luddite/render/scene_node.h>
+#include "material_db.h"
 
 namespace luddite
 {
 
 // should make it load from a buffer not a file
-luddite::SceneNode *scene_objfile( const char *filename );
+    SceneNode *scene_objfile(char const *filename, RenderDevice *renderDevice, MaterialDB *mtlDB);
     
 } // namespace luddite
 
