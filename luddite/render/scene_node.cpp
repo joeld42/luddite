@@ -21,9 +21,9 @@ EASTL_API EmptyString gEmptyString;
 using namespace luddite;
 
 SceneNode::SceneNode( SceneNode *parent ) :
-    m_parent( parent ),
     m_pos( 0.0, 0.0, 0.0 ),
-    m_rot( 0.0, 0.0, 0.0, 1.0 )
+    m_rot( 0.0, 0.0, 0.0, 1.0 ),
+    m_parent( parent )
 {
     if (parent)
     {
@@ -33,10 +33,10 @@ SceneNode::SceneNode( SceneNode *parent ) :
 
 SceneNode::SceneNode( const eastl::string &name, 
                      SceneNode *parent ) :
-    m_parent(parent),
-    m_name(name),
-    m_pos( 0.0, 0.0, 0.0 ),
-    m_rot( 0.0, 0.0, 0.0, 1.0 )
+        m_pos( 0.0, 0.0, 0.0 ),
+        m_rot( 0.0, 0.0, 0.0, 1.0 ),
+        m_name(name),
+        m_parent(parent)
 {
     if (parent)
     {

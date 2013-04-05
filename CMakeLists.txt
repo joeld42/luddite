@@ -55,3 +55,4 @@ ADD_SUBDIRECTORY( tools )
 # Examples
 ADD_SUBDIRECTORY( example/basics )
 #ADD_SUBDIRECTORY( example/shootymech )
+ADD_SUBDIRECTORY( example/testapp )
