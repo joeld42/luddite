@@ -36,7 +36,7 @@
 	}
 
 // Shorthand for checking a pointer is non-null
-#define AssertPtr( ptr ) Assert( ((ptr)!=NULL), #ptr " is NULL" ) 
+#define AssertPtr( ptr ) Assert( ((ptr)!=NULL), #ptr " is NULL" )
 
 // Platform specific assert function, used by assert macros. Don't call
 // directly, use Assert() instead.

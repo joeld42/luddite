@@ -7,18 +7,43 @@
 
 
 #include "test_shell.h"
+#include "scene.h"
+#include "scene_collect.h"
+#include "scene_mesh.h"
 
 using namespace luddite;
+using namespace TestApp;
 
  TestApp::TestAppShell::TestAppShell()
  {
-    init();
+     // Register scenes
+     m_scenes.push_back( new SceneCollect() );
+     m_scenes.push_back( new SceneMesh() );
+
  }
 
- void TestApp::TestAppShell::init()
+ void TestApp::TestAppShell::commonInit()
  {
      m_gameLoop = new GameLoop();
  }
+
+void TestApp::TestAppShell::initWithScene( const char *sceneName )
+{
+    commonInit();
+
+    for (TestApp::Scene *scene : m_scenes )
+    {
+        if (scene->sceneName() == sceneName)
+        {
+            printf( "Using scene %s\n", scene->sceneName().c_str() );
+            m_scene = scene;
+            m_scene->init();
+            return;
+        }
+    }
+
+    printf( "Didn't find scene %s", sceneName);
+}
 
  bool TestApp::TestAppShell::update()
  {
@@ -45,19 +70,26 @@ using namespace luddite;
 
 void TestApp::TestAppShell::render()
 {
-    glClearColor( 0.2f, 0.2f, 1.0f, 1.0f );
-    glClear( GL_COLOR_BUFFER_BIT );
+//    AssertPtr( m_scene );
+
+//    glClearColor( 0.2f, 0.2f, 1.0f, 1.0f );
+//    glClear( GL_COLOR_BUFFER_BIT );
+
+    m_scene->render();
 }
 
 void TestApp::TestAppShell::updateFixed( float dt )
 {
-    DBG::info( "Fixed timestep: %lf\n", dt );
+//    AssertPtr( m_scene );
+
+    //m_scene->updateFixed(dt);
 }
 
 void TestApp::TestAppShell::updateDynamic( float dt )
 {
-    DBG::info( "Dynamic timestep: %lf\n", dt );
-    
+//    AssertPtr( m_scene );
+
+    m_scene->updateDynamic(dt);
 }
 
 

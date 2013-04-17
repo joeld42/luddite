@@ -6,15 +6,15 @@
 //  Copyright (c) 2012 Joel Davis. All rights reserved.
 //
 
-#ifndef luddite_render_device_gl_h
-#define luddite_render_device_gl_h
+#ifndef luddite_ios_render_device_es2_h
+#define luddite_ios_render_device_es2_h
 
 #include <luddite/render/render_device.h>
 
 namespace luddite
 {
 
-class RenderDeviceES2 : public luddite::RenderDevice
+class RenderDeviceGL : public luddite::RenderDevice
 {
 public:
     // HACK: expose params here until mtl/shaders are set up
@@ -35,7 +35,8 @@ protected:
     int32_t _compileShader( const char *shaderText, uint32_t shaderType );
     void _printShaderLog( int32_t program );
     void _link( int32_t program );
-    
+
+    void _param( const Param &p );
 };
     
 //    vec3f m_pos;

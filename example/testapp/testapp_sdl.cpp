@@ -15,6 +15,7 @@
 
 // Game
 #include "test_shell.h"
+#import "scene.h"
 
 #ifndef WIN32
 #define _stricmp strcasecmp
@@ -31,16 +32,23 @@ int main( int argc, char *argv[] )
 		exit(1);
 	}
     
-	// cheezy check for fullscreen
+	// crappy arg parse
+    const char *sceneName = "mesh";
 	Uint32 mode_flags = SDL_OPENGL;
 	for (int i=1; i < argc; i++)
 	{
-		if (!_stricmp( argv[i], "-fullscreen"))
+        if (argv[i][0]!='-')
+        {
+            // No leading -, treat as a scene name
+            sceneName = argv[i];
+        }
+		else if (!_stricmp( argv[i], "-fullscreen"))
 		{
 			mode_flags |= SDL_FULLSCREEN;
 		}
 	}
-    
+
+
     // TODO: flag to control this
     SDL_GL_SetAttribute(SDL_GL_MULTISAMPLEBUFFERS, 1);
 	SDL_GL_SetAttribute( SDL_GL_MULTISAMPLESAMPLES, 4 );
@@ -55,6 +63,8 @@ int main( int argc, char *argv[] )
 	SDL_WM_SetCaption( "Luddite Test App", NULL );
     
     TestApp::TestAppShell *game = new TestApp::TestAppShell();
+
+    game->initWithScene( sceneName );
     
     // init graphics
     // FIXME: screen size

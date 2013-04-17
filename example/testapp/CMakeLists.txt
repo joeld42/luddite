@@ -1,6 +1,13 @@
 include_directories( . )
 
 SET ( testapp_SRCS
+  scene.h
+  scene.cpp
+  scene_mesh.h
+  scene_mesh.cpp
+  scene_collect.h
+  scene_collect.cpp
+  test_shell.h
   test_shell.cpp
   testapp_sdl.cpp
 )

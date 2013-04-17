@@ -1,8 +1,8 @@
 //
-//  render_device_gl.cpp
+//  render_device_es2.cpp
 //  luddite_ios
 //
-//  Created by Joel Davis on 8/21/12.
+//  Created by Joel Davis on 7/29/12.
 //  Copyright (c) 2012 Joel Davis. All rights reserved.
 //
 
@@ -16,6 +16,8 @@
 
 #include <luddite/common/debug.h>
 #include <luddite/render/render_device_gl.h>
+#include <luddite/render/texture_info.h>
+#include <luddite/render/param.h>
 
 // offsetof() gives a warning about non-POD types with xcode, so use these old
 // school macros. This is OK because while VertType is non-POD, it doesn't have
@@ -25,7 +27,39 @@
 
 using namespace luddite;
 
-void RenderDeviceES2::_drawGBatch( luddite::GBatch *gbatch )
+
+void RenderDeviceGL::_param(Param const & p)
+{
+    switch (p.m_paramType)
+    {
+        case ParamType_SCALAR:
+            glUniform1f( p.m_glParam, p.m_val.scalar );
+            break;
+
+        case ParamType_VEC2:
+            glUniform2fv( p.m_glParam, 1, p.m_val.data );
+            break;
+
+        case ParamType_VEC3:
+            glUniform3fv( p.m_glParam, 1, p.m_val.data );
+            break;
+
+        case ParamType_VEC4:
+            glUniform4fv( p.m_glParam, 1, p.m_val.data );
+            break;
+
+        case ParamType_MATRIX3:
+            glUniformMatrix3fv( p.m_glParam, 1, GL_FALSE, p.m_val.data );
+            break;
+
+        case ParamType_MATRIX4:
+            glUniformMatrix4fv( p.m_glParam, 1, GL_FALSE, p.m_val.data );
+            break;
+    }
+}
+
+
+void RenderDeviceGL::_drawGBatch( luddite::GBatch *gbatch )
 {
     luddite::GBuff *gbuff = gbatch->m_gbuff;    
     matrix4x4f mresult =  gbatch->m_xform * matBaseModelView;
@@ -69,14 +103,25 @@ void RenderDeviceES2::_drawGBatch( luddite::GBatch *gbatch )
     else
     {
         // use gbatch material
-//        glUseProgram(gbatch->m_mtl->m_program);
-//        GLint mvp = glGetUniformLocation( gbatch->m_mtl->m_program, "matrixPMV");
-        
-        // use gbatch material
         glUseProgram(gbatch->m_mtl->m_shader->shaderProgram() );
         
         GLint mvp = glGetUniformLocation( gbatch->m_mtl->m_shader->shaderProgram(), "matrixPMV");
         glUniformMatrix4fv( mvp, 1, 0, mresult.m16 );
+
+        // Set params from mtl
+        for (Param &p : gbatch->m_mtl->mutable_params() )
+        {
+            // Does param need to be initialized?
+            if (p.m_glParam==PARAM_UNINITIALIZED)
+            {
+                // find it
+                p.m_glParam = glGetUniformLocation( gbatch->m_mtl->m_shader->shaderProgram(),
+                                                     p.m_name.c_str() );
+                printf("Got param %s (loc: %d)\n", p.m_name.c_str(), p.m_glParam );
+            }
+
+            _param( p );
+        }
     }
 
     // Create gbo for this gbuff if not set up
@@ -94,7 +139,12 @@ void RenderDeviceES2::_drawGBatch( luddite::GBatch *gbatch )
         // Buffer is already created, just bind it
         glBindBuffer( GL_ARRAY_BUFFER, gbuff->m_vbo );
     }
-    
+
+    // Bind textures
+    // TODO: don't rebind if batches share the same texture
+    // TODO: support more than 1 texture
+    glBindTexture(GL_TEXTURE_2D, gbatch->m_mtl->m_tex[0]->m_texId );
+
     // Bind buffer data
     glEnableVertexAttribArray( VertexAttrib_TEXCOORD );
     glVertexAttribPointer( VertexAttrib_TEXCOORD, 2, GL_FLOAT, GL_FALSE, 
@@ -118,7 +168,7 @@ void RenderDeviceES2::_drawGBatch( luddite::GBatch *gbatch )
 
 }
 
-int32_t RenderDeviceES2::loadShader( const eastl::string &shaderKey )
+int32_t RenderDeviceGL::loadShader( const eastl::string &shaderKey )
 {
     GLint program;
 	printf("loadShader %s ...", shaderKey.c_str() );
@@ -186,7 +236,7 @@ int32_t RenderDeviceES2::loadShader( const eastl::string &shaderKey )
     return program;    
 }
 
-int32_t RenderDeviceES2::_compileShader( const char *shaderText, 
+int32_t RenderDeviceGL::_compileShader( const char *shaderText, 
                                          uint32_t shaderType )
 {
     GLint status;    
@@ -223,7 +273,7 @@ int32_t RenderDeviceES2::_compileShader( const char *shaderText,
     return shader;    
 }
 
-void RenderDeviceES2::_printShaderLog( int32_t program )
+void RenderDeviceGL::_printShaderLog( int32_t program )
 {
 	GLint logLength;
     glGetProgramiv( program, GL_INFO_LOG_LENGTH, &logLength );
@@ -237,7 +287,7 @@ void RenderDeviceES2::_printShaderLog( int32_t program )
 	
 }
 
-void RenderDeviceES2::_link( int32_t program )
+void RenderDeviceGL::_link( int32_t program )
 {
     GLint status;
     

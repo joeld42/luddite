@@ -6,7 +6,7 @@
 bool pfAssertFunc( bool expr, const char *desc, int line, const char *file, bool *skip )
 {
     // FIXME
-    return true;
+    return false;
 }
 
 void pfVMessage( int message_level, const char *fmt, va_list args)

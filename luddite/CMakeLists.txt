@@ -44,6 +44,8 @@ SET( render_SRCS
 	render/scene_node.h
 	render/scene_objfile.cpp
 	render/scene_objfile.h
+	render/texture_info.h
+	render/texture_info.cpp
 )
 SOURCE_GROUP( render FILES ${render_SRCS} )
 
