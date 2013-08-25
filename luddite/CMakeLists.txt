@@ -44,6 +44,8 @@ SET( render_SRCS
 	render/scene_node.h
 	render/scene_objfile.cpp
 	render/scene_objfile.h
+	render/shader.h
+	render/shader.cpp
 	render/texture_info.h
 	render/texture_info.cpp
 )
@@ -52,6 +54,7 @@ SOURCE_GROUP( render FILES ${render_SRCS} )
 SET( platform_SRCS
       platform/platform.h
       platform/osx/osx_debug.cpp
+      platform/osx/osx_gfxutil.cpp
 )
 SOURCE_GROUP( platform FILES ${platform_SRCS} )
 

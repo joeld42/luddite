@@ -17,7 +17,7 @@ namespace TestApp
 {
 
 // Test "scene"
-class Scene {
+class TestScene {
     public:
     virtual eastl::string sceneName()=0;
 

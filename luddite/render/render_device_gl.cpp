@@ -65,31 +65,31 @@ void RenderDeviceGL::_drawGBatch( luddite::GBatch *gbatch )
     matrix4x4f mresult =  gbatch->m_xform * matBaseModelView;
     mresult = mresult * matProjection;
     
-//    matrix4x4f &nodeXform = gbatch->m_xform;
-//    DBG::info( "nodeXForm      %3.2f %3.2f %3.2f %3.2f\n"
-//               "              %3.2f %3.2f %3.2f %3.2f\n"
-//               "              %3.2f %3.2f %3.2f %3.2f\n"
-//               "              %3.2f %3.2f %3.2f %3.2f\n",                  
-//              
-//              nodeXform.m16[0],
-//              nodeXform.m16[1],
-//              nodeXform.m16[2],
-//              nodeXform.m16[3],
-//              
-//              nodeXform.m16[4],
-//              nodeXform.m16[5],
-//              nodeXform.m16[6],
-//              nodeXform.m16[7],
-//              
-//              nodeXform.m16[8],
-//              nodeXform.m16[9],
-//              nodeXform.m16[10],
-//              nodeXform.m16[11],
-//              
-//              nodeXform.m16[12],
-//              nodeXform.m16[13],
-//              nodeXform.m16[14],
-//              nodeXform.m16[15] );
+    matrix4x4f &nodeXform = gbatch->m_xform;
+    DBG::info( "nodeXForm      %3.2f %3.2f %3.2f %3.2f\n"
+               "              %3.2f %3.2f %3.2f %3.2f\n"
+               "              %3.2f %3.2f %3.2f %3.2f\n"
+               "              %3.2f %3.2f %3.2f %3.2f\n",                  
+              
+              nodeXform.m16[0],
+              nodeXform.m16[1],
+              nodeXform.m16[2],
+              nodeXform.m16[3],
+              
+              nodeXform.m16[4],
+              nodeXform.m16[5],
+              nodeXform.m16[6],
+              nodeXform.m16[7],
+              
+              nodeXform.m16[8],
+              nodeXform.m16[9],
+              nodeXform.m16[10],
+              nodeXform.m16[11],
+              
+              nodeXform.m16[12],
+              nodeXform.m16[13],
+              nodeXform.m16[14],
+              nodeXform.m16[15] );
 
     
     // Set transform and shader params from gbatch
@@ -103,9 +103,11 @@ void RenderDeviceGL::_drawGBatch( luddite::GBatch *gbatch )
     else
     {
         // use gbatch material
-        glUseProgram(gbatch->m_mtl->m_shader->shaderProgram() );
+        GLuint progGBatch = gbatch->m_mtl->m_shader->shaderProgram();
+        glUseProgram(progGBatch );
+        printf("Gbatch material %d\n", progGBatch);
         
-        GLint mvp = glGetUniformLocation( gbatch->m_mtl->m_shader->shaderProgram(), "matrixPMV");
+        GLint mvp = glGetUniformLocation( progGBatch, "matrixPMV");
         glUniformMatrix4fv( mvp, 1, 0, mresult.m16 );
 
         // Set params from mtl
@@ -164,6 +166,7 @@ void RenderDeviceGL::_drawGBatch( luddite::GBatch *gbatch )
                           sizeof(DrawVert), (void*)offset_s( DrawVert, m_color) );
     
     // Draw it!
+    printf("glDrawArrays sz %ld\n", gbuff->m_vertData.size() );
     glDrawArrays(GL_TRIANGLES, 0, gbuff->m_vertData.size() );
 
 }
@@ -183,7 +186,7 @@ int32_t RenderDeviceGL::loadShader( const eastl::string &shaderKey )
     const char *vertShaderText = glswGetShader( (shaderKey+".Vertex").c_str() );
     if (!vertShaderText)
     {
-        printf("Couldn't find shader key: %s.Vertex\n", shaderKey.c_str() );
+        printf("Couldn't find shader key: %s.Vertex (Error: %s)\n", shaderKey.c_str(), glswGetError() );
 		return SHADER_FAIL;
     }
     
@@ -194,7 +197,7 @@ int32_t RenderDeviceGL::loadShader( const eastl::string &shaderKey )
     const char *fragShaderText = glswGetShader( (shaderKey+".Fragment").c_str() );
     if (!fragShaderText)
     {
-        printf("Couldn't find shader key: %s.Fragment\n", shaderKey.c_str() );
+        printf("Couldn't find shader key: %s.Fragment (Error: %s)\n", shaderKey.c_str(), glswGetError() );
 		return SHADER_FAIL;
     }
     

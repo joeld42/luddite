@@ -15,7 +15,7 @@
 
 // Game
 #include "test_shell.h"
-#import "scene.h"
+#include "test_scene.h"
 
 #ifndef WIN32
 #define _stricmp strcasecmp

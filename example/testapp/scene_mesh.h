@@ -3,15 +3,16 @@
 #define __scene_mesh_H_
 
 #include <iostream>
-#import "scene.h"
+#include "test_scene.h"
 
-#import <luddite/render/render_device.h>
-#import <luddite/render/material_db.h>
+#include <luddite/render/render_device.h>
+#include <luddite/render/material_db.h>
+#include <luddite/render/scene.h>
 
 namespace TestApp
 {
 
-class SceneMesh : public TestApp::Scene
+class SceneMesh : public TestApp::TestScene
 {
 public:
     virtual eastl::string sceneName();
@@ -25,6 +26,7 @@ public:
 protected:
     luddite::RenderDevice *m_renderDevice;
     luddite::MaterialDB *m_mtlDB;
+    luddite::Scene *m_scene;
 };
 
 } // namespace TestApp

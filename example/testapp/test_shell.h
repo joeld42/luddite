@@ -6,7 +6,7 @@
 
 #import <EASTL/vector.h>
 
-#import "scene.h"
+#import "test_scene.h"
 
 namespace TestApp
 {
@@ -32,10 +32,10 @@ private:
     luddite::GameLoop *m_gameLoop;
 
     // registered test scenes
-    eastl::vector<TestApp::Scene*> m_scenes;
+    eastl::vector<TestApp::TestScene*> m_scenes;
 
     // current scene
-    TestApp::Scene *m_scene;
+    TestApp::TestScene *m_scene;
 };
 
 

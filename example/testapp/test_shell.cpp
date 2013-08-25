@@ -7,7 +7,6 @@
 
 
 #include "test_shell.h"
-#include "scene.h"
 #include "scene_collect.h"
 #include "scene_mesh.h"
 
@@ -31,7 +30,7 @@ void TestApp::TestAppShell::initWithScene( const char *sceneName )
 {
     commonInit();
 
-    for (TestApp::Scene *scene : m_scenes )
+    for (TestApp::TestScene *scene : m_scenes )
     {
         if (scene->sceneName() == sceneName)
         {

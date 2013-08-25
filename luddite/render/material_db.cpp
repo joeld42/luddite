@@ -22,12 +22,24 @@ using namespace luddite;
 
 void MaterialDB::initShaderDB( const char *resourcePath )
 {
-    // Initialize shader path
-    glswInit();
-    glswSetPath( resourcePath, ".glsl" );    
-    
     // Remember resource path to load material defs
     m_resourcePath = resourcePath;
+    
+    // Make sure resource Path has a trailing slash
+    if (resourcePath[strlen(resourcePath)-1] != '/')
+    {
+        m_resourcePath = m_resourcePath + "/";
+    }
+
+    // Initialize shader path
+    glswInit();
+    glswSetPath( m_resourcePath.c_str(), ".glsl" );
+
+    // For desktop GL
+    glswAddDirectiveToken("", "#define lowp");
+    glswAddDirectiveToken("", "#define mediump");
+    glswAddDirectiveToken("", "#define highp");
+
 }
 
 void MaterialDB::addMaterialDefs( const char *materialFile )

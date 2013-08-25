@@ -10,12 +10,12 @@
 #define __scene_collect_H_
 
 #include <iostream>
-#import "scene.h"
+#include "test_scene.h"
 
 namespace TestApp
 {
 
-class SceneCollect : public TestApp::Scene
+class SceneCollect : public TestApp::TestScene
 {
 public:
     virtual eastl::string sceneName();

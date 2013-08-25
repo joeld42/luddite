@@ -1,6 +1,6 @@
 
 
-#import "platform.h"
+#include <luddite/platform/platform.h>
 
 //#import <GLKit/GLKTextureLoader.h>
 
