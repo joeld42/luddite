@@ -4,6 +4,8 @@ SET( common_SRCS
       common/allocator.cpp
       common/debug.h
       common/debug.cpp
+      common/useful.h
+      common/useful.cpp
 )
 SOURCE_GROUP( common FILES ${common_SRCS} )
 

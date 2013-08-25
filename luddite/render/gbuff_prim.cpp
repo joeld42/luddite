@@ -75,6 +75,21 @@ GBuff *luddite::gbuff_cube( float size, vec3f center )
                                  (_cubeVertData[i*6 + 4] * size) - center.y,
                                  (_cubeVertData[i*6 + 5] * size) - center.z );
         
+        // derive st's from position
+        size_t sndx, tndx;
+        switch ( i / 6) {
+            case 0: sndx = 1; tndx = 2; break; // face 0, project yz
+            case 1: sndx = 0; tndx = 2; break; // face 1, project xz
+            case 2: sndx = 1; tndx = 2; break; // face 2, project yz
+            case 3: sndx = 0; tndx = 2; break; // face 3, project xz
+            case 4: sndx = 0; tndx = 1; break; // face 4, project xy
+            case 5: sndx = 0; tndx = 1; break; // face 5, project xy
+        }
+        
+        cubeVert->m_st = vec2f( _cubeVertData[i*6 + sndx] + 0.5,
+                                _cubeVertData[i*6 + tndx] + 0.5 );
+
+        
         cubeVert++;
     }
     

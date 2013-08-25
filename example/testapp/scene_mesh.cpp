@@ -67,9 +67,13 @@ void TestApp::SceneMesh::init()
 //    void glhFrustumf2(matrix4x4f &matrix,
 //                      float left, float right, float bottom, float top,
 //                      float znear, float zfar)
+
     glhPerspectivef2( renderDeviceGL->matProjection, 20.0, 800.0/600.0, 1.0, 500.0 );
+    
+//    renderDeviceGL->matProjection.Identity();
 
     renderDeviceGL->matBaseModelView.Identity();
+    renderDeviceGL->matBaseModelView.Translate(0.0, 0.25, -5.0);
     
     // Initialize shader DB
     printf( "Bundle path is %s\n\n", resourcePath.c_str() );
@@ -241,7 +245,8 @@ void TestApp::SceneMesh::init()
 
 void TestApp::SceneMesh::render()
 {
-    //printf("in SceneMesh::render...\n");
+    static long frameCount;
+    printf("in SceneMesh::render [%ld]\n", frameCount++ );
     glClearColor( 0.2f, 0.2f, 0.25f, 1.0f );
     glClear( GL_COLOR_BUFFER_BIT );
 

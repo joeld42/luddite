@@ -4,8 +4,11 @@
 
 #include <luddite/common/useful.h>
 
-#include <GLee.h>
-#include <GL/glu.h>
+#ifdef __APPLE__
+#include <OpenGL/gl.h>
+#else
+#include <GL/gl.h>
+#endif
 
 float randUniform()
 {
@@ -124,7 +127,8 @@ int checkForGLErrors( const char *s, const char * file, int line )
         if ( x == GL_NO_ERROR )
             return errors ;
         
-        printf( "%s:%d [%s] OpenGL error: %s [%08x]\n",  file, line, s ? s : "", gluErrorString ( x ), x ) ;
+//        printf( "%s:%d [%s] OpenGL error: %s [%08x]\n",  file, line, s ? s : "", gluErrorString ( x ), x ) ;
+        printf( "%s:%d [%s] OpenGL error: %08x\n",  file, line, s ? s : "",  x ) ;
         errors++ ;
         counter++ ;
     }

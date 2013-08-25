@@ -66,30 +66,30 @@ void RenderDeviceGL::_drawGBatch( luddite::GBatch *gbatch )
     mresult = mresult * matProjection;
     
     matrix4x4f &nodeXform = gbatch->m_xform;
-    DBG::info( "nodeXForm      %3.2f %3.2f %3.2f %3.2f\n"
-               "              %3.2f %3.2f %3.2f %3.2f\n"
-               "              %3.2f %3.2f %3.2f %3.2f\n"
-               "              %3.2f %3.2f %3.2f %3.2f\n",                  
-              
-              nodeXform.m16[0],
-              nodeXform.m16[1],
-              nodeXform.m16[2],
-              nodeXform.m16[3],
-              
-              nodeXform.m16[4],
-              nodeXform.m16[5],
-              nodeXform.m16[6],
-              nodeXform.m16[7],
-              
-              nodeXform.m16[8],
-              nodeXform.m16[9],
-              nodeXform.m16[10],
-              nodeXform.m16[11],
-              
-              nodeXform.m16[12],
-              nodeXform.m16[13],
-              nodeXform.m16[14],
-              nodeXform.m16[15] );
+//    DBG::info( "nodeXForm      %3.2f %3.2f %3.2f %3.2f\n"
+//               "              %3.2f %3.2f %3.2f %3.2f\n"
+//               "              %3.2f %3.2f %3.2f %3.2f\n"
+//               "              %3.2f %3.2f %3.2f %3.2f\n",                  
+//              
+//              nodeXform.m16[0],
+//              nodeXform.m16[1],
+//              nodeXform.m16[2],
+//              nodeXform.m16[3],
+//              
+//              nodeXform.m16[4],
+//              nodeXform.m16[5],
+//              nodeXform.m16[6],
+//              nodeXform.m16[7],
+//              
+//              nodeXform.m16[8],
+//              nodeXform.m16[9],
+//              nodeXform.m16[10],
+//              nodeXform.m16[11],
+//              
+//              nodeXform.m16[12],
+//              nodeXform.m16[13],
+//              nodeXform.m16[14],
+//              nodeXform.m16[15] );
 
     
     // Set transform and shader params from gbatch
@@ -110,6 +110,32 @@ void RenderDeviceGL::_drawGBatch( luddite::GBatch *gbatch )
         GLint mvp = glGetUniformLocation( progGBatch, "matrixPMV");
         glUniformMatrix4fv( mvp, 1, 0, mresult.m16 );
 
+//        DBG::info( "matrixPMV (%d)      %3.2f %3.2f %3.2f %3.2f\n"
+//                  "              %3.2f %3.2f %3.2f %3.2f\n"
+//                  "              %3.2f %3.2f %3.2f %3.2f\n"
+//                  "              %3.2f %3.2f %3.2f %3.2f\n", mvp,
+//                  
+//                  mresult.m16[0],
+//                  mresult.m16[1],
+//                  mresult.m16[2],
+//                  mresult.m16[3],
+//                  
+//                  mresult.m16[4],
+//                  mresult.m16[5],
+//                  mresult.m16[6],
+//                  mresult.m16[7],
+//                  
+//                  mresult.m16[8],
+//                  mresult.m16[9],
+//                  mresult.m16[10],
+//                  mresult.m16[11],
+//                  
+//                  mresult.m16[12],
+//                  mresult.m16[13],
+//                  mresult.m16[14],
+//                  mresult.m16[15] );
+
+        
         // Set params from mtl
         for (Param &p : gbatch->m_mtl->mutable_params() )
         {
@@ -145,6 +171,7 @@ void RenderDeviceGL::_drawGBatch( luddite::GBatch *gbatch )
     // Bind textures
     // TODO: don't rebind if batches share the same texture
     // TODO: support more than 1 texture
+    // TODO: VAO support
     glBindTexture(GL_TEXTURE_2D, gbatch->m_mtl->m_tex[0]->m_texId );
 
     // Bind buffer data
@@ -166,7 +193,7 @@ void RenderDeviceGL::_drawGBatch( luddite::GBatch *gbatch )
                           sizeof(DrawVert), (void*)offset_s( DrawVert, m_color) );
     
     // Draw it!
-    printf("glDrawArrays sz %ld\n", gbuff->m_vertData.size() );
+    printf("glDrawArrays sz %d\n", gbuff->m_vertData.size() );
     glDrawArrays(GL_TRIANGLES, 0, gbuff->m_vertData.size() );
 
 }
