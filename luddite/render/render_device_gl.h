@@ -29,7 +29,9 @@ public:
     
 protected:
     
+    virtual void _prepareFrame();
     virtual void _drawGBatch( luddite::GBatch *gbatch );
+    virtual void _finishFrame();
     
     // TODO: put this crap in an pimpl class
     int32_t _compileShader( const char *shaderText, uint32_t shaderType );

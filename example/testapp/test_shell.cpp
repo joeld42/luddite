@@ -80,14 +80,12 @@ void TestApp::TestAppShell::render()
 void TestApp::TestAppShell::updateFixed( float dt )
 {
 //    AssertPtr( m_scene );
-
-    //m_scene->updateFixed(dt);
+    m_scene->updateFixed(dt);
 }
 
 void TestApp::TestAppShell::updateDynamic( float dt )
 {
 //    AssertPtr( m_scene );
-
     m_scene->updateDynamic(dt);
 }
 

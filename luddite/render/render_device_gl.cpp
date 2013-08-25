@@ -58,6 +58,10 @@ void RenderDeviceGL::_param(Param const & p)
     }
 }
 
+void RenderDeviceGL::_prepareFrame()
+{
+    glEnable( GL_DEPTH_TEST );
+}
 
 void RenderDeviceGL::_drawGBatch( luddite::GBatch *gbatch )
 {
@@ -197,6 +201,11 @@ void RenderDeviceGL::_drawGBatch( luddite::GBatch *gbatch )
     glDrawArrays(GL_TRIANGLES, 0, gbuff->m_vertData.size() );
 
 }
+
+void RenderDeviceGL::_finishFrame()
+{
+}
+
 
 int32_t RenderDeviceGL::loadShader( const eastl::string &shaderKey )
 {

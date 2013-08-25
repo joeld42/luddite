@@ -19,14 +19,17 @@ public:
 
     virtual void init();
 //    virtual void shutdown();
-//    virtual void updateFixed( float dt );
-//    virtual void updateDynamic( float dt );
+    virtual void updateFixed( float dt );
+    virtual void updateDynamic( float dt );
     virtual void render();
 
 protected:
     luddite::RenderDevice *m_renderDevice;
     luddite::MaterialDB *m_mtlDB;
     luddite::Scene *m_scene;
+    
+    luddite::SceneNode *m_worldRoot;
+    luddite::SceneNode *m_meshNode;
 };
 
 } // namespace TestApp

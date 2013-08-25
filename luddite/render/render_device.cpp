@@ -22,6 +22,8 @@ void RenderDevice::renderFrame()
     // TODO
     DBG::info( "In renderFrame, will draw %d gbatches\n", m_gbatches.size()  );
     
+    _prepareFrame();
+    
 //    eastl::sort( m_gbuffs.begin(), m_gbuffs.end(), GBuff::cmp_ptr );
     
     for( eastl::vector<GBatch*>::iterator gbi = m_gbatches.begin();
@@ -30,7 +32,9 @@ void RenderDevice::renderFrame()
         // Let the device-specific subclass draw the buffer
         _drawGBatch( *gbi );
     }    
-    m_gbatches.clear();    
+    m_gbatches.clear();
+    
+    _finishFrame();
 }
 
 

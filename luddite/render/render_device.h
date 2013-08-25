@@ -34,8 +34,11 @@ public:
     
 protected:
     
-    virtual void _drawGBatch( luddite::GBatch *gbatch )=0; 
-    eastl::vector<luddite::GBatch*> m_gbatches; 
+    virtual void _prepareFrame()=0;
+    virtual void _drawGBatch( luddite::GBatch *gbatch )=0;
+    virtual void _finishFrame()=0;
+    
+    eastl::vector<luddite::GBatch*> m_gbatches;
 };
     
 }; // namespace luddite

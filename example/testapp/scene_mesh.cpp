@@ -92,7 +92,7 @@ void TestApp::SceneMesh::init()
     gbuff_setColorConstant( gbuffCyl, vec4f( 0.0, 1.0, 0.0, 1.0) );
 
     // Build scene graph
-    luddite::SceneNode *worldRoot = new luddite::SceneNode( "worldRoot" );
+    m_worldRoot = new luddite::SceneNode( "worldRoot" );
 
     // Make a material
 //    luddite::Material *mtl = m_mtlDB->_materialWithKey( "Sandbox.Plastic" );
@@ -135,14 +135,13 @@ void TestApp::SceneMesh::init()
 
     // make a ring of cube around the world root
 //    bool cube = true;
-    luddite::SceneNode *cubeNode;
     for (float t=0.0; t <= 2.0*M_PI; t += 20.0 * (M_PI/180.0 ) )
     {
         vec3f cubePos = vec3f( cos(t)*2.0, 0.3, sin(t)*2.0 );
-        cubeNode = new luddite::SceneNode( worldRoot );
-        cubeNode->m_pos = cubePos;
+        m_meshNode = new luddite::SceneNode( m_worldRoot );
+        m_meshNode->m_pos = cubePos;
         
-        cubeNode->m_pos = vec3f( 0.0, 0.0, 0.0 );
+        m_meshNode->m_pos = vec3f( 0.0, 0.0, 0.0 );
 //        NSLog( @"cube pos is %f %f %f", cubePos.x, cubePos.y, cubePos.z );
 
         // bind gbuff to a new gbatch, attach that to scene node
@@ -160,8 +159,11 @@ void TestApp::SceneMesh::init()
 //            currBatch->m_mtl = mtl3;
 //        }
 //        cube = !cube;
+        
+        // Apply a texture
+//        uint32_t texGrass = pfLoadTexture( "grass.png" );
 
-        cubeNode->addGBatch( currBatch );
+        m_meshNode->addGBatch( currBatch );
         
         //DBG
         break;
@@ -217,7 +219,7 @@ void TestApp::SceneMesh::init()
 
 
     // Create scene
-    m_scene = new luddite::Scene( worldRoot );
+    m_scene = new luddite::Scene( m_worldRoot );
 
     // Set up apple example stuff
 //    [self loadShaders];
@@ -243,12 +245,28 @@ void TestApp::SceneMesh::init()
 
 }
 
+void TestApp::SceneMesh::updateFixed( float dt )
+{
+    quat4f qrot;
+    qrot.SetEuler( vec3f(0.0, 0.3f*dt, 0.0), prmath::EULER_XYZ );
+    m_meshNode->m_rot *= qrot;
+    
+//    printf("SceneMesh::updateFixed, rot is %f %f %f %f",
+//           m_meshNode->m_rot.x,
+//           m_meshNode->m_rot.y,
+//           m_meshNode->m_rot.z,
+//           m_meshNode->m_rot.w );
+}
+void TestApp::SceneMesh::updateDynamic( float dt )
+{    
+}
+
 void TestApp::SceneMesh::render()
 {
     static long frameCount;
     printf("in SceneMesh::render [%ld]\n", frameCount++ );
     glClearColor( 0.2f, 0.2f, 0.25f, 1.0f );
-    glClear( GL_COLOR_BUFFER_BIT );
+    glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
 
 //    glUseProgram(_program);
 

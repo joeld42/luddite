@@ -76,7 +76,7 @@ void main()
 	lowp vec4 dif0 = texture2D( sampler_dif0, st );
 	gl_FragColor.rgb = (diffuseColor * dif0.rgb )+specColor;
 	gl_FragColor.a = dif0.a;
-    	
+    
     gl_FragColor = (texture2D( sampler_dif0, st ) + vec4( dbgColor.x, dbgColor.y, dbgColor.z, 1.0 )) * 0.5;
     gl_FragColor = texture2D( sampler_dif0, st );
 
