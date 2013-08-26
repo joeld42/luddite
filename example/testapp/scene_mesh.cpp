@@ -20,6 +20,7 @@
 #include <luddite/render/material_db.h>
 #include <luddite/render/gbuff_prim.h>
 #include <luddite/render/texture_info.h>
+#include <luddite/render/color_util.h>
 
 #include "scene_mesh.h"
 
@@ -42,26 +43,6 @@ void TestApp::SceneMesh::init()
 //    NSString *resPath = [[bundle resourcePath] stringByAppendingString: @"/"];
 //    NSLog( @"Resource Path is %@\n", resPath );
 
-    eastl::string resourcePath;
-    CFBundleRef mainBundle = CFBundleGetMainBundle();
-    CFURLRef bundleURL = CFBundleCopyBundleURL(mainBundle);
-	CFStringRef str = CFURLCopyFileSystemPath( bundleURL, kCFURLPOSIXPathStyle );
-	CFRelease(bundleURL);
-	char path[PATH_MAX];
-	
-	CFStringGetCString( str, path, FILENAME_MAX, kCFStringEncodingASCII );
-	CFRelease(str);
-
-    resourcePath = path;
-    
-    CFURLRef resourcesURL = CFBundleCopyResourcesDirectoryURL(mainBundle);
-	str = CFURLCopyFileSystemPath( resourcesURL, kCFURLPOSIXPathStyle );
-	CFRelease(resourcesURL);
-    
-    CFStringGetCString( str, path, FILENAME_MAX, kCFStringEncodingASCII );
-	CFRelease(str);
-    
-    resourcePath = resourcePath + "/" + path;
 
     // Setup camera (TODO: do this differently)
     //renderDeviceGL->matProjection.Identity();
@@ -82,9 +63,8 @@ void TestApp::SceneMesh::init()
 
     
     // Initialize shader DB
-    printf( "Bundle path is %s\n\n", resourcePath.c_str() );
     m_mtlDB = new luddite::MaterialDB( );
-    m_mtlDB->initShaderDB( resourcePath.c_str() );
+    m_mtlDB->initShaderDB();
 
 //    m_mtlDB->initShaderDB( "./gamedata/" );
 
@@ -186,15 +166,27 @@ void TestApp::SceneMesh::init()
         if (cube)
         {
             currBatch->m_gbuff = gbuffCube;
-            currBatch->m_mtl = mtl;
+            currBatch->m_mtl = new luddite::Material( *mtl );
         }
         else
         {
             meshNode->m_pos.y = sin(t*3) * 0.25;
             currBatch->m_gbuff = gbuffCyl;
-            currBatch->m_mtl = mtl3;
+            currBatch->m_mtl = new luddite::Material( *mtl3 );
         }
         cube = !cube;
+        
+        // Set the material color
+        // TODO: make a better interface to this
+        for (auto &p : currBatch->m_mtl->mutable_params() )
+        {
+            vec3f meshColor = hsv2rgb( vec3f( t * (180.0/M_PI), 1.0, 1.0 ));
+            if (p.m_name == "dbgColor")
+            {
+                p = vec4f( meshColor.r, meshColor.g, meshColor.b, 1.0 );
+                break;
+            }
+        }
         
         // Apply a texture
 //        uint32_t texGrass = pfLoadTexture( "grass.png" );

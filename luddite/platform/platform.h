@@ -60,6 +60,9 @@ uint32_t pfLoadTexture( const char *filename );
 //---[ Filesystem stuff ]------------------------------------
 // need to rethink this, maybe when i switch to SDL2 I can
 // just use their filesystem stuff.
+
+eastl::string pfGetResourcePath();
+
 eastl::string pfPathToResource( const char *resource );
 
 #endif

@@ -41,3 +41,29 @@ eastl::string pfPathToResource( const char *resource )
     
     return eastl::string( [resourceFile UTF8String]);
 }
+
+eastl::string pfGetResourcePath()
+{
+    eastl::string resourcePath;
+    CFBundleRef mainBundle = CFBundleGetMainBundle();
+    CFURLRef bundleURL = CFBundleCopyBundleURL(mainBundle);
+	CFStringRef str = CFURLCopyFileSystemPath( bundleURL, kCFURLPOSIXPathStyle );
+	CFRelease(bundleURL);
+	char path[PATH_MAX];
+	
+	CFStringGetCString( str, path, FILENAME_MAX, kCFStringEncodingASCII );
+	CFRelease(str);
+    
+    resourcePath = path;
+    
+    CFURLRef resourcesURL = CFBundleCopyResourcesDirectoryURL(mainBundle);
+	str = CFURLCopyFileSystemPath( resourcesURL, kCFURLPOSIXPathStyle );
+	CFRelease(resourcesURL);
+    
+    CFStringGetCString( str, path, FILENAME_MAX, kCFStringEncodingASCII );
+	CFRelease(str);
+    
+    resourcePath = resourcePath + "/" + path;
+
+    return resourcePath;
+}

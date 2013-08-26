@@ -1,3 +1,4 @@
+
 //
 //  material_db.h
 //  luddite_ios
@@ -26,6 +27,7 @@ class MaterialDB
 public:
     
     // Material "Database" path for glsw
+    void initShaderDB(); // use default resource path
     void initShaderDB( const char *resourcePath );
     
     // Adds a material definition file, eg "foo.material.xml"

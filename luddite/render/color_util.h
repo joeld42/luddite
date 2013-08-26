@@ -9,6 +9,7 @@
 #ifndef luddite_color_util_h
 #define luddite_color_util_h
 
-
+vec3f hsv2rgb( const vec3f &hsv );
+vec3f rgb2hsv( const vec3f &rgb );
 
 #endif

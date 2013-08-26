@@ -11,14 +11,20 @@
 
 #include <luddite/common/debug.h>
 
+#include <luddite/platform/platform.h>
 #include <luddite/render/material.h>
 #include <luddite/render/material_db.h>
 #include <luddite/render/render_device.h>
 #include <luddite/render/texture_info.h>
+
 #include "texture_info.h"
 
 using namespace luddite;
 
+void MaterialDB::initShaderDB( )
+{
+    initShaderDB( pfGetResourcePath().c_str() );
+}
 
 void MaterialDB::initShaderDB( const char *resourcePath )
 {
