@@ -106,59 +106,77 @@ GBuff *luddite::gbuff_cylinder( int nsegments, float radius,
     
     float halfhite = height/2.0;
     vec2f plast;
+    vec2f stlast;
     vec3f nlast;
+    float t0last;
     for (size_t i=0; i <= nsegments; i++)
     {
         size_t ndx = i*12;
-        float tval = ((float)i / (float)(nsegments-1)) * M_PI * 2.0;
+        float tval0 = ((float)i / (float)(nsegments-1)) * M_PI;
+        float tval = tval0 * 2.0;
         
         vec2f pcurr( cos( tval ) * radius, sin(tval)*radius );
+        vec2f stcurr( (pcurr.x*0.5)+0.5, (pcurr.y*0.5)+0.5 );
         vec3f ncurr( pcurr.x, 0.0, pcurr.y );
         ncurr.Normalize();
         if (i>0)
         {            
             // Top Cap
             cylVert[ndx+0].m_pos = vec3f( 0.0, halfhite, 0.0 );
+            cylVert[ndx+0].m_st = vec2f( 0.5, 0.5 );
             cylVert[ndx+0].m_nrm = vec3f( 0.0, 1.0, 0.0 );
 
             cylVert[ndx+1].m_pos = vec3f( plast.x, halfhite, plast.y );
+            cylVert[ndx+1].m_st = stlast;
             cylVert[ndx+1].m_nrm = vec3f( 0.0, 1.0, 0.0 );
 
             cylVert[ndx+2].m_pos = vec3f( pcurr.x, halfhite, pcurr.y );
+            cylVert[ndx+2].m_st = stcurr;
             cylVert[ndx+2].m_nrm = vec3f( 0.0, 1.0, 0.0 );
 
             // Bottom cap
             cylVert[ndx+3].m_pos = vec3f( 0.0, -halfhite, 0.0 );
+            cylVert[ndx+3].m_st = vec2f( 0.5, 0.5 );
             cylVert[ndx+3].m_nrm = vec3f( 0.0, -1.0, 0.0 );
             
             cylVert[ndx+4].m_pos = vec3f( plast.x, -halfhite, plast.y );
+            cylVert[ndx+4].m_st = stlast;
             cylVert[ndx+4].m_nrm = vec3f( 0.0, -1.0, 0.0 );
             
             cylVert[ndx+5].m_pos = vec3f( pcurr.x, -halfhite, pcurr.y );
-            cylVert[ndx+5].m_nrm = vec3f( 0.0, -1.0, 0.0 );   
+            cylVert[ndx+5].m_st = stcurr;
+            cylVert[ndx+5].m_nrm = vec3f( 0.0, -1.0, 0.0 );
             
             // Middle part (upper tri)
             cylVert[ndx+6].m_pos = vec3f( pcurr.x, halfhite, pcurr.y );
-            cylVert[ndx+6].m_nrm = ncurr;  
+            cylVert[ndx+6].m_st = vec2f( tval0, 0.0 );
+            cylVert[ndx+6].m_nrm = ncurr;
 
             cylVert[ndx+7].m_pos = vec3f( plast.x, halfhite, plast.y );
-            cylVert[ndx+7].m_nrm = nlast;  
+            cylVert[ndx+7].m_st = vec2f( t0last, 0.0 );
+            cylVert[ndx+7].m_nrm = nlast;
 
             cylVert[ndx+8].m_pos = vec3f( pcurr.x, -halfhite, pcurr.y );
-            cylVert[ndx+8].m_nrm = ncurr;  
+            cylVert[ndx+8].m_st = vec2f( tval0, 1.0 );
+            cylVert[ndx+8].m_nrm = ncurr;
 
             // Middle part (lower tri)
             cylVert[ndx+9].m_pos = vec3f( pcurr.x, -halfhite, pcurr.y );
-            cylVert[ndx+9].m_nrm = ncurr;  
+            cylVert[ndx+9].m_st = vec2f( tval0, 1.0 );
+            cylVert[ndx+9].m_nrm = ncurr;
             
             cylVert[ndx+10].m_pos = vec3f( plast.x, -halfhite, plast.y );
-            cylVert[ndx+10].m_nrm = nlast;              
+            cylVert[ndx+10].m_st = vec2f( t0last, 1.0 );
+            cylVert[ndx+10].m_nrm = nlast;
             
             cylVert[ndx+11].m_pos = vec3f( plast.x, halfhite, plast.y );
-            cylVert[ndx+11].m_nrm = nlast;              
+            cylVert[ndx+11].m_st = vec2f( t0last, 0.0 );
+            cylVert[ndx+11].m_nrm = nlast;
         }
         plast=pcurr;
         nlast=ncurr;
+        stlast=stcurr;
+        t0last=tval0;
     }
     
     return gbuff;

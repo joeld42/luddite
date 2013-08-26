@@ -15,7 +15,7 @@
     <Material name="mtl.three" shader="Sandbox.Plastic" parent="mtl.one">
         <param name="dbgColor" value="#ff00ff" />
 		<param name="Kd" value="#ff0000" />
-        <texture slot="0" filename="stripes.png" />
+        <texture slot="0" filename="grass.png" />
 	</Material>
 
     <Material name="mtl.Ground" shader="Sandbox.Plastic">
