@@ -19,9 +19,6 @@ void RenderDevice::addGBatch( luddite::GBatch *gbatch )
 // empties and draws the gbuff list
 void RenderDevice::renderFrame()
 {
-    // TODO
-    DBG::info( "In renderFrame, will draw %d gbatches\n", m_gbatches.size()  );
-    
     _prepareFrame();
     
 //    eastl::sort( m_gbuffs.begin(), m_gbuffs.end(), GBuff::cmp_ptr );

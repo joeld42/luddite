@@ -37,40 +37,20 @@ void TestApp::SceneMesh::init()
     luddite::RenderDeviceGL *renderDeviceGL = new luddite::RenderDeviceGL();
     m_renderDevice = renderDeviceGL;
 
-    // Init luddite material db
-    // FIXME: handle this in eneing
-//    NSBundle *bundle = [NSBundle mainBundle];
-//    NSString *resPath = [[bundle resourcePath] stringByAppendingString: @"/"];
-//    NSLog( @"Resource Path is %@\n", resPath );
-
-
     // Setup camera (TODO: do this differently)
-    //renderDeviceGL->matProjection.Identity();
-//    void glhFrustumf2(matrix4x4f &matrix,
-//                      float left, float right, float bottom, float top,
-//                      float znear, float zfar)
-
     glhPerspectivef2( renderDeviceGL->matProjection, 20.0, 800.0/600.0, 1.0, 500.0 );
-    
-//    renderDeviceGL->matProjection.Identity();
-
     matrix4x4f cameraXlate, cameraRot;
-
-//    renderDeviceGL->matBaseModelView.Identity();
     cameraXlate.Translate(0.0, -4, -15.0);
     cameraRot.RotateX( 15.0 * (M_PI/180.0) );
     renderDeviceGL->matBaseModelView = cameraXlate * cameraRot;
-
     
     // Initialize shader DB
     m_mtlDB = new luddite::MaterialDB( );
     m_mtlDB->initShaderDB();
 
-//    m_mtlDB->initShaderDB( "./gamedata/" );
-
     // Add material def files
     m_mtlDB->addMaterialDefs("Sandbox.material.xml" );
-
+   
     luddite::GBuff *gbuffCube = luddite::gbuff_cube( 0.7, vec3f( 0.0, 0.5, 0.0) );
     gbuff_setColorConstant( gbuffCube, vec4f( 1.0, 0.0, 1.0, 1.0) );
 
@@ -81,84 +61,30 @@ void TestApp::SceneMesh::init()
     m_worldRoot = new luddite::SceneNode( "worldRoot" );
 
     // Make a material
-//    luddite::Material *mtl = m_mtlDB->_materialWithKey( "Sandbox.Plastic" );
     luddite::Material *mtl  = m_mtlDB->getNamedMaterial( m_renderDevice, "mtl.one" );
-//    luddite::Material *mtl2 = m_mtlDB->getNamedMaterial( m_renderDevice, "mtl.two" );
     luddite::Material *mtl3 = m_mtlDB->getNamedMaterial( m_renderDevice, "mtl.three" );
-
-
-    printf("mtl %s tex[0] %p (%s)\n", mtl->m_materialName.c_str(),
-            mtl->m_tex[0],
-            mtl->m_tex[0]?mtl->m_tex[0]->m_filename.c_str():"none");
-
-//    printf("mtl2 %s tex[0] %p (%s)\n", mtl->m_materialName.c_str(),
-//            mtl2->m_tex[0],
-//            mtl2->m_tex[0]?mtl->m_tex[0]->m_filename.c_str():"none");
-//
-//    printf("mtl3 %s tex[0] %p (%s)\n", mtl3->m_materialName.c_str(),
-//            mtl3->m_tex[0],
-//            mtl3->m_tex[0]?mtl3->m_tex[0]->m_filename.c_str():"none");
-
-
-    // DBG
-//    Param pDbgColor("dbgColor");
-//    pDbgColor = vec4f( 1.0, 1.0, 0.0, 1.0 );
-//    mtl->setParam(pDbgColor);
-//
-
-
-    // Set color
-//    luddite::Param Kd("Kd");
-//    Kd = vec4f( 1.0f, 0.6f, 0.0f, 1.0 );
-//    mtl->setParam( Kd );
-//    printf("Set up param %s\n", Kd.m_name.c_str() );
-
-
-//    for (Param &p : mtl->m_params)
-//    {
-//        printf("Param '%s'\n", p.m_name.c_str() );
-//    }
     
     // empty node to spin the scene
     m_spinnyNode = new luddite::SceneNode( m_worldRoot );
 
-    // Load the monkey obj file in the center
-    //    NSString* filePath = [[NSBundle mainBundle] pathForResource:@"cube_mtl_test" ofType:@"obj"];
-    //    NSString* filePath = [[NSBundle mainBundle] pathForResource:@"cube_mtl_test_nrm" ofType:@"obj"];
-    //    NSString* filePath = [[NSBundle mainBundle] pathForResource:@"cube_mtl_test_nrm_st" ofType:@"obj"];
-    //    NSString* filePath = [[NSBundle mainBundle] pathForResource:@"cube_subd_nrm_st" ofType:@"obj"];
-    eastl::string filePath = pfPathToResource( "suzanne.obj" );
-    //    NSLog( @"Loading OBJ from file path %@", filePath );
-       
-    m_monkeyNode = scene_objfile( filePath.c_str(), m_renderDevice, m_mtlDB );
-    
+    // Load the monkey obj file in the center. This obj has 3 different materials,
+    // each will be a separate gbatch
+    m_monkeyNode = scene_objfile_named( "suzanne.obj", m_renderDevice, m_mtlDB );
     if (m_monkeyNode)
     {
-        //        // DBG: hardcode the mtl to all the obj file's batches
-        //        for (GBatchList::const_iterator bi = objNode->batches().begin();
-        //             bi != objNode->batches().end(); ++bi )
-        //        {
-        //            (*bi)->m_mtl = mtl;
-        //        }
-        
         m_monkeyNode->m_rot.SetAngleAxis( 20.0 * (M_PI/180.0f), vec3f( 1.0f, 0.0, 0.0 ));
         m_spinnyNode->addChild( m_monkeyNode );
     }
-    
-
-    
-    // make a ring of cube around the monkey
+        
+    // instance a ring of shapes around the monkey
     bool cube = true;
     for (float t=0.0; t <= 2.0*M_PI; t += 20.0 * (M_PI/180.0 ) )
     {
-        vec3f cubePos = vec3f( cos(t)*3.0, 0.3, sin(t)*3.0 );
-        luddite::SceneNode *meshNode;
-        
-        meshNode = new luddite::SceneNode( m_spinnyNode );
-        meshNode->m_pos = cubePos;
-        
-//        m_meshNode->m_pos = vec3f( 0.0, 0.0, 0.0 );
-//        NSLog( @"cube pos is %f %f %f", cubePos.x, cubePos.y, cubePos.z );
+        // Make a node for this shape
+        vec3f shapePos = vec3f( cos(t)*3.0, 0.3, sin(t)*3.0 );
+        luddite::SceneNode *shapeNode;
+        shapeNode = new luddite::SceneNode( m_spinnyNode );
+        shapeNode->m_pos = shapePos;
 
         // bind gbuff to a new gbatch, attach that to scene node
         luddite::GBatch *currBatch = new luddite::GBatch();
@@ -170,75 +96,29 @@ void TestApp::SceneMesh::init()
         }
         else
         {
-            meshNode->m_pos.y = sin(t*3) * 0.25;
+            // alternate shapes are a cylinder in a wavy pattern
+            shapeNode->m_pos.y = sin(t*3) * 0.25;
             currBatch->m_gbuff = gbuffCyl;
             currBatch->m_mtl = new luddite::Material( *mtl3 );
         }
         cube = !cube;
         
         // Set the material color
-        // TODO: make a better interface to this
-        for (auto &p : currBatch->m_mtl->mutable_params() )
-        {
-            vec3f meshColor = hsv2rgb( vec3f( t * (180.0/M_PI), 1.0, 1.0 ));
-            if (p.m_name == "dbgColor")
-            {
-                p = vec4f( meshColor.r, meshColor.g, meshColor.b, 1.0 );
-                break;
-            }
-        }
+        vec3f meshColor = hsv2rgb( vec3f( t * (180.0/M_PI), 1.0, 1.0 ));
+        currBatch->m_mtl->param( "dbgColor") = vec4f( meshColor.r, meshColor.g, meshColor.b, 1.0 );
         
-        // Apply a texture
-//        uint32_t texGrass = pfLoadTexture( "grass.png" );
-
-        meshNode->addGBatch( currBatch );
-        
-        m_meshNodes.push_back(meshNode);
-        //DBG
-        //break;
+        // Add this as a batch to the node
+        shapeNode->addGBatch( currBatch );
+        m_meshNodes.push_back(shapeNode);
     }
 
 
-    // for now, just stuff the texture into the batches
-//    const eastl::list<GBatch*> &terrBatches = terrainNode->batches();
-//    for (auto bi=terrBatches.begin(); bi != terrBatches.end(); ++bi )
-//    {
-//        GBatch *batch = (*bi);
-//        batch->m_tex[0] = texGrass;
-//    }
-//    m_worldRoot->addChild( terrainNode );
-
-// ----^^^
-
-    // fixme.. this is temporary, shouldn't need to do this
+    // FIXME.. this is temporary, shouldn't need to do this (and we shouldn't
+    // upload all the shaders, only used ones)
     m_mtlDB->useAllShaders( m_renderDevice );
 
-
-    // Create scene
+    // Finally, create scene for our node graph
     m_scene = new luddite::Scene( m_worldRoot );
-
-    // Set up apple example stuff
-//    [self loadShaders];
-//
-//    self.effect = [[GLKBaseEffect alloc] init];
-//    self.effect.light0.enabled = GL_TRUE;
-//    self.effect.light0.diffuseColor = GLKVector4Make(1.0f, 0.4f, 0.4f, 1.0f);
-//    glEnable(GL_DEPTH_TEST);
-//
-//    glGenVertexArraysOES(1, &_vertexArray);
-//    glBindVertexArrayOES(_vertexArray);
-//
-//    glGenBuffers(1, &_vertexBuffer);
-//    glBindBuffer(GL_ARRAY_BUFFER, _vertexBuffer);
-//    glBufferData(GL_ARRAY_BUFFER, sizeof(gCubeVertexData), gCubeVertexData, GL_STATIC_DRAW);
-//
-//    glEnableVertexAttribArray(GLKVertexAttribPosition);
-//    glVertexAttribPointer(GLKVertexAttribPosition, 3, GL_FLOAT, GL_FALSE, 24, BUFFER_OFFSET(0));
-//    glEnableVertexAttribArray(GLKVertexAttribNormal);
-//    glVertexAttribPointer(GLKVertexAttribNormal, 3, GL_FLOAT, GL_FALSE, 24, BUFFER_OFFSET(12));
-//
-//    glBindVertexArrayOES(0);
-
 }
 
 void TestApp::SceneMesh::updateFixed( float dt )
@@ -255,32 +135,20 @@ void TestApp::SceneMesh::updateFixed( float dt )
     {
         mesh->m_rot *= qrot;
     }
-    
-//    printf("SceneMesh::updateFixed, rot is %f %f %f %f",
-//           m_meshNode->m_rot.x,
-//           m_meshNode->m_rot.y,
-//           m_meshNode->m_rot.z,
-//           m_meshNode->m_rot.w );
 }
+
 void TestApp::SceneMesh::updateDynamic( float dt )
 {    
 }
 
 void TestApp::SceneMesh::render()
 {
-    static long frameCount;
-    printf("in SceneMesh::render [%ld]\n", frameCount++ );
+//    static long frameCount;
+//    printf("in SceneMesh::render [%ld]\n", frameCount++ );
     glClearColor( 0.2f, 0.2f, 0.25f, 1.0f );
     glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
-
-//    glUseProgram(_program);
-
-//    glUniformMatrix3fv(uniforms[UNIFORM_NORMAL_MATRIX], 1, 0, _normalMatrix.m);
-
-    // HACK
-//    _renderDevice->uparam_modelViewProjection = uniforms[UNIFORM_MODELVIEWPROJECTION_MATRIX];
-//    _renderDevice->uparam_normalMat = uniforms[UNIFORM_NORMAL_MATRIX];
-
+    
+    // Eval and render the scene
     m_scene->eval( m_renderDevice );
     m_renderDevice->renderFrame();
 

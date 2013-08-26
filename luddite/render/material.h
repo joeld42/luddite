@@ -41,6 +41,10 @@ public:
     const eastl::vector<Param> &params();
     eastl::vector<Param> &mutable_params();
 
+    // Modify an existing param.
+    // not particularly fast, need a better way to modify
+    // params per-frame
+    luddite::Param &param( const eastl::string &name );
     
 //protected:    
     eastl::vector<Param> m_params;

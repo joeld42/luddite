@@ -49,8 +49,21 @@ void Material::setParam( const Param &p )
     m_params.push_back( p );
 }
 
-
 eastl::string const & Material::shaderKey()
 {
     return m_shader->shaderKey();
+}
+
+luddite::Param &Material::param( const eastl::string &targetName )
+{
+    for (auto &p : m_params )
+    {
+        if (p.m_name == targetName )
+        {
+            return p;
+        }
+    }
+    
+    Assert( false, "Tried to modify a non-existant param");
+    return m_params[0]; // keep compiler happy
 }

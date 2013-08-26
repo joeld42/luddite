@@ -109,7 +109,6 @@ void RenderDeviceGL::_drawGBatch( luddite::GBatch *gbatch )
         // use gbatch material
         GLuint progGBatch = gbatch->m_mtl->m_shader->shaderProgram();
         glUseProgram(progGBatch );
-        printf("Gbatch material %d\n", progGBatch);
         
         GLint mvp = glGetUniformLocation( progGBatch, "matrixPMV");
         glUniformMatrix4fv( mvp, 1, 0, mresult.m16 );
@@ -149,7 +148,6 @@ void RenderDeviceGL::_drawGBatch( luddite::GBatch *gbatch )
                 // find it
                 p.m_glParam = glGetUniformLocation( gbatch->m_mtl->m_shader->shaderProgram(),
                                                      p.m_name.c_str() );
-                printf("Got param %s (loc: %d)\n", p.m_name.c_str(), p.m_glParam );
             }
 
             _param( p );
@@ -197,7 +195,6 @@ void RenderDeviceGL::_drawGBatch( luddite::GBatch *gbatch )
                           sizeof(DrawVert), (void*)offset_s( DrawVert, m_color) );
     
     // Draw it!
-    printf("glDrawArrays sz %d\n", gbuff->m_vertData.size() );
     glDrawArrays(GL_TRIANGLES, 0, gbuff->m_vertData.size() );
 
 }

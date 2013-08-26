@@ -58,6 +58,12 @@ static _MtlGroup *findOrCreateMtl( eastl::vector<_MtlGroup*> &mtlGroups,
     return mtl;    
 }
 
+SceneNode *luddite::scene_objfile_named(char const *filename, RenderDevice *renderDevice, MaterialDB *mtlDB)
+{
+    eastl::string filePath = pfPathToResource( "suzanne.obj" );
+    return scene_objfile( filePath.c_str(), renderDevice, mtlDB );
+}
+
 // The last obj loader I will ever write. I hope. But probably not.
 SceneNode *luddite::scene_objfile(char const *filename, RenderDevice *renderDevice, MaterialDB *mtlDB)
 {
