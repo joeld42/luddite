@@ -17,8 +17,10 @@
 namespace luddite
 {
 
-// should make it load from a buffer not a file
-    SceneNode *scene_objfile(char const *filename, RenderDevice *renderDevice, MaterialDB *mtlDB);
+// TODO: should make it load from a buffer not just a file
+SceneNode *scene_objfile(char const *filename,
+                         RenderDevice *renderDevice,
+                         MaterialDB *mtlDB);
     
 } // namespace luddite
 

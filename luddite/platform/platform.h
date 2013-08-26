@@ -4,6 +4,9 @@
 #include <stdarg.h>
 #include <stdint.h>
 
+#include <EASTL/string.h>
+
+
 //---[ Assert ]------------------------------------
 
 #ifdef WIN32
@@ -54,5 +57,9 @@ void pfVMessage( int message_level, const char *fmt, va_list args);
 // Returns 0 on error
 uint32_t pfLoadTexture( const char *filename );
 
+//---[ Filesystem stuff ]------------------------------------
+// need to rethink this, maybe when i switch to SDL2 I can
+// just use their filesystem stuff.
+eastl::string pfPathToResource( const char *resource );
 
 #endif

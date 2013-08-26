@@ -14,6 +14,8 @@
 
 #include <luddite/common/useful.h>
 #include <luddite/render/scene.h>
+#include <luddite/render/scene_objfile.h>
+#include <luddite/platform/platform.h>
 #include <luddite/render/render_device_gl.h>
 #include <luddite/render/material_db.h>
 #include <luddite/render/gbuff_prim.h>
@@ -72,8 +74,14 @@ void TestApp::SceneMesh::init()
     
 //    renderDeviceGL->matProjection.Identity();
 
-    renderDeviceGL->matBaseModelView.Identity();
-    renderDeviceGL->matBaseModelView.Translate(0.0, 0.25, -5.0);
+    matrix4x4f cameraXlate, cameraRot;
+
+//    renderDeviceGL->matBaseModelView.Identity();
+    cameraXlate.Translate(0.0, -4, -15.0);
+    cameraRot.RotateX( 15.0 * (M_PI/180.0) );
+    renderDeviceGL->matBaseModelView = cameraXlate * cameraRot;
+
+
     
     // Initialize shader DB
     printf( "Bundle path is %s\n\n", resourcePath.c_str() );
@@ -85,7 +93,7 @@ void TestApp::SceneMesh::init()
     // Add material def files
     m_mtlDB->addMaterialDefs("Sandbox.material.xml" );
 
-    luddite::GBuff *gbuffCube = luddite::gbuff_cube( 0.3, vec3f( 0.0, 0.5, 0.0) );
+    luddite::GBuff *gbuffCube = luddite::gbuff_cube( 0.7, vec3f( 0.0, 0.5, 0.0) );
     gbuff_setColorConstant( gbuffCube, vec4f( 1.0, 0.0, 1.0, 1.0) );
 
     luddite::GBuff *gbuffCyl = luddite::gbuff_cylinder();
@@ -98,7 +106,7 @@ void TestApp::SceneMesh::init()
 //    luddite::Material *mtl = m_mtlDB->_materialWithKey( "Sandbox.Plastic" );
     luddite::Material *mtl  = m_mtlDB->getNamedMaterial( m_renderDevice, "mtl.one" );
 //    luddite::Material *mtl2 = m_mtlDB->getNamedMaterial( m_renderDevice, "mtl.two" );
-//    luddite::Material *mtl3 = m_mtlDB->getNamedMaterial( m_renderDevice, "mtl.three" );
+    luddite::Material *mtl3 = m_mtlDB->getNamedMaterial( m_renderDevice, "mtl.three" );
 
 
     printf("mtl %s tex[0] %p (%s)\n", mtl->m_materialName.c_str(),
@@ -134,51 +142,54 @@ void TestApp::SceneMesh::init()
 //    }
 
     // make a ring of cube around the world root
-//    bool cube = true;
+    bool cube = true;
     for (float t=0.0; t <= 2.0*M_PI; t += 20.0 * (M_PI/180.0 ) )
     {
-        vec3f cubePos = vec3f( cos(t)*2.0, 0.3, sin(t)*2.0 );
-        m_meshNode = new luddite::SceneNode( m_worldRoot );
-        m_meshNode->m_pos = cubePos;
+        vec3f cubePos = vec3f( cos(t)*3.0, 0.3, sin(t)*3.0 );
+        luddite::SceneNode *meshNode;
         
-        m_meshNode->m_pos = vec3f( 0.0, 0.0, 0.0 );
+        meshNode = new luddite::SceneNode( m_worldRoot );
+        meshNode->m_pos = cubePos;
+        
+//        m_meshNode->m_pos = vec3f( 0.0, 0.0, 0.0 );
 //        NSLog( @"cube pos is %f %f %f", cubePos.x, cubePos.y, cubePos.z );
 
         // bind gbuff to a new gbatch, attach that to scene node
         luddite::GBatch *currBatch = new luddite::GBatch();
         currBatch->m_mtl = NULL;
-//        if (cube)
-//        {
+        if (cube)
+        {
             currBatch->m_gbuff = gbuffCube;
             currBatch->m_mtl = mtl;
-//        }
-//        else
-//        {
-//            cubeNode->m_pos.y = sin(t*3) * 0.25;
-//            currBatch->m_gbuff = gbuffCyl;
-//            currBatch->m_mtl = mtl3;
-//        }
-//        cube = !cube;
+        }
+        else
+        {
+            meshNode->m_pos.y = sin(t*3) * 0.25;
+            currBatch->m_gbuff = gbuffCyl;
+            currBatch->m_mtl = mtl3;
+        }
+        cube = !cube;
         
         // Apply a texture
 //        uint32_t texGrass = pfLoadTexture( "grass.png" );
 
-        m_meshNode->addGBatch( currBatch );
+        meshNode->addGBatch( currBatch );
         
+        m_meshNodes.push_back(meshNode);
         //DBG
-        break;
+        //break;
     }
 
-#if 0
     // Load the obj file in the center
 //    NSString* filePath = [[NSBundle mainBundle] pathForResource:@"cube_mtl_test" ofType:@"obj"];
 //    NSString* filePath = [[NSBundle mainBundle] pathForResource:@"cube_mtl_test_nrm" ofType:@"obj"];
 //    NSString* filePath = [[NSBundle mainBundle] pathForResource:@"cube_mtl_test_nrm_st" ofType:@"obj"];
 //    NSString* filePath = [[NSBundle mainBundle] pathForResource:@"cube_subd_nrm_st" ofType:@"obj"];
-    NSString* filePath = [[NSBundle mainBundle] pathForResource:@"suzanne" ofType:@"obj"];
-    NSLog( @"Loading OBJ from file path %@", filePath );
+    eastl::string filePath = pfPathToResource( "suzanne.obj" );
+//    NSLog( @"Loading OBJ from file path %@", filePath );
 
-    luddite::SceneNode *objNode = scene_objfile([filePath UTF8String], _renderDevice, _mtlDB );
+
+    luddite::SceneNode *objNode = scene_objfile( filePath.c_str(), m_renderDevice, m_mtlDB );
 
     if (objNode)
     {
@@ -189,19 +200,10 @@ void TestApp::SceneMesh::init()
 //            (*bi)->m_mtl = mtl;
 //        }
 
-
-        worldRoot->addChild( objNode );
+        objNode->m_rot.SetAngleAxis( 20.0 * (M_PI/180.0f), vec3f( 1.0f, 0.0, 0.0 ));
+        m_worldRoot->addChild( objNode );
     }
 
-    // Load the grass texture
-//    uint32_t texGrass = pfLoadTexture( "grass.png" );
-//    NSLog( @"loaded grass texture, result is %d", texGrass );
-
-    // Load the terrain file
-    NSString* terrainPath = [[NSBundle mainBundle] pathForResource:@"grid10x10" ofType:@"obj"];
-    NSLog( @"Loading OBJ from file path %@", terrainPath );
-
-    luddite::SceneNode *terrainNode = scene_objfile([terrainPath UTF8String], _renderDevice, _mtlDB );
 
     // for now, just stuff the texture into the batches
 //    const eastl::list<GBatch*> &terrBatches = terrainNode->batches();
@@ -210,9 +212,9 @@ void TestApp::SceneMesh::init()
 //        GBatch *batch = (*bi);
 //        batch->m_tex[0] = texGrass;
 //    }
-    worldRoot->addChild( terrainNode );
+//    m_worldRoot->addChild( terrainNode );
 
-#endif
+// ----^^^
 
     // fixme.. this is temporary, shouldn't need to do this
     m_mtlDB->useAllShaders( m_renderDevice );
@@ -249,7 +251,11 @@ void TestApp::SceneMesh::updateFixed( float dt )
 {
     quat4f qrot;
     qrot.SetEuler( vec3f(0.0, 0.3f*dt, 0.0), prmath::EULER_XYZ );
-    m_meshNode->m_rot *= qrot;
+    
+    for (auto mesh : m_meshNodes)
+    {
+        mesh->m_rot *= qrot;
+    }
     
 //    printf("SceneMesh::updateFixed, rot is %f %f %f %f",
 //           m_meshNode->m_rot.x,

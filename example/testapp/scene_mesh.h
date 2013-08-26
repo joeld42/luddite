@@ -29,7 +29,7 @@ protected:
     luddite::Scene *m_scene;
     
     luddite::SceneNode *m_worldRoot;
-    luddite::SceneNode *m_meshNode;
+    eastl::vector<luddite::SceneNode*> m_meshNodes;
 };
 
 } // namespace TestApp

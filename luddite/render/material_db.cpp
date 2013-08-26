@@ -232,6 +232,8 @@ Material *MaterialDB::getNamedMaterial( RenderDevice *device, const eastl::strin
 {
     // Lookup the material
     Material *mtl = _lookupMaterial( mtlName );
+    
+    DBG::info( "getNamedMaterial, lookup material '%s'\n", mtlName.c_str() );
 
     if (mtl) {
         mtl->m_shader->load( device );

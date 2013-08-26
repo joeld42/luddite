@@ -27,6 +27,17 @@ uint32_t pfLoadTexture( const char *filename )
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S,  GL_REPEAT );
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T,  GL_REPEAT );
     
-    return texture.name;
+    return texture.name;  
+}
+
+
+eastl::string pfPathToResource( const char *resource )
+{
+    NSString *fnstring = [NSString stringWithUTF8String:resource ];
+    NSString *fnExt = [fnstring pathExtension];
+    NSString *fnFile = [fnstring stringByDeletingPathExtension];
     
+    NSString *resourceFile = [[NSBundle mainBundle] pathForResource: fnFile ofType:fnExt ];
+    
+    return eastl::string( [resourceFile UTF8String]);
 }
