@@ -60,7 +60,7 @@ static _MtlGroup *findOrCreateMtl( eastl::vector<_MtlGroup*> &mtlGroups,
 
 SceneNode *luddite::scene_objfile_named(char const *filename, RenderDevice *renderDevice, MaterialDB *mtlDB)
 {
-    eastl::string filePath = pfPathToResource( "suzanne.obj" );
+    eastl::string filePath = pfPathToResource( filename );
     return scene_objfile( filePath.c_str(), renderDevice, mtlDB );
 }
 

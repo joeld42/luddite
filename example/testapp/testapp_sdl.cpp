@@ -33,7 +33,7 @@ int main( int argc, char *argv[] )
 	}
     
 	// crappy arg parse
-    const char *sceneName = "mesh";
+    const char *sceneName = "collect";
 	Uint32 mode_flags = SDL_OPENGL;
 	for (int i=1; i < argc; i++)
 	{

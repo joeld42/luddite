@@ -9,9 +9,6 @@
 #include <GL/gl.h>
 #endif
 
-// FIXME: for bundle path
-#include <CoreFoundation/CoreFoundation.h>
-
 #include <luddite/common/useful.h>
 #include <luddite/render/scene.h>
 #include <luddite/render/scene_objfile.h>

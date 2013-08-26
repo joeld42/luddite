@@ -12,6 +12,11 @@
 #include <iostream>
 #include "test_scene.h"
 
+#include <luddite/render/render_device.h>
+#include <luddite/render/material_db.h>
+#include <luddite/render/scene.h>
+
+
 namespace TestApp
 {
 
@@ -26,7 +31,14 @@ public:
 //    virtual void updateDynamic( float dt );
     virtual void render();
 
+protected:
+    luddite::RenderDevice *m_renderDevice;
+    luddite::MaterialDB *m_mtlDB;
+    luddite::Scene *m_scene;
 
+    luddite::SceneNode *m_worldRoot;
+    luddite::SceneNode *m_groundPlane;
+    luddite::SceneNode *m_player;
 };
 
 }
