@@ -110,7 +110,7 @@ matrix4x4f SceneNode::localXForm()
 //    DBG::info( "[%s] m_rot is %f %f %f %f\n", m_name.c_str(), m_rot.x, m_rot.y, m_rot.z, m_rot.w );
     
     rot = m_rot; // quat to matrix
-    xform = xform * rot;
+    xform = rot * xform;
     
     return xform;
 }

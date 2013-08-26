@@ -29,6 +29,8 @@ protected:
     luddite::Scene *m_scene;
     
     luddite::SceneNode *m_worldRoot;
+    luddite::SceneNode *m_spinnyNode;
+    luddite::SceneNode *m_monkeyNode;
     eastl::vector<luddite::SceneNode*> m_meshNodes;
 };
 

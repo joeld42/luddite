@@ -36,7 +36,6 @@ void TestApp::SceneMesh::init()
     luddite::RenderDeviceGL *renderDeviceGL = new luddite::RenderDeviceGL();
     m_renderDevice = renderDeviceGL;
 
-
     // Init luddite material db
     // FIXME: handle this in eneing
 //    NSBundle *bundle = [NSBundle mainBundle];
@@ -80,7 +79,6 @@ void TestApp::SceneMesh::init()
     cameraXlate.Translate(0.0, -4, -15.0);
     cameraRot.RotateX( 15.0 * (M_PI/180.0) );
     renderDeviceGL->matBaseModelView = cameraXlate * cameraRot;
-
 
     
     // Initialize shader DB
@@ -140,15 +138,43 @@ void TestApp::SceneMesh::init()
 //    {
 //        printf("Param '%s'\n", p.m_name.c_str() );
 //    }
+    
+    // empty node to spin the scene
+    m_spinnyNode = new luddite::SceneNode( m_worldRoot );
 
-    // make a ring of cube around the world root
+    // Load the monkey obj file in the center
+    //    NSString* filePath = [[NSBundle mainBundle] pathForResource:@"cube_mtl_test" ofType:@"obj"];
+    //    NSString* filePath = [[NSBundle mainBundle] pathForResource:@"cube_mtl_test_nrm" ofType:@"obj"];
+    //    NSString* filePath = [[NSBundle mainBundle] pathForResource:@"cube_mtl_test_nrm_st" ofType:@"obj"];
+    //    NSString* filePath = [[NSBundle mainBundle] pathForResource:@"cube_subd_nrm_st" ofType:@"obj"];
+    eastl::string filePath = pfPathToResource( "suzanne.obj" );
+    //    NSLog( @"Loading OBJ from file path %@", filePath );
+       
+    m_monkeyNode = scene_objfile( filePath.c_str(), m_renderDevice, m_mtlDB );
+    
+    if (m_monkeyNode)
+    {
+        //        // DBG: hardcode the mtl to all the obj file's batches
+        //        for (GBatchList::const_iterator bi = objNode->batches().begin();
+        //             bi != objNode->batches().end(); ++bi )
+        //        {
+        //            (*bi)->m_mtl = mtl;
+        //        }
+        
+        m_monkeyNode->m_rot.SetAngleAxis( 20.0 * (M_PI/180.0f), vec3f( 1.0f, 0.0, 0.0 ));
+        m_spinnyNode->addChild( m_monkeyNode );
+    }
+    
+
+    
+    // make a ring of cube around the monkey
     bool cube = true;
     for (float t=0.0; t <= 2.0*M_PI; t += 20.0 * (M_PI/180.0 ) )
     {
         vec3f cubePos = vec3f( cos(t)*3.0, 0.3, sin(t)*3.0 );
         luddite::SceneNode *meshNode;
         
-        meshNode = new luddite::SceneNode( m_worldRoot );
+        meshNode = new luddite::SceneNode( m_spinnyNode );
         meshNode->m_pos = cubePos;
         
 //        m_meshNode->m_pos = vec3f( 0.0, 0.0, 0.0 );
@@ -178,30 +204,6 @@ void TestApp::SceneMesh::init()
         m_meshNodes.push_back(meshNode);
         //DBG
         //break;
-    }
-
-    // Load the obj file in the center
-//    NSString* filePath = [[NSBundle mainBundle] pathForResource:@"cube_mtl_test" ofType:@"obj"];
-//    NSString* filePath = [[NSBundle mainBundle] pathForResource:@"cube_mtl_test_nrm" ofType:@"obj"];
-//    NSString* filePath = [[NSBundle mainBundle] pathForResource:@"cube_mtl_test_nrm_st" ofType:@"obj"];
-//    NSString* filePath = [[NSBundle mainBundle] pathForResource:@"cube_subd_nrm_st" ofType:@"obj"];
-    eastl::string filePath = pfPathToResource( "suzanne.obj" );
-//    NSLog( @"Loading OBJ from file path %@", filePath );
-
-
-    luddite::SceneNode *objNode = scene_objfile( filePath.c_str(), m_renderDevice, m_mtlDB );
-
-    if (objNode)
-    {
-//        // DBG: hardcode the mtl to all the obj file's batches
-//        for (GBatchList::const_iterator bi = objNode->batches().begin();
-//             bi != objNode->batches().end(); ++bi )
-//        {
-//            (*bi)->m_mtl = mtl;
-//        }
-
-        objNode->m_rot.SetAngleAxis( 20.0 * (M_PI/180.0f), vec3f( 1.0f, 0.0, 0.0 ));
-        m_worldRoot->addChild( objNode );
     }
 
 
@@ -250,8 +252,13 @@ void TestApp::SceneMesh::init()
 void TestApp::SceneMesh::updateFixed( float dt )
 {
     quat4f qrot;
-    qrot.SetEuler( vec3f(0.0, 0.3f*dt, 0.0), prmath::EULER_XYZ );
+    qrot.SetEuler( vec3f(0.0, 0.2f*dt, 0.0), prmath::EULER_XYZ );
+
+    // update the spinny node
+    m_spinnyNode->m_rot *= qrot;
     
+    // spin the meshes in the opposite direction
+    qrot.SetEuler( vec3f(0.0, -0.3f*dt, 0.0), prmath::EULER_XYZ );
     for (auto mesh : m_meshNodes)
     {
         mesh->m_rot *= qrot;

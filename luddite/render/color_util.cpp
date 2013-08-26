@@ -71,7 +71,7 @@ vec3f hsv2rgb( const vec3f &hsv )
             case 3:  rgb.x = p;  rgb.y = q;  rgb.z = v;  break; /* Between cyan and blue */
             case 4:  rgb.x = t;  rgb.y = p;  rgb.z = v;  break; /* Between blue and magenta */
             case 5:  rgb.x = v;  rgb.y = p;  rgb.z = q;  break; /* Between magenta and red */
-            default: assert(!"Cannot happen"); rgb.x = rgb.y = rgb.z = 0; break;
+            default: Assert( false, "Bad hsv value"); rgb.x = rgb.y = rgb.z = 0; break;
         }
     } 
     

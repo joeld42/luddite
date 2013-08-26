@@ -42,7 +42,7 @@ void Scene::_evalNode( RenderDevice *device, SceneNode *node, matrix4x4f currXfo
 {
     // update the transform for this batch
     matrix4x4f nodeXform = node->localXForm();
-    nodeXform = currXform * nodeXform;
+    nodeXform = nodeXform * currXform;
     
     // Add the gbatch for this node
     // For now just add everything, need to be smarter about traversal
