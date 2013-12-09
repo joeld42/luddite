@@ -39,6 +39,8 @@ protected:
     luddite::SceneNode *m_worldRoot;
     luddite::SceneNode *m_groundPlane;
     luddite::SceneNode *m_player;
+    
+    eastl::vector<luddite::SceneNode*> m_trees;
 };
 
 }

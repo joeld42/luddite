@@ -65,9 +65,33 @@ void TestApp::SceneCollect::init()
     m_player = scene_objfile_named( "player.obj", m_renderDevice, m_mtlDB );
     m_worldRoot->addChild( m_player );
 
+    // Load the trees
+    luddite::SceneNode *tree = scene_objfile_named("tree_fir.obj", m_renderDevice, m_mtlDB );
+    tree->m_pos = vec3f( 2.0, 0.0, 1.5 );
+    m_worldRoot->addChild( tree );
     
+    m_trees.push_back(tree);
     
-    
+    // Add tree instances
+    // TODO: wrap this with convience funcs to make instances
+    for (int i=0; i <20; i++)
+    {
+        luddite::SceneNode *treeInst = new luddite::SceneNode();
+        luddite::GBatch *treeBatch = new luddite::GBatch();
+        treeBatch->m_gbuff = tree->batches().front()->m_gbuff;
+        treeBatch->m_mtl = tree->batches().front()->m_mtl;
+        treeInst->addGBatch(treeBatch);
+        
+        // Generate a random position for the tree, outside the center of the
+        // map (TODO: also don't overlap other trees)
+        do {
+            vec3f treePos = vec3f( randUniform(-10.0, 10.0), 0.0, randUniform(-10.0, 10.0) );
+            treeInst->m_pos = treePos;
+        } while (prmath::LengthSquared(treeInst->m_pos) < 1.0 );
+
+        m_worldRoot->addChild( treeInst );
+        m_trees.push_back( treeInst );
+    }
     
     // FIXME.. this is temporary, shouldn't need to do this (and we shouldn't
     // upload all the shaders, only used ones)
