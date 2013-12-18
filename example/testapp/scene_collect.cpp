@@ -105,7 +105,7 @@ void TestApp::SceneCollect::init()
 
 void TestApp::SceneCollect::render()
 {
-    glClearColor( 0.46f, 0.94f, 1.0f, 1.0f );
+    glClearColor( 0.64f, 0.79f, 0.67f, 1.0f );
     glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
     
     // Eval and render the scene

@@ -77,8 +77,8 @@ void main()
 	gl_FragColor.rgb = (diffuseColor * dif0.rgb )+specColor;
 	gl_FragColor.a = dif0.a;
     
-    gl_FragColor = (texture2D( sampler_dif0, st ) + vec4( dbgColor.x, dbgColor.y, dbgColor.z, 1.0 )) * 0.5;
-//    gl_FragColor = texture2D( sampler_dif0, st );
+    //gl_FragColor = (texture2D( sampler_dif0, st ) + vec4( dbgColor.x, dbgColor.y, dbgColor.z, 1.0 )) * 0.5;
+    gl_FragColor = texture2D( sampler_dif0, st );
 
 //    gl_FragColor = colorVarying;
 //    gl_FragColor = vec4(st.x, 0.0, st.y, 1.0 );
