@@ -30,6 +30,9 @@ public:
     SceneNode( SceneNode *parent=NULL );
     SceneNode( const eastl::string &name, SceneNode *parent=NULL );
     
+    // Returns an instance of this node
+    SceneNode *makeInstance() const;
+    
     // ----------------------------------------
     //  Identification
     // ----------------------------------------

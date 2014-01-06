@@ -44,10 +44,10 @@
 //    }
 //
 
+#include <luddite/common/useful.h>
+
 namespace luddite
 {
-
-typedef double TimeInterval;
     
 // approx 30 fps sim steps
 #define kDefaultStepTime (33.0)

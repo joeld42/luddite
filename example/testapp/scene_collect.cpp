@@ -73,14 +73,9 @@ void TestApp::SceneCollect::init()
     m_trees.push_back(tree);
     
     // Add tree instances
-    // TODO: wrap this with convience funcs to make instances
     for (int i=0; i <20; i++)
     {
-        luddite::SceneNode *treeInst = new luddite::SceneNode();
-        luddite::GBatch *treeBatch = new luddite::GBatch();
-        treeBatch->m_gbuff = tree->batches().front()->m_gbuff;
-        treeBatch->m_mtl = tree->batches().front()->m_mtl;
-        treeInst->addGBatch(treeBatch);
+        luddite::SceneNode *treeInst = tree->makeInstance();
         
         // Generate a random position for the tree, outside the center of the
         // map (TODO: also don't overlap other trees)

@@ -7,7 +7,7 @@
 //
 
 #ifdef __APPLE__
-#include <OpenGL/gl.h>
+#include <OpenGL/ES2/gl.h>
 #else
 #include <GL/gl.h>
 #endif

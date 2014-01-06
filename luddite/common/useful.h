@@ -4,6 +4,12 @@
 #include <prmath/prmath.hpp>
 
 // ==============================
+//  Common Types
+// ==============================
+
+typedef double TimeInterval;
+
+// ==============================
 //  Random numbers
 // ==============================
 

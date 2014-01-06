@@ -1,7 +1,7 @@
 
 // Basic allocator for EASTL.
-#include <EASTL/hash_map.h>
-#include <EASTL/string.h>
+#include <eastl/hash_map.h>
+#include <eastl/string.h>
 
 // EASTL expects us to define these, see allocator.h line 194
 void* operator new[](size_t size, const char* pName, int flags,

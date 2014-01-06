@@ -44,6 +44,20 @@ SceneNode::SceneNode( const eastl::string &name,
     }
 }
 
+SceneNode *SceneNode::makeInstance() const
+{
+    luddite::SceneNode *nodeInst = new luddite::SceneNode();
+    for (auto bi = m_shapes.begin(); bi != m_shapes.end(); bi++)
+    {
+        luddite::GBatch *nodeBatch = new luddite::GBatch();
+        nodeBatch->m_gbuff = (*bi)->m_gbuff;
+        nodeBatch->m_mtl = (*bi)->m_mtl;
+        nodeInst->addGBatch( nodeBatch );
+    }
+
+    return nodeInst;
+}
+
 const eastl::string &SceneNode::name()
 {
     return m_name;
