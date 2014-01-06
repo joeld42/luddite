@@ -1,7 +1,0 @@
-//
-// Prefix header for all source files of the 'luddite_ios' target in the 'luddite_ios' project
-//
-
-#ifdef __OBJC__
-    #import <Foundation/Foundation.h>
-#endif

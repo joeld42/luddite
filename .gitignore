@@ -1,6 +1,2 @@
-xcode/
-luddite_ios/
-xcode_osx/
-xcode_ios/
 *.app
 *.mtl
