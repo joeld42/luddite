@@ -7,6 +7,29 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6D1ED8D3187B542D00C5A17F /* debug.h in Copy Files (common) */ = {isa = PBXBuildFile; fileRef = 6D2F0212187A7F6600C96232 /* debug.h */; };
+		6D1ED8D4187B542D00C5A17F /* useful.h in Copy Files (common) */ = {isa = PBXBuildFile; fileRef = 6D2F0214187A7F6600C96232 /* useful.h */; };
+		6D1ED8D5187B542D00C5A17F /* util.h in Copy Files (common) */ = {isa = PBXBuildFile; fileRef = 6D2F0215187A7F6600C96232 /* util.h */; };
+		6D1ED920187B7BBD00C5A17F /* behavior.h in Copy Files (game) */ = {isa = PBXBuildFile; fileRef = 6D2F0218187A7F6600C96232 /* behavior.h */; };
+		6D1ED921187B7BBD00C5A17F /* entity.h in Copy Files (game) */ = {isa = PBXBuildFile; fileRef = 6D2F021A187A7F6600C96232 /* entity.h */; };
+		6D1ED922187B7BBD00C5A17F /* gameloop.h in Copy Files (game) */ = {isa = PBXBuildFile; fileRef = 6D2F021C187A7F6600C96232 /* gameloop.h */; };
+		6D1ED925187B7BFB00C5A17F /* platform.h in Copy Files (platform) */ = {isa = PBXBuildFile; fileRef = 6D2F0224187A7F6600C96232 /* platform.h */; };
+		6D1ED926187B7C2300C5A17F /* color_util.h in Copy Files (render) */ = {isa = PBXBuildFile; fileRef = 6D2F0227187A7F6600C96232 /* color_util.h */; };
+		6D1ED927187B7C2300C5A17F /* drawvert.h in Copy Files (render) */ = {isa = PBXBuildFile; fileRef = 6D2F0228187A7F6600C96232 /* drawvert.h */; };
+		6D1ED928187B7C2300C5A17F /* gbatch.h in Copy Files (render) */ = {isa = PBXBuildFile; fileRef = 6D2F022A187A7F6600C96232 /* gbatch.h */; };
+		6D1ED929187B7C2300C5A17F /* gbuff.h in Copy Files (render) */ = {isa = PBXBuildFile; fileRef = 6D2F022C187A7F6600C96232 /* gbuff.h */; };
+		6D1ED92A187B7C2300C5A17F /* gbuff_prim.h in Copy Files (render) */ = {isa = PBXBuildFile; fileRef = 6D2F022E187A7F6600C96232 /* gbuff_prim.h */; };
+		6D1ED92B187B7C2300C5A17F /* material.h in Copy Files (render) */ = {isa = PBXBuildFile; fileRef = 6D2F0230187A7F6600C96232 /* material.h */; };
+		6D1ED92C187B7C2300C5A17F /* material_db.h in Copy Files (render) */ = {isa = PBXBuildFile; fileRef = 6D2F0232187A7F6600C96232 /* material_db.h */; };
+		6D1ED92D187B7C2300C5A17F /* param.h in Copy Files (render) */ = {isa = PBXBuildFile; fileRef = 6D2F0234187A7F6600C96232 /* param.h */; };
+		6D1ED92E187B7C2300C5A17F /* render_device.h in Copy Files (render) */ = {isa = PBXBuildFile; fileRef = 6D2F0236187A7F6600C96232 /* render_device.h */; };
+		6D1ED92F187B7C2300C5A17F /* render_device_es2.h in Copy Files (render) */ = {isa = PBXBuildFile; fileRef = 6D2F0238187A7F6600C96232 /* render_device_es2.h */; };
+		6D1ED930187B7C2300C5A17F /* render_device_gl.h in Copy Files (render) */ = {isa = PBXBuildFile; fileRef = 6D2F023A187A7F6600C96232 /* render_device_gl.h */; };
+		6D1ED931187B7C2300C5A17F /* scene.h in Copy Files (render) */ = {isa = PBXBuildFile; fileRef = 6D2F023C187A7F6600C96232 /* scene.h */; };
+		6D1ED932187B7C2300C5A17F /* scene_node.h in Copy Files (render) */ = {isa = PBXBuildFile; fileRef = 6D2F023E187A7F6600C96232 /* scene_node.h */; };
+		6D1ED933187B7C2300C5A17F /* scene_objfile.h in Copy Files (render) */ = {isa = PBXBuildFile; fileRef = 6D2F0240187A7F6600C96232 /* scene_objfile.h */; };
+		6D1ED934187B7C2300C5A17F /* Shader.h in Copy Files (render) */ = {isa = PBXBuildFile; fileRef = 6D2F0242187A7F6600C96232 /* Shader.h */; };
+		6D1ED935187B7C2300C5A17F /* texture_info.h in Copy Files (render) */ = {isa = PBXBuildFile; fileRef = 6D2F0244187A7F6600C96232 /* texture_info.h */; };
 		6D2F0123187A7C9000C96232 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D2F0122187A7C9000C96232 /* Foundation.framework */; };
 		6D2F0131187A7C9000C96232 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D2F0130187A7C9000C96232 /* XCTest.framework */; };
 		6D2F0132187A7C9000C96232 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D2F0122187A7C9000C96232 /* Foundation.framework */; };
@@ -52,13 +75,67 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		6D2F011D187A7C9000C96232 /* CopyFiles */ = {
+		6D1ED91F187B7B5800C5A17F /* Copy Files (game) */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
-			dstPath = "include/$(PRODUCT_NAME)";
+			dstPath = "include/$(PRODUCT_NAME)/game";
 			dstSubfolderSpec = 16;
 			files = (
+				6D1ED920187B7BBD00C5A17F /* behavior.h in Copy Files (game) */,
+				6D1ED921187B7BBD00C5A17F /* entity.h in Copy Files (game) */,
+				6D1ED922187B7BBD00C5A17F /* gameloop.h in Copy Files (game) */,
 			);
+			name = "Copy Files (game)";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6D1ED923187B7BCF00C5A17F /* Copy Files (platform) */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)/platform";
+			dstSubfolderSpec = 16;
+			files = (
+				6D1ED925187B7BFB00C5A17F /* platform.h in Copy Files (platform) */,
+			);
+			name = "Copy Files (platform)";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6D1ED924187B7BD300C5A17F /* Copy Files (render) */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)/render";
+			dstSubfolderSpec = 16;
+			files = (
+				6D1ED926187B7C2300C5A17F /* color_util.h in Copy Files (render) */,
+				6D1ED927187B7C2300C5A17F /* drawvert.h in Copy Files (render) */,
+				6D1ED928187B7C2300C5A17F /* gbatch.h in Copy Files (render) */,
+				6D1ED929187B7C2300C5A17F /* gbuff.h in Copy Files (render) */,
+				6D1ED92A187B7C2300C5A17F /* gbuff_prim.h in Copy Files (render) */,
+				6D1ED92B187B7C2300C5A17F /* material.h in Copy Files (render) */,
+				6D1ED92C187B7C2300C5A17F /* material_db.h in Copy Files (render) */,
+				6D1ED92D187B7C2300C5A17F /* param.h in Copy Files (render) */,
+				6D1ED92E187B7C2300C5A17F /* render_device.h in Copy Files (render) */,
+				6D1ED92F187B7C2300C5A17F /* render_device_es2.h in Copy Files (render) */,
+				6D1ED930187B7C2300C5A17F /* render_device_gl.h in Copy Files (render) */,
+				6D1ED931187B7C2300C5A17F /* scene.h in Copy Files (render) */,
+				6D1ED932187B7C2300C5A17F /* scene_node.h in Copy Files (render) */,
+				6D1ED933187B7C2300C5A17F /* scene_objfile.h in Copy Files (render) */,
+				6D1ED934187B7C2300C5A17F /* Shader.h in Copy Files (render) */,
+				6D1ED935187B7C2300C5A17F /* texture_info.h in Copy Files (render) */,
+			);
+			name = "Copy Files (render)";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6D2F011D187A7C9000C96232 /* Copy Files (common) */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)/common";
+			dstSubfolderSpec = 16;
+			files = (
+				6D1ED8D3187B542D00C5A17F /* debug.h in Copy Files (common) */,
+				6D1ED8D4187B542D00C5A17F /* useful.h in Copy Files (common) */,
+				6D1ED8D5187B542D00C5A17F /* util.h in Copy Files (common) */,
+			);
+			name = "Copy Files (common)";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -110,7 +187,7 @@
 		6D2F01FF187A7CF600C96232 /* tinyxmlerror.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxmlerror.cpp; sourceTree = "<group>"; };
 		6D2F0200187A7CF600C96232 /* tinyxmlparser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxmlparser.cpp; sourceTree = "<group>"; };
 		6D2F0211187A7F6600C96232 /* debug.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = debug.cpp; sourceTree = "<group>"; };
-		6D2F0212187A7F6600C96232 /* debug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = debug.h; sourceTree = "<group>"; };
+		6D2F0212187A7F6600C96232 /* debug.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; path = debug.h; sourceTree = "<group>"; };
 		6D2F0213187A7F6600C96232 /* useful.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = useful.cpp; sourceTree = "<group>"; };
 		6D2F0214187A7F6600C96232 /* useful.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = useful.h; sourceTree = "<group>"; };
 		6D2F0215187A7F6600C96232 /* util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = util.h; sourceTree = "<group>"; };
@@ -389,7 +466,10 @@
 			buildPhases = (
 				6D2F011B187A7C9000C96232 /* Sources */,
 				6D2F011C187A7C9000C96232 /* Frameworks */,
-				6D2F011D187A7C9000C96232 /* CopyFiles */,
+				6D2F011D187A7C9000C96232 /* Copy Files (common) */,
+				6D1ED91F187B7B5800C5A17F /* Copy Files (game) */,
+				6D1ED923187B7BCF00C5A17F /* Copy Files (platform) */,
+				6D1ED924187B7BD300C5A17F /* Copy Files (render) */,
 			);
 			buildRules = (
 			);
@@ -596,6 +676,7 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = include/luddite;
 				SKIP_INSTALL = YES;
 				USER_HEADER_SEARCH_PATHS = "";
 			};
@@ -618,6 +699,7 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = include/luddite;
 				SKIP_INSTALL = YES;
 				USER_HEADER_SEARCH_PATHS = "";
 			};
@@ -680,6 +762,7 @@
 				6D2F0144187A7C9000C96232 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		6D2F0145187A7C9000C96232 /* Build configuration list for PBXNativeTarget "ludditeTests" */ = {
 			isa = XCConfigurationList;
@@ -688,6 +771,7 @@
 				6D2F0147187A7C9000C96232 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

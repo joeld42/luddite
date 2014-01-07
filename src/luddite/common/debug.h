@@ -25,6 +25,7 @@ extern const int kVerbose_Dbg; // 6
 extern int g_verbose_level;
 extern bool g_colorterm;
 
+    
 // output messages
 void fatal    ( const char *fmt, ... );
 void error    ( const char *fmt, ... );
