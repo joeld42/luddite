@@ -30,6 +30,8 @@
 		6D1ED933187B7C2300C5A17F /* scene_objfile.h in Copy Files (render) */ = {isa = PBXBuildFile; fileRef = 6D2F0240187A7F6600C96232 /* scene_objfile.h */; };
 		6D1ED934187B7C2300C5A17F /* Shader.h in Copy Files (render) */ = {isa = PBXBuildFile; fileRef = 6D2F0242187A7F6600C96232 /* Shader.h */; };
 		6D1ED935187B7C2300C5A17F /* texture_info.h in Copy Files (render) */ = {isa = PBXBuildFile; fileRef = 6D2F0244187A7F6600C96232 /* texture_info.h */; };
+		6D1ED98F187F1DBF00C5A17F /* TKGameViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6D1ED98E187F1DBF00C5A17F /* TKGameViewController.mm */; };
+		6D1ED991187F21D500C5A17F /* TKGameViewController.h in Copy Files (ios helpers) */ = {isa = PBXBuildFile; fileRef = 6D1ED98D187F1DBF00C5A17F /* TKGameViewController.h */; };
 		6D2F0123187A7C9000C96232 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D2F0122187A7C9000C96232 /* Foundation.framework */; };
 		6D2F0131187A7C9000C96232 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D2F0130187A7C9000C96232 /* XCTest.framework */; };
 		6D2F0132187A7C9000C96232 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D2F0122187A7C9000C96232 /* Foundation.framework */; };
@@ -125,6 +127,17 @@
 			name = "Copy Files (render)";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		6D1ED990187F215600C5A17F /* Copy Files (ios helpers) */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+				6D1ED991187F21D500C5A17F /* TKGameViewController.h in Copy Files (ios helpers) */,
+			);
+			name = "Copy Files (ios helpers)";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6D2F011D187A7C9000C96232 /* Copy Files (common) */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -141,6 +154,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		6D1ED98D187F1DBF00C5A17F /* TKGameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TKGameViewController.h; path = ../ios/TKGameViewController.h; sourceTree = "<group>"; };
+		6D1ED98E187F1DBF00C5A17F /* TKGameViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = TKGameViewController.mm; path = ../ios/TKGameViewController.mm; sourceTree = "<group>"; };
 		6D2F011F187A7C9000C96232 /* libluddite.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libluddite.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		6D2F0122187A7C9000C96232 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		6D2F012F187A7C9000C96232 /* ludditeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ludditeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -255,6 +270,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6D1ED986187BCA6900C5A17F /* ios */ = {
+			isa = PBXGroup;
+			children = (
+				6D1ED98D187F1DBF00C5A17F /* TKGameViewController.h */,
+				6D1ED98E187F1DBF00C5A17F /* TKGameViewController.mm */,
+			);
+			name = ios;
+			sourceTree = "<group>";
+		};
 		6D2F0116187A7C9000C96232 = {
 			isa = PBXGroup;
 			children = (
@@ -367,6 +391,7 @@
 		6D2F020D187A7F6600C96232 /* luddite */ = {
 			isa = PBXGroup;
 			children = (
+				6D1ED986187BCA6900C5A17F /* ios */,
 				6D2F020F187A7F6600C96232 /* common */,
 				6D2F0216187A7F6600C96232 /* game */,
 				6D2F021D187A7F6600C96232 /* platform */,
@@ -470,6 +495,7 @@
 				6D1ED91F187B7B5800C5A17F /* Copy Files (game) */,
 				6D1ED923187B7BCF00C5A17F /* Copy Files (platform) */,
 				6D1ED924187B7BD300C5A17F /* Copy Files (render) */,
+				6D1ED990187F215600C5A17F /* Copy Files (ios helpers) */,
 			);
 			buildRules = (
 			);
@@ -550,6 +576,7 @@
 				6D2F025C187A7F6600C96232 /* Shader.cpp in Sources */,
 				6D2F0259187A7F6600C96232 /* scene.cpp in Sources */,
 				6D2F0256187A7F6600C96232 /* render_device.cpp in Sources */,
+				6D1ED98F187F1DBF00C5A17F /* TKGameViewController.mm in Sources */,
 				6D2F020C187A7CF600C96232 /* tinyxmlparser.cpp in Sources */,
 				6D2F024C187A7F6600C96232 /* ios_gfxutil.mm in Sources */,
 				6D2F0251187A7F6600C96232 /* gbuff.cpp in Sources */,
