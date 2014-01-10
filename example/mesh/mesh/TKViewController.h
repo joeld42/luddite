@@ -11,10 +11,10 @@
 
 #import <luddite/TKGameViewController.h>
 
-class MeshGameDelegate;
+#import "MeshGame.h"
 
 @interface TKViewController : TKGameViewController
 
-@property (nonatomic, strong) MeshGameDelegate *meshGame;
+@property (nonatomic, strong) MeshGame* meshGame;
 
 @end

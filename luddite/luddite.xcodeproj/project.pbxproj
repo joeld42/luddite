@@ -32,6 +32,26 @@
 		6D1ED935187B7C2300C5A17F /* texture_info.h in Copy Files (render) */ = {isa = PBXBuildFile; fileRef = 6D2F0244187A7F6600C96232 /* texture_info.h */; };
 		6D1ED98F187F1DBF00C5A17F /* TKGameViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6D1ED98E187F1DBF00C5A17F /* TKGameViewController.mm */; };
 		6D1ED991187F21D500C5A17F /* TKGameViewController.h in Copy Files (ios helpers) */ = {isa = PBXBuildFile; fileRef = 6D1ED98D187F1DBF00C5A17F /* TKGameViewController.h */; };
+		6D1ED996187F7C7900C5A17F /* basevector.hpp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6D2F01DB187A7CF600C96232 /* basevector.hpp */; };
+		6D1ED997187F7C7900C5A17F /* box.hpp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6D2F01DC187A7CF600C96232 /* box.hpp */; };
+		6D1ED998187F7C7900C5A17F /* cone.hpp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6D2F01DD187A7CF600C96232 /* cone.hpp */; };
+		6D1ED999187F7C7900C5A17F /* euler.hpp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6D2F01DF187A7CF600C96232 /* euler.hpp */; };
+		6D1ED99A187F7C7900C5A17F /* intersect.hpp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6D2F01E0187A7CF600C96232 /* intersect.hpp */; };
+		6D1ED99B187F7C7900C5A17F /* line.hpp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6D2F01E2187A7CF600C96232 /* line.hpp */; };
+		6D1ED99C187F7C7900C5A17F /* matrix4x4.hpp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6D2F01E3187A7CF600C96232 /* matrix4x4.hpp */; };
+		6D1ED99D187F7C7900C5A17F /* metavector.hpp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6D2F01E4187A7CF600C96232 /* metavector.hpp */; };
+		6D1ED99E187F7C7900C5A17F /* minmax.hpp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6D2F01E5187A7CF600C96232 /* minmax.hpp */; };
+		6D1ED99F187F7C7900C5A17F /* plane.hpp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6D2F01E6187A7CF600C96232 /* plane.hpp */; };
+		6D1ED9A0187F7C7900C5A17F /* prmath.hpp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6D2F01E7187A7CF600C96232 /* prmath.hpp */; };
+		6D1ED9A1187F7C7900C5A17F /* quaternion.hpp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6D2F01E8187A7CF600C96232 /* quaternion.hpp */; };
+		6D1ED9A2187F7C7900C5A17F /* ray.hpp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6D2F01E9187A7CF600C96232 /* ray.hpp */; };
+		6D1ED9A3187F7C7900C5A17F /* sphere.hpp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6D2F01EA187A7CF600C96232 /* sphere.hpp */; };
+		6D1ED9A4187F7C7900C5A17F /* spline.hpp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6D2F01EB187A7CF600C96232 /* spline.hpp */; };
+		6D1ED9A5187F7C7900C5A17F /* vector2.hpp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6D2F01EC187A7CF600C96232 /* vector2.hpp */; };
+		6D1ED9A6187F7C7900C5A17F /* vector3.hpp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6D2F01ED187A7CF600C96232 /* vector3.hpp */; };
+		6D1ED9A7187F7C7900C5A17F /* vector3float.hpp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6D2F01EE187A7CF600C96232 /* vector3float.hpp */; };
+		6D1ED9A8187F7C7900C5A17F /* vector4.hpp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6D2F01EF187A7CF600C96232 /* vector4.hpp */; };
+		6D1ED9A9187F7C7900C5A17F /* vector4float.hpp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6D2F01F0187A7CF600C96232 /* vector4float.hpp */; };
 		6D2F0123187A7C9000C96232 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D2F0122187A7C9000C96232 /* Foundation.framework */; };
 		6D2F0131187A7C9000C96232 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D2F0130187A7C9000C96232 /* XCTest.framework */; };
 		6D2F0132187A7C9000C96232 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D2F0122187A7C9000C96232 /* Foundation.framework */; };
@@ -136,6 +156,35 @@
 				6D1ED991187F21D500C5A17F /* TKGameViewController.h in Copy Files (ios helpers) */,
 			);
 			name = "Copy Files (ios helpers)";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6D1ED995187F7C3800C5A17F /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = include/prmath;
+			dstSubfolderSpec = 16;
+			files = (
+				6D1ED996187F7C7900C5A17F /* basevector.hpp in CopyFiles */,
+				6D1ED997187F7C7900C5A17F /* box.hpp in CopyFiles */,
+				6D1ED998187F7C7900C5A17F /* cone.hpp in CopyFiles */,
+				6D1ED999187F7C7900C5A17F /* euler.hpp in CopyFiles */,
+				6D1ED99A187F7C7900C5A17F /* intersect.hpp in CopyFiles */,
+				6D1ED99B187F7C7900C5A17F /* line.hpp in CopyFiles */,
+				6D1ED99C187F7C7900C5A17F /* matrix4x4.hpp in CopyFiles */,
+				6D1ED99D187F7C7900C5A17F /* metavector.hpp in CopyFiles */,
+				6D1ED99E187F7C7900C5A17F /* minmax.hpp in CopyFiles */,
+				6D1ED99F187F7C7900C5A17F /* plane.hpp in CopyFiles */,
+				6D1ED9A0187F7C7900C5A17F /* prmath.hpp in CopyFiles */,
+				6D1ED9A1187F7C7900C5A17F /* quaternion.hpp in CopyFiles */,
+				6D1ED9A2187F7C7900C5A17F /* ray.hpp in CopyFiles */,
+				6D1ED9A3187F7C7900C5A17F /* sphere.hpp in CopyFiles */,
+				6D1ED9A4187F7C7900C5A17F /* spline.hpp in CopyFiles */,
+				6D1ED9A5187F7C7900C5A17F /* vector2.hpp in CopyFiles */,
+				6D1ED9A6187F7C7900C5A17F /* vector3.hpp in CopyFiles */,
+				6D1ED9A7187F7C7900C5A17F /* vector3float.hpp in CopyFiles */,
+				6D1ED9A8187F7C7900C5A17F /* vector4.hpp in CopyFiles */,
+				6D1ED9A9187F7C7900C5A17F /* vector4float.hpp in CopyFiles */,
+			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		6D2F011D187A7C9000C96232 /* Copy Files (common) */ = {
@@ -496,6 +545,7 @@
 				6D1ED923187B7BCF00C5A17F /* Copy Files (platform) */,
 				6D1ED924187B7BD300C5A17F /* Copy Files (render) */,
 				6D1ED990187F215600C5A17F /* Copy Files (ios helpers) */,
+				6D1ED995187F7C3800C5A17F /* CopyFiles */,
 			);
 			buildRules = (
 			);

@@ -15,7 +15,6 @@
 @interface TKGameViewController ()
 {
     luddite::GameLoop *_gameloop;
-    luddite::Scene *_currentScene;
 }
 
 // Common ctor code for all the initWith... messages
@@ -53,6 +52,12 @@
     _gameloop = new luddite::GameLoop();
     NSLog( @"Created new gameloop %p", _gameloop );
     
+    [self gameInit];    
+}
+
+- (void)gameInit
+{
+    // Stub -- subclass can init game stuff here
 }
 
 - (void)viewDidLoad

@@ -28,6 +28,8 @@ using namespace luddite;
 
 @implementation TKViewController
 
+@synthesize meshGame=_meshGame;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -37,8 +39,11 @@ using namespace luddite;
     return self;
 }
 
-TODO: create MeshGameDelegate in init here..
-
+- (void) gameInit
+{
+    self.meshGame = [[MeshGame alloc] init];
+    self.gameDelegate = _meshGame;
+}
 
 - (void)viewDidLoad
 {

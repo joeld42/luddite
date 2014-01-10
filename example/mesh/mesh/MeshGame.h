@@ -9,7 +9,13 @@
 #import <Foundation/Foundation.h>
 #import <luddite/TKGameViewController.h>
 
-@interface MeshGameDelegate : NSObject <TKGameLoopDelegate>
+@interface MeshGame : NSObject <TKGameLoopDelegate>
+
+- (id)init;
+
+- (void)setupMeshScene;
+
+#pragma mark - TKGameLoopDelegate
 
 - (void) updateFixed: (double)dt;
 - (void) updateDynamic: (double)dt;

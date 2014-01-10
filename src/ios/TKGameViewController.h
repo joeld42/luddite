@@ -15,18 +15,15 @@
 
 @optional
 
-// Called before/after drawing the scene graph
+// Called when a redraw is needed
 - (void) drawScene;
-- (void) drawSceneFinished;
-
-// TODO: hud stuff
-//- (void) drawHUD;
 
 @end
 
 @interface TKGameViewController : GLKViewController <GLKViewDelegate>
 
-#pragma mark - GLKViewDelegate
+// Place for subclasses to init game stuff
+- (void)gameInit;
 
 - (void)glkView:(GLKView *)view drawInRect:(CGRect)rect;
 

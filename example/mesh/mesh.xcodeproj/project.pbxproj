@@ -27,7 +27,7 @@
 		6D1ED979187B87E700C5A17F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6D1ED977187B87E700C5A17F /* InfoPlist.strings */; };
 		6D1ED97B187B87E700C5A17F /* meshTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D1ED97A187B87E700C5A17F /* meshTests.m */; };
 		6D1ED985187BBB5300C5A17F /* libluddite.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D1ED984187BBB5300C5A17F /* libluddite.a */; };
-		6D1ED994187F467000C5A17F /* MeshGameDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D1ED993187F467000C5A17F /* MeshGameDelegate.m */; };
+		6D1ED994187F467000C5A17F /* MeshGame.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6D1ED993187F467000C5A17F /* MeshGame.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,8 +66,8 @@
 		6D1ED978187B87E700C5A17F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6D1ED97A187B87E700C5A17F /* meshTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = meshTests.m; sourceTree = "<group>"; };
 		6D1ED984187BBB5300C5A17F /* libluddite.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libluddite.a; path = "../../luddite/build/Debug-iphoneos/libluddite.a"; sourceTree = "<group>"; };
-		6D1ED992187F467000C5A17F /* MeshGameDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MeshGameDelegate.h; sourceTree = "<group>"; };
-		6D1ED993187F467000C5A17F /* MeshGameDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MeshGameDelegate.m; sourceTree = "<group>"; };
+		6D1ED992187F467000C5A17F /* MeshGame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MeshGame.h; sourceTree = "<group>"; };
+		6D1ED993187F467000C5A17F /* MeshGame.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MeshGame.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,8 +143,8 @@
 				6D1ED965187B87E700C5A17F /* TKViewController.mm */,
 				6D1ED967187B87E700C5A17F /* Images.xcassets */,
 				6D1ED94F187B87E700C5A17F /* Supporting Files */,
-				6D1ED992187F467000C5A17F /* MeshGameDelegate.h */,
-				6D1ED993187F467000C5A17F /* MeshGameDelegate.m */,
+				6D1ED992187F467000C5A17F /* MeshGame.h */,
+				6D1ED993187F467000C5A17F /* MeshGame.mm */,
 			);
 			path = mesh;
 			sourceTree = "<group>";
@@ -282,7 +282,7 @@
 				6D1ED966187B87E700C5A17F /* TKViewController.mm in Sources */,
 				6D1ED955187B87E700C5A17F /* main.m in Sources */,
 				6D1ED959187B87E700C5A17F /* TKAppDelegate.m in Sources */,
-				6D1ED994187F467000C5A17F /* MeshGameDelegate.m in Sources */,
+				6D1ED994187F467000C5A17F /* MeshGame.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
