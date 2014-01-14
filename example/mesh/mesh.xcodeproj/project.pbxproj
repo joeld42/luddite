@@ -28,6 +28,11 @@
 		6D1ED97B187B87E700C5A17F /* meshTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D1ED97A187B87E700C5A17F /* meshTests.m */; };
 		6D1ED985187BBB5300C5A17F /* libluddite.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D1ED984187BBB5300C5A17F /* libluddite.a */; };
 		6D1ED994187F467000C5A17F /* MeshGame.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6D1ED993187F467000C5A17F /* MeshGame.mm */; };
+		6D1ED9BF1885C4CD00C5A17F /* example_mesh.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 6D1ED9BC1885C4CD00C5A17F /* example_mesh.glsl */; };
+		6D1ED9C01885C4CD00C5A17F /* example_mesh.material.xml in Resources */ = {isa = PBXBuildFile; fileRef = 6D1ED9BD1885C4CD00C5A17F /* example_mesh.material.xml */; };
+		6D1ED9C11885C4CD00C5A17F /* suzanne.obj in Resources */ = {isa = PBXBuildFile; fileRef = 6D1ED9BE1885C4CD00C5A17F /* suzanne.obj */; };
+		6D1ED9C31885CAF600C5A17F /* grass.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D1ED9C21885CAF600C5A17F /* grass.png */; };
+		6D1ED9C51885D57800C5A17F /* rock1.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D1ED9C41885D57800C5A17F /* rock1.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +73,11 @@
 		6D1ED984187BBB5300C5A17F /* libluddite.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libluddite.a; path = "../../luddite/build/Debug-iphoneos/libluddite.a"; sourceTree = "<group>"; };
 		6D1ED992187F467000C5A17F /* MeshGame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MeshGame.h; sourceTree = "<group>"; };
 		6D1ED993187F467000C5A17F /* MeshGame.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MeshGame.mm; sourceTree = "<group>"; };
+		6D1ED9BC1885C4CD00C5A17F /* example_mesh.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = example_mesh.glsl; sourceTree = "<group>"; };
+		6D1ED9BD1885C4CD00C5A17F /* example_mesh.material.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = example_mesh.material.xml; sourceTree = "<group>"; };
+		6D1ED9BE1885C4CD00C5A17F /* suzanne.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = suzanne.obj; sourceTree = "<group>"; };
+		6D1ED9C21885CAF600C5A17F /* grass.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = grass.png; sourceTree = "<group>"; };
+		6D1ED9C41885D57800C5A17F /* rock1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rock1.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +110,7 @@
 		6D1ED938187B87E700C5A17F = {
 			isa = PBXGroup;
 			children = (
+				6D1ED9BB1885C4CD00C5A17F /* gamedata */,
 				6D1ED94E187B87E700C5A17F /* mesh */,
 				6D1ED974187B87E700C5A17F /* meshTests */,
 				6D1ED943187B87E700C5A17F /* Frameworks */,
@@ -176,6 +187,19 @@
 				6D1ED977187B87E700C5A17F /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		6D1ED9BB1885C4CD00C5A17F /* gamedata */ = {
+			isa = PBXGroup;
+			children = (
+				6D1ED9C41885D57800C5A17F /* rock1.png */,
+				6D1ED9C21885CAF600C5A17F /* grass.png */,
+				6D1ED9BC1885C4CD00C5A17F /* example_mesh.glsl */,
+				6D1ED9BD1885C4CD00C5A17F /* example_mesh.material.xml */,
+				6D1ED9BE1885C4CD00C5A17F /* suzanne.obj */,
+			);
+			name = gamedata;
+			path = mesh/gamedata;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -255,10 +279,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6D1ED9C51885D57800C5A17F /* rock1.png in Resources */,
 				6D1ED961187B87E700C5A17F /* Shader.fsh in Resources */,
 				6D1ED95F187B87E700C5A17F /* Main_iPad.storyboard in Resources */,
+				6D1ED9C31885CAF600C5A17F /* grass.png in Resources */,
 				6D1ED95C187B87E700C5A17F /* Main_iPhone.storyboard in Resources */,
 				6D1ED968187B87E700C5A17F /* Images.xcassets in Resources */,
+				6D1ED9BF1885C4CD00C5A17F /* example_mesh.glsl in Resources */,
+				6D1ED9C11885C4CD00C5A17F /* suzanne.obj in Resources */,
+				6D1ED9C01885C4CD00C5A17F /* example_mesh.material.xml in Resources */,
 				6D1ED953187B87E700C5A17F /* InfoPlist.strings in Resources */,
 				6D1ED963187B87E700C5A17F /* Shader.vsh in Resources */,
 			);

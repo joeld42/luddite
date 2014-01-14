@@ -234,7 +234,7 @@ int32_t RenderDeviceGL::loadShader( const std::string &shaderKey )
 		return SHADER_FAIL;
     }
     
-    printf( "compile fragment shader" );
+    printf( "compile fragment shader:\n%s\n-----\n", fragShaderText );
     
     // Compile the fragment shader
     fragShader = _compileShader( fragShaderText, GL_FRAGMENT_SHADER );
@@ -284,14 +284,13 @@ int32_t RenderDeviceGL::_compileShader( const char *shaderText,
     glCompileShader( shader );
     
     // Check for errors
-    GLint logLength;
+    GLint logLength=0;
     glGetShaderiv( shader, GL_INFO_LOG_LENGTH, &logLength );
     if (logLength > 0)
     {
         char *log = (char *)malloc(logLength);
-        glGetShaderInfoLog( shader, logLength, &logLength, log );
-        
-        printf("Error compiling shader:\n%s\n", log );
+        glGetShaderInfoLog( shader, logLength, NULL, log );
+        printf("Error compiling shader:\n%s\n-------\n", log );
         free(log);        
     }
     
@@ -311,7 +310,7 @@ int32_t RenderDeviceGL::_compileShader( const char *shaderText,
 
 void RenderDeviceGL::_printShaderLog( int32_t program )
 {
-	GLint logLength;
+	GLint logLength=0;
     glGetProgramiv( program, GL_INFO_LOG_LENGTH, &logLength );
     if (logLength > 0 )
     {

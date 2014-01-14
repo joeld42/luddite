@@ -61,6 +61,9 @@ static _MtlGroup *findOrCreateMtl( std::vector<_MtlGroup*> &mtlGroups,
 SceneNode *luddite::scene_objfile_named(char const *filename, RenderDevice *renderDevice, MaterialDB *mtlDB)
 {
     std::string filePath = pfPathToResource( filename );
+    
+//    Assert( filePath.length(), "Couldn't find resource file"  );
+    
     return scene_objfile( filePath.c_str(), renderDevice, mtlDB );
 }
 

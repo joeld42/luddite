@@ -43,6 +43,9 @@ using namespace luddite;
 {
     self.meshGame = [[MeshGame alloc] init];
     self.gameDelegate = _meshGame;
+    
+    // Set the view
+    _meshGame.viewport = self.view.bounds.size;
 }
 
 - (void)viewDidLoad
@@ -57,6 +60,11 @@ using namespace luddite;
     [super didReceiveMemoryWarning];
 
     // Dispose of any resources that can be recreated.
+}
+
+- (void) didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
+{
+    _meshGame.viewport = self.view.bounds.size;
 }
 
 //- (void)setupGL

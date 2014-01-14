@@ -15,6 +15,7 @@
 @interface TKGameViewController ()
 {
     luddite::GameLoop *_gameloop;
+    BOOL _didGameInit;
 }
 
 // Common ctor code for all the initWith... messages
@@ -52,7 +53,7 @@
     _gameloop = new luddite::GameLoop();
     NSLog( @"Created new gameloop %p", _gameloop );
     
-    [self gameInit];    
+    _didGameInit = NO;
 }
 
 - (void)gameInit
@@ -114,6 +115,12 @@
   
     // set up GL Stuff here
     glEnable(GL_DEPTH_TEST);
+    
+    if (!_didGameInit)
+    {
+        [self gameInit];
+        _didGameInit = YES;
+    }
 }
 
 - (void)tearDownGL
@@ -164,8 +171,14 @@
 {
     NSLog( @"redraw gl view..");
     
-    glClearColor(1.0, 0.0, 1.0, 1.0f);
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+//    glClearColor(1.0, 0.0, 1.0, 1.0f);
+//    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    if ([self.gameDelegate respondsToSelector:@selector(drawScene)])
+    {
+        [self.gameDelegate drawScene ];
+    }
+
+    
 }
 
 @end

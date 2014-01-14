@@ -41,9 +41,9 @@ void MaterialDB::initShaderDB( const char *resourcePath )
     glswSetPath( m_resourcePath.c_str(), ".glsl" );
 
     // For desktop GL
-    glswAddDirectiveToken("", "#define lowp");
-    glswAddDirectiveToken("", "#define mediump");
-    glswAddDirectiveToken("", "#define highp");
+//    glswAddDirectiveToken("", "#define lowp");
+//    glswAddDirectiveToken("", "#define mediump");
+//    glswAddDirectiveToken("", "#define highp");
 
 }
 

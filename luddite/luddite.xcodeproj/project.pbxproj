@@ -23,7 +23,6 @@
 		6D1ED92C187B7C2300C5A17F /* material_db.h in Copy Files (render) */ = {isa = PBXBuildFile; fileRef = 6D2F0232187A7F6600C96232 /* material_db.h */; };
 		6D1ED92D187B7C2300C5A17F /* param.h in Copy Files (render) */ = {isa = PBXBuildFile; fileRef = 6D2F0234187A7F6600C96232 /* param.h */; };
 		6D1ED92E187B7C2300C5A17F /* render_device.h in Copy Files (render) */ = {isa = PBXBuildFile; fileRef = 6D2F0236187A7F6600C96232 /* render_device.h */; };
-		6D1ED92F187B7C2300C5A17F /* render_device_es2.h in Copy Files (render) */ = {isa = PBXBuildFile; fileRef = 6D2F0238187A7F6600C96232 /* render_device_es2.h */; };
 		6D1ED930187B7C2300C5A17F /* render_device_gl.h in Copy Files (render) */ = {isa = PBXBuildFile; fileRef = 6D2F023A187A7F6600C96232 /* render_device_gl.h */; };
 		6D1ED931187B7C2300C5A17F /* scene.h in Copy Files (render) */ = {isa = PBXBuildFile; fileRef = 6D2F023C187A7F6600C96232 /* scene.h */; };
 		6D1ED932187B7C2300C5A17F /* scene_node.h in Copy Files (render) */ = {isa = PBXBuildFile; fileRef = 6D2F023E187A7F6600C96232 /* scene_node.h */; };
@@ -67,7 +66,7 @@
 		6D2F0248187A7F6600C96232 /* behavior.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6D2F0217187A7F6600C96232 /* behavior.cpp */; };
 		6D2F0249187A7F6600C96232 /* entity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6D2F0219187A7F6600C96232 /* entity.cpp */; };
 		6D2F024A187A7F6600C96232 /* gameloop.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6D2F021B187A7F6600C96232 /* gameloop.cpp */; };
-		6D2F024B187A7F6600C96232 /* ios_debug.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6D2F021F187A7F6600C96232 /* ios_debug.cpp */; };
+		6D2F024B187A7F6600C96232 /* ios_debug.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6D2F021F187A7F6600C96232 /* ios_debug.mm */; };
 		6D2F024C187A7F6600C96232 /* ios_gfxutil.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6D2F0220187A7F6600C96232 /* ios_gfxutil.mm */; };
 		6D2F024F187A7F6600C96232 /* color_util.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6D2F0226187A7F6600C96232 /* color_util.cpp */; };
 		6D2F0250187A7F6600C96232 /* gbatch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6D2F0229187A7F6600C96232 /* gbatch.cpp */; };
@@ -77,7 +76,6 @@
 		6D2F0254187A7F6600C96232 /* material_db.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6D2F0231187A7F6600C96232 /* material_db.cpp */; };
 		6D2F0255187A7F6600C96232 /* param.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6D2F0233187A7F6600C96232 /* param.cpp */; };
 		6D2F0256187A7F6600C96232 /* render_device.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6D2F0235187A7F6600C96232 /* render_device.cpp */; };
-		6D2F0257187A7F6600C96232 /* render_device_es2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6D2F0237187A7F6600C96232 /* render_device_es2.cpp */; };
 		6D2F0258187A7F6600C96232 /* render_device_gl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6D2F0239187A7F6600C96232 /* render_device_gl.cpp */; };
 		6D2F0259187A7F6600C96232 /* scene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6D2F023B187A7F6600C96232 /* scene.cpp */; };
 		6D2F025A187A7F6600C96232 /* scene_node.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6D2F023D187A7F6600C96232 /* scene_node.cpp */; };
@@ -136,7 +134,6 @@
 				6D1ED92C187B7C2300C5A17F /* material_db.h in Copy Files (render) */,
 				6D1ED92D187B7C2300C5A17F /* param.h in Copy Files (render) */,
 				6D1ED92E187B7C2300C5A17F /* render_device.h in Copy Files (render) */,
-				6D1ED92F187B7C2300C5A17F /* render_device_es2.h in Copy Files (render) */,
 				6D1ED930187B7C2300C5A17F /* render_device_gl.h in Copy Files (render) */,
 				6D1ED931187B7C2300C5A17F /* scene.h in Copy Files (render) */,
 				6D1ED932187B7C2300C5A17F /* scene_node.h in Copy Files (render) */,
@@ -261,7 +258,7 @@
 		6D2F021A187A7F6600C96232 /* entity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = entity.h; sourceTree = "<group>"; };
 		6D2F021B187A7F6600C96232 /* gameloop.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = gameloop.cpp; sourceTree = "<group>"; };
 		6D2F021C187A7F6600C96232 /* gameloop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gameloop.h; sourceTree = "<group>"; };
-		6D2F021F187A7F6600C96232 /* ios_debug.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ios_debug.cpp; sourceTree = "<group>"; };
+		6D2F021F187A7F6600C96232 /* ios_debug.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ios_debug.mm; sourceTree = "<group>"; };
 		6D2F0220187A7F6600C96232 /* ios_gfxutil.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ios_gfxutil.mm; sourceTree = "<group>"; };
 		6D2F0224187A7F6600C96232 /* platform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = platform.h; sourceTree = "<group>"; };
 		6D2F0226187A7F6600C96232 /* color_util.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = color_util.cpp; sourceTree = "<group>"; };
@@ -281,8 +278,6 @@
 		6D2F0234187A7F6600C96232 /* param.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = param.h; sourceTree = "<group>"; };
 		6D2F0235187A7F6600C96232 /* render_device.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = render_device.cpp; sourceTree = "<group>"; };
 		6D2F0236187A7F6600C96232 /* render_device.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = render_device.h; sourceTree = "<group>"; };
-		6D2F0237187A7F6600C96232 /* render_device_es2.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = render_device_es2.cpp; sourceTree = "<group>"; };
-		6D2F0238187A7F6600C96232 /* render_device_es2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = render_device_es2.h; sourceTree = "<group>"; };
 		6D2F0239187A7F6600C96232 /* render_device_gl.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = render_device_gl.cpp; sourceTree = "<group>"; };
 		6D2F023A187A7F6600C96232 /* render_device_gl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = render_device_gl.h; sourceTree = "<group>"; };
 		6D2F023B187A7F6600C96232 /* scene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = scene.cpp; sourceTree = "<group>"; };
@@ -487,7 +482,7 @@
 		6D2F021E187A7F6600C96232 /* ios */ = {
 			isa = PBXGroup;
 			children = (
-				6D2F021F187A7F6600C96232 /* ios_debug.cpp */,
+				6D2F021F187A7F6600C96232 /* ios_debug.mm */,
 				6D2F0220187A7F6600C96232 /* ios_gfxutil.mm */,
 			);
 			path = ios;
@@ -513,8 +508,6 @@
 				6D2F0234187A7F6600C96232 /* param.h */,
 				6D2F0235187A7F6600C96232 /* render_device.cpp */,
 				6D2F0236187A7F6600C96232 /* render_device.h */,
-				6D2F0237187A7F6600C96232 /* render_device_es2.cpp */,
-				6D2F0238187A7F6600C96232 /* render_device_es2.h */,
 				6D2F0239187A7F6600C96232 /* render_device_gl.cpp */,
 				6D2F023A187A7F6600C96232 /* render_device_gl.h */,
 				6D2F023B187A7F6600C96232 /* scene.cpp */,
@@ -622,7 +615,7 @@
 				6D2F0258187A7F6600C96232 /* render_device_gl.cpp in Sources */,
 				6D2F0207187A7CF600C96232 /* bstrlib.c in Sources */,
 				6D2F0209187A7CF600C96232 /* tinystr.cpp in Sources */,
-				6D2F024B187A7F6600C96232 /* ios_debug.cpp in Sources */,
+				6D2F024B187A7F6600C96232 /* ios_debug.mm in Sources */,
 				6D2F025C187A7F6600C96232 /* Shader.cpp in Sources */,
 				6D2F0259187A7F6600C96232 /* scene.cpp in Sources */,
 				6D2F0256187A7F6600C96232 /* render_device.cpp in Sources */,
@@ -638,7 +631,6 @@
 				6D2F0252187A7F6600C96232 /* gbuff_prim.cpp in Sources */,
 				6D2F0255187A7F6600C96232 /* param.cpp in Sources */,
 				6D2F0253187A7F6600C96232 /* material.cpp in Sources */,
-				6D2F0257187A7F6600C96232 /* render_device_es2.cpp in Sources */,
 				6D2F0250187A7F6600C96232 /* gbatch.cpp in Sources */,
 				6D2F0254187A7F6600C96232 /* material_db.cpp in Sources */,
 				6D2F024A187A7F6600C96232 /* gameloop.cpp in Sources */,

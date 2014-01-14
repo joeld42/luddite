@@ -1,0 +1,28 @@
+<MaterialList>
+
+	<Material name="mtl.one" shader="example_mesh.Plastic">
+		<param name="Kd" value="#ff00ff" />
+        <param name="dbgColor" value="#ff0000" />
+		<param name="roughness" value="25.0" />
+        <texture slot="0" filename="rock1.png" />
+    </Material>
+
+	<Material name="mtl.two" shader="example_mesh.Plastic" parent="mtl.one">
+        <param name="dbgColor" value="#00ff00" />
+		<param name="Kd" value="#ff0000" />
+	</Material>
+
+    <Material name="mtl.three" shader="example_mesh.Plastic" parent="mtl.one">
+        <param name="dbgColor" value="#ff00ff" />
+		<param name="Kd" value="#ff0000" />
+        <texture slot="0" filename="grass.png" />
+	</Material>
+
+    <Material name="mtl.Ground" shader="example_mesh.Plastic">
+        <param name="dbgColor" value="#005500" />
+        <param name="Kd" value="#005555" />
+        <texture slot="0" filename="grass.png" />
+    </Material>
+
+
+</MaterialList>

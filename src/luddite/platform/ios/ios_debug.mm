@@ -5,8 +5,16 @@
 
 bool pfAssertFunc( bool expr, const char *desc, int line, const char *file, bool *skip )
 {
-    // FIXME
-    return true;
+    // If expr is false, and we haven't been told to skip it
+    if ((!expr) && ((!skip)||(*skip)) )
+    {
+        // TODO: see if we can pop up our own dialog with a private event loop
+        printf( "***assert failed: %s:%d -- %s", file, line, desc );
+        return true;
+    }
+    
+    // No assert, or skip it
+    return false;
 }
 
 void pfVMessage( int message_level, const char *fmt, va_list args)

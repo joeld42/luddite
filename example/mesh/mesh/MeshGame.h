@@ -15,6 +15,8 @@
 
 - (void)setupMeshScene;
 
+@property (nonatomic, assign) CGSize viewport;
+
 #pragma mark - TKGameLoopDelegate
 
 - (void) updateFixed: (double)dt;

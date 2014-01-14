@@ -29,11 +29,13 @@
     luddite::SceneNode *_worldRoot;
     luddite::SceneNode *_spinnyNode, *_monkeyNode;
     
-    luddite::Scene *_scene;
+    luddite::Scene *_scene;    
 }
 @end
 
 @implementation MeshGame
+
+@synthesize viewport=_viewport;
 
 - (id)init
 {
@@ -43,6 +45,8 @@
         // Set up luddite stuff
         luddite::RenderDeviceGL *renderDeviceGL = new luddite::RenderDeviceGL();
         _renderDeviceGL = renderDeviceGL;
+        
+        [self setupMeshScene];
     }
     return self;
 }
@@ -51,18 +55,23 @@
 {
     
     // Setup camera (TODO: do this differently)
-    glhPerspectivef2( _renderDeviceGL->matProjection, 20.0, 800.0/600.0, 1.0, 500.0 );
-    matrix4x4f cameraXlate, cameraRot;
-    cameraXlate.Translate(0.0, -4, -15.0);
-    cameraRot.RotateX( 15.0 * (M_PI/180.0) );
-    _renderDeviceGL->matBaseModelView = cameraXlate * cameraRot;
+//    // FIXME: aspect
+//    glhPerspectivef2( _renderDeviceGL->matProjection, 20.0, 320.0/480.0, 1.0, 500.0 );
+//    matrix4x4f cameraXlate, cameraRot;
+//    cameraXlate.Translate(0.0, -4, -15.0);
+//    cameraRot.RotateX( 15.0 * (M_PI/180.0) );
+//    _renderDeviceGL->matBaseModelView = cameraXlate * cameraRot;
+
+    // just init with a default viewport, game can set it later
+    self.viewport = CGSizeMake( 100.0, 100.0 );
+
     
     // Initialize shader DB
     _mtlDB = new luddite::MaterialDB( );
     _mtlDB->initShaderDB();
     
     // Add material def files
-    _mtlDB->addMaterialDefs("Sandbox.material.xml" );
+    _mtlDB->addMaterialDefs("example_mesh.material.xml" );
     
     luddite::GBuff *gbuffCube = luddite::gbuff_cube( 0.7, vec3f( 0.0, 0.5, 0.0) );
     gbuff_setColorConstant( gbuffCube, vec4f( 1.0, 0.0, 1.0, 1.0) );
@@ -161,7 +170,25 @@
 
 - (void) drawScene
 {
+    glClearColor( 0.2f, 0.2f, 0.25f, 1.0f );
+    glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
     
+    // Eval and render the scene
+    _scene->eval( _renderDeviceGL );
+    _renderDeviceGL->renderFrame();
+}
+
+- (void)setViewport:(CGSize)viewport
+{
+    _viewport = viewport;
+    
+    // Setup camera (TODO: do this differently)
+    glhPerspectivef2( _renderDeviceGL->matProjection, 20.0, viewport.width / viewport.height, 1.0, 500.0 );
+    matrix4x4f cameraXlate, cameraRot;
+    cameraXlate.Translate(0.0, -4, -15.0);
+    cameraRot.RotateX( 15.0 * (M_PI/180.0) );
+    _renderDeviceGL->matBaseModelView = cameraXlate * cameraRot;
+
 }
 
 @end
