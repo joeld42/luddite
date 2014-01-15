@@ -53,18 +53,9 @@
 
 - (void)setupMeshScene
 {
-    
-    // Setup camera (TODO: do this differently)
-//    // FIXME: aspect
-//    glhPerspectivef2( _renderDeviceGL->matProjection, 20.0, 320.0/480.0, 1.0, 500.0 );
-//    matrix4x4f cameraXlate, cameraRot;
-//    cameraXlate.Translate(0.0, -4, -15.0);
-//    cameraRot.RotateX( 15.0 * (M_PI/180.0) );
-//    _renderDeviceGL->matBaseModelView = cameraXlate * cameraRot;
-
+   
     // just init with a default viewport, game can set it later
     self.viewport = CGSizeMake( 100.0, 100.0 );
-
     
     // Initialize shader DB
     _mtlDB = new luddite::MaterialDB( );
@@ -146,7 +137,6 @@
 
 - (void) updateFixed: (double)dt
 {
-    NSLog( @"MeshGameDelegate: updateFixed: %lf", dt );
     quat4f qrot;
     qrot.SetEuler( vec3f(0.0, 0.2f*dt, 0.0), prmath::EULER_XYZ );
     

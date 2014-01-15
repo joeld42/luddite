@@ -17,8 +17,6 @@
 		6D1ED959187B87E700C5A17F /* TKAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D1ED958187B87E700C5A17F /* TKAppDelegate.m */; };
 		6D1ED95C187B87E700C5A17F /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6D1ED95A187B87E700C5A17F /* Main_iPhone.storyboard */; };
 		6D1ED95F187B87E700C5A17F /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6D1ED95D187B87E700C5A17F /* Main_iPad.storyboard */; };
-		6D1ED961187B87E700C5A17F /* Shader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 6D1ED960187B87E700C5A17F /* Shader.fsh */; };
-		6D1ED963187B87E700C5A17F /* Shader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 6D1ED962187B87E700C5A17F /* Shader.vsh */; };
 		6D1ED966187B87E700C5A17F /* TKViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6D1ED965187B87E700C5A17F /* TKViewController.mm */; };
 		6D1ED968187B87E700C5A17F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6D1ED967187B87E700C5A17F /* Images.xcassets */; };
 		6D1ED96F187B87E700C5A17F /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D1ED96E187B87E700C5A17F /* XCTest.framework */; };
@@ -60,8 +58,6 @@
 		6D1ED958187B87E700C5A17F /* TKAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TKAppDelegate.m; sourceTree = "<group>"; };
 		6D1ED95B187B87E700C5A17F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
 		6D1ED95E187B87E700C5A17F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
-		6D1ED960187B87E700C5A17F /* Shader.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = Shader.fsh; path = Shaders/Shader.fsh; sourceTree = "<group>"; };
-		6D1ED962187B87E700C5A17F /* Shader.vsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = Shader.vsh; path = Shaders/Shader.vsh; sourceTree = "<group>"; };
 		6D1ED964187B87E700C5A17F /* TKViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TKViewController.h; sourceTree = "<group>"; };
 		6D1ED965187B87E700C5A17F /* TKViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = TKViewController.mm; sourceTree = "<group>"; };
 		6D1ED967187B87E700C5A17F /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -148,8 +144,6 @@
 				6D1ED958187B87E700C5A17F /* TKAppDelegate.m */,
 				6D1ED95A187B87E700C5A17F /* Main_iPhone.storyboard */,
 				6D1ED95D187B87E700C5A17F /* Main_iPad.storyboard */,
-				6D1ED960187B87E700C5A17F /* Shader.fsh */,
-				6D1ED962187B87E700C5A17F /* Shader.vsh */,
 				6D1ED964187B87E700C5A17F /* TKViewController.h */,
 				6D1ED965187B87E700C5A17F /* TKViewController.mm */,
 				6D1ED967187B87E700C5A17F /* Images.xcassets */,
@@ -280,7 +274,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				6D1ED9C51885D57800C5A17F /* rock1.png in Resources */,
-				6D1ED961187B87E700C5A17F /* Shader.fsh in Resources */,
 				6D1ED95F187B87E700C5A17F /* Main_iPad.storyboard in Resources */,
 				6D1ED9C31885CAF600C5A17F /* grass.png in Resources */,
 				6D1ED95C187B87E700C5A17F /* Main_iPhone.storyboard in Resources */,
@@ -289,7 +282,6 @@
 				6D1ED9C11885C4CD00C5A17F /* suzanne.obj in Resources */,
 				6D1ED9C01885C4CD00C5A17F /* example_mesh.material.xml in Resources */,
 				6D1ED953187B87E700C5A17F /* InfoPlist.strings in Resources */,
-				6D1ED963187B87E700C5A17F /* Shader.vsh in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
