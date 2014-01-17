@@ -1,0 +1,559 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		6D1ED9D31886100B00C5A17F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D1ED9D21886100B00C5A17F /* Foundation.framework */; };
+		6D1ED9D51886100B00C5A17F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D1ED9D41886100B00C5A17F /* CoreGraphics.framework */; };
+		6D1ED9D71886100B00C5A17F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D1ED9D61886100B00C5A17F /* UIKit.framework */; };
+		6D1ED9D91886100B00C5A17F /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D1ED9D81886100B00C5A17F /* GLKit.framework */; };
+		6D1ED9DB1886100B00C5A17F /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D1ED9DA1886100B00C5A17F /* OpenGLES.framework */; };
+		6D1ED9E11886100B00C5A17F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6D1ED9DF1886100B00C5A17F /* InfoPlist.strings */; };
+		6D1ED9E31886100B00C5A17F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D1ED9E21886100B00C5A17F /* main.m */; };
+		6D1ED9E71886100B00C5A17F /* TKAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D1ED9E61886100B00C5A17F /* TKAppDelegate.m */; };
+		6D1ED9EA1886100B00C5A17F /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6D1ED9E81886100B00C5A17F /* Main_iPhone.storyboard */; };
+		6D1ED9ED1886100B00C5A17F /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6D1ED9EB1886100B00C5A17F /* Main_iPad.storyboard */; };
+		6D1ED9EF1886100B00C5A17F /* Shader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 6D1ED9EE1886100B00C5A17F /* Shader.fsh */; };
+		6D1ED9F11886100B00C5A17F /* Shader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 6D1ED9F01886100B00C5A17F /* Shader.vsh */; };
+		6D1ED9F41886100B00C5A17F /* TKCollectViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6D1ED9F31886100B00C5A17F /* TKCollectViewController.mm */; };
+		6D1ED9F61886100B00C5A17F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6D1ED9F51886100B00C5A17F /* Images.xcassets */; };
+		6D1ED9FD1886100C00C5A17F /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D1ED9FC1886100C00C5A17F /* XCTest.framework */; };
+		6D1ED9FE1886100C00C5A17F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D1ED9D21886100B00C5A17F /* Foundation.framework */; };
+		6D1ED9FF1886100C00C5A17F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D1ED9D61886100B00C5A17F /* UIKit.framework */; };
+		6D1EDA071886100C00C5A17F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6D1EDA051886100C00C5A17F /* InfoPlist.strings */; };
+		6D1EDA091886100C00C5A17F /* CollectGameTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D1EDA081886100C00C5A17F /* CollectGameTests.m */; };
+		6D1EDA1C188611CB00C5A17F /* libluddite.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D1EDA1B188611CB00C5A17F /* libluddite.a */; };
+		6D1EDA1F18861C7B00C5A17F /* TKCollectGame.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6D1EDA1E18861C7B00C5A17F /* TKCollectGame.mm */; };
+		6D1EDA281889055500C5A17F /* CollectGame.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 6D1EDA211889055400C5A17F /* CollectGame.glsl */; };
+		6D1EDA291889055500C5A17F /* CollectGame.material.xml in Resources */ = {isa = PBXBuildFile; fileRef = 6D1EDA221889055400C5A17F /* CollectGame.material.xml */; };
+		6D1EDA2A1889055500C5A17F /* grid10x10.obj in Resources */ = {isa = PBXBuildFile; fileRef = 6D1EDA231889055500C5A17F /* grid10x10.obj */; };
+		6D1EDA2B1889055500C5A17F /* ground_swirl.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D1EDA241889055500C5A17F /* ground_swirl.png */; };
+		6D1EDA2C1889055500C5A17F /* img_tree.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D1EDA251889055500C5A17F /* img_tree.png */; };
+		6D1EDA2D1889055500C5A17F /* player.obj in Resources */ = {isa = PBXBuildFile; fileRef = 6D1EDA261889055500C5A17F /* player.obj */; };
+		6D1EDA2E1889055500C5A17F /* tree_fir.obj in Resources */ = {isa = PBXBuildFile; fileRef = 6D1EDA271889055500C5A17F /* tree_fir.obj */; };
+		6D1EDA301889076000C5A17F /* player.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D1EDA2F1889076000C5A17F /* player.png */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		6D1EDA001886100C00C5A17F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6D1ED9C71886100B00C5A17F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6D1ED9CE1886100B00C5A17F;
+			remoteInfo = CollectGame;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		6D1ED9CF1886100B00C5A17F /* CollectGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CollectGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6D1ED9D21886100B00C5A17F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		6D1ED9D41886100B00C5A17F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		6D1ED9D61886100B00C5A17F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		6D1ED9D81886100B00C5A17F /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
+		6D1ED9DA1886100B00C5A17F /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		6D1ED9DE1886100B00C5A17F /* CollectGame-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CollectGame-Info.plist"; sourceTree = "<group>"; };
+		6D1ED9E01886100B00C5A17F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		6D1ED9E21886100B00C5A17F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		6D1ED9E41886100B00C5A17F /* CollectGame-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CollectGame-Prefix.pch"; sourceTree = "<group>"; };
+		6D1ED9E51886100B00C5A17F /* TKAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TKAppDelegate.h; sourceTree = "<group>"; };
+		6D1ED9E61886100B00C5A17F /* TKAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TKAppDelegate.m; sourceTree = "<group>"; };
+		6D1ED9E91886100B00C5A17F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
+		6D1ED9EC1886100B00C5A17F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
+		6D1ED9EE1886100B00C5A17F /* Shader.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = Shader.fsh; path = Shaders/Shader.fsh; sourceTree = "<group>"; };
+		6D1ED9F01886100B00C5A17F /* Shader.vsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = Shader.vsh; path = Shaders/Shader.vsh; sourceTree = "<group>"; };
+		6D1ED9F21886100B00C5A17F /* TKCollectViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TKCollectViewController.h; sourceTree = "<group>"; };
+		6D1ED9F31886100B00C5A17F /* TKCollectViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = TKCollectViewController.mm; sourceTree = "<group>"; };
+		6D1ED9F51886100B00C5A17F /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		6D1ED9FB1886100C00C5A17F /* CollectGameTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CollectGameTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		6D1ED9FC1886100C00C5A17F /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		6D1EDA041886100C00C5A17F /* CollectGameTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CollectGameTests-Info.plist"; sourceTree = "<group>"; };
+		6D1EDA061886100C00C5A17F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		6D1EDA081886100C00C5A17F /* CollectGameTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CollectGameTests.m; sourceTree = "<group>"; };
+		6D1EDA1B188611CB00C5A17F /* libluddite.a */ = {isa = PBXFileReference; lastKnownFileType = file; name = libluddite.a; path = "../../luddite/build/Debug-iphoneos/libluddite.a"; sourceTree = "<group>"; };
+		6D1EDA1D18861C7B00C5A17F /* TKCollectGame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKCollectGame.h; sourceTree = "<group>"; };
+		6D1EDA1E18861C7B00C5A17F /* TKCollectGame.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TKCollectGame.mm; sourceTree = "<group>"; };
+		6D1EDA211889055400C5A17F /* CollectGame.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CollectGame.glsl; sourceTree = "<group>"; };
+		6D1EDA221889055400C5A17F /* CollectGame.material.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = CollectGame.material.xml; sourceTree = "<group>"; };
+		6D1EDA231889055500C5A17F /* grid10x10.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = grid10x10.obj; sourceTree = "<group>"; };
+		6D1EDA241889055500C5A17F /* ground_swirl.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ground_swirl.png; sourceTree = "<group>"; };
+		6D1EDA251889055500C5A17F /* img_tree.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_tree.png; sourceTree = "<group>"; };
+		6D1EDA261889055500C5A17F /* player.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = player.obj; sourceTree = "<group>"; };
+		6D1EDA271889055500C5A17F /* tree_fir.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = tree_fir.obj; sourceTree = "<group>"; };
+		6D1EDA2F1889076000C5A17F /* player.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = player.png; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		6D1ED9CC1886100B00C5A17F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6D1EDA1C188611CB00C5A17F /* libluddite.a in Frameworks */,
+				6D1ED9DB1886100B00C5A17F /* OpenGLES.framework in Frameworks */,
+				6D1ED9D51886100B00C5A17F /* CoreGraphics.framework in Frameworks */,
+				6D1ED9D71886100B00C5A17F /* UIKit.framework in Frameworks */,
+				6D1ED9D91886100B00C5A17F /* GLKit.framework in Frameworks */,
+				6D1ED9D31886100B00C5A17F /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6D1ED9F81886100C00C5A17F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6D1ED9FD1886100C00C5A17F /* XCTest.framework in Frameworks */,
+				6D1ED9FF1886100C00C5A17F /* UIKit.framework in Frameworks */,
+				6D1ED9FE1886100C00C5A17F /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		6D1ED9C61886100B00C5A17F = {
+			isa = PBXGroup;
+			children = (
+				6D1EDA201889055400C5A17F /* gamedata */,
+				6D1ED9DC1886100B00C5A17F /* CollectGame */,
+				6D1EDA021886100C00C5A17F /* CollectGameTests */,
+				6D1ED9D11886100B00C5A17F /* Frameworks */,
+				6D1ED9D01886100B00C5A17F /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		6D1ED9D01886100B00C5A17F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6D1ED9CF1886100B00C5A17F /* CollectGame.app */,
+				6D1ED9FB1886100C00C5A17F /* CollectGameTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		6D1ED9D11886100B00C5A17F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6D1EDA1B188611CB00C5A17F /* libluddite.a */,
+				6D1ED9D21886100B00C5A17F /* Foundation.framework */,
+				6D1ED9D41886100B00C5A17F /* CoreGraphics.framework */,
+				6D1ED9D61886100B00C5A17F /* UIKit.framework */,
+				6D1ED9D81886100B00C5A17F /* GLKit.framework */,
+				6D1ED9DA1886100B00C5A17F /* OpenGLES.framework */,
+				6D1ED9FC1886100C00C5A17F /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6D1ED9DC1886100B00C5A17F /* CollectGame */ = {
+			isa = PBXGroup;
+			children = (
+				6D1ED9E51886100B00C5A17F /* TKAppDelegate.h */,
+				6D1ED9E61886100B00C5A17F /* TKAppDelegate.m */,
+				6D1ED9E81886100B00C5A17F /* Main_iPhone.storyboard */,
+				6D1ED9EB1886100B00C5A17F /* Main_iPad.storyboard */,
+				6D1ED9EE1886100B00C5A17F /* Shader.fsh */,
+				6D1ED9F01886100B00C5A17F /* Shader.vsh */,
+				6D1ED9F21886100B00C5A17F /* TKCollectViewController.h */,
+				6D1ED9F31886100B00C5A17F /* TKCollectViewController.mm */,
+				6D1ED9F51886100B00C5A17F /* Images.xcassets */,
+				6D1ED9DD1886100B00C5A17F /* Supporting Files */,
+				6D1EDA1D18861C7B00C5A17F /* TKCollectGame.h */,
+				6D1EDA1E18861C7B00C5A17F /* TKCollectGame.mm */,
+			);
+			path = CollectGame;
+			sourceTree = "<group>";
+		};
+		6D1ED9DD1886100B00C5A17F /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				6D1ED9DE1886100B00C5A17F /* CollectGame-Info.plist */,
+				6D1ED9DF1886100B00C5A17F /* InfoPlist.strings */,
+				6D1ED9E21886100B00C5A17F /* main.m */,
+				6D1ED9E41886100B00C5A17F /* CollectGame-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		6D1EDA021886100C00C5A17F /* CollectGameTests */ = {
+			isa = PBXGroup;
+			children = (
+				6D1EDA081886100C00C5A17F /* CollectGameTests.m */,
+				6D1EDA031886100C00C5A17F /* Supporting Files */,
+			);
+			path = CollectGameTests;
+			sourceTree = "<group>";
+		};
+		6D1EDA031886100C00C5A17F /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				6D1EDA041886100C00C5A17F /* CollectGameTests-Info.plist */,
+				6D1EDA051886100C00C5A17F /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		6D1EDA201889055400C5A17F /* gamedata */ = {
+			isa = PBXGroup;
+			children = (
+				6D1EDA2F1889076000C5A17F /* player.png */,
+				6D1EDA211889055400C5A17F /* CollectGame.glsl */,
+				6D1EDA221889055400C5A17F /* CollectGame.material.xml */,
+				6D1EDA231889055500C5A17F /* grid10x10.obj */,
+				6D1EDA241889055500C5A17F /* ground_swirl.png */,
+				6D1EDA251889055500C5A17F /* img_tree.png */,
+				6D1EDA261889055500C5A17F /* player.obj */,
+				6D1EDA271889055500C5A17F /* tree_fir.obj */,
+			);
+			name = gamedata;
+			path = CollectGame/gamedata;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		6D1ED9CE1886100B00C5A17F /* CollectGame */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6D1EDA0C1886100C00C5A17F /* Build configuration list for PBXNativeTarget "CollectGame" */;
+			buildPhases = (
+				6D1ED9CB1886100B00C5A17F /* Sources */,
+				6D1ED9CC1886100B00C5A17F /* Frameworks */,
+				6D1ED9CD1886100B00C5A17F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CollectGame;
+			productName = CollectGame;
+			productReference = 6D1ED9CF1886100B00C5A17F /* CollectGame.app */;
+			productType = "com.apple.product-type.application";
+		};
+		6D1ED9FA1886100C00C5A17F /* CollectGameTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6D1EDA0F1886100C00C5A17F /* Build configuration list for PBXNativeTarget "CollectGameTests" */;
+			buildPhases = (
+				6D1ED9F71886100C00C5A17F /* Sources */,
+				6D1ED9F81886100C00C5A17F /* Frameworks */,
+				6D1ED9F91886100C00C5A17F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6D1EDA011886100C00C5A17F /* PBXTargetDependency */,
+			);
+			name = CollectGameTests;
+			productName = CollectGameTests;
+			productReference = 6D1ED9FB1886100C00C5A17F /* CollectGameTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		6D1ED9C71886100B00C5A17F /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = TK;
+				LastUpgradeCheck = 0500;
+				ORGANIZATIONNAME = Tapnik;
+				TargetAttributes = {
+					6D1ED9FA1886100C00C5A17F = {
+						TestTargetID = 6D1ED9CE1886100B00C5A17F;
+					};
+				};
+			};
+			buildConfigurationList = 6D1ED9CA1886100B00C5A17F /* Build configuration list for PBXProject "CollectGame" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 6D1ED9C61886100B00C5A17F;
+			productRefGroup = 6D1ED9D01886100B00C5A17F /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				6D1ED9CE1886100B00C5A17F /* CollectGame */,
+				6D1ED9FA1886100C00C5A17F /* CollectGameTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		6D1ED9CD1886100B00C5A17F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6D1EDA301889076000C5A17F /* player.png in Resources */,
+				6D1EDA2D1889055500C5A17F /* player.obj in Resources */,
+				6D1ED9EF1886100B00C5A17F /* Shader.fsh in Resources */,
+				6D1ED9ED1886100B00C5A17F /* Main_iPad.storyboard in Resources */,
+				6D1EDA2E1889055500C5A17F /* tree_fir.obj in Resources */,
+				6D1ED9EA1886100B00C5A17F /* Main_iPhone.storyboard in Resources */,
+				6D1EDA281889055500C5A17F /* CollectGame.glsl in Resources */,
+				6D1EDA291889055500C5A17F /* CollectGame.material.xml in Resources */,
+				6D1EDA2A1889055500C5A17F /* grid10x10.obj in Resources */,
+				6D1EDA2B1889055500C5A17F /* ground_swirl.png in Resources */,
+				6D1ED9F61886100B00C5A17F /* Images.xcassets in Resources */,
+				6D1ED9E11886100B00C5A17F /* InfoPlist.strings in Resources */,
+				6D1ED9F11886100B00C5A17F /* Shader.vsh in Resources */,
+				6D1EDA2C1889055500C5A17F /* img_tree.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6D1ED9F91886100C00C5A17F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6D1EDA071886100C00C5A17F /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		6D1ED9CB1886100B00C5A17F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6D1ED9F41886100B00C5A17F /* TKCollectViewController.mm in Sources */,
+				6D1EDA1F18861C7B00C5A17F /* TKCollectGame.mm in Sources */,
+				6D1ED9E31886100B00C5A17F /* main.m in Sources */,
+				6D1ED9E71886100B00C5A17F /* TKAppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6D1ED9F71886100C00C5A17F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6D1EDA091886100C00C5A17F /* CollectGameTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		6D1EDA011886100C00C5A17F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6D1ED9CE1886100B00C5A17F /* CollectGame */;
+			targetProxy = 6D1EDA001886100C00C5A17F /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		6D1ED9DF1886100B00C5A17F /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6D1ED9E01886100B00C5A17F /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		6D1ED9E81886100B00C5A17F /* Main_iPhone.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6D1ED9E91886100B00C5A17F /* Base */,
+			);
+			name = Main_iPhone.storyboard;
+			sourceTree = "<group>";
+		};
+		6D1ED9EB1886100B00C5A17F /* Main_iPad.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6D1ED9EC1886100B00C5A17F /* Base */,
+			);
+			name = Main_iPad.storyboard;
+			sourceTree = "<group>";
+		};
+		6D1EDA051886100C00C5A17F /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6D1EDA061886100C00C5A17F /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		6D1EDA0A1886100C00C5A17F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		6D1EDA0B1886100C00C5A17F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		6D1EDA0D1886100C00C5A17F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CollectGame/CollectGame-Prefix.pch";
+				INFOPLIST_FILE = "CollectGame/CollectGame-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		6D1EDA0E1886100C00C5A17F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CollectGame/CollectGame-Prefix.pch";
+				INFOPLIST_FILE = "CollectGame/CollectGame-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		6D1EDA101886100C00C5A17F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/CollectGame.app/CollectGame";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CollectGame/CollectGame-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "CollectGameTests/CollectGameTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		6D1EDA111886100C00C5A17F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/CollectGame.app/CollectGame";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CollectGame/CollectGame-Prefix.pch";
+				INFOPLIST_FILE = "CollectGameTests/CollectGameTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		6D1ED9CA1886100B00C5A17F /* Build configuration list for PBXProject "CollectGame" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6D1EDA0A1886100C00C5A17F /* Debug */,
+				6D1EDA0B1886100C00C5A17F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6D1EDA0C1886100C00C5A17F /* Build configuration list for PBXNativeTarget "CollectGame" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6D1EDA0D1886100C00C5A17F /* Debug */,
+				6D1EDA0E1886100C00C5A17F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6D1EDA0F1886100C00C5A17F /* Build configuration list for PBXNativeTarget "CollectGameTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6D1EDA101886100C00C5A17F /* Debug */,
+				6D1EDA111886100C00C5A17F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 6D1ED9C71886100B00C5A17F /* Project object */;
+}

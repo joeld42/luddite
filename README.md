@@ -15,3 +15,4 @@ Steps to set up a project:
 # Drag the "luddite" project to the workspace
 # Rename classes that will have luddite code visible to .mm (FIXME: could guard this in headers)
 # Under app target, go to 'Link Binary with Libraries' and add the libluddite.a as a dependency
+

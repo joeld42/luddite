@@ -1,0 +1,22 @@
+<MaterialList>
+
+	<Material name="mtl.environment" shader="CollectGame.BasicMtl">
+		<param name="Kd" value="#ff00ff" />
+		<param name="roughness" value="25.0" />
+        <texture slot="0" filename="ground_swirl.png" />
+    </Material>
+
+    <Material name="mtl.player" shader="CollectGame.BasicMtl">
+		<param name="Kd" value="#ff00ff" />
+		<param name="roughness" value="25.0" />
+        <texture slot="0" filename="player.png" />
+    </Material>
+
+<Material name="mtl.tree" shader="CollectGame.BasicMtl">
+    <param name="Kd" value="#ff00ff" />
+    <param name="roughness" value="25.0" />
+    <texture slot="0" filename="img_tree.png" />
+</Material>
+
+
+</MaterialList>

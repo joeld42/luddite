@@ -1,46 +1,47 @@
 //
-//  TKViewController.m
-//  mesh
+//  TKCollectViewController.m
+//  CollectGame
 //
-//  Created by Joel Davis on 1/6/14.
+//  Created by Joel Davis on 1/14/14.
 //  Copyright (c) 2014 Tapnik. All rights reserved.
 //
 
 #import <luddite/common/debug.h>
 
-#import "TKViewController.h"
+#import "TKCollectViewController.h"
+#import "TKCollectGame.h"
 
 using namespace luddite;
 
-@interface TKViewController ()
+@interface TKCollectViewController ()
 @property (strong, nonatomic) EAGLContext *context;
+@property (strong, nonatomic) TKCollectGame *game;
 @end
 
-@implementation TKViewController
+@implementation TKCollectViewController
 
-@synthesize meshGame=_meshGame;
+@synthesize game=_game;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        NSLog( @"TKViewController init here...");
+        NSLog( @"TKCollectViewController init here...");
     }
     return self;
 }
 
 - (void) gameInit
 {
-    self.meshGame = [[MeshGame alloc] init];
-    self.gameDelegate = _meshGame;
+    self.game = [[TKCollectGame alloc] init];
+    self.gameDelegate = _game;
     
     // Set the view
-    _meshGame.viewport = self.view.bounds.size;
+    _game.viewport = self.view.bounds.size;
 }
 
 - (void)viewDidLoad
 {
-
     [super viewDidLoad];
 }
 
@@ -48,12 +49,12 @@ using namespace luddite;
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-
+    
     // Dispose of any resources that can be recreated.
 }
 
 - (void) didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {
-    _meshGame.viewport = self.view.bounds.size;
+    _game.viewport = self.view.bounds.size;
 }
 @end
