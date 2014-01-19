@@ -9,7 +9,7 @@
 #ifndef luddite_ios_drawvert_h
 #define luddite_ios_drawvert_h
 
-#include <prmath/prmath.hpp>
+#include <GLKit/GLKMath.h>
 
 namespace luddite
 {
@@ -17,10 +17,10 @@ namespace luddite
 // Common per-vertex attributes
 struct DrawVert
 {
-    vec3f m_pos;
-    vec2f m_st;
-    vec3f m_nrm;
-    // prmath::vec3			tangents[2];
+    GLKVector3 m_pos;
+    GLKVector3 m_st;
+    GLKVector3 m_nrm;
+    // GLKVector3			tangents[2];
     uint8_t	m_color[4];
 };
     

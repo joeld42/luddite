@@ -59,7 +59,7 @@ static float _cubeVertData[NUM_CUBE_VERTS * 6] =
     -0.5f, 0.5f, -0.5f,        0.0f, 0.0f, -1.0f
 };
 
-GBuff *luddite::gbuff_cube( float size, vec3f center )
+GBuff *luddite::gbuff_cube( float size, GLKVector3 center )
 {
     GBuff *gbuff = new GBuff();
     
@@ -67,11 +67,11 @@ GBuff *luddite::gbuff_cube( float size, vec3f center )
     
     for (int i=0; i < NUM_CUBE_VERTS; ++i)
     {
-        cubeVert->m_pos = vec3f( (_cubeVertData[i*6 + 0] * size) - center.x,
+        cubeVert->m_pos = GLKVector3Make( (_cubeVertData[i*6 + 0] * size) - center.x,
                                  (_cubeVertData[i*6 + 1] * size) - center.y,
                                  (_cubeVertData[i*6 + 2] * size) - center.z );
  
-        cubeVert->m_nrm = vec3f( (_cubeVertData[i*6 + 3] * size) - center.x,
+        cubeVert->m_nrm = GLKVector3Make( (_cubeVertData[i*6 + 3] * size) - center.x,
                                  (_cubeVertData[i*6 + 4] * size) - center.y,
                                  (_cubeVertData[i*6 + 5] * size) - center.z );
         
@@ -86,8 +86,8 @@ GBuff *luddite::gbuff_cube( float size, vec3f center )
             case 5: sndx = 0; tndx = 1; break; // face 5, project xy
         }
         
-        cubeVert->m_st = vec2f( _cubeVertData[i*6 + sndx] + 0.5,
-                                _cubeVertData[i*6 + tndx] + 0.5 );
+        cubeVert->m_st = GLKVector3Make(  _cubeVertData[i*6 + sndx] + 0.5,
+                                          _cubeVertData[i*6 + tndx] + 0.5, 0.0 );
 
         
         cubeVert++;
@@ -97,7 +97,7 @@ GBuff *luddite::gbuff_cube( float size, vec3f center )
 }
 
 GBuff *luddite::gbuff_cylinder( int nsegments, float radius, 
-                       float height, vec3f center )
+                       float height, GLKVector3 center )
 {
     GBuff *gbuff = new GBuff();
     
@@ -105,9 +105,9 @@ GBuff *luddite::gbuff_cylinder( int nsegments, float radius,
     DrawVert *cylVert = gbuff->addVerts( nsegments * 4*3 );
     
     float halfhite = height/2.0;
-    vec2f plast;
-    vec2f stlast;
-    vec3f nlast;
+    GLKVector2 plast;
+    GLKVector3 stlast;
+    GLKVector3 nlast;
     float t0last;
     for (size_t i=0; i <= nsegments; i++)
     {
@@ -115,62 +115,63 @@ GBuff *luddite::gbuff_cylinder( int nsegments, float radius,
         float tval0 = ((float)i / (float)(nsegments-1)) * M_PI;
         float tval = tval0 * 2.0;
         
-        vec2f pcurr( cos( tval ) * radius, sin(tval)*radius );
-        vec2f stcurr( (pcurr.x*0.5)+0.5, (pcurr.y*0.5)+0.5 );
-        vec3f ncurr( pcurr.x, 0.0, pcurr.y );
-        ncurr.Normalize();
+        GLKVector2 pcurr = GLKVector2Make( cos( tval ) * radius, sin(tval)*radius );
+        GLKVector3 stcurr = GLKVector3Make( (pcurr.x*0.5)+0.5, (pcurr.y*0.5)+0.5, 0.0 );
+        GLKVector3 ncurr = GLKVector3Make( pcurr.x, 0.0, pcurr.y );
+        ncurr = GLKVector3Normalize( ncurr );
+        
         if (i>0)
         {            
             // Top Cap
-            cylVert[ndx+0].m_pos = vec3f( 0.0, halfhite, 0.0 );
-            cylVert[ndx+0].m_st = vec2f( 0.5, 0.5 );
-            cylVert[ndx+0].m_nrm = vec3f( 0.0, 1.0, 0.0 );
+            cylVert[ndx+0].m_pos = GLKVector3Make( 0.0, halfhite, 0.0 );
+            cylVert[ndx+0].m_st = GLKVector3Make( 0.5, 0.5, 0.0 );
+            cylVert[ndx+0].m_nrm = GLKVector3Make( 0.0, 1.0, 0.0 );
 
-            cylVert[ndx+1].m_pos = vec3f( plast.x, halfhite, plast.y );
+            cylVert[ndx+1].m_pos = GLKVector3Make( plast.x, halfhite, plast.y );
             cylVert[ndx+1].m_st = stlast;
-            cylVert[ndx+1].m_nrm = vec3f( 0.0, 1.0, 0.0 );
+            cylVert[ndx+1].m_nrm = GLKVector3Make( 0.0, 1.0, 0.0 );
 
-            cylVert[ndx+2].m_pos = vec3f( pcurr.x, halfhite, pcurr.y );
+            cylVert[ndx+2].m_pos = GLKVector3Make( pcurr.x, halfhite, pcurr.y );
             cylVert[ndx+2].m_st = stcurr;
-            cylVert[ndx+2].m_nrm = vec3f( 0.0, 1.0, 0.0 );
+            cylVert[ndx+2].m_nrm = GLKVector3Make( 0.0, 1.0, 0.0 );
 
             // Bottom cap
-            cylVert[ndx+3].m_pos = vec3f( 0.0, -halfhite, 0.0 );
-            cylVert[ndx+3].m_st = vec2f( 0.5, 0.5 );
-            cylVert[ndx+3].m_nrm = vec3f( 0.0, -1.0, 0.0 );
+            cylVert[ndx+3].m_pos = GLKVector3Make( 0.0, -halfhite, 0.0 );
+            cylVert[ndx+3].m_st = GLKVector3Make( 0.5, 0.5, 0.0 );
+            cylVert[ndx+3].m_nrm = GLKVector3Make( 0.0, -1.0, 0.0 );
             
-            cylVert[ndx+4].m_pos = vec3f( plast.x, -halfhite, plast.y );
+            cylVert[ndx+4].m_pos = GLKVector3Make( plast.x, -halfhite, plast.y );
             cylVert[ndx+4].m_st = stlast;
-            cylVert[ndx+4].m_nrm = vec3f( 0.0, -1.0, 0.0 );
+            cylVert[ndx+4].m_nrm = GLKVector3Make( 0.0, -1.0, 0.0 );
             
-            cylVert[ndx+5].m_pos = vec3f( pcurr.x, -halfhite, pcurr.y );
+            cylVert[ndx+5].m_pos = GLKVector3Make( pcurr.x, -halfhite, pcurr.y );
             cylVert[ndx+5].m_st = stcurr;
-            cylVert[ndx+5].m_nrm = vec3f( 0.0, -1.0, 0.0 );
+            cylVert[ndx+5].m_nrm = GLKVector3Make( 0.0, -1.0, 0.0 );
             
             // Middle part (upper tri)
-            cylVert[ndx+6].m_pos = vec3f( pcurr.x, halfhite, pcurr.y );
-            cylVert[ndx+6].m_st = vec2f( tval0, 0.0 );
+            cylVert[ndx+6].m_pos = GLKVector3Make( pcurr.x, halfhite, pcurr.y );
+            cylVert[ndx+6].m_st = GLKVector3Make( tval0, 0.0, 0.0 );
             cylVert[ndx+6].m_nrm = ncurr;
 
-            cylVert[ndx+7].m_pos = vec3f( plast.x, halfhite, plast.y );
-            cylVert[ndx+7].m_st = vec2f( t0last, 0.0 );
+            cylVert[ndx+7].m_pos = GLKVector3Make( plast.x, halfhite, plast.y );
+            cylVert[ndx+7].m_st = GLKVector3Make( t0last, 0.0, 0.0 );
             cylVert[ndx+7].m_nrm = nlast;
 
-            cylVert[ndx+8].m_pos = vec3f( pcurr.x, -halfhite, pcurr.y );
-            cylVert[ndx+8].m_st = vec2f( tval0, 1.0 );
+            cylVert[ndx+8].m_pos = GLKVector3Make( pcurr.x, -halfhite, pcurr.y );
+            cylVert[ndx+8].m_st = GLKVector3Make( tval0, 1.0, 0.0 );
             cylVert[ndx+8].m_nrm = ncurr;
 
             // Middle part (lower tri)
-            cylVert[ndx+9].m_pos = vec3f( pcurr.x, -halfhite, pcurr.y );
-            cylVert[ndx+9].m_st = vec2f( tval0, 1.0 );
+            cylVert[ndx+9].m_pos = GLKVector3Make( pcurr.x, -halfhite, pcurr.y );
+            cylVert[ndx+9].m_st = GLKVector3Make( tval0, 1.0, 0.0 );
             cylVert[ndx+9].m_nrm = ncurr;
             
-            cylVert[ndx+10].m_pos = vec3f( plast.x, -halfhite, plast.y );
-            cylVert[ndx+10].m_st = vec2f( t0last, 1.0 );
+            cylVert[ndx+10].m_pos = GLKVector3Make( plast.x, -halfhite, plast.y );
+            cylVert[ndx+10].m_st = GLKVector3Make( t0last, 1.0, 0.0 );
             cylVert[ndx+10].m_nrm = nlast;
             
-            cylVert[ndx+11].m_pos = vec3f( plast.x, halfhite, plast.y );
-            cylVert[ndx+11].m_st = vec2f( t0last, 0.0 );
+            cylVert[ndx+11].m_pos = GLKVector3Make( plast.x, halfhite, plast.y );
+            cylVert[ndx+11].m_st = GLKVector3Make( t0last, 0.0, 0.0 );
             cylVert[ndx+11].m_nrm = nlast;
         }
         plast=pcurr;
@@ -182,7 +183,7 @@ GBuff *luddite::gbuff_cylinder( int nsegments, float radius,
     return gbuff;
 }
 
-void luddite::gbuff_setColorConstant( GBuff *gbuff, const vec4f &color )
+void luddite::gbuff_setColorConstant( GBuff *gbuff, const GLKVector4 &color )
 {
     for (std::vector<luddite::DrawVert>::iterator vi = gbuff->m_vertData.begin();
          vi != gbuff->m_vertData.end(); ++vi )

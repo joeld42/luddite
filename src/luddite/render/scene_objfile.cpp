@@ -5,8 +5,9 @@
 //  Created by Joel Davis on 8/10/12.
 //  Copyright (c) 2012 Joel Davis. All rights reserved.
 //
-#include <prmath/prmath.hpp>
 #include <vector>
+
+#include <GLKit/GLKmath.h>
 
 #include <luddite/common/debug.h>
 #include <luddite/render/scene_objfile.h>
@@ -72,9 +73,9 @@ SceneNode *luddite::scene_objfile(char const *filename, RenderDevice *renderDevi
 {
     // Vert, st and norms are shared for all gbuffs in the
     // obj file
-    std::vector<vec3f> verts;
-    std::vector<vec3f> nrms;
-    std::vector<vec2f> sts;
+    std::vector<GLKVector3> verts;
+    std::vector<GLKVector3> nrms;
+    std::vector<GLKVector3> sts;
     
     // TODO: default name from filename
     SceneNode *objNode = new SceneNode();    
@@ -107,7 +108,7 @@ SceneNode *luddite::scene_objfile(char const *filename, RenderDevice *renderDevi
         // "v <x> <y> <z>"
         else if (!strcmp(token, "v"))
         {
-            vec3f v;
+            GLKVector3 v;
             sscanf( line, "%*s %f %f %f", &(v.x), &(v.y), &(v.z) );
             verts.push_back( v );
         }
@@ -115,15 +116,16 @@ SceneNode *luddite::scene_objfile(char const *filename, RenderDevice *renderDevi
         // "vt <s> <t>"
         else if (!strcmp( token, "vt"))
         {
-            vec2f st;
+            GLKVector3 st;
             sscanf( line, "%*s %f %f", &(st.s), &(st.t) );
+            st.z = 0.0;
             sts.push_back(st);
         }
         
         // "n <x> <y> <z>"
         else if (!strcmp(token, "vn"))
         {
-            vec3f n;
+            GLKVector3 n;
             sscanf( line, "%*s %f %f %f", &(n.x), &(n.y), &(n.z) );
             nrms.push_back( n );
         }
@@ -197,13 +199,13 @@ SceneNode *luddite::scene_objfile(char const *filename, RenderDevice *renderDevi
             // add dummy STs if none in obj file
             if (sts.size()==0)
             {
-                sts.push_back( vec2f(0.0,0.0) );
+                sts.push_back( GLKVector3Make(0.0,0.0,0.0) );
             }
             
             // Add dummy norms if none in obj file
             if (nrms.size()==0)
             {
-                nrms.push_back(vec3f(0.0,1.0,0.0) );
+                nrms.push_back(GLKVector3Make(0.0,1.0,0.0) );
             }
             
             // Skip points or single particles
@@ -212,6 +214,7 @@ SceneNode *luddite::scene_objfile(char const *filename, RenderDevice *renderDevi
                 for (int b=1; b < (faceVerts.size()-1); b++)
                 {                                    
                     DrawVert *tri = currMtl->gbuff->addTri();;
+                    
                     tri[0].m_pos = verts[faceVerts[0].pos];
                     tri[0].m_st = sts[faceVerts[0].st];
                     tri[0].m_nrm = nrms[faceVerts[0].nrm];

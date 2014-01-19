@@ -12,6 +12,8 @@
 #include <string>
 #include <vector>
 
+#include <GLKit/GLKMath.h>
+
 namespace luddite
 {
 
@@ -50,11 +52,11 @@ struct Param
     
     // Use assignment to set type and value
     const Param &operator= (float value );
-    const Param &operator= (const vec2f &value );
-    const Param &operator= (const vec3f &value );
-    const Param &operator= (const vec4f &value );
+    const Param &operator= (const GLKVector2 &value );
+    const Param &operator= (const GLKVector3 &value );
+    const Param &operator= (const GLKVector4 &value );
     //    const Param &operator= (const matrix3x3f &value );
-    const Param &operator= (const matrix4x4f &value );
+    const Param &operator= (const GLKMatrix4 &value );
 
     // param in GL shader.
     int32_t m_glParam;

@@ -12,7 +12,8 @@
 #include <list>
 #include <string>
 
-#import <prmath/prmath.hpp>
+#include <GLKit/GLKMath.h>
+
 #import <luddite/render/gbatch.h>
 
 namespace luddite
@@ -61,16 +62,16 @@ public:
     // ----------------------------------------
     //  Locations and Transform
     // ----------------------------------------    
-    vec3f worldPos();
-    vec3f localToWorld( const vec3f &localPos );
-    vec3f worldToLocal( const vec3f &worldPos );
+    GLKVector3 worldPos();
+    GLKVector3 localToWorld( const GLKVector3 &localPos );
+    GLKVector3 worldToLocal( const GLKVector3 &worldPos );
     
     // TODO wrap with accessors for dirty flag?
-    vec3f  m_pos;
-    quat4f m_rot;
+    GLKVector3  m_pos;
+    GLKQuaternion m_rot;
     
     // Build the current xform
-    matrix4x4f localXForm();
+    GLKMatrix4 localXForm();
         
     
 protected:

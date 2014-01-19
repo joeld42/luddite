@@ -218,7 +218,7 @@ void MaterialDB::_parseParam(Material *mtl, std::string const & paramName, char 
         printf("setting param %s:%s (%s) to %d (%d %d %d)\n", mtl->m_materialName.c_str(), value,
                 paramName.c_str(), color, r, g, b );
 
-        p = vec4f( (float)r/255.0, (float)g/255.0, (float)b/255.0, 1.0 );
+        p = GLKVector4Make( (float)r/255.0, (float)g/255.0, (float)b/255.0, 1.0 );
     }
     // TODO: more formats
     else

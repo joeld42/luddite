@@ -17,6 +17,8 @@
 
 @property (nonatomic, assign) CGSize viewport;
 
+@property (nonatomic, assign) CGFloat zval;
+
 #pragma mark - TKGameLoopDelegate
 
 - (void) updateFixed: (double)dt;

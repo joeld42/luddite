@@ -33,16 +33,17 @@ SceneNode *Scene::root()
 void Scene::eval( RenderDevice *device )
 {
     // TODO: use visibilty for traversal..
-    matrix4x4f rootXform;
-    rootXform.Identity();
-    _evalNode( device, m_sceneRoot, rootXform );
+//    GLKMatrix4 rootXform;
+//    rootXform.Identity();
+    _evalNode( device, m_sceneRoot, GLKMatrix4Identity );
 }
 
-void Scene::_evalNode( RenderDevice *device, SceneNode *node, matrix4x4f currXform )
+void Scene::_evalNode( RenderDevice *device, SceneNode *node, GLKMatrix4 currXform )
 {
     // update the transform for this batch
-    matrix4x4f nodeXform = node->localXForm();
-    nodeXform = nodeXform * currXform;
+    GLKMatrix4 nodeXform = node->localXForm();
+    //nodeXform = nodeXform * currXform;
+    nodeXform = GLKMatrix4Multiply( nodeXform, currXform );
     
     // Add the gbatch for this node
     // For now just add everything, need to be smarter about traversal

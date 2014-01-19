@@ -6,10 +6,12 @@
 //  Copyright (c) 2012 Joel Davis. All rights reserved.
 //
 
-#include <luddite/common/debug.h>
+#include <GLKit/GLKMath.h>
 
+#include <luddite/common/debug.h>
 #include <luddite/render/drawvert.h>
 #include <luddite/render/gbuff.h>
+
 
 using namespace luddite;
 
@@ -21,9 +23,9 @@ GBuff::GBuff() :
 luddite::DrawVert *GBuff::addVerts( size_t numVerts )
 {
     DrawVert defaultVert;
-    defaultVert.m_pos = vec3f( 0.0, 0.0, 0.0 );
-    defaultVert.m_st  = vec2f( 0.0, 0.0 );
-    defaultVert.m_nrm = vec3f( 0.0, 1.0 , 0.0 );
+    defaultVert.m_pos = GLKVector3Make( 0.0, 0.0, 0.0 );
+    defaultVert.m_st  = GLKVector3Make( 0.0, 0.0, 0.0 );
+    defaultVert.m_nrm = GLKVector3Make( 0.0, 1.0 , 0.0 );
     defaultVert.m_color[0] = 0xff;
     defaultVert.m_color[1] = 0xff;
     defaultVert.m_color[2] = 0xff;

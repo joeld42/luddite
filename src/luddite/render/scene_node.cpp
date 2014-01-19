@@ -14,10 +14,10 @@
 using namespace luddite;
 
 SceneNode::SceneNode( SceneNode *parent ) :
-    m_pos( 0.0, 0.0, 0.0 ),
-    m_rot( 0.0, 0.0, 0.0, 1.0 ),
     m_parent( parent )
 {
+    m_pos = GLKVector3Make( 0.0, 0.0, 0.0 );
+    m_rot = GLKQuaternionMake( 0.0, 0.0, 0.0, 1.0 );
     if (parent)
     {
         parent->addChild( this );
@@ -26,11 +26,11 @@ SceneNode::SceneNode( SceneNode *parent ) :
 
 SceneNode::SceneNode( const std::string &name, 
                      SceneNode *parent ) :
-        m_pos( 0.0, 0.0, 0.0 ),
-        m_rot( 0.0, 0.0, 0.0, 1.0 ),
         m_name(name),
         m_parent(parent)
 {
+    m_pos = GLKVector3Make( 0.0, 0.0, 0.0 );
+    m_rot = GLKQuaternionMake( 0.0, 0.0, 0.0, 1.0 );
     if (parent)
     {
         parent->addChild( this );
@@ -99,36 +99,34 @@ SceneNode *SceneNode::findNamedChild( const std::string &targetName )
     return NULL;
 }
 
-vec3f SceneNode::worldPos()
+GLKVector3 SceneNode::worldPos()
 {
-    return localToWorld(vec3f(0.0,0.0,0.0) );
+    return localToWorld( GLKVector3Make(0.0,0.0,0.0) );
 }
 
-matrix4x4f SceneNode::localXForm()
+GLKMatrix4 SceneNode::localXForm()
 {
-    matrix4x4f xform;
-    matrix4x4f rot;
+    GLKMatrix4 xform;
+    GLKMatrix4 rot;
     
 //    DBG::info( "[%s] m_pos is %f %f %f\n", m_name.c_str(), m_pos.x, m_pos.y, m_pos.z );
-    
-    xform.Identity();
-    xform.Translate(m_pos);
+    xform = GLKMatrix4MakeTranslation( m_pos.x, m_pos.y, m_pos.z );
 
 //    DBG::info( "[%s] m_rot is %f %f %f %f\n", m_name.c_str(), m_rot.x, m_rot.y, m_rot.z, m_rot.w );
+    rot = GLKMatrix4MakeWithQuaternion( m_rot );
     
-    rot = m_rot; // quat to matrix
-    xform = rot * xform;
+    xform = GLKMatrix4Multiply( rot, xform );
     
     return xform;
 }
 
-vec3f SceneNode::localToWorld( const vec3f &localPos )
+GLKVector3 SceneNode::localToWorld( const GLKVector3 &localPos )
 {
     // TODO
     return localPos;
 }
 
-vec3f SceneNode::worldToLocal( const vec3f &worldPos )
+GLKVector3 SceneNode::worldToLocal( const GLKVector3 &worldPos )
 {
     // TODO
     return worldPos;

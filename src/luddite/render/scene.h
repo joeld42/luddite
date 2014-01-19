@@ -9,7 +9,7 @@
 #ifndef luddite_scene_h
 #define luddite_scene_h
 
-#include <prmath/prmath.hpp>
+#include <GLKit/GLKMath.h>
 
 #include <luddite/render/scene_node.h>
 #include <luddite/render/render_device.h>
@@ -35,7 +35,7 @@ public:
     void eval( RenderDevice *device );
     
 protected:
-    void _evalNode( RenderDevice *device, SceneNode *node, matrix4x4f currXform );
+    void _evalNode( RenderDevice *device, SceneNode *node, GLKMatrix4 currXform );
     SceneNode *m_sceneRoot;
 };
     

@@ -14,6 +14,8 @@
 
 #import <glsw/glsw.h>
 
+#include <GLKit/GLKMath.h>
+
 #include <luddite/common/debug.h>
 #include <luddite/render/render_device_gl.h>
 #include <luddite/render/texture_info.h>
@@ -66,8 +68,9 @@ void RenderDeviceGL::_prepareFrame()
 void RenderDeviceGL::_drawGBatch( luddite::GBatch *gbatch )
 {
     luddite::GBuff *gbuff = gbatch->m_gbuff;    
-    matrix4x4f mresult =  gbatch->m_xform * matBaseModelView;
-    mresult = mresult * matProjection;
+    //matrix4x4f mresult =  gbatch->m_xform * matBaseModelView;
+    GLKMatrix4 mresult = GLKMatrix4Multiply( matBaseModelView, gbatch->m_xform  );
+    mresult = GLKMatrix4Multiply(  matProjection, mresult );
     
 //    matrix4x4f &nodeXform = gbatch->m_xform;
 //    DBG::info( "nodeXForm      %3.2f %3.2f %3.2f %3.2f\n"
@@ -101,7 +104,7 @@ void RenderDeviceGL::_drawGBatch( luddite::GBatch *gbatch )
     if (!gbatch->m_mtl)
     {
         // Use default material    
-        glUniformMatrix4fv(uparam_modelViewProjection, 1, 0, mresult.m16 );
+        glUniformMatrix4fv(uparam_modelViewProjection, 1, 0, mresult.m );
 //    glUniformMatrix3fv(uparam_normalMat, 1, 0, _normalMatrix.m);
     }
     else
@@ -111,7 +114,7 @@ void RenderDeviceGL::_drawGBatch( luddite::GBatch *gbatch )
         glUseProgram(progGBatch );
         
         GLint mvp = glGetUniformLocation( progGBatch, "matrixPMV");
-        glUniformMatrix4fv( mvp, 1, 0, mresult.m16 );
+        glUniformMatrix4fv( mvp, 1, 0, mresult.m );
 
 //        DBG::info( "matrixPMV (%d)      %3.2f %3.2f %3.2f %3.2f\n"
 //                  "              %3.2f %3.2f %3.2f %3.2f\n"

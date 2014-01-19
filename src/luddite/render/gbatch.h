@@ -11,7 +11,8 @@
 
 #include <list>
 
-#include <prmath/prmath.hpp>
+#include <GLKit/GLKMath.h>
+
 #include <luddite/render/gbuff.h>
 #include <luddite/render/material.h>
 
@@ -22,8 +23,8 @@ namespace luddite {
 // and textures. (TODO should textures live on the material??)
 struct GBatch 
 {
-    matrix4x4f m_xform;
-    matrix4x4f m_xformInv;
+    GLKMatrix4 m_xform;
+    GLKMatrix4 m_xformInv;
 
     luddite::GBuff *m_gbuff;
     luddite::Material *m_mtl;

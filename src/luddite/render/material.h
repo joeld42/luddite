@@ -9,7 +9,6 @@
 #ifndef luddite_shader_h
 #define luddite_shader_h
 
-#include <prmath/prmath.hpp>
 #include <string>
 
 #include <luddite/render/param.h>

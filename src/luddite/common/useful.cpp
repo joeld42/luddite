@@ -1,8 +1,9 @@
 #include <stdlib.h>
 #include <math.h>
-#include <prmath/prmath.hpp>
 
 #include <luddite/common/useful.h>
+
+#include <GLKit/GLKMath.h>
 
 #ifdef __APPLE__
 #include <OpenGLES/ES2/gl.h>
@@ -63,6 +64,8 @@ float randNormal( float mean, float stddev )
     return (randNormal() * stddev) + mean;
 }
 
+#if 0
+
 // From http://www.opengl.org/wiki/GluPerspective_code
 
 void glhFrustumf2(matrix4x4f &matrix, 
@@ -107,6 +110,8 @@ void glhPerspectivef2(matrix4x4f &matrix, float fovyInDegrees, float aspectRatio
     xmax = ymax * aspectRatio;
     glhFrustumf2(matrix, -xmax, xmax, -ymax, ymax, znear, zfar);
 }
+
+#endif
 
 float sgn( float n )
 {

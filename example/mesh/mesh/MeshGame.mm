@@ -64,11 +64,11 @@
     // Add material def files
     _mtlDB->addMaterialDefs("example_mesh.material.xml" );
     
-    luddite::GBuff *gbuffCube = luddite::gbuff_cube( 0.7, vec3f( 0.0, 0.5, 0.0) );
-    gbuff_setColorConstant( gbuffCube, vec4f( 1.0, 0.0, 1.0, 1.0) );
+    luddite::GBuff *gbuffCube = luddite::gbuff_cube( 0.7, GLKVector3Make( 0.0, 0.5, 0.0) );
+    gbuff_setColorConstant( gbuffCube, GLKVector4Make( 1.0, 0.0, 1.0, 1.0) );
     
     luddite::GBuff *gbuffCyl = luddite::gbuff_cylinder();
-    gbuff_setColorConstant( gbuffCyl, vec4f( 0.0, 1.0, 0.0, 1.0) );
+    gbuff_setColorConstant( gbuffCyl, GLKVector4Make( 0.0, 1.0, 0.0, 1.0) );
     
     // Build scene graph
     _worldRoot = new luddite::SceneNode( "worldRoot" );
@@ -85,7 +85,7 @@
     _monkeyNode = scene_objfile_named( "suzanne.obj", _renderDeviceGL, _mtlDB );
     if (_monkeyNode)
     {
-        _monkeyNode->m_rot.SetAngleAxis( 20.0 * (M_PI/180.0f), vec3f( 1.0f, 0.0, 0.0 ));
+        _monkeyNode->m_rot = GLKQuaternionMakeWithAngleAndAxis(20.0*DEG2RAD, 1.0, 0.0, 0.0);
         _spinnyNode->addChild( _monkeyNode );
     }
     
@@ -94,7 +94,7 @@
     for (float t=0.0; t <= 2.0*M_PI; t += 20.0 * (M_PI/180.0 ) )
     {
         // Make a node for this shape
-        vec3f shapePos = vec3f( cos(t)*3.0, 0.3, sin(t)*3.0 );
+        GLKVector3 shapePos = GLKVector3Make( cos(t)*3.0, 0.3, sin(t)*3.0 );
         luddite::SceneNode *shapeNode;
         shapeNode = new luddite::SceneNode( _spinnyNode );
         shapeNode->m_pos = shapePos;
@@ -117,8 +117,8 @@
         cube = !cube;
         
         // Set the material color
-        vec3f meshColor = hsv2rgb( vec3f( t * (180.0/M_PI), 1.0, 1.0 ));
-        currBatch->m_mtl->param( "dbgColor") = vec4f( meshColor.r, meshColor.g, meshColor.b, 1.0 );
+        GLKVector3 meshColor = hsv2rgb( GLKVector3Make( t * (180.0/M_PI), 1.0, 1.0 ));
+        currBatch->m_mtl->param( "dbgColor") = GLKVector4Make( meshColor.r, meshColor.g, meshColor.b, 1.0 );
         
         // Add this as a batch to the node
         shapeNode->addGBatch( currBatch );
@@ -137,17 +137,18 @@
 
 - (void) updateFixed: (double)dt
 {
-    quat4f qrot;
-    qrot.SetEuler( vec3f(0.0, 0.2f*dt, 0.0), prmath::EULER_XYZ );
+//    quat4f qrot;
+    GLKQuaternion qrot = GLKQuaternionMakeWithAngleAndAxis(0.2f*dt, 0.0, 1.0, 0.0 );
     
     // update the spinny node
-    _spinnyNode->m_rot *= qrot;
+    _spinnyNode->m_rot = GLKQuaternionMultiply( _spinnyNode->m_rot, qrot );
     
     // spin the meshes in the opposite direction
-    qrot.SetEuler( vec3f(0.0, -0.3f*dt, 0.0), prmath::EULER_XYZ );
+    qrot = GLKQuaternionMakeWithAngleAndAxis(-0.3f*dt, 0.0, 1.0, 0.0 );
     for (auto mesh : _meshNodes)
     {
-        mesh->m_rot *= qrot;
+        mesh->m_rot = GLKQuaternionMultiply( mesh->m_rot, qrot);
+//        mesh->m_rot *= qrot;
     }
 
 }
@@ -173,12 +174,25 @@
     _viewport = viewport;
     
     // Setup camera (TODO: do this differently)
-    glhPerspectivef2( _renderDeviceGL->matProjection, 20.0, viewport.width / viewport.height, 1.0, 500.0 );
-    matrix4x4f cameraXlate, cameraRot;
-    cameraXlate.Translate(0.0, -4, -15.0);
-    cameraRot.RotateX( 15.0 * (M_PI/180.0) );
-    _renderDeviceGL->matBaseModelView = cameraXlate * cameraRot;
+    //    glhPerspectivef2( _renderDevice->matProjection, 20.0, viewport.width / viewport.height, 1.0, 500.0 );
+    _renderDeviceGL->matProjection = GLKMatrix4MakePerspective( 20.0 * DEG2RAD,
+                                                             viewport.width/viewport.height,
+                                                             1.0, 500.0);
+    
+    GLKMatrix4 cameraXlate, cameraRot;
+//    cameraXlate = GLKMatrix4MakeTranslation( 0.0, -4.0, -15.0 );
+    cameraXlate = GLKMatrix4MakeTranslation( 0.0, -4.0, _zval );
+    cameraRot = GLKMatrix4RotateX( cameraXlate, 15.0*DEG2RAD );
 
+    _renderDeviceGL->matBaseModelView = cameraXlate;
+    _renderDeviceGL->matBaseModelView = GLKMatrix4Multiply( cameraRot, cameraXlate );
+
+}
+
+- (void)setZval:(CGFloat)zval
+{
+    _zval = zval;
+    [self setViewport: _viewport];
 }
 
 @end

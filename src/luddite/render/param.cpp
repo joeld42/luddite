@@ -6,8 +6,6 @@
 //  Copyright (c) 2012 Joel Davis. All rights reserved.
 //
 
-#include <prmath/prmath.hpp>
-
 #include <luddite/common/debug.h>
 #include <luddite/render/param.h>
 
@@ -121,7 +119,7 @@ const Param &Param::operator= (float value )
     return *this;
 }
 
-const Param &Param::operator= (const vec2f &value )
+const Param &Param::operator= (const GLKVector2 &value )
 {
     if (m_paramType != ParamType_SCALAR)
     {
@@ -135,7 +133,7 @@ const Param &Param::operator= (const vec2f &value )
     return *this;
 }
 
-const Param &Param::operator= (const vec3f &value )
+const Param &Param::operator= (const GLKVector3 &value )
 {
     if (m_paramType != ParamType_SCALAR)
     {
@@ -149,7 +147,7 @@ const Param &Param::operator= (const vec3f &value )
     return *this;
 }
 
-const Param &Param::operator= (const vec4f &value )
+const Param &Param::operator= (const GLKVector4 &value )
 {
     if (m_paramType != ParamType_SCALAR)
     {
@@ -165,7 +163,7 @@ const Param &Param::operator= (const vec4f &value )
 
 //    const Param &operator= (const matrix3x3f &value );
 
-const Param &Param::operator= (const matrix4x4f &value )
+const Param &Param::operator= (const GLKMatrix4 &value )
 {
     if (m_paramType != ParamType_SCALAR)
     {

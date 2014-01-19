@@ -9,7 +9,9 @@
 #ifndef luddite_color_util_h
 #define luddite_color_util_h
 
-vec3f hsv2rgb( const vec3f &hsv );
-vec3f rgb2hsv( const vec3f &rgb );
+#include <GLKit/GLKMath.h>
+
+GLKVector3 hsv2rgb( const GLKVector3 &hsv );
+GLKVector3 rgb2hsv( const GLKVector3 &rgb );
 
 #endif

@@ -42,8 +42,20 @@ using namespace luddite;
 {
 
     [super viewDidLoad];
+    
+    UIPanGestureRecognizer *panRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(dbgAdjust:)];
+    [self.view addGestureRecognizer:panRecognizer];
+
 }
 
+- (void)dbgAdjust:(UIPanGestureRecognizer*)gr
+{
+    CGPoint pos = [gr locationInView: self.view ];
+    NSLog( @"pan: %f %f", pos.x, pos.y );
+    
+    float amt = (pos.y / 240.0) - 1.0;
+    _meshGame.zval = amt*20;
+}
 
 - (void)didReceiveMemoryWarning
 {

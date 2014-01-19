@@ -6,17 +6,15 @@
 //  Copyright (c) 2012 Joel Davis. All rights reserved.
 //
 
-#include <prmath/prmath.hpp>
-
 #include <luddite/common/debug.h>
 #include <luddite/common/util.h>
 #include <luddite/render/color_util.h>
 
 // from the internet... Author: Bert Bos <bert@w3.org>
-vec3f rgb2hsv( const vec3f &rgb )
+GLKVector3 rgb2hsv( const GLKVector3 &rgb )
 {
     float max, min, del;
-    vec3f ret;
+    GLKVector3 ret;
     
     max = MAX3(rgb.x, rgb.y, rgb.z);
     min = MAX3(rgb.x, rgb.y, rgb.z);
@@ -41,11 +39,11 @@ vec3f rgb2hsv( const vec3f &rgb )
 }
 
 // from the internet... Author: Bert Bos <bert@w3.org>
-vec3f hsv2rgb( const vec3f &hsv )
+GLKVector3 hsv2rgb( const GLKVector3 &hsv )
 {
 	int j;  
 	float f, p, q, t, h, s, v;
-	vec3f rgb;
+	GLKVector3 rgb;
 	h = hsv.x;
 	s = hsv.y;
 	v = hsv.z;

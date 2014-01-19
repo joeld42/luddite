@@ -1,7 +1,6 @@
 #ifndef USEFUL_H
 #define USEFUL_H
 
-#include <prmath/prmath.hpp>
 
 // ==============================
 //  Common Types
@@ -39,6 +38,9 @@ float sgn( float n );
 #ifdef WIN32
 #define M_PI (3.1415926535897932384626433832795)
 #endif
+
+#define DEG2RAD (M_PI/180.0)
+#define RAD2DEG (180.0/M_PI)
 
 // ==============================
 //  GL error checking

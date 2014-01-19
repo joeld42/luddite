@@ -78,7 +78,7 @@
     
     // Load the trees
     luddite::SceneNode *tree = scene_objfile_named("tree_fir.obj", _renderDevice, _mtlDB );
-    tree->m_pos = vec3f( 2.0, 0.0, 1.5 );
+    tree->m_pos = GLKVector3Make( 2.0, 0.0, 1.5 );
     _worldRoot->addChild( tree );
     
     _trees.push_back(tree);
@@ -91,9 +91,9 @@
         // Generate a random position for the tree, outside the center of the
         // map (TODO: also don't overlap other trees)
         do {
-            vec3f treePos = vec3f( randUniform(-10.0, 10.0), 0.0, randUniform(-10.0, 10.0) );
+            GLKVector3 treePos = GLKVector3Make( randUniform(-10.0, 10.0), 0.0, randUniform(-10.0, 10.0) );
             treeInst->m_pos = treePos;
-        } while (prmath::LengthSquared(treeInst->m_pos) < 1.0 );
+        } while ( GLKVector3Length(treeInst->m_pos) < 1.0 );
         
         _worldRoot->addChild( treeInst );
         _trees.push_back( treeInst );
@@ -133,11 +133,16 @@
     _viewport = viewport;
     
     // Setup camera (TODO: do this differently)
-    glhPerspectivef2( _renderDevice->matProjection, 20.0, viewport.width / viewport.height, 1.0, 500.0 );
-    matrix4x4f cameraXlate, cameraRot;
-    cameraXlate.Translate(0.0, -4, -15.0);
-    cameraRot.RotateX( 15.0 * (M_PI/180.0) );
-    _renderDevice->matBaseModelView = cameraXlate * cameraRot;
+//    glhPerspectivef2( _renderDevice->matProjection, 20.0, viewport.width / viewport.height, 1.0, 500.0 );
+    _renderDevice->matProjection = GLKMatrix4MakePerspective( 20.0 * DEG2RAD,
+                                                             viewport.width/viewport.height,
+                                                             1.0, 500.0);
+    
+    GLKMatrix4 cameraXlate, cameraRot;
+    cameraXlate = GLKMatrix4MakeTranslation( 0.0, -4.0, -15.0 );
+    cameraXlate = GLKMatrix4RotateX( cameraXlate, 15.0*DEG2RAD );
+
+    _renderDevice->matBaseModelView = GLKMatrix4Multiply( cameraXlate, cameraRot );
 }
 
 @end

@@ -22,8 +22,8 @@ public:
     GLint uparam_normalMat;
     
     // TODO: have a camera object
-    matrix4x4f matBaseModelView; // camera 
-    matrix4x4f matProjection;
+    GLKMatrix4 matBaseModelView; // camera
+    GLKMatrix4 matProjection;
     
     virtual int32_t loadShader( const std::string &shaderKey );
     
@@ -41,11 +41,6 @@ protected:
     void _param( const Param &p );
 };
     
-//    vec3f m_pos;
-//    vec2f m_st;
-//    vec3f m_nrm;
-//    // prmath::vec3			tangents[2];
-//    uint8_t	m_color[4];
 
 enum
 {
