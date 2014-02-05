@@ -109,7 +109,7 @@ GBuff *luddite::gbuff_cylinder( int nsegments, float radius,
     GLKVector3 stlast;
     GLKVector3 nlast;
     float t0last;
-    for (size_t i=0; i <= nsegments; i++)
+    for (size_t i=0; i < nsegments; i++)
     {
         size_t ndx = i*12;
         float tval0 = ((float)i / (float)(nsegments-1)) * M_PI;

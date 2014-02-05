@@ -58,14 +58,14 @@ void checkFBO();
 // ==============================
 //  GL camera math
 // ==============================
-
+#if 0
 void glhFrustumf2(matrix4x4f &matrix, 
                   float left, float right, float bottom, float top,
                   float znear, float zfar);
 
 void glhPerspectivef2(matrix4x4f &matrix, float fovyInDegrees, float aspectRatio,
                       float znear, float zfar);
-
+#endif
 
 
 #endif

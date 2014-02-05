@@ -37,10 +37,6 @@
 		6D2F0137187A7C9000C96232 /* libluddite.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D2F011F187A7C9000C96232 /* libluddite.a */; };
 		6D2F0207187A7CF600C96232 /* bstrlib.c in Sources */ = {isa = PBXBuildFile; fileRef = 6D2F01D5187A7CF600C96232 /* bstrlib.c */; };
 		6D2F0208187A7CF600C96232 /* glsw.c in Sources */ = {isa = PBXBuildFile; fileRef = 6D2F01D8187A7CF600C96232 /* glsw.c */; };
-		6D2F0209187A7CF600C96232 /* tinystr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6D2F01FB187A7CF600C96232 /* tinystr.cpp */; };
-		6D2F020A187A7CF600C96232 /* tinyxml.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6D2F01FD187A7CF600C96232 /* tinyxml.cpp */; };
-		6D2F020B187A7CF600C96232 /* tinyxmlerror.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6D2F01FF187A7CF600C96232 /* tinyxmlerror.cpp */; };
-		6D2F020C187A7CF600C96232 /* tinyxmlparser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6D2F0200187A7CF600C96232 /* tinyxmlparser.cpp */; };
 		6D2F0246187A7F6600C96232 /* debug.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6D2F0211187A7F6600C96232 /* debug.cpp */; };
 		6D2F0247187A7F6600C96232 /* useful.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6D2F0213187A7F6600C96232 /* useful.cpp */; };
 		6D2F0248187A7F6600C96232 /* behavior.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6D2F0217187A7F6600C96232 /* behavior.cpp */; };
@@ -178,13 +174,6 @@
 		6D2F01F6187A7CF600C96232 /* rapidxml_print.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = rapidxml_print.hpp; sourceTree = "<group>"; };
 		6D2F01F7187A7CF600C96232 /* rapidxml_utils.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = rapidxml_utils.hpp; sourceTree = "<group>"; };
 		6D2F01F8187A7CF600C96232 /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
-		6D2F01FA187A7CF600C96232 /* CMakeLists.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CMakeLists.txt; sourceTree = "<group>"; };
-		6D2F01FB187A7CF600C96232 /* tinystr.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tinystr.cpp; sourceTree = "<group>"; };
-		6D2F01FC187A7CF600C96232 /* tinystr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tinystr.h; sourceTree = "<group>"; };
-		6D2F01FD187A7CF600C96232 /* tinyxml.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxml.cpp; sourceTree = "<group>"; };
-		6D2F01FE187A7CF600C96232 /* tinyxml.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tinyxml.h; sourceTree = "<group>"; };
-		6D2F01FF187A7CF600C96232 /* tinyxmlerror.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxmlerror.cpp; sourceTree = "<group>"; };
-		6D2F0200187A7CF600C96232 /* tinyxmlparser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxmlparser.cpp; sourceTree = "<group>"; };
 		6D2F0211187A7F6600C96232 /* debug.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = debug.cpp; sourceTree = "<group>"; };
 		6D2F0212187A7F6600C96232 /* debug.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; path = debug.h; sourceTree = "<group>"; };
 		6D2F0213187A7F6600C96232 /* useful.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = useful.cpp; sourceTree = "<group>"; };
@@ -295,7 +284,6 @@
 				6D2F01D4187A7CF600C96232 /* glsw */,
 				6D2F01F1187A7CF600C96232 /* rapidxml */,
 				6D2F01F8187A7CF600C96232 /* README */,
-				6D2F01F9187A7CF600C96232 /* tinyxml */,
 			);
 			name = extern;
 			path = ../extern;
@@ -324,20 +312,6 @@
 				6D2F01F7187A7CF600C96232 /* rapidxml_utils.hpp */,
 			);
 			path = rapidxml;
-			sourceTree = "<group>";
-		};
-		6D2F01F9187A7CF600C96232 /* tinyxml */ = {
-			isa = PBXGroup;
-			children = (
-				6D2F01FA187A7CF600C96232 /* CMakeLists.txt */,
-				6D2F01FB187A7CF600C96232 /* tinystr.cpp */,
-				6D2F01FC187A7CF600C96232 /* tinystr.h */,
-				6D2F01FD187A7CF600C96232 /* tinyxml.cpp */,
-				6D2F01FE187A7CF600C96232 /* tinyxml.h */,
-				6D2F01FF187A7CF600C96232 /* tinyxmlerror.cpp */,
-				6D2F0200187A7CF600C96232 /* tinyxmlparser.cpp */,
-			);
-			path = tinyxml;
 			sourceTree = "<group>";
 		};
 		6D2F020D187A7F6600C96232 /* luddite */ = {
@@ -518,17 +492,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				6D2F0247187A7F6600C96232 /* useful.cpp in Sources */,
-				6D2F020A187A7CF600C96232 /* tinyxml.cpp in Sources */,
-				6D2F020B187A7CF600C96232 /* tinyxmlerror.cpp in Sources */,
 				6D2F0258187A7F6600C96232 /* render_device_gl.cpp in Sources */,
 				6D2F0207187A7CF600C96232 /* bstrlib.c in Sources */,
-				6D2F0209187A7CF600C96232 /* tinystr.cpp in Sources */,
 				6D2F024B187A7F6600C96232 /* ios_debug.mm in Sources */,
 				6D2F025C187A7F6600C96232 /* shader.cpp in Sources */,
 				6D2F0259187A7F6600C96232 /* scene.cpp in Sources */,
 				6D2F0256187A7F6600C96232 /* render_device.cpp in Sources */,
 				6D1ED98F187F1DBF00C5A17F /* TKGameViewController.mm in Sources */,
-				6D2F020C187A7CF600C96232 /* tinyxmlparser.cpp in Sources */,
 				6D2F024C187A7F6600C96232 /* ios_gfxutil.mm in Sources */,
 				6D2F0251187A7F6600C96232 /* gbuff.cpp in Sources */,
 				6D2F025A187A7F6600C96232 /* scene_node.cpp in Sources */,
