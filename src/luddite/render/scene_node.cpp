@@ -115,7 +115,7 @@ GLKMatrix4 SceneNode::localXForm()
 //    DBG::info( "[%s] m_rot is %f %f %f %f\n", m_name.c_str(), m_rot.x, m_rot.y, m_rot.z, m_rot.w );
     rot = GLKMatrix4MakeWithQuaternion( m_rot );
     
-    xform = GLKMatrix4Multiply( rot, xform );
+    xform = GLKMatrix4Multiply( xform, rot );
     
     return xform;
 }

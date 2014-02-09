@@ -284,6 +284,8 @@ Material *MaterialDB::_materialWithKey( const std::string &mtlKey )
 
 luddite::TextureInfo *MaterialDB::_lookupTexture( const std::string &filename )
 {
+    printf("Lookup texture: %s\n", filename.c_str() );
+    
     TextureInfo *texInfo;
     auto texIter = m_textures.find( filename );
     if (texIter != m_textures.end())
@@ -319,6 +321,7 @@ void MaterialDB::useAllShaders(RenderDevice *device)
         {
             // Texture not loaded yet..
             // TODO: load w/h and other stuff here ...
+            printf("Loading texture %s\n", texInfo->m_filename.c_str() );
             texInfo->m_texId = pfLoadTexture( texInfo->m_filename.c_str() );
         }
     }

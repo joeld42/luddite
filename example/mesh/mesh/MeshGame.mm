@@ -132,6 +132,9 @@
     
     // Finally, create scene for our node graph
     _scene = new luddite::Scene( _worldRoot );
+    
+    // Init zval
+    _zval = -20.0;
 
 }
 
@@ -181,17 +184,18 @@
     
     GLKMatrix4 cameraXlate, cameraRot;
 //    cameraXlate = GLKMatrix4MakeTranslation( 0.0, -4.0, -15.0 );
-    cameraXlate = GLKMatrix4MakeTranslation( 0.0, -4.0, _zval );
+    cameraXlate = GLKMatrix4MakeTranslation( 0.0, 0.0, _zval );
     cameraRot = GLKMatrix4RotateX( cameraXlate, 15.0*DEG2RAD );
 
     _renderDeviceGL->matBaseModelView = cameraXlate;
-    _renderDeviceGL->matBaseModelView = GLKMatrix4Multiply( cameraRot, cameraXlate );
+    _renderDeviceGL->matBaseModelView = GLKMatrix4Multiply( cameraXlate, cameraRot );
 
 }
 
 - (void)setZval:(CGFloat)zval
 {
     _zval = zval;
+    NSLog( @"zval is %f", _zval );
     [self setViewport: _viewport];
 }
 
