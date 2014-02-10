@@ -17,8 +17,16 @@
 #include <luddite/render/render_device.h>
 #include <luddite/render/texture_info.h>
 
+#ifdef __APPLE__
+#include <OpenGLES/ES2/gl.h>
+#else
+#include <GL/gl.h>
+#endif
+
 
 using namespace luddite;
+
+uint32_t _parseWrapMode( const char *wrapModeStr );
 
 void MaterialDB::initShaderDB( )
 {
@@ -171,6 +179,9 @@ void MaterialDB::addMaterialDefs( const char *materialFile )
         {
             rapidxml::xml_attribute<> *attrFilename = currTexture->first_attribute( "filename" );
             rapidxml::xml_attribute<> *attrSlot = currTexture->first_attribute( "slot" );
+            rapidxml::xml_attribute<> *attrPname = currTexture->first_attribute( "pname" );
+            rapidxml::xml_attribute<> *attrWrap = currTexture->first_attribute( "wrap" );
+            
             printf("texture: %s value %s\n", attrFilename?attrFilename->value():"(null)", attrSlot?attrSlot->value():"(null)" );
 
             if (attrSlot)
@@ -180,9 +191,25 @@ void MaterialDB::addMaterialDefs( const char *materialFile )
                 {
                     TextureInfo *texInfo = _lookupTexture( attrFilename->value() );
                     material->m_tex[slot] = texInfo;
+                    
+                    // Do we also have a pname?
+                    if (attrPname)
+                    {
+                        texInfo->m_paramName = attrPname->value();
+                    }
+                    
+                    // Do we have a wrap mode?
+                    if (attrWrap)
+                    {
+                        texInfo->m_wrapMode = _parseWrapMode( attrWrap->value());
+                    }
+                    else
+                    {
+                        texInfo->m_wrapMode = GL_REPEAT;
+                    }
+                    
                 }
             }
-
 
             currTexture = currTexture->next_sibling("texture");
         }
@@ -323,9 +350,30 @@ void MaterialDB::useAllShaders(RenderDevice *device)
             // TODO: load w/h and other stuff here ...
             printf("Loading texture %s\n", texInfo->m_filename.c_str() );
             texInfo->m_texId = pfLoadTexture( texInfo->m_filename.c_str() );
+            
+            glBindTexture(GL_TEXTURE_2D, texInfo->m_texId  );
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, texInfo->m_wrapMode );
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, texInfo->m_wrapMode );
+            
+            // HERE also mipmap...
+
         }
     }
-
+    
     printf("useAllShader done...\n" );
 
+}
+
+#pragma mark - Helpers
+
+uint32_t _parseWrapMode( const char *wrapModeStr )
+{
+    if (!strcmp( wrapModeStr, "clamp"))
+    {
+        return GL_CLAMP_TO_EDGE;
+    }
+    else // "repeat", or undefined.. use repeat
+    {
+        return GL_REPEAT;
+    }
 }

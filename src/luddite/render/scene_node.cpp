@@ -84,6 +84,20 @@ void SceneNode::removeChild( SceneNode *child )
     m_childs.remove( child );
 }
 
+void SceneNode::removeFromParent()
+{
+    if (m_parent)
+    {
+        m_parent->removeChild(this);
+    }
+}
+
+
+SceneNode *SceneNode::parent()
+{
+    return m_parent;
+}
+
 const SceneNodeList &SceneNode::childs()
 {
     return m_childs;

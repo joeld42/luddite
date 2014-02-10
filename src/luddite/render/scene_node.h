@@ -54,6 +54,9 @@ public:
     // ----------------------------------------
     void addChild( SceneNode *child );
     void removeChild( SceneNode *child );
+    void removeFromParent();    
+    SceneNode *parent();
+
     
     SceneNode *findNamedChild( const std::string &targetName );
      

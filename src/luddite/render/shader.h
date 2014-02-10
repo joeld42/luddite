@@ -21,6 +21,9 @@ class Shader
     uint32_t shaderProgram();
 
     void load( RenderDevice *device ); // Load shader if needed
+    
+    // HACKY HACK -- FIXME
+    void bindTextures( std::string tex0, std::string tex1, std::string tex2, std::string tex3 );
 
  protected:
     std::string m_shaderKey;

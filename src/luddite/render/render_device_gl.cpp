@@ -70,7 +70,7 @@ void RenderDeviceGL::_drawGBatch( luddite::GBatch *gbatch )
     luddite::GBuff *gbuff = gbatch->m_gbuff;    
     //matrix4x4f mresult =  gbatch->m_xform * matBaseModelView;
     GLKMatrix4 mresult = GLKMatrix4Multiply( matBaseModelView, gbatch->m_xform  );
-    mresult = GLKMatrix4Multiply(  matProjection, mresult );
+    GLKMatrix4 mresultPMV = GLKMatrix4Multiply(  matProjection, mresult );
     
 //    matrix4x4f &nodeXform = gbatch->m_xform;
 //    DBG::info( "nodeXForm      %3.2f %3.2f %3.2f %3.2f\n"
@@ -104,7 +104,7 @@ void RenderDeviceGL::_drawGBatch( luddite::GBatch *gbatch )
     if (!gbatch->m_mtl)
     {
         // Use default material    
-        glUniformMatrix4fv(uparam_modelViewProjection, 1, 0, mresult.m );
+        glUniformMatrix4fv(uparam_modelViewProjection, 1, 0, mresultPMV.m );
 //    glUniformMatrix3fv(uparam_normalMat, 1, 0, _normalMatrix.m);
     }
     else
@@ -114,8 +114,12 @@ void RenderDeviceGL::_drawGBatch( luddite::GBatch *gbatch )
         glUseProgram(progGBatch );
         
         GLint mvp = glGetUniformLocation( progGBatch, "matrixPMV");
-        glUniformMatrix4fv( mvp, 1, 0, mresult.m );
+        glUniformMatrix4fv( mvp, 1, 0, mresultPMV.m );
 
+        GLint modelView = glGetUniformLocation( progGBatch, "matrixModelview");
+        glUniformMatrix4fv( modelView, 1, 0, mresult.m );
+
+        
 //        DBG::info( "matrixPMV (%d)      %3.2f %3.2f %3.2f %3.2f\n"
 //                  "              %3.2f %3.2f %3.2f %3.2f\n"
 //                  "              %3.2f %3.2f %3.2f %3.2f\n"
@@ -155,6 +159,27 @@ void RenderDeviceGL::_drawGBatch( luddite::GBatch *gbatch )
 
             _param( p );
         }
+        
+        // bind textures to slots
+        for (int i=0; i < kMaxTextureSlot; i++)
+        {
+            if (gbatch->m_mtl->m_tex[i] && (!gbatch->m_mtl->m_tex[i]->m_paramName.empty()))
+            {
+
+                // Do we need to find the texture param?
+                if (gbatch->m_mtl->m_texParam[i] == PARAM_UNINITIALIZED)
+                {
+                    GLuint texp = glGetUniformLocation( gbatch->m_mtl->m_shader->shaderProgram(),
+                                                        gbatch->m_mtl->m_tex[i]->m_paramName.c_str() );
+                    printf("Looking for param name %s, result %d\n", gbatch->m_mtl->m_tex[i]->m_paramName.c_str(), texp );
+
+                    gbatch->m_mtl->m_texParam[i] = texp;
+                }
+                glUniform1i( gbatch->m_mtl->m_texParam[i], i );
+//                printf("bind texture param %d slot %d\n", gbatch->m_mtl->m_texParam[i], i );
+            }
+            
+        }
     }
 
     // Create gbo for this gbuff if not set up
@@ -175,9 +200,19 @@ void RenderDeviceGL::_drawGBatch( luddite::GBatch *gbatch )
 
     // Bind textures
     // TODO: don't rebind if batches share the same texture
-    // TODO: support more than 1 texture
     // TODO: VAO support
-    glBindTexture(GL_TEXTURE_2D, gbatch->m_mtl->m_tex[0]->m_texId );
+    for (int i=3; i >= 0; i--)
+    {
+        if (!gbatch->m_mtl->m_tex[i]) continue;
+        
+        GLuint texId = gbatch->m_mtl->m_tex[i]->m_texId;
+        if (texId)
+        {
+//            printf("  Bind texture %d (%s) slot %d\n", texId, gbatch->m_mtl->m_tex[i]->m_filename.c_str(), i );
+            glActiveTexture( GL_TEXTURE0+i );
+            glBindTexture(GL_TEXTURE_2D, gbatch->m_mtl->m_tex[i]->m_texId );
+        }
+    }
 
     // Bind buffer data
     glEnableVertexAttribArray( VertexAttrib_TEXCOORD );

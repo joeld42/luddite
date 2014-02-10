@@ -51,6 +51,7 @@ public:
     Shader *m_shader;
 
     luddite::TextureInfo* m_tex[kMaxTextureSlot];
+    uint32_t m_texParam[kMaxTextureSlot];
 
 public:
     const std::string &shaderKey();

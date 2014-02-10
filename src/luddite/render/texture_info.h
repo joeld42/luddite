@@ -18,8 +18,12 @@ class TextureInfo
 {
 public:
     std::string m_filename;
+    std::string m_paramName;
+    
     uint32_t m_width, m_height;
     uint32_t m_texId;
+    
+    uint32_t m_wrapMode;
 };
 
 }
