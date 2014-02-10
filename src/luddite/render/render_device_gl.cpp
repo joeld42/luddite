@@ -35,6 +35,7 @@ void RenderDeviceGL::_param(Param const & p)
     switch (p.m_paramType)
     {
         case ParamType_SCALAR:
+//            printf("Set param %s to %f\n", p.m_name.c_str(), p.m_val.scalar );
             glUniform1f( p.m_glParam, p.m_val.scalar );
             break;
 
@@ -147,6 +148,7 @@ void RenderDeviceGL::_drawGBatch( luddite::GBatch *gbatch )
 
         
         // Set params from mtl
+//        printf("mtl: %s\n", gbatch->m_mtl->m_materialName.c_str() );
         for (Param &p : gbatch->m_mtl->mutable_params() )
         {
             // Does param need to be initialized?

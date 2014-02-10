@@ -247,10 +247,13 @@ void MaterialDB::_parseParam(Material *mtl, std::string const & paramName, char 
 
         p = GLKVector4Make( (float)r/255.0, (float)g/255.0, (float)b/255.0, 1.0 );
     }
-    // TODO: more formats
     else
     {
-        DBG::warn( "Unknown format: for param %s '%s'\n", paramName.c_str(), value );
+        // Is it a float?
+        p = atof(value);
+        
+//        // TODO: more formats, like x,y,z
+//        DBG::warn( "Unknown format: for param %s '%s'\n", paramName.c_str(), value );
     }
 
     // Add the param

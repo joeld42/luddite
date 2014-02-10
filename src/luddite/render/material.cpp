@@ -16,9 +16,9 @@ using namespace luddite;
 Material::Material() :
     m_shader(NULL)
 {
-    memset( m_tex, 0, kMaxTextureSlot*sizeof(uint32_t) );
     for (int i=0; i < kMaxTextureSlot; i++)
     {
+        m_tex[i] = NULL;
         m_texParam[i] = PARAM_UNINITIALIZED;
     }
 }
