@@ -34,6 +34,13 @@ float randNormal( float mean, float stddev );
 //  general mathy stuff
 // ==============================
 float sgn( float n );
+float clamp( float x, float a, float b); // clamp x to range [a..b]
+float saturate( float x ); // clamp x to [0..1]
+float smoothstep(float edge0, float edge1, float x); 
+float smootherstep(float edge0, float edge1, float x);
+
+
+
 
 #ifdef WIN32
 #define M_PI (3.1415926535897932384626433832795)

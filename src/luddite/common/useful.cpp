@@ -118,6 +118,35 @@ float sgn( float n )
     return (n<0)?-1.0:1.0;
 }
 
+float clamp( float x, float a, float b)
+{
+    if (x < a) return a;
+    else if (x > b) return b;
+    else return x;
+}
+
+float saturate( float x )
+{
+    if (x < 0.0) return 0.0;
+    else if (x > 1.0) return 1.0;
+    else return x;
+}
+
+float smoothstep(float edge0, float edge1, float x)
+{
+    // Scale, bias and saturate x to 0..1 range
+    x = saturate((x - edge0)/(edge1 - edge0));
+    // Evaluate polynomial
+    return x*x*(3 - 2*x);
+}
+
+float smootherstep(float edge0, float edge1, float x)
+{
+    // Scale, and clamp x to 0..1 range
+    x = clamp((x - edge0)/(edge1 - edge0), 0.0, 1.0);
+    // Evaluate polynomial
+    return x*x*x*(x*(x*6 - 15) + 10);
+}
 
 // ===========================================================================
 // Error Checkings
