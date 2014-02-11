@@ -36,6 +36,7 @@ float randNormal( float mean, float stddev );
 float sgn( float n );
 float clamp( float x, float a, float b); // clamp x to range [a..b]
 float saturate( float x ); // clamp x to [0..1]
+float lerp( float a, float b, float t);
 float smoothstep(float edge0, float edge1, float x); 
 float smootherstep(float edge0, float edge1, float x);
 

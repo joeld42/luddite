@@ -132,6 +132,11 @@ float saturate( float x )
     else return x;
 }
 
+float lerp( float a, float b, float t)
+{
+    return (a*(1.0-t)) + (b*t);
+}
+
 float smoothstep(float edge0, float edge1, float x)
 {
     // Scale, bias and saturate x to 0..1 range

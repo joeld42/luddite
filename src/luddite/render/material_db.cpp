@@ -221,6 +221,7 @@ void MaterialDB::addMaterialDefs( const char *materialFile )
         // Next material in file
         currMtl = currMtl->next_sibling( "Material" );
     }
+        
     
     // release the xml 
     free(xmlText );
@@ -367,7 +368,31 @@ void MaterialDB::useAllShaders(RenderDevice *device)
 
 }
 
+
+void MaterialDB::dumpMaterialDB()
+{
+    for (auto &mtli : m_materials)
+    {
+        std::string mtlName = mtli.first;
+        Material *mtl = mtli.second;
+        printf("---[ %15s (%18s ) ]----------\n", mtlName.c_str(), mtl->m_materialName.c_str() );
+        for (auto &pi : mtl->params())
+        {
+            if (pi.m_paramType == ParamType_SCALAR)
+            {
+                printf("  %10s : %f\n", pi.m_name.c_str(), pi.m_val.scalar );
+            }
+            else
+            {
+                printf("  %10s : ...\n", pi.m_name.c_str() ); // todo more types
+            }
+        }
+        
+    }
+}
+
 #pragma mark - Helpers
+
 
 uint32_t _parseWrapMode( const char *wrapModeStr )
 {

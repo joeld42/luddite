@@ -41,6 +41,9 @@ public:
     // out what materials we're actually using and use that. But for now this works
     void useAllShaders( RenderDevice *device );
     
+    // prints out the material db for debugging
+    void dumpMaterialDB();
+    
 //private:
     Material *_materialWithKey( const std::string &mtlKey );
     Material *_lookupMaterial( const std::string &mtlName );

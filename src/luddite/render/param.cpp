@@ -76,8 +76,15 @@ const Param &Param::operator= (const Param &other )
     if (m_paramType == other.m_paramType)
     {
         // yeah, skip the type conversion and just copy data
-        size_t paramSz = _paramDataSize( other.m_paramType );
-        memcpy( m_val.data, other.m_val.data, sizeof(float)*paramSz );
+        if (m_paramType == ParamType_SCALAR)
+        {
+            m_val.scalar = other.m_val.scalar;
+        }
+        else
+        {
+            size_t paramSz = _paramDataSize( other.m_paramType );
+            memcpy( m_val.data, other.m_val.data, sizeof(float)*paramSz );
+        }
     }
     else
     {        
@@ -114,7 +121,7 @@ const Param &Param::operator= (float value )
         delete [] m_val.data;
     }
     m_paramType = ParamType_SCALAR;
-    m_val.scalar = 0.0;    
+    m_val.scalar = value;
     
     return *this;
 }

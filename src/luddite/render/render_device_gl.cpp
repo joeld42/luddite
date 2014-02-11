@@ -35,7 +35,6 @@ void RenderDeviceGL::_param(Param const & p)
     switch (p.m_paramType)
     {
         case ParamType_SCALAR:
-//            printf("Set param %s to %f\n", p.m_name.c_str(), p.m_val.scalar );
             glUniform1f( p.m_glParam, p.m_val.scalar );
             break;
 
