@@ -42,14 +42,12 @@ void Material::setParam( const Param &p )
         if ((*pi).m_name == p.m_name)
         {
             // Yep. Just replace it.
-            printf("Setting param %s\n", p.m_name.c_str() );
             (*pi) = p;
             return;
         }
     }
     
     // Nope, add it as a new param
-    printf("Param %s not found, adding\n", p.m_name.c_str() );
     m_params.push_back( p );
 }
 

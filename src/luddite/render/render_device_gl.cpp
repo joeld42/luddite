@@ -172,7 +172,7 @@ void RenderDeviceGL::_drawGBatch( luddite::GBatch *gbatch )
                 {
                     GLuint texp = glGetUniformLocation( gbatch->m_mtl->m_shader->shaderProgram(),
                                                         gbatch->m_mtl->m_tex[i]->m_paramName.c_str() );
-                    printf("Looking for param name %s, result %d\n", gbatch->m_mtl->m_tex[i]->m_paramName.c_str(), texp );
+//                    printf("Looking for param name %s, result %d\n", gbatch->m_mtl->m_tex[i]->m_paramName.c_str(), texp );
 
                     gbatch->m_mtl->m_texParam[i] = texp;
                 }
@@ -246,7 +246,7 @@ void RenderDeviceGL::_finishFrame()
 int32_t RenderDeviceGL::loadShader( const std::string &shaderKey )
 {
     GLint program;
-	printf("loadShader %s ...", shaderKey.c_str() );
+//	printf("loadShader %s ...", shaderKey.c_str() );
 	
     // Create shader program
     program = glCreateProgram();
@@ -273,7 +273,7 @@ int32_t RenderDeviceGL::loadShader( const std::string &shaderKey )
 		return SHADER_FAIL;
     }
     
-    printf( "compile fragment shader:\n%s\n-----\n", fragShaderText );
+//    printf( "compile fragment shader:\n%s\n-----\n", fragShaderText );
     
     // Compile the fragment shader
     fragShader = _compileShader( fragShaderText, GL_FRAGMENT_SHADER );
@@ -282,7 +282,7 @@ int32_t RenderDeviceGL::loadShader( const std::string &shaderKey )
     glAttachShader( program, vertShader );
     glAttachShader( program, fragShader );
     
-    printf("... bind attrs\n" );
+//    printf("... bind attrs\n" );
 	
 	// Bind Attrs (todo put in subclass)
 	// FIXME: some shaders dont have all these attrs..
@@ -293,7 +293,7 @@ int32_t RenderDeviceGL::loadShader( const std::string &shaderKey )
 	
     
     //  Link Shader
-    printf("... links shaders\n" );
+//    printf("... links shaders\n" );
     _link( program );
     
     // Release vert and frag shaders
@@ -302,10 +302,10 @@ int32_t RenderDeviceGL::loadShader( const std::string &shaderKey )
     
 	
 	// print shader params
-	printf(" ----- %s ------\n", shaderKey.c_str() );
+//	printf(" ----- %s ------\n", shaderKey.c_str() );
 	int activeUniforms;
 	glGetProgramiv( program, GL_ACTIVE_UNIFORMS, &activeUniforms );	
-	printf(" Active Uniforms: %d\n", activeUniforms );
+//	printf(" Active Uniforms: %d\n", activeUniforms );
 	
     // done
     return program;    
@@ -339,7 +339,7 @@ int32_t RenderDeviceGL::_compileShader( const char *shaderText,
         glDeleteShader( shader );
         
         // TODO: better handle errors
-        printf("Compile status is bad\n" );
+//        printf("Compile status is bad\n" );
         
         return 0;        
     }
@@ -355,8 +355,8 @@ void RenderDeviceGL::_printShaderLog( int32_t program )
     {
         char *log = (char*)malloc(logLength);
         glGetProgramInfoLog( program, logLength, &logLength, log );
-        printf ("Link Log:\n%s\n", log );
-        free(log);        
+//        printf ("Link Log:\n%s\n", log );
+        free(log);
     }
 	
 }

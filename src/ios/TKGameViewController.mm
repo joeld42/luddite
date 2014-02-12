@@ -39,7 +39,6 @@
 
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
-    NSLog( @"In initWithCodeer...");
     if (self) {
         [self _commonInit];
     }
@@ -51,8 +50,6 @@
 - (void) _commonInit
 {
     _gameloop = new luddite::GameLoop();
-    NSLog( @"Created new gameloop %p", _gameloop );
-    
     _didGameInit = NO;
 }
 
@@ -75,7 +72,7 @@
     view.context = self.context;
     view.drawableDepthFormat = GLKViewDrawableDepthFormat24;
     
-    luddite::DBG::info( "Hello luddite world...");
+//    luddite::DBG::info( "Hello luddite world...");
     
     [self setupGL];
 

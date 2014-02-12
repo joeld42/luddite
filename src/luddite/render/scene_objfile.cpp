@@ -32,8 +32,6 @@ struct _MtlGroup
 static _MtlGroup *findOrCreateMtl( std::vector<_MtlGroup*> &mtlGroups,
                                   const char *mtlName )
 {
-    printf( "findOrCreateMtl: %s\n", mtlName );
-
     // try to find the material
     _MtlGroup *mtl = NULL;
     for (std::vector<_MtlGroup*>::iterator mi = mtlGroups.begin(); mi != mtlGroups.end(); ++mi )
@@ -53,7 +51,7 @@ static _MtlGroup *findOrCreateMtl( std::vector<_MtlGroup*> &mtlGroups,
         mtl->mtlName = mtlName;
         mtl->gbuff = new GBuff;
         mtlGroups.push_back(mtl);
-        printf("creating new mtl %s\n", mtlName);
+//        printf("creating new mtl %s\n", mtlName);
     }
     
     return mtl;    

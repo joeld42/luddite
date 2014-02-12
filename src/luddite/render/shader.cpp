@@ -32,7 +32,7 @@ void Shader::load( RenderDevice *device )
     if (m_loaded) return;
 
     m_program = device->loadShader(m_shaderKey);
-    printf("Shader::load %s result %d\n", m_shaderKey.c_str(), m_program );
+//    printf("Shader::load %s result %d\n", m_shaderKey.c_str(), m_program );
 
     // TODO: if m_program is SHADER_FAIL then use
     // a common error shader instead...

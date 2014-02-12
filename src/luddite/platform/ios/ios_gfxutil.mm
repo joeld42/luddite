@@ -25,7 +25,9 @@ uint32_t pfLoadTexture( const char *filename )
     
     NSError *error = nil;
     GLKTextureInfo *texture = [GLKTextureLoader textureWithContentsOfFile: textureFile
-                                                                  options:nil error:&error ];
+                                                                  options: @{ GLKTextureLoaderOriginBottomLeft : @(YES),
+                                                                              GLKTextureLoaderGenerateMipmaps  : @(YES) }
+                                                                    error:&error ];
     if (error) {
         NSLog( @"Error loading texture '%s': %@, %@", filename, error, GLKTextureLoaderErrorKey );
         return 0;
