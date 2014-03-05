@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6D04511518BD001900CE7B37 /* particle_batch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6D04511318BD001800CE7B37 /* particle_batch.cpp */; };
+		6D04511818BD003000CE7B37 /* emitter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6D04511618BD003000CE7B37 /* emitter.cpp */; };
+		6D04511B18C05D0400CE7B37 /* particle_group.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6D04511918C05D0400CE7B37 /* particle_group.cpp */; };
+		6D04511D18C318B100CE7B37 /* particle_batch.h in Copy Files (render) */ = {isa = PBXBuildFile; fileRef = 6D04511418BD001900CE7B37 /* particle_batch.h */; };
+		6D04511E18C318B100CE7B37 /* emitter.h in Copy Files (render) */ = {isa = PBXBuildFile; fileRef = 6D04511718BD003000CE7B37 /* emitter.h */; };
+		6D04511F18C318B100CE7B37 /* particle_group.h in Copy Files (render) */ = {isa = PBXBuildFile; fileRef = 6D04511A18C05D0400CE7B37 /* particle_group.h */; };
+		6D04512018C318B100CE7B37 /* particle.h in Copy Files (render) */ = {isa = PBXBuildFile; fileRef = 6D04511C18C0638600CE7B37 /* particle.h */; };
 		6D1ED8D3187B542D00C5A17F /* debug.h in Copy Files (common) */ = {isa = PBXBuildFile; fileRef = 6D2F0212187A7F6600C96232 /* debug.h */; };
 		6D1ED8D4187B542D00C5A17F /* useful.h in Copy Files (common) */ = {isa = PBXBuildFile; fileRef = 6D2F0214187A7F6600C96232 /* useful.h */; };
 		6D1ED8D5187B542D00C5A17F /* util.h in Copy Files (common) */ = {isa = PBXBuildFile; fileRef = 6D2F0215187A7F6600C96232 /* util.h */; };
@@ -101,6 +108,10 @@
 			dstPath = "include/$(PRODUCT_NAME)/render";
 			dstSubfolderSpec = 16;
 			files = (
+				6D04511D18C318B100CE7B37 /* particle_batch.h in Copy Files (render) */,
+				6D04511E18C318B100CE7B37 /* emitter.h in Copy Files (render) */,
+				6D04511F18C318B100CE7B37 /* particle_group.h in Copy Files (render) */,
+				6D04512018C318B100CE7B37 /* particle.h in Copy Files (render) */,
 				6D1ED926187B7C2300C5A17F /* color_util.h in Copy Files (render) */,
 				6D1ED927187B7C2300C5A17F /* drawvert.h in Copy Files (render) */,
 				6D1ED928187B7C2300C5A17F /* gbatch.h in Copy Files (render) */,
@@ -156,6 +167,13 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		6D04511318BD001800CE7B37 /* particle_batch.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = particle_batch.cpp; sourceTree = "<group>"; };
+		6D04511418BD001900CE7B37 /* particle_batch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = particle_batch.h; sourceTree = "<group>"; };
+		6D04511618BD003000CE7B37 /* emitter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = emitter.cpp; sourceTree = "<group>"; };
+		6D04511718BD003000CE7B37 /* emitter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = emitter.h; sourceTree = "<group>"; };
+		6D04511918C05D0400CE7B37 /* particle_group.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = particle_group.cpp; sourceTree = "<group>"; };
+		6D04511A18C05D0400CE7B37 /* particle_group.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = particle_group.h; sourceTree = "<group>"; };
+		6D04511C18C0638600CE7B37 /* particle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = particle.h; sourceTree = "<group>"; };
 		6D1ED98D187F1DBF00C5A17F /* TKGameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TKGameViewController.h; path = ../ios/TKGameViewController.h; sourceTree = "<group>"; };
 		6D1ED98E187F1DBF00C5A17F /* TKGameViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = TKGameViewController.mm; path = ../ios/TKGameViewController.mm; sourceTree = "<group>"; };
 		6D2F011F187A7C9000C96232 /* libluddite.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libluddite.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -402,6 +420,13 @@
 				6D2F0242187A7F6600C96232 /* shader.h */,
 				6D2F0243187A7F6600C96232 /* texture_info.cpp */,
 				6D2F0244187A7F6600C96232 /* texture_info.h */,
+				6D04511318BD001800CE7B37 /* particle_batch.cpp */,
+				6D04511418BD001900CE7B37 /* particle_batch.h */,
+				6D04511618BD003000CE7B37 /* emitter.cpp */,
+				6D04511718BD003000CE7B37 /* emitter.h */,
+				6D04511918C05D0400CE7B37 /* particle_group.cpp */,
+				6D04511A18C05D0400CE7B37 /* particle_group.h */,
+				6D04511C18C0638600CE7B37 /* particle.h */,
 			);
 			path = render;
 			sourceTree = "<group>";
@@ -493,9 +518,12 @@
 			files = (
 				6D2F0247187A7F6600C96232 /* useful.cpp in Sources */,
 				6D2F0258187A7F6600C96232 /* render_device_gl.cpp in Sources */,
+				6D04511818BD003000CE7B37 /* emitter.cpp in Sources */,
 				6D2F0207187A7CF600C96232 /* bstrlib.c in Sources */,
+				6D04511518BD001900CE7B37 /* particle_batch.cpp in Sources */,
 				6D2F024B187A7F6600C96232 /* ios_debug.mm in Sources */,
 				6D2F025C187A7F6600C96232 /* shader.cpp in Sources */,
+				6D04511B18C05D0400CE7B37 /* particle_group.cpp in Sources */,
 				6D2F0259187A7F6600C96232 /* scene.cpp in Sources */,
 				6D2F0256187A7F6600C96232 /* render_device.cpp in Sources */,
 				6D1ED98F187F1DBF00C5A17F /* TKGameViewController.mm in Sources */,
