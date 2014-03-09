@@ -13,6 +13,7 @@
 
 #include <luddite/render/gbuff.h>
 #include <luddite/render/gbatch.h>
+#include <luddite/render/particle_group.h>
 
 #define SHADER_FAIL (0)
 

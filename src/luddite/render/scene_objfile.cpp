@@ -253,7 +253,7 @@ SceneNode *luddite::scene_objfile(char const *filename, RenderDevice *renderDevi
     for (std::vector<_MtlGroup*>::iterator mi = mtlGroups.begin();
          mi != mtlGroups.end(); ++mi )
     {
-        GBatch *mtlBatch = new GBatch();
+        GBatch *mtlBatch = new GBatch();        
 
 //        luddite::Material *mtl = _mtlDB->getNamedMaterial( _renderDevice, "mtl.one" );
         Material *mtl = mtlDB->getNamedMaterial( renderDevice, (*mi)->mtlName );

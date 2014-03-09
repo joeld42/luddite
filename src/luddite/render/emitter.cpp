@@ -48,9 +48,13 @@ void EmitterNode::emitIntoGroup( luddite::ParticleGroup *group, float dt )
     for (size_t i=0; i < numParts; i++)
     {
         // TODO: set up particle
-        part.m_pos = GLKVector3( 0.0, 0.0, 0.0 ); // TODO: use our world loc
-        part.m_vel = GLKVector3( 0.0, 1.0, 0.0 ); // TODO: calculate this
+        part.m_pos = GLKVector3Make( 0.0, 0.0, 0.0 ); // TODO: use our world loc
+        part.m_vel = GLKVector3Make( randUniform(), randUniform(), randUniform() ); // TODO: calculate this
+        part.m_vel = GLKVector3Normalize( part.m_vel );
         
-        group->addChild( part );
+        group->addParticle( part );
+        if (group->isFull()) break;
     }
+    
+    printf("EmitterNode: Now has %zu particles...\n", group->particleCount() );
 }

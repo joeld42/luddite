@@ -9,7 +9,7 @@
 #ifndef __luddite__particle_group__
 #define __luddite__particle_group__
 
-#include <luddite/render/particle_batch.h>
+#include <luddite/render/material.h>
 #include <luddite/render/emitter.h>
 #include <luddite/render/particle.h>
 
@@ -19,22 +19,6 @@
 // Particle group is a group of similar particles. Particles in the same
 // group share the same behavior and appearance. Particle groups are all in
 // world space.
-//
-// Particle batches (Pbatch) are what is boiled down and sent to the gpu.
-//
-//
-// +------------+
-// | Emitter 1  |-+
-// +------------+ |   +------------+
-//                +-->| PGroup A   |-+
-// +------------+ |   +------------+ |     +------------+
-// | Emitter 2  |-+                  +---->| PBatch     |
-// +------------+     +------------+ |     +------------+
-//                 ,->| PGroup B   |-+
-// +------------+  |  +------------+
-// | Emitter 3  |+-/
-// +------------+
-//
 
 namespace luddite {
 
@@ -42,19 +26,27 @@ namespace luddite {
 class ParticleGroup
 {
 public:
-    ParticleGroup( ParticleBatch *pbatch );
+    ParticleGroup( luddite::Material *mtl, size_t maxParticles=0 );
 
     // Main point for subclasses to customize particle behavior.
     virtual void update( float dt );
 
-    // Emitters use this
+    // Emitters use these
     void addParticle( Particle p );
+    bool isFull();
+
+    // Info
+    size_t particleCount();
+    
+    luddite::GBatch *_buildParticles();
     
 protected:
-    
-    luddite::ParticleBatch *m_pbatch;
+
+    luddite::Material *m_mtl;
     std::vector<luddite::Particle> m_particles;
+    size_t m_maxParticles; // cap size of group
     
+    luddite::GBatch *m_gbatch;
 };
     
 }; // namespace luddite

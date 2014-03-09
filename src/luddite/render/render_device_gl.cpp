@@ -20,6 +20,7 @@
 #include <luddite/render/render_device_gl.h>
 #include <luddite/render/texture_info.h>
 #include <luddite/render/param.h>
+#include <luddite/render/particle_group.h>
 
 // offsetof() gives a warning about non-POD types with xcode, so use these old
 // school macros. This is OK because while VertType is non-POD, it doesn't have
@@ -224,7 +225,6 @@ void RenderDeviceGL::_drawGBatch( luddite::GBatch *gbatch )
     glVertexAttribPointer( VertexAttrib_POSITION, 3, GL_FLOAT, GL_FALSE, 
                           sizeof(DrawVert), (void*)offset_s( DrawVert, m_pos) );
 
-
     glEnableVertexAttribArray( VertexAttrib_NORMAL );
     glVertexAttribPointer( VertexAttrib_NORMAL, 3, GL_FLOAT, GL_FALSE, 
                           sizeof(DrawVert), (void*)offset_s( DrawVert, m_nrm) );
@@ -234,9 +234,17 @@ void RenderDeviceGL::_drawGBatch( luddite::GBatch *gbatch )
                           sizeof(DrawVert), (void*)offset_s( DrawVert, m_color) );
     
     // Draw it!
-    glDrawArrays(GL_TRIANGLES, 0, (GLsizei)gbuff->m_vertData.size() );
+    if (gbatch->m_batchType == BatchType_TRIANGLES)
+    {
+        glDrawArrays(GL_TRIANGLES, 0, (GLsizei)gbuff->m_vertData.size() );
+    }
+    else if (gbatch->m_batchType == BatchType_PARTICLES)
+    {
+        glDrawArrays(GL_POINTS, 0, (GLsizei)gbuff->m_vertData.size() );
+    }
 
 }
+
 
 void RenderDeviceGL::_finishFrame()
 {

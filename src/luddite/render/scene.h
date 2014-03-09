@@ -17,6 +17,8 @@
 namespace luddite
 {
 
+class ParticleGroup;
+    
 // TODO: visibility
     
 // Top level scene class, handles scene evaluation
@@ -33,10 +35,15 @@ public:
     // Evaluate scene and add visible nodes
     // to the RenderDevice for this frame
     void eval( RenderDevice *device );
+
+    // Particles -- TODO make better
+    void addParticleGroup( ParticleGroup *pgroup );
     
 protected:
     void _evalNode( RenderDevice *device, SceneNode *node, GLKMatrix4 currXform );
+    
     SceneNode *m_sceneRoot;
+    std::vector<ParticleGroup*> m_pgroups;
 };
     
     

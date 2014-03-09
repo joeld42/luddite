@@ -17,6 +17,7 @@ namespace luddite
 class RenderDeviceGL : public luddite::RenderDevice
 {
 public:
+    
     // HACK: expose params here until mtl/shaders are set up
     GLint uparam_modelViewProjection;
     GLint uparam_normalMat;

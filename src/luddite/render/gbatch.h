@@ -18,6 +18,12 @@
 
 
 namespace luddite {
+
+enum
+{
+    BatchType_TRIANGLES,
+    BatchType_PARTICLES
+};
     
 // A gbatch is a gbuff bound to an xform and a material
 // and textures. (TODO should textures live on the material??)
@@ -28,6 +34,7 @@ struct GBatch
 
     luddite::GBuff *m_gbuff;
     luddite::Material *m_mtl;
+    int m_batchType;
 };
   
 typedef std::list<GBatch*> GBatchList;

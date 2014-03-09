@@ -9,6 +9,11 @@
 #include <luddite/common/debug.h>
 #include <luddite/render/scene.h>
 
+#include <luddite/render/emitter.h>
+#include <luddite/render/particle_group.h>
+#include <luddite/render/particle_batch.h>
+
+
 using namespace luddite;
 
 Scene::Scene( luddite::SceneNode *root ) :
@@ -36,6 +41,14 @@ void Scene::eval( RenderDevice *device )
 //    GLKMatrix4 rootXform;
 //    rootXform.Identity();
     _evalNode( device, m_sceneRoot, GLKMatrix4Identity );
+
+    // eval pgroups into emitters
+    for (auto pg : m_pgroups)
+    {
+        GBatch *pbatch = pg->_buildParticles();
+        device->addGBatch( pbatch );
+        printf("Added pbatch... %p\n", pbatch );
+    }
 }
 
 void Scene::_evalNode( RenderDevice *device, SceneNode *node, GLKMatrix4 currXform )
@@ -94,3 +107,8 @@ void Scene::_evalNode( RenderDevice *device, SceneNode *node, GLKMatrix4 currXfo
          
 }
 
+// Particles
+void Scene::addParticleGroup( ParticleGroup *pgroup )
+{
+    m_pgroups.push_back(pgroup);
+}

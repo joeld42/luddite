@@ -11,7 +11,6 @@
 
 #include <GLKit/GLKMath.h>
 
-#include <luddite/render/particle_batch.h>
 #include <luddite/render/scene_node.h>
 #include <luddite/render/particle.h>
 
@@ -25,6 +24,7 @@ class ParticleGroup;
 // a particle batch.
 class EmitterNode : public SceneNode
 {
+public:
     EmitterNode( SceneNode *parent=NULL );
     EmitterNode( const std::string &name, SceneNode *parent=NULL );
 
