@@ -37,6 +37,7 @@ public:
 
     // Info
     size_t particleCount();
+    size_t maxParticles();
     
     luddite::GBatch *_buildParticles();
     

@@ -22,12 +22,17 @@ void ParticleGroup::update( float dt )
 {
     // This really should happen with a subclass, or components, but
     // for now just do it here...
+    GLKVector3 gravity = GLKVector3Make( 0.0, -1.0 * dt, 0.0 );
     for ( Particle &p : m_particles)
     {
-        GLKVector3 dp = GLKVector3MultiplyScalar( p.m_pos, dt );
+        GLKVector3 dp = GLKVector3MultiplyScalar( p.m_vel, dt );
         p.m_pos = GLKVector3Add( p.m_pos, dp );
         p.m_age += dt;
+        
+        // Gravity
+        p.m_vel = GLKVector3Add( p.m_vel, gravity );
     }
+    
 }
 
 // Emitters use this
@@ -50,14 +55,19 @@ size_t ParticleGroup::particleCount()
     return m_particles.size();
 }
 
+size_t ParticleGroup::maxParticles()
+{
+    return m_maxParticles;
+}
+
 luddite::GBatch *ParticleGroup::_buildParticles()
 {
     if (!m_gbatch)
     {
         m_gbatch = new GBatch();
-        m_gbatch->m_batchType = BatchType_PARTICLES;
         m_gbatch->m_mtl = m_mtl;
         m_gbatch->m_gbuff = new GBuff();
+        m_gbatch->m_gbuff->m_capacity = m_maxParticles;
         m_gbatch->m_xform = GLKMatrix4Identity;
         m_gbatch->m_xformInv = GLKMatrix4Identity;
     }

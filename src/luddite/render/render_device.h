@@ -24,7 +24,8 @@ class RenderDevice
 {
 public:    
     void addGBatch( luddite::GBatch *gbatch );
-
+    void addParticleBatch( luddite::GBatch *pbatch );
+    
     // empties and draws the gbuff list
     void renderFrame();
     
@@ -38,9 +39,11 @@ protected:
     
     virtual void _prepareFrame()=0;
     virtual void _drawGBatch( luddite::GBatch *gbatch )=0;
+    virtual void _drawParticleBatch( luddite::GBatch *pbatch )=0;
     virtual void _finishFrame()=0;
     
     std::vector<luddite::GBatch*> m_gbatches;
+    std::vector<luddite::GBatch*> m_particleBatches;
 };
     
 }; // namespace luddite

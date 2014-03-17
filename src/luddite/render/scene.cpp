@@ -46,7 +46,7 @@ void Scene::eval( RenderDevice *device )
     for (auto pg : m_pgroups)
     {
         GBatch *pbatch = pg->_buildParticles();
-        device->addGBatch( pbatch );
+        device->addParticleBatch( pbatch );
         printf("Added pbatch... %p\n", pbatch );
     }
 }

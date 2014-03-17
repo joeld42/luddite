@@ -29,6 +29,7 @@ struct GBuff
      
     std::vector<luddite::DrawVert> m_vertData;
     uint32_t m_vbo;
+    uint32_t m_capacity; // for particle gbuffs, max capacity to allocate
 };
 
 }; // namespace luddite

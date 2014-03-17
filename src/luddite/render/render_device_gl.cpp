@@ -72,39 +72,134 @@ void RenderDeviceGL::_drawGBatch( luddite::GBatch *gbatch )
     //matrix4x4f mresult =  gbatch->m_xform * matBaseModelView;
     GLKMatrix4 mresult = GLKMatrix4Multiply( matBaseModelView, gbatch->m_xform  );
     GLKMatrix4 mresultPMV = GLKMatrix4Multiply(  matProjection, mresult );
-    
-//    matrix4x4f &nodeXform = gbatch->m_xform;
-//    DBG::info( "nodeXForm      %3.2f %3.2f %3.2f %3.2f\n"
-//               "              %3.2f %3.2f %3.2f %3.2f\n"
-//               "              %3.2f %3.2f %3.2f %3.2f\n"
-//               "              %3.2f %3.2f %3.2f %3.2f\n",                  
-//              
-//              nodeXform.m16[0],
-//              nodeXform.m16[1],
-//              nodeXform.m16[2],
-//              nodeXform.m16[3],
-//              
-//              nodeXform.m16[4],
-//              nodeXform.m16[5],
-//              nodeXform.m16[6],
-//              nodeXform.m16[7],
-//              
-//              nodeXform.m16[8],
-//              nodeXform.m16[9],
-//              nodeXform.m16[10],
-//              nodeXform.m16[11],
-//              
-//              nodeXform.m16[12],
-//              nodeXform.m16[13],
-//              nodeXform.m16[14],
-//              nodeXform.m16[15] );
 
-    
+    // setup material from this gbatch
+    _setupMaterial(gbatch, mresult, mresultPMV);
+
+    // Create gbo for this gbuff if not set up
+     _bindGbuffVBO(gbuff);
+
+    // Bind textures
+    _bindGBatchTextures(gbatch);
+
+    // Bind buffer data
+    _bindDrawVertAttribs();
+
+    // Draw it!
+   glDrawArrays(GL_TRIANGLES, 0, (GLsizei)gbuff->m_vertData.size() );
+
+}
+
+void RenderDeviceGL::_drawParticleBatch( luddite::GBatch *pbatch )
+{
+    luddite::GBuff *gbuff = pbatch->m_gbuff;
+    printf("TODO: _drawParticleBatch %p (sz %d)\n", pbatch, (GLsizei)gbuff->m_vertData.size() );
+
+    //matrix4x4f mresult =  gbatch->m_xform * matBaseModelView;
+    GLKMatrix4 mresult = GLKMatrix4Multiply( matBaseModelView, pbatch->m_xform  );
+    GLKMatrix4 mresultPMV = GLKMatrix4Multiply(  matProjection, mresult );
+
+    // setup material from this gbatch
+    _setupMaterial(pbatch, mresult, mresultPMV);
+
+    // Create gbo for this gbuff if not set up
+    _bindParticleVBO(gbuff );
+
+    // Bind textures
+    _bindGBatchTextures(pbatch);
+
+    // Bind buffer data
+    _bindDrawVertAttribs();
+
+    // Draw it!
+    glDrawArrays(GL_POINTS, 0, (GLsizei)gbuff->m_vertData.size() );
+
+
+}
+
+
+void RenderDeviceGL::_bindDrawVertAttribs()
+{
+    glEnableVertexAttribArray( VertexAttrib_TEXCOORD );
+    glVertexAttribPointer( VertexAttrib_TEXCOORD, 2, GL_FLOAT, GL_FALSE,
+                          sizeof(DrawVert), (void*)offset_s( DrawVert, m_st ) );
+
+    glEnableVertexAttribArray( VertexAttrib_POSITION );
+    glVertexAttribPointer( VertexAttrib_POSITION, 3, GL_FLOAT, GL_FALSE,
+                          sizeof(DrawVert), (void*)offset_s( DrawVert, m_pos) );
+
+    glEnableVertexAttribArray( VertexAttrib_NORMAL );
+    glVertexAttribPointer( VertexAttrib_NORMAL, 3, GL_FLOAT, GL_FALSE,
+                          sizeof(DrawVert), (void*)offset_s( DrawVert, m_nrm) );
+
+    glEnableVertexAttribArray( VertexAttrib_COLOR );
+    glVertexAttribPointer( VertexAttrib_COLOR, 4, GL_UNSIGNED_BYTE, GL_TRUE,
+                          sizeof(DrawVert), (void*)offset_s( DrawVert, m_color) );
+}
+
+void RenderDeviceGL::_bindGBatchTextures(GBatch *gbatch)
+{
+    // TODO: don't rebind if batches share the same texture
+    // TODO: VAO support
+    for (int i=3; i >= 0; i--)
+    {
+        if (!gbatch->m_mtl->m_tex[i]) continue;
+
+        GLuint texId = gbatch->m_mtl->m_tex[i]->m_texId;
+        if (texId)
+        {
+//            printf("  Bind texture %d (%s) slot %d\n", texId, gbatch->m_mtl->m_tex[i]->m_filename.c_str(), i );
+            glActiveTexture( GL_TEXTURE0+i );
+            glBindTexture(GL_TEXTURE_2D, gbatch->m_mtl->m_tex[i]->m_texId );
+        }
+    }
+}
+
+void RenderDeviceGL::_bindGbuffVBO(GBuff *gbuff )
+{
+    if (gbuff->m_vbo==0)
+    {
+        glGenBuffers( 1, &(gbuff->m_vbo) );
+
+        glBindBuffer( GL_ARRAY_BUFFER, gbuff->m_vbo );
+        glBufferData( GL_ARRAY_BUFFER, gbuff->m_vertData.size() * sizeof( DrawVert ),
+                     gbuff->m_vertData.data(), GL_STATIC_DRAW );
+
+    }
+    else
+    {
+        // Buffer is already created, just bind it
+        glBindBuffer( GL_ARRAY_BUFFER, gbuff->m_vbo );
+    }
+}
+
+void RenderDeviceGL::_bindParticleVBO(GBuff *gbuff )
+{
+    if (gbuff->m_vbo==0)
+    {
+        glGenBuffers( 1, &(gbuff->m_vbo) );
+
+        glBindBuffer( GL_ARRAY_BUFFER, gbuff->m_vbo );
+        glBufferData( GL_ARRAY_BUFFER, gbuff->m_capacity * sizeof( DrawVert ),
+               NULL, GL_DYNAMIC_DRAW );
+    }
+    else
+    {
+        // Buffer is already created, just bind it
+        glBindBuffer( GL_ARRAY_BUFFER, gbuff->m_vbo );
+    }
+
+    // Copy active particles into buffer
+    glBufferSubData(GL_ARRAY_BUFFER, 0, gbuff->m_vertData.size() * sizeof( DrawVert ), gbuff->m_vertData.data() );
+}
+
+
+void RenderDeviceGL::_setupMaterial(GBatch *gbatch, const GLKMatrix4 &mresult, const GLKMatrix4 &mresultPMV)
+{
     // Set transform and shader params from gbatch
-    
     if (!gbatch->m_mtl)
     {
-        // Use default material    
+        // Use default material
         glUniformMatrix4fv(uparam_modelViewProjection, 1, 0, mresultPMV.m );
 //    glUniformMatrix3fv(uparam_normalMat, 1, 0, _normalMatrix.m);
     }
@@ -113,40 +208,13 @@ void RenderDeviceGL::_drawGBatch( luddite::GBatch *gbatch )
         // use gbatch material
         GLuint progGBatch = gbatch->m_mtl->m_shader->shaderProgram();
         glUseProgram(progGBatch );
-        
+
         GLint mvp = glGetUniformLocation( progGBatch, "matrixPMV");
         glUniformMatrix4fv( mvp, 1, 0, mresultPMV.m );
 
         GLint modelView = glGetUniformLocation( progGBatch, "matrixModelview");
         glUniformMatrix4fv( modelView, 1, 0, mresult.m );
 
-        
-//        DBG::info( "matrixPMV (%d)      %3.2f %3.2f %3.2f %3.2f\n"
-//                  "              %3.2f %3.2f %3.2f %3.2f\n"
-//                  "              %3.2f %3.2f %3.2f %3.2f\n"
-//                  "              %3.2f %3.2f %3.2f %3.2f\n", mvp,
-//                  
-//                  mresult.m16[0],
-//                  mresult.m16[1],
-//                  mresult.m16[2],
-//                  mresult.m16[3],
-//                  
-//                  mresult.m16[4],
-//                  mresult.m16[5],
-//                  mresult.m16[6],
-//                  mresult.m16[7],
-//                  
-//                  mresult.m16[8],
-//                  mresult.m16[9],
-//                  mresult.m16[10],
-//                  mresult.m16[11],
-//                  
-//                  mresult.m16[12],
-//                  mresult.m16[13],
-//                  mresult.m16[14],
-//                  mresult.m16[15] );
-
-        
         // Set params from mtl
 //        printf("mtl: %s\n", gbatch->m_mtl->m_materialName.c_str() );
         for (Param &p : gbatch->m_mtl->mutable_params() )
@@ -161,7 +229,7 @@ void RenderDeviceGL::_drawGBatch( luddite::GBatch *gbatch )
 
             _param( p );
         }
-        
+
         // bind textures to slots
         for (int i=0; i < kMaxTextureSlot; i++)
         {
@@ -180,71 +248,10 @@ void RenderDeviceGL::_drawGBatch( luddite::GBatch *gbatch )
                 glUniform1i( gbatch->m_mtl->m_texParam[i], i );
 //                printf("bind texture param %d slot %d\n", gbatch->m_mtl->m_texParam[i], i );
             }
-            
+
         }
     }
-
-    // Create gbo for this gbuff if not set up
-    if (gbuff->m_vbo==0)
-    {
-        glGenBuffers( 1, &(gbuff->m_vbo) );
-        
-        glBindBuffer( GL_ARRAY_BUFFER, gbuff->m_vbo );
-        glBufferData( GL_ARRAY_BUFFER, gbuff->m_vertData.size() * sizeof( DrawVert ), 
-                     gbuff->m_vertData.data(), GL_STATIC_DRAW );
-        
-    }
-    else
-    {
-        // Buffer is already created, just bind it
-        glBindBuffer( GL_ARRAY_BUFFER, gbuff->m_vbo );
-    }
-
-    // Bind textures
-    // TODO: don't rebind if batches share the same texture
-    // TODO: VAO support
-    for (int i=3; i >= 0; i--)
-    {
-        if (!gbatch->m_mtl->m_tex[i]) continue;
-        
-        GLuint texId = gbatch->m_mtl->m_tex[i]->m_texId;
-        if (texId)
-        {
-//            printf("  Bind texture %d (%s) slot %d\n", texId, gbatch->m_mtl->m_tex[i]->m_filename.c_str(), i );
-            glActiveTexture( GL_TEXTURE0+i );
-            glBindTexture(GL_TEXTURE_2D, gbatch->m_mtl->m_tex[i]->m_texId );
-        }
-    }
-
-    // Bind buffer data
-    glEnableVertexAttribArray( VertexAttrib_TEXCOORD );
-    glVertexAttribPointer( VertexAttrib_TEXCOORD, 2, GL_FLOAT, GL_FALSE, 
-                          sizeof(DrawVert), (void*)offset_s( DrawVert, m_st ) );
-    
-    glEnableVertexAttribArray( VertexAttrib_POSITION );
-    glVertexAttribPointer( VertexAttrib_POSITION, 3, GL_FLOAT, GL_FALSE, 
-                          sizeof(DrawVert), (void*)offset_s( DrawVert, m_pos) );
-
-    glEnableVertexAttribArray( VertexAttrib_NORMAL );
-    glVertexAttribPointer( VertexAttrib_NORMAL, 3, GL_FLOAT, GL_FALSE, 
-                          sizeof(DrawVert), (void*)offset_s( DrawVert, m_nrm) );
-    
-    glEnableVertexAttribArray( VertexAttrib_COLOR );
-    glVertexAttribPointer( VertexAttrib_COLOR, 4, GL_UNSIGNED_BYTE, GL_TRUE, 
-                          sizeof(DrawVert), (void*)offset_s( DrawVert, m_color) );
-    
-    // Draw it!
-    if (gbatch->m_batchType == BatchType_TRIANGLES)
-    {
-        glDrawArrays(GL_TRIANGLES, 0, (GLsizei)gbuff->m_vertData.size() );
-    }
-    else if (gbatch->m_batchType == BatchType_PARTICLES)
-    {
-        glDrawArrays(GL_POINTS, 0, (GLsizei)gbuff->m_vertData.size() );
-    }
-
 }
-
 
 void RenderDeviceGL::_finishFrame()
 {

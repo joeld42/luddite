@@ -32,6 +32,7 @@ protected:
     
     virtual void _prepareFrame();
     virtual void _drawGBatch( luddite::GBatch *gbatch );
+    virtual void _drawParticleBatch( luddite::GBatch *pbatch );
     virtual void _finishFrame();
     
     // TODO: put this crap in an pimpl class
@@ -40,6 +41,13 @@ protected:
     void _link( int32_t program );
 
     void _param( const Param &p );
+
+    void _setupMaterial(GBatch *gbatch, const GLKMatrix4 &mresult, const GLKMatrix4 &mresultPMV);
+    void _bindGbuffVBO(GBuff *gbuff );
+    void _bindParticleVBO(GBuff *gbuff );
+    void _bindGBatchTextures(GBatch * gbatch);
+
+    void _bindDrawVertAttribs();
 };
     
 

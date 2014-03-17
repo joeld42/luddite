@@ -49,8 +49,11 @@ void EmitterNode::emitIntoGroup( luddite::ParticleGroup *group, float dt )
     {
         // TODO: set up particle
         part.m_pos = GLKVector3Make( 0.0, 0.0, 0.0 ); // TODO: use our world loc
-        part.m_vel = GLKVector3Make( randUniform(), randUniform(), randUniform() ); // TODO: calculate this
+        part.m_vel = GLKVector3Make( ((randUniform()*2.0) - 1.0) * 0.3,
+                                     randUniform() * 2.0,
+                                    ((randUniform()*2.0) - 1.0)  * 0.3 ); // TODO: calculate this right
         part.m_vel = GLKVector3Normalize( part.m_vel );
+        part.m_vel = GLKVector3MultiplyScalar( part.m_vel, randUniform( 3.0, 10.0 ) );
         
         group->addParticle( part );
         if (group->isFull()) break;

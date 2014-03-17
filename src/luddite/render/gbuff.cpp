@@ -16,7 +16,8 @@
 using namespace luddite;
 
 GBuff::GBuff() :
-    m_vbo( 0 )
+    m_vbo( 0 ),
+    m_capacity( 0 )
 {
 }
 
