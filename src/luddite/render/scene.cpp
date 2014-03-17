@@ -47,7 +47,6 @@ void Scene::eval( RenderDevice *device )
     {
         GBatch *pbatch = pg->_buildParticles();
         device->addParticleBatch( pbatch );
-        printf("Added pbatch... %p\n", pbatch );
     }
 }
 
@@ -57,6 +56,9 @@ void Scene::_evalNode( RenderDevice *device, SceneNode *node, GLKMatrix4 currXfo
     GLKMatrix4 nodeXform = node->localXForm();
     //nodeXform = nodeXform * currXform;
     nodeXform = GLKMatrix4Multiply( nodeXform, currXform );
+    
+    // cache the xform
+    node->_sceneEval_setNodeXform( nodeXform );
     
     // Add the gbatch for this node
     // For now just add everything, need to be smarter about traversal

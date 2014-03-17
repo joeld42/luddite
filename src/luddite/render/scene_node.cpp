@@ -134,6 +134,16 @@ GLKMatrix4 SceneNode::localXForm()
     return xform;
 }
 
+GLKMatrix4 SceneNode::nodeXForm()
+{
+    return m_nodeXform;
+}
+
+void SceneNode::_sceneEval_setNodeXform( const GLKMatrix4 &xform )
+{
+    m_nodeXform = xform;
+}
+
 GLKVector3 SceneNode::localToWorld( const GLKVector3 &localPos )
 {
     // TODO

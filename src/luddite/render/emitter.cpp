@@ -42,22 +42,33 @@ void EmitterNode::emitIntoGroup( luddite::ParticleGroup *group, float dt )
     {
         numParts++;
     }
-    
+
     // Emit the particles
     Particle part;
+    GLKMatrix4 emitterXform = nodeXForm();
     for (size_t i=0; i < numParts; i++)
     {
         // TODO: set up particle
-        part.m_pos = GLKVector3Make( 0.0, 0.0, 0.0 ); // TODO: use our world loc
-        part.m_vel = GLKVector3Make( ((randUniform()*2.0) - 1.0) * 0.3,
-                                     randUniform() * 2.0,
-                                    ((randUniform()*2.0) - 1.0)  * 0.3 ); // TODO: calculate this right
-        part.m_vel = GLKVector3Normalize( part.m_vel );
-        part.m_vel = GLKVector3MultiplyScalar( part.m_vel, randUniform( 3.0, 10.0 ) );
+        GLKVector3 pos, vel;
+        pos = GLKVector3Make( 0.0, 0.0, 0.0 ); // TODO: use our world loc
+        vel = GLKVector3Make( ((randUniform()*2.0) - 1.0) * 0.3,
+                            ((randUniform()*2.0) - 1.0)  * 0.3,
+                              randUniform() * 2.0 ); // TODO: calculate this right
+        
+        vel = GLKVector3MultiplyScalar( GLKVector3Normalize( vel ), randUniform( 3.0, 10.0 ) );
+        
+        // transform by this emitter's xform
+        part.m_pos = GLKMatrix4MultiplyVector3WithTranslation( emitterXform, pos );
+        part.m_vel = GLKMatrix4MultiplyVector3( emitterXform,  vel );
+        part.m_age = 0.0;
+        part.m_lifetime = randNormal( 2.0, 0.5 );
+        
+//        printf("emit: part location %3.2f %3.2f %3.2f\n",
+//               part.m_pos.x, part.m_pos.y, part.m_pos.z );
         
         group->addParticle( part );
         if (group->isFull()) break;
     }
     
-    printf("EmitterNode: Now has %zu particles...\n", group->particleCount() );
+//    printf("EmitterNode: Now has %zu particles...\n", group->particleCount() );
 }

@@ -31,7 +31,16 @@ void ParticleGroup::update( float dt )
         
         // Gravity
         p.m_vel = GLKVector3Add( p.m_vel, gravity );
+        
+        // Age particle
+        p.m_age += dt;
     }
+    
+    // age out any old particles
+    m_particles.erase( std::remove_if( m_particles.begin(), m_particles.end(),
+                                      [](const Particle &p)
+                                      { return p.m_age > p.m_lifetime; }),
+                      m_particles.end() );
     
 }
 
@@ -67,7 +76,7 @@ luddite::GBatch *ParticleGroup::_buildParticles()
         m_gbatch = new GBatch();
         m_gbatch->m_mtl = m_mtl;
         m_gbatch->m_gbuff = new GBuff();
-        m_gbatch->m_gbuff->m_capacity = m_maxParticles;
+        m_gbatch->m_gbuff->m_capacity = (uint32_t)m_maxParticles;
         m_gbatch->m_xform = GLKMatrix4Identity;
         m_gbatch->m_xformInv = GLKMatrix4Identity;
     }
@@ -79,11 +88,16 @@ luddite::GBatch *ParticleGroup::_buildParticles()
     
     for (size_t i=0; i < m_particles.size(); i++)
     {
-        verts[i].m_pos = m_particles[i].m_pos;
-        verts[i].m_color[0] = m_particles[i].m_color[0];
-        verts[i].m_color[1] = m_particles[i].m_color[1];
-        verts[i].m_color[2] = m_particles[i].m_color[2];
-        verts[i].m_color[3] = m_particles[i].m_color[3];
+        const Particle &p = m_particles[i];
+        verts[i].m_pos = p.m_pos;
+        verts[i].m_color[0] = p.m_color[0];
+        verts[i].m_color[1] = p.m_color[1];
+        verts[i].m_color[2] = p.m_color[2];
+        verts[i].m_color[3] = p.m_color[3];
+
+        // yuk, just stuff the particle age, etc into unused drawvert fields
+        // really should have a separate vert type for particles
+        verts[i].m_st = GLKVector3Make( p.m_age/p.m_lifetime, 0, 0 );
     }
 
     return m_gbatch;

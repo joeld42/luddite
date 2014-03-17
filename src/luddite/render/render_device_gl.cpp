@@ -93,7 +93,6 @@ void RenderDeviceGL::_drawGBatch( luddite::GBatch *gbatch )
 void RenderDeviceGL::_drawParticleBatch( luddite::GBatch *pbatch )
 {
     luddite::GBuff *gbuff = pbatch->m_gbuff;
-    printf("TODO: _drawParticleBatch %p (sz %d)\n", pbatch, (GLsizei)gbuff->m_vertData.size() );
 
     //matrix4x4f mresult =  gbatch->m_xform * matBaseModelView;
     GLKMatrix4 mresult = GLKMatrix4Multiply( matBaseModelView, pbatch->m_xform  );
@@ -277,6 +276,8 @@ int32_t RenderDeviceGL::loadShader( const std::string &shaderKey )
 		return SHADER_FAIL;
     }
     
+//    printf( "compile vertex shader:\n%s\n-----\n", vertShaderText );
+    
     // Compile the vertex shader
     vertShader = _compileShader( vertShaderText, GL_VERTEX_SHADER );
     
@@ -327,7 +328,7 @@ int32_t RenderDeviceGL::loadShader( const std::string &shaderKey )
 }
 
 int32_t RenderDeviceGL::_compileShader( const char *shaderText, 
-                                         uint32_t shaderType )
+                                        uint32_t shaderType )
 {
     GLint status;    
     GLuint shader;
@@ -344,7 +345,10 @@ int32_t RenderDeviceGL::_compileShader( const char *shaderText,
     {
         char *log = (char *)malloc(logLength);
         glGetShaderInfoLog( shader, logLength, NULL, log );
-        printf("Error compiling shader:\n%s\n-------\n", log );
+        printf("--------------------------\n%s\n\n", shaderText );
+        printf("Error compiling %s shader:\n%s\n-------\n",
+               (shaderType==GL_VERTEX_SHADER)?"Vertex":"Fragment",
+               log );
         free(log);        
     }
     

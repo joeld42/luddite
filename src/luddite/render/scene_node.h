@@ -75,11 +75,15 @@ public:
     
     // Build the current xform
     GLKMatrix4 localXForm();
-        
+    GLKMatrix4 nodeXForm(); // node xform at last eval
+
+    // used by scene::eval()
+    void _sceneEval_setNodeXform( const GLKMatrix4 &xform );
     
 protected:
     std::string m_name;
     SceneNode *m_parent;
+    GLKMatrix4 m_nodeXform; 
     
     GBatchList m_shapes;
     SceneNodeList m_childs;        
