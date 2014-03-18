@@ -100,6 +100,11 @@ void RenderDeviceGL::_drawParticleBatch( luddite::GBatch *pbatch )
 
     // setup material from this gbatch
     _setupMaterial(pbatch, mresult, mresultPMV);
+    
+    // set blend mode
+    glEnable( GL_BLEND );
+    glBlendFunc( GL_ONE , GL_ONE );
+    glDepthMask( GL_FALSE );
 
     // Create gbo for this gbuff if not set up
     _bindParticleVBO(gbuff );
@@ -113,7 +118,8 @@ void RenderDeviceGL::_drawParticleBatch( luddite::GBatch *pbatch )
     // Draw it!
     glDrawArrays(GL_POINTS, 0, (GLsizei)gbuff->m_vertData.size() );
 
-
+    glDisable( GL_BLEND );
+    glDepthMask( GL_TRUE );
 }
 
 

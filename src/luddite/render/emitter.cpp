@@ -61,7 +61,7 @@ void EmitterNode::emitIntoGroup( luddite::ParticleGroup *group, float dt )
         part.m_pos = GLKMatrix4MultiplyVector3WithTranslation( emitterXform, pos );
         part.m_vel = GLKMatrix4MultiplyVector3( emitterXform,  vel );
         part.m_age = 0.0;
-        part.m_lifetime = randNormal( 2.0, 0.5 );
+        part.m_lifetime = randNormal( 1.0, 0.25 );
         
 //        printf("emit: part location %3.2f %3.2f %3.2f\n",
 //               part.m_pos.x, part.m_pos.y, part.m_pos.z );
