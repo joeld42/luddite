@@ -13,6 +13,7 @@
 
 #include <luddite/render/scene_node.h>
 #include <luddite/render/particle.h>
+#include "particle_group.h"
 
 
 namespace luddite
@@ -34,6 +35,7 @@ public:
     float m_rate; // particles per second avg.
     GLKVector3 m_dir; // direction
     float m_spreadAngle; // degrees, 0..180
+    size_t _numPartsForRate(float rate, float dt);
 };
     
 } // namespace luddite

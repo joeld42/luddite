@@ -14,7 +14,8 @@
 using namespace luddite;
 
 Material::Material() :
-    m_shader(NULL)
+    m_shader(NULL),
+    m_blendAdd(false)
 {
     for (int i=0; i < kMaxTextureSlot; i++)
     {
@@ -34,6 +35,8 @@ std::vector<Param>  & Material::mutable_params() {
 
 void Material::setParam( const Param &p )
 {
+    printf("mtl %s setParam: %s\n", m_materialName.c_str(), p.m_name.c_str() );
+    
     // Is this parameter already in this material's 
     // parameter list?
     for (std::vector<Param>::iterator pi = m_params.begin();
@@ -49,6 +52,7 @@ void Material::setParam( const Param &p )
     
     // Nope, add it as a new param
     m_params.push_back( p );
+    
 }
 
 std::string const & Material::shaderKey()

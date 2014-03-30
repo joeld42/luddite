@@ -28,6 +28,16 @@ using namespace luddite;
 
 uint32_t _parseWrapMode( const char *wrapModeStr );
 
+int countchars( const char *s, char target )
+{
+    int count=0;
+    for (const char *ch=s; *ch; ch++)
+    {
+        if (*ch==target) count++;
+    }
+    return count;
+}
+
 void MaterialDB::initShaderDB( )
 {
     initShaderDB( pfGetResourcePath().c_str() );
@@ -132,6 +142,7 @@ void MaterialDB::addMaterialDefs( const char *materialFile )
                         parentMtl->shaderKey().c_str() );
             }
             material = new Material( *parentMtl );
+            material->m_materialName = mtlName;
 
 //            printf( "parent material is %s\n", parentMtl->m_materialName.c_str());
 
@@ -142,8 +153,9 @@ void MaterialDB::addMaterialDefs( const char *materialFile )
 
         } else if (!shaderKey.empty()) {
             material = _materialWithKey( shaderKey );
+            material->m_materialName = mtlName;
         } else {
-            DBG::error( "Material '%s' doesn't specify a shader or a parent material. Skipping.");
+            DBG::error( "Material '%s' doesn't specify a shader or a parent material. Skipping.",  mtlName.c_str());
             currMtl = currMtl->next_sibling( "Material" );
             continue;
         }
@@ -156,6 +168,20 @@ void MaterialDB::addMaterialDefs( const char *materialFile )
 //            attr = attr->next_attribute();
 //        }
 
+        // Set blend flag (for particle materials)
+        rapidxml::xml_attribute<> *attrBlend = currMtl->first_attribute( "blend" );
+        if (attrBlend) {
+            if (!strcmp(attrBlend->value(), "add"))
+            {
+                material->m_blendAdd = true;
+            }
+            else
+            {
+                DBG::warn( "Material %s: Unknown blend mode '%s'", mtlName.c_str(), attrBlend->value() );
+            }
+        }
+        
+        
         // Params
         // FIXME: make this case-insensive
         rapidxml::xml_node<> *currParam = currMtl->first_node( "param" );
@@ -231,7 +257,10 @@ void MaterialDB::_parseParam(Material *mtl, std::string const & paramName, char 
 {
     Param p(paramName);
 
+    printf("paramName %s value %s\n", paramName.c_str(), value );
+    
     // TODO: better value parser
+    int numComma = countchars(value, ',');
     if ((value[0]=='#') && (strlen(value)==7))
     {
         // html style color like #ff00ee
@@ -248,9 +277,31 @@ void MaterialDB::_parseParam(Material *mtl, std::string const & paramName, char 
 
         p = GLKVector4Make( (float)r/255.0, (float)g/255.0, (float)b/255.0, 1.0 );
     }
+    else if (numComma==3)
+    {
+        // 4 floats
+        float x,y,z,w;
+        sscanf( value, "%f,%f,%f,%f", &x, &y, &z, &w );
+        p = GLKVector4Make( x,y,z,w);
+    }
+    else if (numComma==2)
+    {
+        // 3 floats
+        float x,y,z;
+        sscanf( value, "%f,%f,%f", &x, &y, &z );
+        printf("got vec3 %f %f %f\n", x, y, z );
+        p = GLKVector3Make( x,y,z );
+    }
+    else if (numComma==1)
+    {
+        // 2 floats
+        float x,y;
+        sscanf( value, "%f,%f", &x, &y  );
+        p = GLKVector2Make( x,y );
+    }
     else
     {
-        // Is it a float?
+        // Is it a single float?
         p = atof(value);
         
 //        // TODO: more formats, like x,y,z

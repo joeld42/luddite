@@ -48,6 +48,10 @@ void RenderDeviceGL::_param(Param const & p)
             break;
 
         case ParamType_VEC4:
+//            printf("Bind: %s %f %f %f %f\n", p.m_name.c_str(),
+//                   p.m_val.data[0],p.m_val.data[1],
+//                   p.m_val.data[2],p.m_val.data[3]
+//                   );
             glUniform4fv( p.m_glParam, 1, p.m_val.data );
             break;
 
@@ -103,7 +107,16 @@ void RenderDeviceGL::_drawParticleBatch( luddite::GBatch *pbatch )
     
     // set blend mode
     glEnable( GL_BLEND );
-    glBlendFunc( GL_ONE , GL_ONE );
+    
+    if (pbatch->m_mtl->m_blendAdd)
+    {
+        glBlendFunc( GL_ONE , GL_ONE );
+    }
+    else
+    {
+        glBlendFunc( GL_SRC_ALPHA , GL_ONE_MINUS_SRC_ALPHA );
+    }
+    
     glDepthMask( GL_FALSE );
 
     // Create gbo for this gbuff if not set up

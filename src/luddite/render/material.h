@@ -52,6 +52,11 @@ public:
 
     luddite::TextureInfo* m_tex[kMaxTextureSlot];
     uint32_t m_texParam[kMaxTextureSlot];
+    
+    // for particle materials, use add blend mode?
+    // TODO: expand this out to support more blend modes for
+    // everthing
+    bool m_blendAdd;
 
 public:
     const std::string &shaderKey();
