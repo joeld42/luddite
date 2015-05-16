@@ -15,9 +15,10 @@ Maturity
 This is not a stable or complete engine. There are huge parts missing, and there are other fundamental parts that are slow or wrong or untested. 
 
 That said, I have already shipped one game with it:
+
 ![Droppyship Screenshot](http://www.tapnik.com/images/droppyship-featured.png)
-[Droppyship]
-(http://www.tapnik.com/droppyship/)
+
+[Droppyship](http://www.tapnik.com/droppyship/)
 
 [Droppyship on the App Store](https://itunes.apple.com/us/app/droppyship/id820172550?mt=8)
 
