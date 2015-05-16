@@ -8,15 +8,15 @@
 
 #import <luddite/common/debug.h>
 
-#import "TKViewController.h"
+#import "TKMeshExampleViewController.h"
 
 using namespace luddite;
 
-@interface TKViewController ()
+@interface TKMeshExampleViewController ()
 @property (strong, nonatomic) EAGLContext *context;
 @end
 
-@implementation TKViewController
+@implementation TKMeshExampleViewController
 
 @synthesize meshGame=_meshGame;
 
@@ -24,9 +24,13 @@ using namespace luddite;
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        NSLog( @"TKViewController init here...");
+        NSLog( @"TKMeshExampleViewController init here...");
     }
     return self;
+}
+
+- (UIStatusBarStyle) preferredStatusBarStyle {
+    return UIStatusBarStyleLightContent;
 }
 
 - (void) gameInit

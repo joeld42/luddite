@@ -12,7 +12,7 @@
 #include <GL/gl.h>
 #endif
 
-#import <glsw/glsw.h>
+#import <glsw.h>
 
 #include <GLKit/GLKMath.h>
 

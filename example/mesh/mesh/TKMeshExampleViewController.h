@@ -9,11 +9,11 @@
 #import <UIKit/UIKit.h>
 #import <GLKit/GLKit.h>
 
-#import <luddite/TKGameViewController.h>
+#import "TKGameViewController.h"
 
 #import "MeshGame.h"
 
-@interface TKViewController : TKGameViewController
+@interface TKMeshExampleViewController : TKGameViewController
 
 @property (nonatomic, strong) MeshGame* meshGame;
 

@@ -1,18 +1,29 @@
+
 luddite
-=======
+--------
 
-Luddite Game Engine derived from bits of my ludum dare code.
+Luddite is a lightweight 3D game engine for iOS. This originally started as bits of ludumdare basecode. There are some great choices (e.g. Unreal) if you are making game with a huge team, or platforms like Unity can work well for small teams if you're willing to completely buy into their platform.
 
-Originally was meant to be portable but I'm only really using it on iOS and it's causing a lot
-of build headaches keeping desktop/windows working. So now the goal is to make it ios-only but
-it should be pretty easy to port if the need arises.
+Instead, luddite aims to be a small, focused engine that is appropriate for individual devs or small teams. It's not trying
+to reinvent the wheel, and it's not adding any fancy or cutting edge features. It doesn't try to be too flexible or modular, if you're using this for a real project I'd assume you're willing to hack on the engine a bit to get what you need. 
 
-No real docs since this is too early to be useful, these are mostly notes to myself:
+Originally was meant to be portable but I'm only really using it on iOS and it's causing a lot of build headaches keeping desktop/windows working. So right now it's only supported
+on iOS but there shouldn't be too much platform specific stuff, and one day I'll revisit support for other platforms.
 
-Steps to set up a project:
-# Create a new iOS app project (such as the GL game template)
-# Create a workspace (with cocoapods or just straight up)
-# Drag the "luddite" project to the workspace
-# Rename classes that will have luddite code visible to .mm (FIXME: could guard this in headers)
-# Under app target, go to 'Link Binary with Libraries' and add the libluddite.a as a dependency
+Maturity
+------
+This is not a stable or complete engine. There are huge parts missing, and there are other fundamental parts that are slow or wrong or untested. 
 
+That said, I have already shipped one game with it:
+![Droppyship Screenshot](http://www.tapnik.com/images/droppyship-featured.png)
+[Droppyship]
+(http://www.tapnik.com/droppyship/)
+
+[Droppyship on the App Store](https://itunes.apple.com/us/app/droppyship/id820172550?mt=8)
+
+No real docs since this is too early to be useful.
+
+Tools
+-----
+
+gfxpack - Simple utility to pack fonts and small images (like UI icons) into images.

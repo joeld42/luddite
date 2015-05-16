@@ -7,7 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <luddite/TKGameViewController.h>
+
+#import "TKGameViewController.h"
 
 @interface MeshGame : NSObject <TKGameLoopDelegate>
 

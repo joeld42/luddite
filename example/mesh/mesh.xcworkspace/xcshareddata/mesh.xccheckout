@@ -10,29 +10,29 @@
 	<string>mesh</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>35ABA8E3-6500-4812-A28C-79C3C8ACBC03</key>
+		<key>D21EA963B41EC5BD050AC6403CAABF59A5002FE2</key>
 		<string>ssh://github.com/joeld42/luddite.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>example/mesh/mesh.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>35ABA8E3-6500-4812-A28C-79C3C8ACBC03</key>
+		<key>D21EA963B41EC5BD050AC6403CAABF59A5002FE2</key>
 		<string>../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>ssh://github.com/joeld42/luddite.git</string>
 	<key>IDESourceControlProjectVersion</key>
-	<integer>110</integer>
+	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>35ABA8E3-6500-4812-A28C-79C3C8ACBC03</string>
+	<string>D21EA963B41EC5BD050AC6403CAABF59A5002FE2</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>35ABA8E3-6500-4812-A28C-79C3C8ACBC03</string>
+			<string>D21EA963B41EC5BD050AC6403CAABF59A5002FE2</string>
 			<key>IDESourceControlWCCName</key>
 			<string>luddite</string>
 		</dict>

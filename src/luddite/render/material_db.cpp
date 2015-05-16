@@ -6,7 +6,7 @@
 //  Copyright (c) 2012 Joel Davis. All rights reserved.
 //
 
-#include <glsw/glsw.h>
+#include <glsw.h>
 #include <rapidxml.hpp>
 
 #include <luddite/common/debug.h>
