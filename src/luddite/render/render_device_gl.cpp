@@ -150,9 +150,19 @@ void RenderDeviceGL::_bindDrawVertAttribs()
     glVertexAttribPointer( VertexAttrib_NORMAL, 3, GL_FLOAT, GL_FALSE,
                           sizeof(DrawVert), (void*)offset_s( DrawVert, m_nrm) );
 
+    glEnableVertexAttribArray( VertexAttrib_TANGENT );
+    glVertexAttribPointer( VertexAttrib_TANGENT, 3, GL_FLOAT, GL_FALSE,
+                          sizeof(DrawVert), (void*)offset_s( DrawVert, m_tangent) );
+
+    glEnableVertexAttribArray( VertexAttrib_BITANGENT );
+    glVertexAttribPointer( VertexAttrib_BITANGENT, 3, GL_FLOAT, GL_FALSE,
+                          sizeof(DrawVert), (void*)offset_s( DrawVert, m_bitangent) );
+    
     glEnableVertexAttribArray( VertexAttrib_COLOR );
     glVertexAttribPointer( VertexAttrib_COLOR, 4, GL_UNSIGNED_BYTE, GL_TRUE,
                           sizeof(DrawVert), (void*)offset_s( DrawVert, m_color) );
+    
+
 }
 
 void RenderDeviceGL::_bindGBatchTextures(GBatch *gbatch)
@@ -251,9 +261,14 @@ void RenderDeviceGL::_setupMaterial(GBatch *gbatch, const GLKMatrix4 &mresult, c
         // bind textures to slots
         for (int i=0; i < kMaxTextureSlot; i++)
         {
+//            printf("mtl %s SLOT %d tex %p\n",
+//                   gbatch->m_mtl->m_materialName.c_str(),
+//                   i,
+//                   gbatch->m_mtl->m_tex[i]
+//                   );
+
             if (gbatch->m_mtl->m_tex[i] && (!gbatch->m_mtl->m_tex[i]->m_paramName.empty()))
             {
-
                 // Do we need to find the texture param?
                 if (gbatch->m_mtl->m_texParam[i] == PARAM_UNINITIALIZED)
                 {
@@ -324,8 +339,9 @@ int32_t RenderDeviceGL::loadShader( const std::string &shaderKey )
 	glBindAttribLocation( program, VertexAttrib_POSITION, "position" );
 	glBindAttribLocation( program, VertexAttrib_TEXCOORD, "texcoord" );
 	glBindAttribLocation( program, VertexAttrib_NORMAL,   "normal" );    
-	glBindAttribLocation( program, VertexAttrib_COLOR,   "color" );
-	
+	glBindAttribLocation( program, VertexAttrib_COLOR,    "color" );
+	glBindAttribLocation( program, VertexAttrib_TANGENT,  "tangent" );
+    glBindAttribLocation( program, VertexAttrib_BITANGENT, "bitangent" );
     
     //  Link Shader
 //    printf("... links shaders\n" );

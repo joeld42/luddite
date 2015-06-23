@@ -208,7 +208,7 @@ void MaterialDB::addMaterialDefs( const char *materialFile )
             rapidxml::xml_attribute<> *attrPname = currTexture->first_attribute( "pname" );
             rapidxml::xml_attribute<> *attrWrap = currTexture->first_attribute( "wrap" );
             
-//            printf("texture: %s value %s\n", attrFilename?attrFilename->value():"(null)", attrSlot?attrSlot->value():"(null)" );
+            printf("texture: %s value %s\n", attrFilename?attrFilename->value():"(null)", attrSlot?attrSlot->value():"(null)" );
 
             if (attrSlot)
             {

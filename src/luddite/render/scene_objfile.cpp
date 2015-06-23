@@ -256,10 +256,12 @@ SceneNode *luddite::scene_objfile(char const *filename, RenderDevice *renderDevi
         GBatch *mtlBatch = new GBatch();        
 
 //        luddite::Material *mtl = _mtlDB->getNamedMaterial( _renderDevice, "mtl.one" );
-        Material *mtl = mtlDB->getNamedMaterial( renderDevice, (*mi)->mtlName );
+        Material *mtl = mtlDB->getNamedMaterial( renderDevice, (*mi)->mtlName );        
 
         mtlBatch->m_gbuff = (*mi)->gbuff;
         mtlBatch->m_mtl = mtl;
+        
+        mtlBatch->m_gbuff->calcTangents();
         
         objNode->addGBatch( mtlBatch );
     }

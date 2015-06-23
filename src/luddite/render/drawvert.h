@@ -20,7 +20,8 @@ struct DrawVert
     GLKVector3 m_pos;
     GLKVector3 m_st;
     GLKVector3 m_nrm;
-    // GLKVector3			tangents[2];
+    GLKVector3 m_tangent;
+    GLKVector3 m_bitangent;
     uint8_t	m_color[4];
 };
     

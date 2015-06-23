@@ -26,7 +26,10 @@ struct GBuff
     
     luddite::DrawVert *addTri(); // adds 3 verts
     luddite::DrawVert *addQuad(); // adds 6 verts
-     
+    
+    // calculates tangents for lighting
+    void calcTangents();
+    
     std::vector<luddite::DrawVert> m_vertData;
     uint32_t m_vbo;
     uint32_t m_capacity; // for particle gbuffs, max capacity to allocate

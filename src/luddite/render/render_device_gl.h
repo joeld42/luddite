@@ -56,8 +56,8 @@ enum
     VertexAttrib_POSITION,
     VertexAttrib_TEXCOORD,
     VertexAttrib_NORMAL,
-//    VertexAttrib_TANGENT,
-//    VertexAttrib_BITANGENT,
+    VertexAttrib_TANGENT,
+    VertexAttrib_BITANGENT,
     VertexAttrib_COLOR,
 };
 
