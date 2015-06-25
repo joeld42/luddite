@@ -62,6 +62,10 @@ public:
     const std::string &shaderKey();
 
 private:
+    // Things we want to be transformed into local space
+    // (e.g. lights)
+    std::vector<Param*> m_objectSpaceParams;
+    
     bool _loadShader( const char *shaderKey );
 };
         

@@ -50,7 +50,7 @@ public:
 
     luddite::TextureInfo *_lookupTexture( const std::string &filename );
 
-    void _parseParam( Material *mtl, const std::string &paramName, const char *value );
+    void _parseParam( Material *mtl, const std::string &paramName, const char *value, bool objectSpace );
     
     std::string m_resourcePath;
     std::unordered_map<std::string,luddite::Material*> m_materials;

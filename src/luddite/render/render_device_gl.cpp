@@ -31,8 +31,15 @@
 using namespace luddite;
 
 
-void RenderDeviceGL::_param(Param const & p)
+//void RenderDeviceGL::_param(Param const & p)
+void RenderDeviceGL::_param( const Param &p, const GLKMatrix4 &mresult )
 {
+    bool doDebug = false;
+    if (p.m_name=="lightDir0")
+    {
+        doDebug = true;
+    }
+    
     switch (p.m_paramType)
     {
         case ParamType_SCALAR:
@@ -44,14 +51,41 @@ void RenderDeviceGL::_param(Param const & p)
             break;
 
         case ParamType_VEC3:
-            glUniform3fv( p.m_glParam, 1, p.m_val.data );
+
+            if (doDebug)
+            {
+                printf("Bind: %s %f %f %f (%s)\n", p.m_name.c_str(),
+                       p.m_val.data[0],p.m_val.data[1],
+                       p.m_val.data[2],
+                       p.m_space==ParamSpace_OBJECT?"object":"world"
+                       );
+            }
+
+            
+            if (p.m_space == ParamSpace_WORLD)
+            {
+                glUniform3fv( p.m_glParam, 1, p.m_val.data );
+            }
+            else if (p.m_space == ParamSpace_OBJECT)
+            {
+                // FIXME: do this at a higher level only once
+                GLKVector3 pworld = GLKVector3MakeWithArray( p.m_val.data );
+                GLKMatrix4 xformInv = GLKMatrix4Transpose( mresult );
+                GLKVector3 plocal = GLKMatrix4MultiplyVector3( xformInv, pworld );
+                printf("Light dir (local) %f %f %f\n", plocal.x, plocal.y, plocal.z );
+                glUniform3fv( p.m_glParam, 1, plocal.v );
+            }
             break;
 
         case ParamType_VEC4:
-//            printf("Bind: %s %f %f %f %f\n", p.m_name.c_str(),
-//                   p.m_val.data[0],p.m_val.data[1],
-//                   p.m_val.data[2],p.m_val.data[3]
-//                   );
+//            if (doDebug)
+//            {
+//                printf("Bind: %s %f %f %f %f\n", p.m_name.c_str(),
+//                       p.m_val.data[0],p.m_val.data[1],
+//                       p.m_val.data[2],p.m_val.data[3]
+//                       );
+//            }
+
             glUniform4fv( p.m_glParam, 1, p.m_val.data );
             break;
 
@@ -255,7 +289,7 @@ void RenderDeviceGL::_setupMaterial(GBatch *gbatch, const GLKMatrix4 &mresult, c
                                                      p.m_name.c_str() );
             }
 
-            _param( p );
+            _param( p, mresult );
         }
 
         // bind textures to slots

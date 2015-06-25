@@ -36,6 +36,7 @@ Param::Param()
     m_paramType = ParamType_SCALAR;
     m_val.scalar = 0.0;
     m_glParam = PARAM_UNINITIALIZED;
+    m_space = ParamSpace_WORLD;
 }
 
 Param::~Param()
@@ -67,7 +68,8 @@ const Param &Param::operator= (const Param &other )
 {
     // Copy basic stuff
     m_name = other.m_name;
-
+    m_space = other.m_space;
+    
     // Set to uninitialized in case this is assigning into a different shader
     m_glParam = PARAM_UNINITIALIZED;
 

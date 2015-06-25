@@ -189,11 +189,24 @@ void MaterialDB::addMaterialDefs( const char *materialFile )
         {
             rapidxml::xml_attribute<> *attrName = currParam->first_attribute( "name" );
             rapidxml::xml_attribute<> *attrValue = currParam->first_attribute( "value" );
+            
+            bool objectSpace = false;
+            rapidxml::xml_attribute<> *attrSpace = currParam->first_attribute( "xform" );
+            
+            if (attrSpace)
+            {
+                printf("DBG: HAS AttrSpace: %s\n", attrSpace->value() );
+            }
+            
+            if ((attrSpace) && !strcmp(attrSpace->value(), "object")) {
+                objectSpace = true;
+            }
+            
 //            printf("  param: %s value %s\n", attrName?attrName->value():"(null)", attrValue?attrValue->value():"(null)" );
 
             if ((attrName)&&(attrValue))
             {
-                _parseParam( material, attrName->value(), attrValue->value() );
+                _parseParam( material, attrName->value(), attrValue->value(), objectSpace );
             }
 
             currParam = currParam->next_sibling("param");
@@ -253,7 +266,7 @@ void MaterialDB::addMaterialDefs( const char *materialFile )
     free(xmlText );
 }
 
-void MaterialDB::_parseParam(Material *mtl, std::string const & paramName, char const *value)
+void MaterialDB::_parseParam(Material *mtl, std::string const & paramName, char const *value, bool objectSpace)
 {
     Param p(paramName);
 
@@ -308,6 +321,12 @@ void MaterialDB::_parseParam(Material *mtl, std::string const & paramName, char 
 //        DBG::warn( "Unknown format: for param %s '%s'\n", paramName.c_str(), value );
     }
 
+    // Set param space
+    if (objectSpace)
+    {
+        p.m_space = ParamSpace_OBJECT;
+    }
+    
     // Add the param
     mtl->setParam( p );
 }

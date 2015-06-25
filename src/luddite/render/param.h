@@ -26,6 +26,12 @@ enum
     ParamType_MATRIX3,
     ParamType_MATRIX4
 };
+    
+enum
+{
+    ParamSpace_WORLD,
+    ParamSpace_OBJECT,
+};
 
 // Special values for gl param
 enum {
@@ -60,6 +66,9 @@ struct Param
 
     // param in GL shader.
     int32_t m_glParam;
+    
+    // what space to put parameter in
+    int32_t m_space;
     
 };
 

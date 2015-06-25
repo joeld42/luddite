@@ -40,7 +40,7 @@ protected:
     void _printShaderLog( int32_t program );
     void _link( int32_t program );
 
-    void _param( const Param &p );
+    void _param( const Param &p, const GLKMatrix4 &mresult );
 
     void _setupMaterial(GBatch *gbatch, const GLKMatrix4 &mresult, const GLKMatrix4 &mresultPMV);
     void _bindGbuffVBO(GBuff *gbuff );
