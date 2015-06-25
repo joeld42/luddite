@@ -52,14 +52,14 @@ void RenderDeviceGL::_param( const Param &p, const GLKMatrix4 &mresult )
 
         case ParamType_VEC3:
 
-            if (doDebug)
-            {
-                printf("Bind: %s %f %f %f (%s)\n", p.m_name.c_str(),
-                       p.m_val.data[0],p.m_val.data[1],
-                       p.m_val.data[2],
-                       p.m_space==ParamSpace_OBJECT?"object":"world"
-                       );
-            }
+//            if (doDebug)
+//            {
+//                printf("Bind: %s %f %f %f (%s)\n", p.m_name.c_str(),
+//                       p.m_val.data[0],p.m_val.data[1],
+//                       p.m_val.data[2],
+//                       p.m_space==ParamSpace_OBJECT?"object":"world"
+//                       );
+//            }
 
             
             if (p.m_space == ParamSpace_WORLD)
@@ -72,7 +72,7 @@ void RenderDeviceGL::_param( const Param &p, const GLKMatrix4 &mresult )
                 GLKVector3 pworld = GLKVector3MakeWithArray( p.m_val.data );
                 GLKMatrix4 xformInv = GLKMatrix4Transpose( mresult );
                 GLKVector3 plocal = GLKMatrix4MultiplyVector3( xformInv, pworld );
-                printf("Light dir (local) %f %f %f\n", plocal.x, plocal.y, plocal.z );
+//                printf("Light dir (local) %f %f %f\n", plocal.x, plocal.y, plocal.z );
                 glUniform3fv( p.m_glParam, 1, plocal.v );
             }
             break;
