@@ -20,9 +20,6 @@
 		6D1ED95F187B87E700C5A17F /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6D1ED95D187B87E700C5A17F /* Main_iPad.storyboard */; };
 		6D1ED966187B87E700C5A17F /* TKMeshExampleViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6D1ED965187B87E700C5A17F /* TKMeshExampleViewController.mm */; };
 		6D1ED968187B87E700C5A17F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6D1ED967187B87E700C5A17F /* Images.xcassets */; };
-		6D1ED96F187B87E700C5A17F /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D1ED96E187B87E700C5A17F /* XCTest.framework */; };
-		6D1ED970187B87E700C5A17F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D1ED944187B87E700C5A17F /* Foundation.framework */; };
-		6D1ED971187B87E700C5A17F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D1ED948187B87E700C5A17F /* UIKit.framework */; };
 		6D1ED994187F467000C5A17F /* MeshGame.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6D1ED993187F467000C5A17F /* MeshGame.mm */; };
 		6D1ED9BF1885C4CD00C5A17F /* example_mesh.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 6D1ED9BC1885C4CD00C5A17F /* example_mesh.glsl */; };
 		6D1ED9C01885C4CD00C5A17F /* example_mesh.material.xml in Resources */ = {isa = PBXBuildFile; fileRef = 6D1ED9BD1885C4CD00C5A17F /* example_mesh.material.xml */; };
@@ -30,16 +27,6 @@
 		6D1ED9C31885CAF600C5A17F /* grass.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D1ED9C21885CAF600C5A17F /* grass.png */; };
 		6D1ED9C51885D57800C5A17F /* rock1.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D1ED9C41885D57800C5A17F /* rock1.png */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		6D1ED972187B87E700C5A17F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 6D1ED939187B87E700C5A17F /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 6D1ED940187B87E700C5A17F;
-			remoteInfo = mesh;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		588B375FE2A77C97315F5C96 /* Pods-mesh.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mesh.debug.xcconfig"; path = "Pods/Target Support Files/Pods-mesh/Pods-mesh.debug.xcconfig"; sourceTree = "<group>"; };
@@ -60,7 +47,6 @@
 		6D1ED964187B87E700C5A17F /* TKMeshExampleViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TKMeshExampleViewController.h; sourceTree = "<group>"; };
 		6D1ED965187B87E700C5A17F /* TKMeshExampleViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = TKMeshExampleViewController.mm; sourceTree = "<group>"; };
 		6D1ED967187B87E700C5A17F /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		6D1ED96D187B87E700C5A17F /* meshTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = meshTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6D1ED96E187B87E700C5A17F /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		6D1ED984187BBB5300C5A17F /* libluddite.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libluddite.a; path = "../../luddite/build/Debug-iphoneos/libluddite.a"; sourceTree = "<group>"; };
 		6D1ED992187F467000C5A17F /* MeshGame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MeshGame.h; sourceTree = "<group>"; };
@@ -85,16 +71,6 @@
 				6D1ED94B187B87E700C5A17F /* GLKit.framework in Frameworks */,
 				6D1ED945187B87E700C5A17F /* Foundation.framework in Frameworks */,
 				52B8D977972CCB494C2320BA /* libPods-mesh.a in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		6D1ED96A187B87E700C5A17F /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				6D1ED96F187B87E700C5A17F /* XCTest.framework in Frameworks */,
-				6D1ED971187B87E700C5A17F /* UIKit.framework in Frameworks */,
-				6D1ED970187B87E700C5A17F /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -125,7 +101,6 @@
 			isa = PBXGroup;
 			children = (
 				6D1ED941187B87E700C5A17F /* mesh.app */,
-				6D1ED96D187B87E700C5A17F /* meshTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -208,24 +183,6 @@
 			productReference = 6D1ED941187B87E700C5A17F /* mesh.app */;
 			productType = "com.apple.product-type.application";
 		};
-		6D1ED96C187B87E700C5A17F /* meshTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 6D1ED981187B87E700C5A17F /* Build configuration list for PBXNativeTarget "meshTests" */;
-			buildPhases = (
-				6D1ED969187B87E700C5A17F /* Sources */,
-				6D1ED96A187B87E700C5A17F /* Frameworks */,
-				6D1ED96B187B87E700C5A17F /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				6D1ED973187B87E700C5A17F /* PBXTargetDependency */,
-			);
-			name = meshTests;
-			productName = meshTests;
-			productReference = 6D1ED96D187B87E700C5A17F /* meshTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -235,11 +192,6 @@
 				CLASSPREFIX = TK;
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = Tapnik;
-				TargetAttributes = {
-					6D1ED96C187B87E700C5A17F = {
-						TestTargetID = 6D1ED940187B87E700C5A17F;
-					};
-				};
 			};
 			buildConfigurationList = 6D1ED93C187B87E700C5A17F /* Build configuration list for PBXProject "mesh" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -255,7 +207,6 @@
 			projectRoot = "";
 			targets = (
 				6D1ED940187B87E700C5A17F /* mesh */,
-				6D1ED96C187B87E700C5A17F /* meshTests */,
 			);
 		};
 /* End PBXProject section */
@@ -274,13 +225,6 @@
 				6D1ED9C11885C4CD00C5A17F /* suzanne.obj in Resources */,
 				6D1ED9C01885C4CD00C5A17F /* example_mesh.material.xml in Resources */,
 				6D1ED953187B87E700C5A17F /* InfoPlist.strings in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		6D1ED96B187B87E700C5A17F /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -331,22 +275,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		6D1ED969187B87E700C5A17F /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		6D1ED973187B87E700C5A17F /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 6D1ED940187B87E700C5A17F /* mesh */;
-			targetProxy = 6D1ED972187B87E700C5A17F /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		6D1ED951187B87E700C5A17F /* InfoPlist.strings */ = {
@@ -478,48 +407,6 @@
 			};
 			name = Release;
 		};
-		6D1ED982187B87E700C5A17F /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/mesh.app/mesh";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "mesh/mesh-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "meshTests/meshTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Debug;
-		};
-		6D1ED983187B87E700C5A17F /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/mesh.app/mesh";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "mesh/mesh-Prefix.pch";
-				INFOPLIST_FILE = "meshTests/meshTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -537,15 +424,6 @@
 			buildConfigurations = (
 				6D1ED97F187B87E700C5A17F /* Debug */,
 				6D1ED980187B87E700C5A17F /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		6D1ED981187B87E700C5A17F /* Build configuration list for PBXNativeTarget "meshTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				6D1ED982187B87E700C5A17F /* Debug */,
-				6D1ED983187B87E700C5A17F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
