@@ -70,10 +70,10 @@ void RenderDeviceGL::_param( const Param &p, const GLKMatrix4 &mresult )
             {
                 // FIXME: do this at a higher level only once
                 GLKVector3 pworld = GLKVector3MakeWithArray( p.m_val.data );
-                GLKMatrix4 xformInv = GLKMatrix4Transpose( mresult );
-                GLKVector3 plocal = GLKMatrix4MultiplyVector3( xformInv, pworld );
+//                GLKMatrix4 xformInv = GLKMatrix4Transpose( mresult );
+//                GLKVector3 plocal = GLKMatrix4MultiplyVector3( mresult, pworld );
 //                printf("Light dir (local) %f %f %f\n", plocal.x, plocal.y, plocal.z );
-                glUniform3fv( p.m_glParam, 1, plocal.v );
+                glUniform3fv( p.m_glParam, 1, pworld.v );
             }
             break;
 
@@ -276,6 +276,13 @@ void RenderDeviceGL::_setupMaterial(GBatch *gbatch, const GLKMatrix4 &mresult, c
 
         GLint modelView = glGetUniformLocation( progGBatch, "matrixModelview");
         glUniformMatrix4fv( modelView, 1, 0, mresult.m );
+        
+        GLint mnrm = glGetUniformLocation( progGBatch, "normalMatrix");
+        GLKMatrix3 nrmMat = GLKMatrix4GetMatrix3( mresult );
+//        nrmMat = GLKMatrix3Transpose( nrmMat );
+        
+        glUniformMatrix3fv( mnrm, 1, GL_FALSE, nrmMat.m );
+        
 
         // Set params from mtl
 //        printf("mtl: %s\n", gbatch->m_mtl->m_materialName.c_str() );
@@ -443,7 +450,7 @@ void RenderDeviceGL::_printShaderLog( int32_t program )
     {
         char *log = (char*)malloc(logLength);
         glGetProgramInfoLog( program, logLength, &logLength, log );
-//        printf ("Link Log:\n%s\n", log );
+        printf ("Link Log:\n%s\n", log );
         free(log);
     }
 	

@@ -116,6 +116,11 @@ void GBuff::calcTangents()
 
         // compute bitangent.
         m_vertData[i].m_bitangent = GLKVector3Normalize( GLKVector3CrossProduct( m_vertData[i].m_nrm, m_vertData[i].m_tangent));
+        
+        // DBG
+//        m_vertData[i].m_nrm = GLKVector3Make( 0.0, 1.0, 0.0 );
+//        m_vertData[i].m_tangent = GLKVector3Make( 0.0, 1.0, 0.0 );
+//        m_vertData[i].m_bitangent = GLKVector3Make( 0.0, 1.0, 0.0 );
     }
     
 }
