@@ -1,0 +1,12 @@
+<MaterialList>
+
+	<Material name="mtl.inner" shader="basic.FlatColor">
+		<param name="flatColor" value="#aaaaaa" />
+    </Material>
+
+<Material name="mtl.outer" shader="basic.FlatColor">
+    <param name="flatColor" value="#ff0000" />
+</Material>
+
+
+</MaterialList>

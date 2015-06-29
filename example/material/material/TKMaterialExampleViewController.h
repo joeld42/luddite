@@ -8,8 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
+#import "TKGameViewController.h"
 
+@interface TKMaterialExampleViewController : TKGameViewController
+
+- (void) initScene;
 
 @end
 

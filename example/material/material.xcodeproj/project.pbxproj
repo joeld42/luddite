@@ -9,23 +9,38 @@
 /* Begin PBXBuildFile section */
 		6D1E392E1B405A830017B40F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D1E392D1B405A830017B40F /* main.m */; };
 		6D1E39311B405A830017B40F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D1E39301B405A830017B40F /* AppDelegate.m */; };
-		6D1E39341B405A830017B40F /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D1E39331B405A830017B40F /* ViewController.m */; };
+		6D1E39341B405A830017B40F /* TKMaterialExampleViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6D1E39331B405A830017B40F /* TKMaterialExampleViewController.mm */; };
 		6D1E39371B405A830017B40F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6D1E39351B405A830017B40F /* Main.storyboard */; };
 		6D1E39391B405A830017B40F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6D1E39381B405A830017B40F /* Images.xcassets */; };
 		6D1E393C1B405A830017B40F /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D1E393A1B405A830017B40F /* LaunchScreen.xib */; };
+		6D1E39531B405D1D0017B40F /* MaterialGame.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6D1E39511B405D1D0017B40F /* MaterialGame.cpp */; };
+		6D1E39551B4065370017B40F /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D1E39541B4065370017B40F /* GLKit.framework */; };
+		6D1E39591B40F2650017B40F /* basic.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 6D1E39571B40F2650017B40F /* basic.glsl */; };
+		6D1E395A1B40F2650017B40F /* basic.material.xml in Resources */ = {isa = PBXBuildFile; fileRef = 6D1E39581B40F2650017B40F /* basic.material.xml */; };
+		6D1E395C1B40FA460017B40F /* mtl_test_sph.obj in Resources */ = {isa = PBXBuildFile; fileRef = 6D1E395B1B40FA460017B40F /* mtl_test_sph.obj */; };
+		A5C8F97ECAC29F015429BFEA /* libPods-material.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C3CB29A73D9DDEC05C9420B5 /* libPods-material.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1D4A02094F02DA1E1934DFBF /* Pods-material.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-material.debug.xcconfig"; path = "Pods/Target Support Files/Pods-material/Pods-material.debug.xcconfig"; sourceTree = "<group>"; };
+		66F3516760E2FA4D1872254B /* Pods-material.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-material.release.xcconfig"; path = "Pods/Target Support Files/Pods-material/Pods-material.release.xcconfig"; sourceTree = "<group>"; };
 		6D1E39281B405A830017B40F /* material.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = material.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6D1E392C1B405A830017B40F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6D1E392D1B405A830017B40F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		6D1E392F1B405A830017B40F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		6D1E39301B405A830017B40F /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		6D1E39321B405A830017B40F /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		6D1E39331B405A830017B40F /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		6D1E39321B405A830017B40F /* TKMaterialExampleViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TKMaterialExampleViewController.h; sourceTree = "<group>"; };
+		6D1E39331B405A830017B40F /* TKMaterialExampleViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = TKMaterialExampleViewController.mm; sourceTree = "<group>"; };
 		6D1E39361B405A830017B40F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		6D1E39381B405A830017B40F /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		6D1E393B1B405A830017B40F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		6D1E39511B405D1D0017B40F /* MaterialGame.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MaterialGame.cpp; sourceTree = "<group>"; };
+		6D1E39521B405D1D0017B40F /* MaterialGame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MaterialGame.h; sourceTree = "<group>"; };
+		6D1E39541B4065370017B40F /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
+		6D1E39571B40F2650017B40F /* basic.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = basic.glsl; sourceTree = "<group>"; };
+		6D1E39581B40F2650017B40F /* basic.material.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = basic.material.xml; sourceTree = "<group>"; };
+		6D1E395B1B40FA460017B40F /* mtl_test_sph.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = mtl_test_sph.obj; sourceTree = "<group>"; };
+		C3CB29A73D9DDEC05C9420B5 /* libPods-material.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-material.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,6 +48,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6D1E39551B4065370017B40F /* GLKit.framework in Frameworks */,
+				A5C8F97ECAC29F015429BFEA /* libPods-material.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -44,6 +61,8 @@
 			children = (
 				6D1E392A1B405A830017B40F /* material */,
 				6D1E39291B405A830017B40F /* Products */,
+				6EB59EA3146273BA8E351A64 /* Pods */,
+				74F8B66703DFA84A6007EA48 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -58,14 +77,17 @@
 		6D1E392A1B405A830017B40F /* material */ = {
 			isa = PBXGroup;
 			children = (
+				6D1E39561B40F2650017B40F /* gamedata */,
 				6D1E392F1B405A830017B40F /* AppDelegate.h */,
 				6D1E39301B405A830017B40F /* AppDelegate.m */,
-				6D1E39321B405A830017B40F /* ViewController.h */,
-				6D1E39331B405A830017B40F /* ViewController.m */,
+				6D1E39321B405A830017B40F /* TKMaterialExampleViewController.h */,
+				6D1E39331B405A830017B40F /* TKMaterialExampleViewController.mm */,
 				6D1E39351B405A830017B40F /* Main.storyboard */,
 				6D1E39381B405A830017B40F /* Images.xcassets */,
 				6D1E393A1B405A830017B40F /* LaunchScreen.xib */,
 				6D1E392B1B405A830017B40F /* Supporting Files */,
+				6D1E39511B405D1D0017B40F /* MaterialGame.cpp */,
+				6D1E39521B405D1D0017B40F /* MaterialGame.h */,
 			);
 			path = material;
 			sourceTree = "<group>";
@@ -79,6 +101,34 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		6D1E39561B40F2650017B40F /* gamedata */ = {
+			isa = PBXGroup;
+			children = (
+				6D1E395B1B40FA460017B40F /* mtl_test_sph.obj */,
+				6D1E39571B40F2650017B40F /* basic.glsl */,
+				6D1E39581B40F2650017B40F /* basic.material.xml */,
+			);
+			path = gamedata;
+			sourceTree = SOURCE_ROOT;
+		};
+		6EB59EA3146273BA8E351A64 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				1D4A02094F02DA1E1934DFBF /* Pods-material.debug.xcconfig */,
+				66F3516760E2FA4D1872254B /* Pods-material.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		74F8B66703DFA84A6007EA48 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6D1E39541B4065370017B40F /* GLKit.framework */,
+				C3CB29A73D9DDEC05C9420B5 /* libPods-material.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -86,9 +136,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6D1E394B1B405A830017B40F /* Build configuration list for PBXNativeTarget "material" */;
 			buildPhases = (
+				C921B559C0CECE46539018C6 /* Check Pods Manifest.lock */,
 				6D1E39241B405A830017B40F /* Sources */,
 				6D1E39251B405A830017B40F /* Frameworks */,
 				6D1E39261B405A830017B40F /* Resources */,
+				C854BA2A8AE3E6BCA831E79B /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -136,7 +188,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6D1E395A1B40F2650017B40F /* basic.material.xml in Resources */,
+				6D1E39591B40F2650017B40F /* basic.glsl in Resources */,
 				6D1E39371B405A830017B40F /* Main.storyboard in Resources */,
+				6D1E395C1B40FA460017B40F /* mtl_test_sph.obj in Resources */,
 				6D1E393C1B405A830017B40F /* LaunchScreen.xib in Resources */,
 				6D1E39391B405A830017B40F /* Images.xcassets in Resources */,
 			);
@@ -144,13 +199,47 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		C854BA2A8AE3E6BCA831E79B /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-material/Pods-material-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C921B559C0CECE46539018C6 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		6D1E39241B405A830017B40F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6D1E39341B405A830017B40F /* ViewController.m in Sources */,
+				6D1E39341B405A830017B40F /* TKMaterialExampleViewController.mm in Sources */,
 				6D1E39311B405A830017B40F /* AppDelegate.m in Sources */,
+				6D1E39531B405D1D0017B40F /* MaterialGame.cpp in Sources */,
 				6D1E392E1B405A830017B40F /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -261,6 +350,7 @@
 		};
 		6D1E394C1B405A830017B40F /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1D4A02094F02DA1E1934DFBF /* Pods-material.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = material/Info.plist;
@@ -271,6 +361,7 @@
 		};
 		6D1E394D1B405A830017B40F /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 66F3516760E2FA4D1872254B /* Pods-material.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = material/Info.plist;
@@ -298,6 +389,7 @@
 				6D1E394D1B405A830017B40F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
