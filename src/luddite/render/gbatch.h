@@ -16,6 +16,14 @@
 #include <luddite/render/gbuff.h>
 #include <luddite/render/material.h>
 
+enum {
+    GBatchFlag_BLEND = 0x01,  // Draw after the others, in the blend pass
+};
+
+enum {
+    GBatchBlendMode_OVER,
+    GBatchBlendMode_ADD
+};
 
 namespace luddite {
 
@@ -29,6 +37,8 @@ struct GBatch
     luddite::GBuff *m_gbuff;
     luddite::Material *m_mtl;
 
+    uint64_t m_flags;
+    uint64_t m_blendMode;
 };
   
 typedef std::list<GBatch*> GBatchList;

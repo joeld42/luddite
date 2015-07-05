@@ -13,7 +13,16 @@ using namespace luddite;
 
 void RenderDevice::addGBatch( luddite::GBatch *gbatch )
 {
-    m_gbatches.push_back( gbatch );
+    if (gbatch->m_flags & GBatchFlag_BLEND)
+    {
+        // Blended batch
+        m_gbatchesBlend.push_back( gbatch );
+    }
+    else
+    {
+        // Normal, non-blend batch
+        m_gbatches.push_back( gbatch );
+    }
 }
 
 void RenderDevice::addParticleBatch( luddite::GBatch *pbatch )
@@ -31,27 +40,57 @@ void RenderDevice::renderFrame()
     
     
     // draw gbatches
-    for( std::vector<GBatch*>::iterator gbi = m_gbatches.begin();
-        gbi != m_gbatches.end(); ++gbi)
+    if (m_gbatches.size())
     {
-        // Let the device-specific subclass draw the buffer
-        _drawGBatch( *gbi );
-    }    
+        _enableBlendMode( false );
+        
+        for( std::vector<GBatch*>::iterator gbi = m_gbatches.begin();
+            gbi != m_gbatches.end(); ++gbi)
+        {
+            // Let the device-specific subclass draw the buffer
+            _drawGBatch( *gbi );
+        }
+    }
+
+    // draw blend gbatches
+    bool didEnableBlend = false;
+    if (m_gbatchesBlend.size())
+    {
+        _enableBlendMode( true );
+        didEnableBlend = true;
+        
+        // FIXME: honor blend flags
+        for( std::vector<GBatch*>::iterator gbi = m_gbatchesBlend.begin();
+            gbi != m_gbatchesBlend.end(); ++gbi)
+        {
+            // Let the device-specific subclass draw the buffer
+            _drawGBatch( *gbi );
+        }
+    }
+
+    
     m_gbatches.clear();
+    m_gbatchesBlend.clear();
 
     // next, draw particle batches
-    for( std::vector<GBatch*>::iterator gbi = m_particleBatches.begin();
-        gbi != m_particleBatches.end(); ++gbi)
+    if (m_particleBatches.size())
     {
-        // Let the device-specific subclass draw the buffer
-        _drawParticleBatch( *gbi );
+        if (!didEnableBlend)
+        {
+            _enableBlendMode( true );
+        }
+        
+        for( std::vector<GBatch*>::iterator gbi = m_particleBatches.begin();
+            gbi != m_particleBatches.end(); ++gbi)
+        {
+            // Let the device-specific subclass draw the buffer
+            _drawParticleBatch( *gbi );
+        }
+        m_particleBatches.clear();
     }
-    m_particleBatches.clear();
-
     
     _finishFrame();
 }
-
 
 int32_t RenderDevice::loadShader( const std::string &shaderKey )
 {

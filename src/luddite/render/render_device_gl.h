@@ -34,6 +34,7 @@ protected:
     virtual void _drawGBatch( luddite::GBatch *gbatch );
     virtual void _drawParticleBatch( luddite::GBatch *pbatch );
     virtual void _finishFrame();
+    virtual void _enableBlendMode( bool enabled );
     
     // TODO: put this crap in an pimpl class
     int32_t _compileShader( const char *shaderText, uint32_t shaderType );

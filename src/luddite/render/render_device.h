@@ -40,9 +40,11 @@ protected:
     virtual void _prepareFrame()=0;
     virtual void _drawGBatch( luddite::GBatch *gbatch )=0;
     virtual void _drawParticleBatch( luddite::GBatch *pbatch )=0;
-    virtual void _finishFrame()=0;
+    virtual void _finishFrame()=0;    
+    virtual void _enableBlendMode( bool enabled )=0;
     
     std::vector<luddite::GBatch*> m_gbatches;
+    std::vector<luddite::GBatch*> m_gbatchesBlend;
     std::vector<luddite::GBatch*> m_particleBatches;
 };
     

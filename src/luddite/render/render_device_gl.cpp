@@ -128,6 +128,18 @@ void RenderDeviceGL::_drawGBatch( luddite::GBatch *gbatch )
 
 }
 
+void RenderDeviceGL::_enableBlendMode( bool enabled )
+{
+    if (enabled)
+    {
+        glEnable( GL_BLEND );
+    }
+    else
+    {
+        glDisable( GL_BLEND );
+    }
+}
+
 void RenderDeviceGL::_drawParticleBatch( luddite::GBatch *pbatch )
 {
     luddite::GBuff *gbuff = pbatch->m_gbuff;
@@ -138,18 +150,6 @@ void RenderDeviceGL::_drawParticleBatch( luddite::GBatch *pbatch )
 
     // setup material from this gbatch
     _setupMaterial(pbatch, mresult, mresultPMV);
-    
-    // set blend mode
-    glEnable( GL_BLEND );
-    
-    if (pbatch->m_mtl->m_blendAdd)
-    {
-        glBlendFunc( GL_ONE , GL_ONE );
-    }
-    else
-    {
-        glBlendFunc( GL_SRC_ALPHA , GL_ONE_MINUS_SRC_ALPHA );
-    }
     
     glDepthMask( GL_FALSE );
 
@@ -267,6 +267,22 @@ void RenderDeviceGL::_setupMaterial(GBatch *gbatch, const GLKMatrix4 &mresult, c
     }
     else
     {
+        // set blend mode
+        glEnable( GL_BLEND );
+        
+        if (gbatch->m_flags & GBatchFlag_BLEND)
+        {
+            if (gbatch->m_mtl->m_blendAdd)
+            {
+                glBlendFunc( GL_ONE , GL_ONE );
+            }
+            else
+            {
+                glBlendFunc( GL_SRC_ALPHA , GL_ONE_MINUS_SRC_ALPHA );
+            }
+        }
+        
+        
         // use gbatch material
         GLuint progGBatch = gbatch->m_mtl->m_shader->shaderProgram();
         glUseProgram(progGBatch );
