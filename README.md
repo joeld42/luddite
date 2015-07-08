@@ -2,6 +2,8 @@
 luddite
 --------
 
+[![Join the chat at https://gitter.im/joeld42/luddite](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/joeld42/luddite?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 Luddite is a lightweight 3D game engine for iOS. This originally started as bits of ludumdare basecode. There are some great choices (e.g. Unreal) if you are making game with a huge team, or platforms like Unity can work well for small teams if you're willing to completely buy into their platform.
 
 Instead, luddite aims to be a small, focused engine that is appropriate for individual devs or small teams. It's not trying
