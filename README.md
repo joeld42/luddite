@@ -11,6 +11,7 @@ Originally was meant to be portable but I'm only really using it on iOS and it's
 on iOS but there shouldn't be too much platform specific stuff, and one day I'll revisit support for other platforms.
 
 ![Normal Mapping](http://www.tapnik.com/luddite_nrm_mapping_sm.png)
+
 Look, fancy normal mapping.
 
 Maturity
