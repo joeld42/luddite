@@ -10,6 +10,10 @@ to reinvent the wheel, and it's not adding any fancy or cutting edge features. I
 Originally was meant to be portable but I'm only really using it on iOS and it's causing a lot of build headaches keeping desktop/windows working. So right now it's only supported
 on iOS but there shouldn't be too much platform specific stuff, and one day I'll revisit support for other platforms.
 
+![Normal Mapping](http://www.tapnik.com/luddite_nrm_mapping_sm.png)
+
+Look, fancy normal mapping.
+
 Maturity
 ------
 This is not a stable or complete engine. There are huge parts missing, and there are other fundamental parts that are slow or wrong or untested. 
