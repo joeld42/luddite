@@ -27,6 +27,8 @@
 
 - (void)glkView:(GLKView *)view drawInRect:(CGRect)rect;
 
+- (void)update;
+
 // This will do the game stuff
 @property (nonatomic, strong) id<TKGameLoopDelegate> gameDelegate;
 

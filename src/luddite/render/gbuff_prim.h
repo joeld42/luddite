@@ -21,6 +21,8 @@ namespace luddite
     // -------------------------------
     //   Primitives
     // -------------------------------
+    luddite::GBuff *gbuff_grid( uint32_t divisions=4, float size=1.0, GLKVector3  center=GLKVector3Make(0.0,0.0,0.0) );
+    
     luddite::GBuff *gbuff_cube( float size=1.0, GLKVector3  center=GLKVector3Make(0.0,0.0,0.0) );
     
     luddite::GBuff *gbuff_cylinder( int nsegments=12, 

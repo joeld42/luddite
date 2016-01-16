@@ -96,6 +96,47 @@ GBuff *luddite::gbuff_cube( float size, GLKVector3 center )
     return gbuff;
 }
 
+
+GBuff *luddite::gbuff_grid( uint32_t divisions, float size, GLKVector3 center )
+{
+    float halfSize = size / 2.0;
+    float stepSize = size / divisions;
+    float stStep = 1.0 / divisions;
+    
+    GBuff *gbuff = new GBuff();
+    
+    DrawVert *gridVert = gbuff->addVerts( divisions * divisions * 6 );
+    for (int j=0; j < divisions; j++)
+    {
+        for (int i=0; i < divisions; i++)
+        {
+            GLKVector3 v00 = GLKVector3Make( -halfSize + stepSize*i, 0.0, -halfSize + stepSize*j);
+            GLKVector3 st00 = GLKVector3Make( stStep * i, stStep * j, 0.0 );
+            
+            GLKVector3 v01 = GLKVector3Make( -halfSize + stepSize*i, 0.0, -halfSize + stepSize*(j+1));
+            GLKVector3 st01 = GLKVector3Make( stStep * i, stStep * (j+1), 0.0 );
+            
+            GLKVector3 v10 = GLKVector3Make( -halfSize + stepSize*(i+1), 0.0, -halfSize + stepSize*j);
+            GLKVector3 st10 = GLKVector3Make( stStep * (i+1), stStep * j, 0.0 );
+            
+            GLKVector3 v11 = GLKVector3Make( -halfSize + stepSize*(i+1), 0.0, -halfSize + stepSize*(j+1));
+            GLKVector3 st11 = GLKVector3Make( stStep * (i+1), stStep * (j+1), 0.0 );
+            
+            gridVert[0].m_pos = v00; gridVert[0].m_st = st00;
+            gridVert[1].m_pos = v10; gridVert[1].m_st = st10;
+            gridVert[2].m_pos = v01; gridVert[2].m_st = st01;
+            
+            gridVert[3].m_pos = v10; gridVert[3].m_st = st10;
+            gridVert[4].m_pos = v01; gridVert[4].m_st = st01;
+            gridVert[5].m_pos = v11; gridVert[5].m_st = st11;
+            
+            gridVert += 6;
+        }
+    }
+
+    return gbuff;
+}
+
 GBuff *luddite::gbuff_cylinder( int nsegments, float radius, 
                        float height, GLKVector3 center )
 {
