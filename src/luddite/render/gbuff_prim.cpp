@@ -121,11 +121,11 @@ GBuff *luddite::gbuff_grid( uint32_t divisions, float size, GLKVector3 center )
             
             GLKVector3 v11 = GLKVector3Make( -halfSize + stepSize*(i+1), 0.0, -halfSize + stepSize*(j+1));
             GLKVector3 st11 = GLKVector3Make( stStep * (i+1), stStep * (j+1), 0.0 );
-            
-            gridVert[0].m_pos = v00; gridVert[0].m_st = st00;
-            gridVert[1].m_pos = v10; gridVert[1].m_st = st10;
+
+            gridVert[0].m_pos = v10; gridVert[0].m_st = st10;
+            gridVert[1].m_pos = v00; gridVert[1].m_st = st00;
             gridVert[2].m_pos = v01; gridVert[2].m_st = st01;
-            
+
             gridVert[3].m_pos = v10; gridVert[3].m_st = st10;
             gridVert[4].m_pos = v01; gridVert[4].m_st = st01;
             gridVert[5].m_pos = v11; gridVert[5].m_st = st11;
