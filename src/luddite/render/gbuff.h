@@ -37,7 +37,7 @@ struct GBuff
     // NOTE(jbd): Dynamic stuff is pretty crappy, just added for the debug
     // draw stuff. Don't trust it.
     bool m_dynamic = false; // allocate with DYNAMIC_DRAW
-    uint32_t m_dynamicSize; // For dynamic, how many verts did we use this frame?
+    uint32_t m_dynamicSize = 0; // For dynamic, how many verts did we use this frame?
 };
 
 }; // namespace luddite

@@ -126,7 +126,11 @@ void RenderDeviceGL::_drawGBatch( luddite::GBatch *gbatch )
     // Draw it!
     if (gbatch->m_flags & GBatchFlag_LINES)
     {
-        glDrawArrays(GL_LINES, 0, (GLsizei)gbuff->m_vertData.size() );
+        if (gbuff->m_dynamic) {
+            glDrawArrays(GL_LINES, 0, (GLsizei)gbuff->m_dynamicSize );
+        } else {
+            glDrawArrays(GL_LINES, 0, (GLsizei)gbuff->m_vertData.size() );
+        }
     } else {
         glDrawArrays(GL_TRIANGLES, 0, (GLsizei)gbuff->m_vertData.size() );
     }
@@ -242,7 +246,8 @@ void RenderDeviceGL::_bindGbuffVBO(GBuff *gbuff )
         // For dynamic gbuffs, update the data every draw
         if (gbuff->m_dynamic)
         {
-            glBufferSubData( GL_ARRAY_BUFFER, 0, gbuff->m_dynamicSize,
+            glBufferSubData( GL_ARRAY_BUFFER, 0,
+                            gbuff->m_dynamicSize * sizeof(DrawVert),
                             gbuff->m_vertData.data() );
         }
     }
