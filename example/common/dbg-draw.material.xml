@@ -1,0 +1,10 @@
+<MaterialList>
+    
+    <Material name="mtl.dbg-linepoint" shader="dbg-draw.LinePoint">
+    </Material>
+    
+    <Material name="mtl.dbg-text" shader="dbg-draw.Text">
+    </Material>
+    
+    
+</MaterialList>

@@ -57,6 +57,7 @@ private:
     
     luddite::MaterialDB *mtlDB_ = nullptr;
     luddite::SceneNode *linesNode_ = nullptr;
+    luddite::SceneNode *pointsNode_ = nullptr;
     luddite::GBuff *linesGBuff_ = nullptr;
 
 };
