@@ -90,7 +90,7 @@ Pod::Spec.new do |s|
   #  Not including the public_header_files will make all headers public.
   #
   s.header_mappings_dir = 'src/luddite'
-  s.source_files  = "extern/glsw", "extern/rapidxml", "src", "src/**/*.{h,m,mm,cpp}"
+  s.source_files  = "extern/glsw", "extern/rapidxml", "extern/debug-draw", "src", "src/**/*.{h,m,mm,cpp}"
   s.exclude_files = "src/luddite/common/allocator.cpp", "src/luddite/platform/osx/*"
 
   # s.public_header_files = "Classes/**/*.h"
