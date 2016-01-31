@@ -18,7 +18,9 @@
 
 enum {
     GBatchFlag_BLEND   = 0x01,  // Draw after the others, in the blend pass
+
     GBatchFlag_LINES   = 0x02,  // Draw as lines, for debugging info
+    GBatchFlag_POINTS  = 0x04,  // Draw as points, for debugging info
 };
 
 enum {

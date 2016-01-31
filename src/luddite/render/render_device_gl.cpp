@@ -131,7 +131,16 @@ void RenderDeviceGL::_drawGBatch( luddite::GBatch *gbatch )
         } else {
             glDrawArrays(GL_LINES, 0, (GLsizei)gbuff->m_vertData.size() );
         }
+    } else if (gbatch->m_flags & GBatchFlag_POINTS)
+        {
+            if (gbuff->m_dynamic) {
+                glDrawArrays(GL_POINTS, 0, (GLsizei)gbuff->m_dynamicSize );
+            } else {
+                glDrawArrays(GL_POINTS, 0, (GLsizei)gbuff->m_vertData.size() );
+            }
+
     } else {
+        // Regular case, draw as triangles
         glDrawArrays(GL_TRIANGLES, 0, (GLsizei)gbuff->m_vertData.size() );
     }
 

@@ -50,15 +50,19 @@ public:
     
 private:
     // stuff
-    void setupVertexBuffers();
-
+    bool checkCount( size_t currentSize, int countAdded );
+    
     static GLuint handleToGL(dd::GlyphTextureHandle handle);
     static dd::GlyphTextureHandle GLToHandle(const GLuint id);
     
     luddite::MaterialDB *mtlDB_ = nullptr;
     luddite::SceneNode *linesNode_ = nullptr;
-    luddite::SceneNode *pointsNode_ = nullptr;
     luddite::GBuff *linesGBuff_ = nullptr;
+    
+    luddite::SceneNode *pointsNode_ = nullptr;
+    luddite::GBuff *pointsGBuff_ = nullptr;
+    
+    bool didWarnThisFrame_ = false;
 
 };
 
