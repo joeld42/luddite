@@ -153,6 +153,20 @@ float smootherstep(float edge0, float edge1, float x)
     return x*x*x*(x*(x*6 - 15) + 10);
 }
 
+void printMatrix( const char *label, const GLKMatrix4 mat )
+{
+    const float *m = mat.m;
+    printf("%10s: %3.2f %3.2f %3.2f %3.2f\n"
+           "            %3.2f %3.2f %3.2f %3.2f\n"
+           "            %3.2f %3.2f %3.2f %3.2f\n"
+           "            %3.2f %3.2f %3.2f %3.2f\n",
+           label,
+           m[0], m[1], m[2], m[3],
+           m[4], m[5], m[6], m[7],
+           m[8], m[9], m[10], m[11],
+           m[12], m[13], m[14], m[15] );
+}
+
 // ===========================================================================
 // Error Checkings
 int checkForGLErrors( const char *s, const char * file, int line )

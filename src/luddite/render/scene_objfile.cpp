@@ -57,17 +57,17 @@ static _MtlGroup *findOrCreateMtl( std::vector<_MtlGroup*> &mtlGroups,
     return mtl;    
 }
 
-SceneNode *luddite::scene_objfile_named(char const *filename, RenderDevice *renderDevice, MaterialDB *mtlDB)
+SceneNode *luddite::scene_objfile_named(char const *filename, RenderDevice *renderDevice, MaterialDB *mtlDB, float scale)
 {
     std::string filePath = pfPathToResource( filename );
     
 //    Assert( filePath.length(), "Couldn't find resource file"  );
     
-    return scene_objfile( filePath.c_str(), renderDevice, mtlDB );
+    return scene_objfile( filePath.c_str(), renderDevice, mtlDB, scale );
 }
 
 // The last obj loader I will ever write. I hope. But probably not.
-SceneNode *luddite::scene_objfile(char const *filename, RenderDevice *renderDevice, MaterialDB *mtlDB)
+SceneNode *luddite::scene_objfile(char const *filename, RenderDevice *renderDevice, MaterialDB *mtlDB, float scale)
 {
     // Vert, st and norms are shared for all gbuffs in the
     // obj file
@@ -108,7 +108,8 @@ SceneNode *luddite::scene_objfile(char const *filename, RenderDevice *renderDevi
         {
             GLKVector3 v;
             sscanf( line, "%*s %f %f %f", &(v.x), &(v.y), &(v.z) );
-            verts.push_back( v );
+            
+            verts.push_back( GLKVector3MultiplyScalar( v, scale ) );
         }
         
         // "vt <s> <t>"

@@ -17,7 +17,8 @@
 #include <luddite/render/material.h>
 
 enum {
-    GBatchFlag_BLEND = 0x01,  // Draw after the others, in the blend pass
+    GBatchFlag_BLEND   = 0x01,  // Draw after the others, in the blend pass
+    GBatchFlag_LINES   = 0x02,  // Draw as lines, for debugging info
 };
 
 enum {

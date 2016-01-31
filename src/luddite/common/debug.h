@@ -51,8 +51,6 @@ void _dbgtext_NewFrame();
 void _dbgtext_FinishFrame2D();
 void _dbgtext_GetProjection();
 
-
-
   }; // namespace DBG
 }; // namespace luddite
 

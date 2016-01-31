@@ -1,6 +1,7 @@
 #ifndef USEFUL_H
 #define USEFUL_H
 
+#include <GLKit/GLKMath.h>
 
 // ==============================
 //  Common Types
@@ -40,7 +41,7 @@ float lerp( float a, float b, float t);
 float smoothstep(float edge0, float edge1, float x); 
 float smootherstep(float edge0, float edge1, float x);
 
-
+void printMatrix( const char *label, const GLKMatrix4 mat  );
 
 
 #ifdef WIN32

@@ -224,6 +224,14 @@ GBuff *luddite::gbuff_cylinder( int nsegments, float radius,
     return gbuff;
 }
 
+luddite::GBuff *luddite::gbuff_dynamic( uint32_t numVerts )
+{
+    GBuff *gbuff = new GBuff();
+    gbuff->m_dynamic = true;
+    gbuff->m_vertData.resize( numVerts );
+    return gbuff;
+}
+
 void luddite::gbuff_setColorConstant( GBuff *gbuff, const GLKVector4 &color )
 {
     for (std::vector<luddite::DrawVert>::iterator vi = gbuff->m_vertData.begin();

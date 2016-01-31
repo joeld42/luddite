@@ -124,7 +124,12 @@ void RenderDeviceGL::_drawGBatch( luddite::GBatch *gbatch )
     _bindDrawVertAttribs();
 
     // Draw it!
-   glDrawArrays(GL_TRIANGLES, 0, (GLsizei)gbuff->m_vertData.size() );
+    if (gbatch->m_flags & GBatchFlag_LINES)
+    {
+        glDrawArrays(GL_LINES, 0, (GLsizei)gbuff->m_vertData.size() );
+    } else {
+        glDrawArrays(GL_TRIANGLES, 0, (GLsizei)gbuff->m_vertData.size() );
+    }
 
 }
 
@@ -225,13 +230,21 @@ void RenderDeviceGL::_bindGbuffVBO(GBuff *gbuff )
 
         glBindBuffer( GL_ARRAY_BUFFER, gbuff->m_vbo );
         glBufferData( GL_ARRAY_BUFFER, gbuff->m_vertData.size() * sizeof( DrawVert ),
-                     gbuff->m_vertData.data(), GL_STATIC_DRAW );
+                     gbuff->m_vertData.data(),
+                     gbuff->m_dynamic?GL_DYNAMIC_DRAW:GL_STATIC_DRAW );
 
     }
     else
     {
         // Buffer is already created, just bind it
         glBindBuffer( GL_ARRAY_BUFFER, gbuff->m_vbo );
+        
+        // For dynamic gbuffs, update the data every draw
+        if (gbuff->m_dynamic)
+        {
+            glBufferSubData( GL_ARRAY_BUFFER, 0, gbuff->m_dynamicSize,
+                            gbuff->m_vertData.data() );
+        }
     }
 }
 
