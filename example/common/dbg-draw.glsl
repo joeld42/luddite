@@ -46,14 +46,14 @@ attribute highp vec4 position;
 attribute highp vec4 color;
 attribute mediump vec2 texcoord;
 
-//uniform highp vec2 u_screenDimensions;
+uniform highp vec2 u_screenDimensions;
 
 varying highp vec2 v_TexCoords;
 varying highp vec4 v_Color;
 
 void main()
 {
-    highp vec2 u_screenDimensions = vec2( 768, 1024);
+//    highp vec2 u_screenDimensions = vec2( 768, 1024);
     
     // Map to normalized clip coordinates:
     highp float x = ((2.0 * (position.x - 0.5)) / u_screenDimensions.x) - 1.0;

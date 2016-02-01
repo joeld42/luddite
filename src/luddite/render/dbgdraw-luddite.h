@@ -29,6 +29,8 @@ public:
     DDRenderInterfaceLuddite( luddite::RenderDevice *device,
                               luddite::MaterialDB *mtlDB,
                               luddite::SceneNode *worldRoot );
+
+    void setScreenSize( luddite::RenderDevice *device, GLKVector2 screenSize );
     
     void drawPointList(const dd::DrawVertex * points, const int count,
                        const bool depthEnabled) override;
@@ -52,7 +54,8 @@ public:
     
 private:
     // stuff
-    luddite::GBuff *makeDebugGeom( luddite::SceneNode *worldRoot, luddite::Material *mtl, int flags );
+    luddite::GBuff *makeDebugGeom( luddite::SceneNode *worldRoot,
+                                  luddite::Material *mtl, int flags );
     bool checkCount( size_t currentSize, int countAdded );
     
     static GLuint handleToGL(dd::GlyphTextureHandle handle);

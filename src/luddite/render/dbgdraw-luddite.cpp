@@ -42,7 +42,14 @@ DDRenderInterfaceLuddite::DDRenderInterfaceLuddite( luddite::RenderDevice *devic
     
 }
 
-luddite::GBuff *DDRenderInterfaceLuddite::makeDebugGeom( luddite::SceneNode *worldRoot, luddite::Material *mtl, int flags )
+void DDRenderInterfaceLuddite::setScreenSize( luddite::RenderDevice *device, GLKVector2 screenSize )
+{
+    luddite::Material *mtlText = mtlDB_->getNamedMaterial( device, "mtl.dbg-text" );
+    mtlText->param("u_screenDimensions") = screenSize;
+}
+
+luddite::GBuff *DDRenderInterfaceLuddite::makeDebugGeom( luddite::SceneNode *worldRoot,
+                                                        luddite::Material *mtl, int flags )
 {
     luddite::SceneNode *debugNode = new luddite::SceneNode();
     luddite::GBuff *gbuff = luddite::gbuff_dynamic( MAX_DEBUG_POINTS );
