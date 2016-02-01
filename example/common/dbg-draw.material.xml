@@ -4,6 +4,7 @@
     </Material>
     
     <Material name="mtl.dbg-text" shader="dbg-draw.Text">
+        <texture slot="0" pname="sampler_dif0" dynamic="true" filename="dbgdraw-glyphs" />
     </Material>
     
     

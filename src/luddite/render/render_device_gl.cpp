@@ -106,13 +106,18 @@ void RenderDeviceGL::_prepareFrame()
 
 void RenderDeviceGL::_drawGBatch( luddite::GBatch *gbatch )
 {
-    luddite::GBuff *gbuff = gbatch->m_gbuff;    
-    //matrix4x4f mresult =  gbatch->m_xform * matBaseModelView;
+    luddite::GBuff *gbuff = gbatch->m_gbuff;
+
     GLKMatrix4 mresult = GLKMatrix4Multiply( matBaseModelView, gbatch->m_xform  );
     GLKMatrix4 mresultPMV = GLKMatrix4Multiply(  matProjection, mresult );
 
     // setup material from this gbatch
     _setupMaterial(gbatch, mresult, mresultPMV);
+    
+    if (gbatch->m_flags & GBatchFlag_SCREENSPACE) {
+        glDisable( GL_DEPTH_TEST );
+        glDepthMask( GL_FALSE );
+    }
 
     // Create gbo for this gbuff if not set up
      _bindGbuffVBO(gbuff);
@@ -124,26 +129,23 @@ void RenderDeviceGL::_drawGBatch( luddite::GBatch *gbatch )
     _bindDrawVertAttribs();
 
     // Draw it!
-    if (gbatch->m_flags & GBatchFlag_LINES)
-    {
-        if (gbuff->m_dynamic) {
-            glDrawArrays(GL_LINES, 0, (GLsizei)gbuff->m_dynamicSize );
-        } else {
-            glDrawArrays(GL_LINES, 0, (GLsizei)gbuff->m_vertData.size() );
-        }
-    } else if (gbatch->m_flags & GBatchFlag_POINTS)
-        {
-            if (gbuff->m_dynamic) {
-                glDrawArrays(GL_POINTS, 0, (GLsizei)gbuff->m_dynamicSize );
-            } else {
-                glDrawArrays(GL_POINTS, 0, (GLsizei)gbuff->m_vertData.size() );
-            }
-
-    } else {
-        // Regular case, draw as triangles
-        glDrawArrays(GL_TRIANGLES, 0, (GLsizei)gbuff->m_vertData.size() );
+    GLuint prim = GL_TRIANGLES;
+    if (gbatch->m_flags & GBatchFlag_POINTS) {
+        prim = GL_POINTS;
+    } else if (gbatch->m_flags & GBatchFlag_LINES) {
+        prim = GL_LINES;
     }
-
+    
+    if (gbuff->m_dynamic) {
+        glDrawArrays(prim, 0, (GLsizei)gbuff->m_dynamicSize );
+    } else {
+        glDrawArrays(prim, 0, (GLsizei)gbuff->m_vertData.size() );
+    }
+    
+    if (gbatch->m_flags & GBatchFlag_SCREENSPACE) {
+        glEnable( GL_DEPTH_TEST );
+        glDepthMask( GL_TRUE );
+    }
 }
 
 void RenderDeviceGL::_enableBlendMode( bool enabled )

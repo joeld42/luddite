@@ -27,42 +27,44 @@ DDRenderInterfaceLuddite::DDRenderInterfaceLuddite( luddite::RenderDevice *devic
                         mtlDB_( mtlDB )
 {
     luddite::Material *mtlLinePoint = mtlDB_->getNamedMaterial( device, "mtl.dbg-linepoint" );
-
-    // Lines geom
-    linesNode_ = new luddite::SceneNode();
-    luddite::GBuff *gbuffLines = luddite::gbuff_dynamic( MAX_DEBUG_POINTS );
-    gbuff_setColorConstant( gbuffLines, GLKVector4Make( 1.0, 0.0, 1.0, 1.0) );
-    linesGBuff_ = gbuffLines;
-
-    luddite::GBatch *lineBatch = new luddite::GBatch();
-    lineBatch->m_gbuff = gbuffLines;
-    lineBatch->m_mtl = mtlLinePoint;
-    lineBatch->m_flags = GBatchFlag_LINES;
-    linesNode_->addGBatch( lineBatch );
+    luddite::Material *mtlText = mtlDB_->getNamedMaterial( device, "mtl.dbg-text" );
     
-    worldRoot->addChild( linesNode_ );
+    glyphsTex_ = mtlDB_->lookupTexture("dbgdraw-glyphs");
+    
+    // Lines geom
+    linesGBuff_ = makeDebugGeom( worldRoot, mtlLinePoint, GBatchFlag_LINES );
 
     // Points geom
-    pointsNode_ = new luddite::SceneNode();
-    luddite::GBuff *gbuffPoints = luddite::gbuff_dynamic( MAX_DEBUG_POINTS );
-    gbuff_setColorConstant( gbuffPoints, GLKVector4Make( 1.0, 0.0, 1.0, 1.0) );
-    pointsGBuff_ = gbuffPoints;
+    pointsGBuff_ = makeDebugGeom( worldRoot, mtlLinePoint, GBatchFlag_POINTS );
 
-    luddite::GBatch *pointsBatch = new luddite::GBatch();
-    pointsBatch->m_gbuff = gbuffPoints;
-    pointsBatch->m_mtl = mtlLinePoint;
-    pointsBatch->m_flags = GBatchFlag_POINTS;
-    pointsNode_->addGBatch( pointsBatch );
+    // Glyphs geom
+    glyphsGBuff_ = makeDebugGeom( worldRoot, mtlText, GBatchFlag_SCREENSPACE | GBatchFlag_BLEND );
     
-    worldRoot->addChild( pointsNode_ );
+}
 
+luddite::GBuff *DDRenderInterfaceLuddite::makeDebugGeom( luddite::SceneNode *worldRoot, luddite::Material *mtl, int flags )
+{
+    luddite::SceneNode *debugNode = new luddite::SceneNode();
+    luddite::GBuff *gbuff = luddite::gbuff_dynamic( MAX_DEBUG_POINTS );
+    gbuff_setColorConstant( gbuff, GLKVector4Make( 1.0, 0.0, 1.0, 1.0) );
     
+    luddite::GBatch *gbatch = new luddite::GBatch();
+    gbatch->m_gbuff = gbuff;
+    gbatch->m_mtl = mtl;
+    gbatch->m_flags = flags;
+    debugNode->addGBatch( gbatch );
+    
+    worldRoot->addChild( debugNode );
+    
+    return gbuff;
 }
 
 void DDRenderInterfaceLuddite::beginDraw()
 {
     didWarnThisFrame_ = false;
     linesGBuff_->m_dynamicSize = 0;
+    pointsGBuff_->m_dynamicSize = 0;
+    glyphsGBuff_->m_dynamicSize = 0;
 }
 
 // this could be smarter but it's debug code so meh..
@@ -135,19 +137,55 @@ void DDRenderInterfaceLuddite::drawLineList(const dd::DrawVertex * lines, const 
 void DDRenderInterfaceLuddite::drawGlyphList(const dd::DrawVertex * glyphs, const int count,
                    dd::GlyphTextureHandle glyphTex)
 {
-//    printf("TODO: drawGlyphList: %d count\n", count );
+    // copy count verts from dd::DrawVertex into our format
+    const dd::DrawVertex *curr = glyphs;
+    size_t countAdded = 0;
+    for (int i=0; i < count; i++) {
+        size_t ndx = glyphsGBuff_->m_dynamicSize + i;
+        glyphsGBuff_->m_vertData[ndx].m_pos = GLKVector3Make( curr->glyph.x, curr->glyph.y, 0.0 );
+        glyphsGBuff_->m_vertData[ndx].m_st = GLKVector3Make( curr->glyph.u, curr->glyph.v, 0.0 );
+        
+        glyphsGBuff_->m_vertData[ndx].m_color[0] = curr->glyph.r * 0xFF;
+        glyphsGBuff_->m_vertData[ndx].m_color[1] = curr->glyph.g * 0xFF;
+        glyphsGBuff_->m_vertData[ndx].m_color[2] = curr->glyph.b * 0xFF;
+        glyphsGBuff_->m_vertData[ndx].m_color[3] = 0xFF;
+        
+        countAdded++;
+        curr++;
+        if (checkCount( glyphsGBuff_->m_dynamicSize, countAdded ) ) {
+            break;
+        }
+    }
+    glyphsGBuff_->m_dynamicSize += countAdded;
+//    printf("drawGlyphList: %d count %d dynSize\n", count, linesGBuff_->m_dynamicSize );
+
 }
 
 
 dd::GlyphTextureHandle DDRenderInterfaceLuddite::createGlyphTexture(const int width, const int height,
                                                                     const void * pixels)
 {
-    return NULL;
+    assert( mtlDB_ );
+    
+    printf("createGlyphTexture %dx%d (glyphsTex_ is %u sz: %d %d)\n", width, height,
+           glyphsTex_->m_texId,
+           glyphsTex_->m_width,
+           glyphsTex_->m_height );
+    
+    glBindTexture(GL_TEXTURE_2D, glyphsTex_->m_texId  );
+    glTexImage2D( GL_TEXTURE_2D, 0, GL_LUMINANCE, width, height, 0, GL_LUMINANCE, GL_UNSIGNED_BYTE, pixels );
+    
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST );
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST );
+    
+    
+    return reinterpret_cast<dd::GlyphTextureHandle>( glyphsTex_ );
 }
 
 
 void DDRenderInterfaceLuddite::destroyGlyphTexture(dd::GlyphTextureHandle glyphTex)
 {
+    // meh... let it leak..
 }
 
 GLuint DDRenderInterfaceLuddite::handleToGL(dd::GlyphTextureHandle handle)

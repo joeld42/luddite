@@ -220,6 +220,7 @@ void MaterialDB::addMaterialDefs( const char *materialFile )
             rapidxml::xml_attribute<> *attrSlot = currTexture->first_attribute( "slot" );
             rapidxml::xml_attribute<> *attrPname = currTexture->first_attribute( "pname" );
             rapidxml::xml_attribute<> *attrWrap = currTexture->first_attribute( "wrap" );
+            rapidxml::xml_attribute<> *attrDynamic = currTexture->first_attribute( "dynamic" );
             
             printf("texture: %s value %s\n", attrFilename?attrFilename->value():"(null)", attrSlot?attrSlot->value():"(null)" );
 
@@ -228,7 +229,11 @@ void MaterialDB::addMaterialDefs( const char *materialFile )
                 int slot = atoi(attrSlot->value());
                 if ((attrFilename) && (slot >=0) && (slot < kMaxTextureSlot))
                 {
-                    TextureInfo *texInfo = _lookupTexture( attrFilename->value() );
+                    TextureInfo *texInfo = lookupTexture( attrFilename->value() );
+                    if ((attrDynamic) && (!strcmp(attrDynamic->value(), "true"))) {
+                        texInfo->m_dynamic = true;
+                    }
+
                     material->m_tex[slot] = texInfo;
                     
                     // Do we also have a pname?
@@ -383,7 +388,7 @@ Material *MaterialDB::_materialWithKey( const std::string &mtlKey )
     return mtl;
 }
 
-luddite::TextureInfo *MaterialDB::_lookupTexture( const std::string &filename )
+luddite::TextureInfo *MaterialDB::lookupTexture( const std::string &filename )
 {
     TextureInfo *texInfo;
     auto texIter = m_textures.find( filename );
@@ -396,6 +401,9 @@ luddite::TextureInfo *MaterialDB::_lookupTexture( const std::string &filename )
         // didn't find, create new
         texInfo = new TextureInfo();
         texInfo->m_filename = filename;
+        texInfo->m_width = 0;
+        texInfo->m_height = 0;
+        texInfo->m_dynamic = false;
         m_textures[filename] = texInfo;
     }
 
@@ -419,7 +427,36 @@ void MaterialDB::useAllShaders(RenderDevice *device)
             // Texture not loaded yet..
             // TODO: load w/h and other stuff here ...
 //            printf("Loading texture %s\n", texInfo->m_filename.c_str() );
-            texInfo->m_texId = pfLoadTexture( texInfo->m_filename.c_str() );
+            if (!texInfo->m_dynamic) {
+                texInfo->m_texId = pfLoadTexture( texInfo->m_filename.c_str() );
+            } else {
+                printf("dynamic texture for %s\n", texInfo->m_filename.c_str() );
+                
+                // "dynamic texture". Basically just make a placeholder and trust the app to
+                // put something there later.
+                const int placeholderSz = 32;
+                uint8_t *data = (uint8_t*)malloc( placeholderSz*placeholderSz*4 );
+                for (int j=0; j < placeholderSz; j++) {
+                    for (int i=0; i < placeholderSz; i++) {
+                        size_t ndx = ((j*placeholderSz)+i) * 4;
+                        
+                        data[ndx+0] = 0x55;
+                        data[ndx+1] = ((i&1)==(j&1))?0xFF:0x00;
+                        data[ndx+2] = 0x55;
+                        data[ndx+3] = 0xFF;
+                    }
+                }
+                glGenTextures(1, &(texInfo->m_texId));
+                
+                glBindTexture(GL_TEXTURE_2D, texInfo->m_texId  );
+                glTexImage2D( GL_TEXTURE_2D, 0, GL_RGBA, placeholderSz, placeholderSz, 0, GL_RGBA, GL_UNSIGNED_BYTE, data );
+                glGenerateMipmap( GL_TEXTURE_2D);
+                
+                glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
+                glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_NEAREST );
+                
+                free(data);
+            }
             
             glBindTexture(GL_TEXTURE_2D, texInfo->m_texId  );
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, texInfo->m_wrapMode );

@@ -9,6 +9,7 @@
 #ifndef dbgdraw_luddite_h
 #define dbgdraw_luddite_h
 
+#define DEBUG_DRAW_CXX11_SUPPORTED (1)
 #include "debug_draw.hpp"
 
 #ifdef __APPLE__
@@ -20,6 +21,7 @@
 #include <luddite/render/scene.h>
 #include <luddite/render/render_device_gl.h>
 #include <luddite/render/material_db.h>
+#include <luddite/render/texture_info.h>
 
 class DDRenderInterfaceLuddite : public dd::RenderInterface
 {
@@ -50,17 +52,18 @@ public:
     
 private:
     // stuff
+    luddite::GBuff *makeDebugGeom( luddite::SceneNode *worldRoot, luddite::Material *mtl, int flags );
     bool checkCount( size_t currentSize, int countAdded );
     
     static GLuint handleToGL(dd::GlyphTextureHandle handle);
     static dd::GlyphTextureHandle GLToHandle(const GLuint id);
     
     luddite::MaterialDB *mtlDB_ = nullptr;
-    luddite::SceneNode *linesNode_ = nullptr;
-    luddite::GBuff *linesGBuff_ = nullptr;
     
-    luddite::SceneNode *pointsNode_ = nullptr;
+    luddite::GBuff *linesGBuff_ = nullptr;
     luddite::GBuff *pointsGBuff_ = nullptr;
+    luddite::GBuff *glyphsGBuff_ = nullptr;
+    luddite::TextureInfo *glyphsTex_ = nullptr;
     
     bool didWarnThisFrame_ = false;
 

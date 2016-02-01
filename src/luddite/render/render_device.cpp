@@ -56,6 +56,15 @@ void RenderDevice::renderFrame()
     bool didEnableBlend = false;
     if (m_gbatchesBlend.size())
     {
+        
+        std::sort( m_gbatchesBlend.begin(), m_gbatchesBlend.end(),
+                  [] (const luddite::GBatch *a, const luddite::GBatch *b) -> bool
+                  {
+                      // ensure screenspace flagged stuff goes last
+                      return (a->m_flags & GBatchFlag_SCREENSPACE) <
+                             (b->m_flags & GBatchFlag_SCREENSPACE);
+                  });
+        
         _enableBlendMode( true );
         didEnableBlend = true;
         

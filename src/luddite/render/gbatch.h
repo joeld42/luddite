@@ -21,6 +21,8 @@ enum {
 
     GBatchFlag_LINES   = 0x02,  // Draw as lines, for debugging info
     GBatchFlag_POINTS  = 0x04,  // Draw as points, for debugging info
+    
+    GBatchFlag_SCREENSPACE  = 0x08,  // Draw with screenspace transform (FIXME do this better)
 };
 
 enum {
@@ -40,7 +42,7 @@ struct GBatch
     luddite::GBuff *m_gbuff;
     luddite::Material *m_mtl;
 
-    uint64_t m_flags;
+    uint64_t m_flags = 0;
     uint64_t m_blendMode;
 };
   

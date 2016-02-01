@@ -44,11 +44,12 @@ public:
     // prints out the material db for debugging
     void dumpMaterialDB();
     
+    // managing textures
+    luddite::TextureInfo *lookupTexture( const std::string &filename );
+    
 //private:
     Material *_materialWithKey( const std::string &mtlKey );
     Material *_lookupMaterial( const std::string &mtlName );
-
-    luddite::TextureInfo *_lookupTexture( const std::string &filename );
 
     void _parseParam( Material *mtl, const std::string &paramName, const char *value, bool objectSpace );
     
