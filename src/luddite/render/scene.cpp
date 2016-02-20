@@ -52,6 +52,11 @@ void Scene::eval( RenderDevice *device )
 
 void Scene::_evalNode( RenderDevice *device, SceneNode *node, GLKMatrix4 currXform )
 {
+    // Skip this node (and all it's child nodes) if not visible
+    if (!node->visible()) {        
+        return;
+    }
+    
     // update the transform for this batch
     GLKMatrix4 nodeXform = node->localXForm();
     //nodeXform = nodeXform * currXform;

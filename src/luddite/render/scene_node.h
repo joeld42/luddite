@@ -41,6 +41,13 @@ public:
     void setName( const std::string &name );
 
     // ----------------------------------------
+    //  Visibility
+    // ----------------------------------------
+    
+    bool visible() const;
+    void setVisible( bool visible );
+    
+    // ----------------------------------------
     //  Binding Gbuff (for shape nodes)
     // ----------------------------------------
 
@@ -82,6 +89,8 @@ public:
     
 protected:
     std::string m_name;
+    bool m_visible;
+    
     SceneNode *m_parent;
     GLKMatrix4 m_nodeXform; 
     

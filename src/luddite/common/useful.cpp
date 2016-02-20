@@ -12,7 +12,9 @@
 #include <GL/gl.h>
 #endif
 
-float randUniform()
+using namespace luddite;
+
+float luddite::randUniform()
 {
 #ifndef WIN32
     return drand48();
@@ -21,12 +23,12 @@ float randUniform()
 #endif
 }
 
-float randUniform( float minVal, float maxVal )
+float luddite::randUniform( float minVal, float maxVal )
 {
     return minVal + (randUniform() * (maxVal-minVal));    
 }
 
-float randNormal()
+float luddite::randNormal()
 {
     static float y1, y2;
     
@@ -59,7 +61,7 @@ float randNormal()
     }
 }
 
-float randNormal( float mean, float stddev )
+float luddite::randNormal( float mean, float stddev )
 {
     return (randNormal() * stddev) + mean;
 }
@@ -113,31 +115,31 @@ void glhPerspectivef2(matrix4x4f &matrix, float fovyInDegrees, float aspectRatio
 
 #endif
 
-float sgn( float n )
+float luddite::sgn( float n )
 {
     return (n<0)?-1.0:1.0;
 }
 
-float clamp( float x, float a, float b)
+float luddite::clamp( float x, float a, float b)
 {
     if (x < a) return a;
     else if (x > b) return b;
     else return x;
 }
 
-float saturate( float x )
+float luddite::saturate( float x )
 {
     if (x < 0.0) return 0.0;
     else if (x > 1.0) return 1.0;
     else return x;
 }
 
-float lerp( float a, float b, float t)
+float luddite::lerp( float a, float b, float t)
 {
     return (a*(1.0-t)) + (b*t);
 }
 
-float smoothstep(float edge0, float edge1, float x)
+float luddite::smoothstep(float edge0, float edge1, float x)
 {
     // Scale, bias and saturate x to 0..1 range
     x = saturate((x - edge0)/(edge1 - edge0));
@@ -145,7 +147,7 @@ float smoothstep(float edge0, float edge1, float x)
     return x*x*(3 - 2*x);
 }
 
-float smootherstep(float edge0, float edge1, float x)
+float luddite::smootherstep(float edge0, float edge1, float x)
 {
     // Scale, and clamp x to 0..1 range
     x = clamp((x - edge0)/(edge1 - edge0), 0.0, 1.0);
@@ -153,7 +155,7 @@ float smootherstep(float edge0, float edge1, float x)
     return x*x*x*(x*(x*6 - 15) + 10);
 }
 
-void printMatrix( const char *label, const GLKMatrix4 mat )
+void luddite::printMatrix( const char *label, const GLKMatrix4 mat )
 {
     const float *m = mat.m;
     printf("%10s: %3.2f %3.2f %3.2f %3.2f\n"
@@ -169,7 +171,7 @@ void printMatrix( const char *label, const GLKMatrix4 mat )
 
 // ===========================================================================
 // Error Checkings
-int checkForGLErrors( const char *s, const char * file, int line )
+int luddite::checkForGLErrors( const char *s, const char * file, int line )
 {
     int errors = 0 ;
     int counter = 0 ;
@@ -189,7 +191,7 @@ int checkForGLErrors( const char *s, const char * file, int line )
 	return 0;
 }
 
-void checkFBO()
+void luddite::checkFBO()
 {
 	GLenum status = glCheckFramebufferStatus( GL_FRAMEBUFFER );
 	if (status != GL_FRAMEBUFFER_COMPLETE )

@@ -7,6 +7,9 @@
 //  Common Types
 // ==============================
 
+namespace luddite
+{
+
 typedef double TimeInterval;
 
 // ==============================
@@ -76,6 +79,7 @@ void glhPerspectivef2(matrix4x4f &matrix, float fovyInDegrees, float aspectRatio
                       float znear, float zfar);
 #endif
 
+} // namespace luddite
 
 #endif
 

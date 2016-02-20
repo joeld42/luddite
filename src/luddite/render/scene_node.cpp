@@ -14,7 +14,8 @@
 using namespace luddite;
 
 SceneNode::SceneNode( SceneNode *parent ) :
-    m_parent( parent )
+    m_parent( parent ),
+    m_visible( true )
 {
     m_pos = GLKVector3Make( 0.0, 0.0, 0.0 );
     m_rot = GLKQuaternionMake( 0.0, 0.0, 0.0, 1.0 );
@@ -27,7 +28,8 @@ SceneNode::SceneNode( SceneNode *parent ) :
 SceneNode::SceneNode( const std::string &name, 
                      SceneNode *parent ) :
         m_name(name),
-        m_parent(parent)
+        m_parent(parent),
+        m_visible( true )
 {
     m_pos = GLKVector3Make( 0.0, 0.0, 0.0 );
     m_rot = GLKQuaternionMake( 0.0, 0.0, 0.0, 1.0 );
@@ -49,6 +51,16 @@ SceneNode *SceneNode::makeInstance() const
     }
 
     return nodeInst;
+}
+
+bool SceneNode::visible() const
+{
+    return m_visible;
+}
+
+void SceneNode::setVisible( bool visible )
+{
+    m_visible = visible;
 }
 
 const std::string &SceneNode::name()

@@ -14,6 +14,12 @@
 namespace luddite
 {
 
+enum {
+    TextureInfoFilter_NEAREST,   // no filtering
+    TextureInfoFilter_LINEAR,    // magnify linear, no mipmapping
+    TextureInfoFilter_MIPMAPPED  // magnify linear, mipmap linear
+};
+    
 class TextureInfo
 {
 public:
@@ -24,6 +30,7 @@ public:
     uint32_t m_texId;
     
     uint32_t m_wrapMode;
+    uint32_t m_filterMode;
     
     // dynamic textures are not well supported. Basically this flag means "don't throw an error,
     // when you can't find the texture, generate a 32x32 checkboard instead and the game will

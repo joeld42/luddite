@@ -27,6 +27,7 @@
 using namespace luddite;
 
 uint32_t _parseWrapMode( const char *wrapModeStr );
+uint32_t _parseFilterMode( const char *filterModeStr );
 
 int countchars( const char *s, char target )
 {
@@ -220,7 +221,9 @@ void MaterialDB::addMaterialDefs( const char *materialFile )
             rapidxml::xml_attribute<> *attrSlot = currTexture->first_attribute( "slot" );
             rapidxml::xml_attribute<> *attrPname = currTexture->first_attribute( "pname" );
             rapidxml::xml_attribute<> *attrWrap = currTexture->first_attribute( "wrap" );
+            rapidxml::xml_attribute<> *attrFilter = currTexture->first_attribute( "filter" );
             rapidxml::xml_attribute<> *attrDynamic = currTexture->first_attribute( "dynamic" );
+            
             
             printf("texture: %s value %s\n", attrFilename?attrFilename->value():"(null)", attrSlot?attrSlot->value():"(null)" );
 
@@ -237,20 +240,24 @@ void MaterialDB::addMaterialDefs( const char *materialFile )
                     material->m_tex[slot] = texInfo;
                     
                     // Do we also have a pname?
-                    if (attrPname)
-                    {
+                    if (attrPname) {
                         texInfo->m_paramName = attrPname->value();
                     }
                     
                     // Do we have a wrap mode?
-                    if (attrWrap)
-                    {
+                    if (attrWrap) {
                         texInfo->m_wrapMode = _parseWrapMode( attrWrap->value());
-                    }
-                    else
-                    {
+                    } else {
                         texInfo->m_wrapMode = GL_REPEAT;
                     }
+                    
+                    // Filter
+                    if (attrFilter) {
+                        texInfo->m_wrapMode = _parseFilterMode( attrFilter->value() );
+                    } else {
+                        texInfo->m_filterMode = TextureInfoFilter_MIPMAPPED;
+                    }
+
                     
                 }
             }
@@ -459,10 +466,25 @@ void MaterialDB::useAllShaders(RenderDevice *device)
             }
             
             glBindTexture(GL_TEXTURE_2D, texInfo->m_texId  );
+            
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, texInfo->m_wrapMode );
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, texInfo->m_wrapMode );
             
-            // HERE also mipmap...
+            if (texInfo->m_filterMode == TextureInfoFilter_NEAREST) {
+                
+                glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST );
+                glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST );
+
+            } else if (texInfo->m_filterMode == TextureInfoFilter_LINEAR) {
+
+                glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
+                glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
+
+            } else if (texInfo->m_filterMode == TextureInfoFilter_MIPMAPPED) {
+                
+                glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
+                glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_NEAREST );
+            }
 
         }
     }
@@ -506,3 +528,19 @@ uint32_t _parseWrapMode( const char *wrapModeStr )
         return GL_REPEAT;
     }
 }
+
+uint32_t _parseFilterMode( const char *filterModeStr )
+{
+    if (!strcmp( filterModeStr, "nearest")) {
+        return TextureInfoFilter_NEAREST;
+    } else if (!strcmp( filterModeStr, "linear")) {
+        return TextureInfoFilter_LINEAR;
+    } else {
+        return TextureInfoFilter_MIPMAPPED;
+    }
+    
+}
+
+
+
+

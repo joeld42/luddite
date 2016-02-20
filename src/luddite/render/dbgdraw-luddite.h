@@ -51,6 +51,7 @@ public:
     
     void endDraw() override { }
     
+    void setActive(bool active=true );
     
 private:
     // stuff
@@ -63,10 +64,13 @@ private:
     
     luddite::MaterialDB *mtlDB_ = nullptr;
     
+    luddite::SceneNode *debugRoot_ = nullptr;
     luddite::GBuff *linesGBuff_ = nullptr;
     luddite::GBuff *pointsGBuff_ = nullptr;
     luddite::GBuff *glyphsGBuff_ = nullptr;
     luddite::TextureInfo *glyphsTex_ = nullptr;
+    
+    bool m_active = true;
     
     bool didWarnThisFrame_ = false;
 

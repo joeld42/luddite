@@ -31,14 +31,20 @@ DDRenderInterfaceLuddite::DDRenderInterfaceLuddite( luddite::RenderDevice *devic
     
     glyphsTex_ = mtlDB_->lookupTexture("dbgdraw-glyphs");
     
+    
+    debugRoot_ = new luddite::SceneNode();
+    worldRoot->addChild( debugRoot_ );
+    
     // Lines geom
-    linesGBuff_ = makeDebugGeom( worldRoot, mtlLinePoint, GBatchFlag_LINES );
+    linesGBuff_ = makeDebugGeom( debugRoot_, mtlLinePoint, GBatchFlag_LINES );
 
     // Points geom
-    pointsGBuff_ = makeDebugGeom( worldRoot, mtlLinePoint, GBatchFlag_POINTS );
+    pointsGBuff_ = makeDebugGeom( debugRoot_, mtlLinePoint, GBatchFlag_POINTS );
 
     // Glyphs geom
-    glyphsGBuff_ = makeDebugGeom( worldRoot, mtlText, GBatchFlag_SCREENSPACE | GBatchFlag_BLEND );
+    glyphsGBuff_ = makeDebugGeom( debugRoot_, mtlText, GBatchFlag_SCREENSPACE | GBatchFlag_BLEND );
+    
+    m_active = true;
     
 }
 
@@ -48,7 +54,7 @@ void DDRenderInterfaceLuddite::setScreenSize( luddite::RenderDevice *device, GLK
     mtlText->param("u_screenDimensions") = screenSize;
 }
 
-luddite::GBuff *DDRenderInterfaceLuddite::makeDebugGeom( luddite::SceneNode *worldRoot,
+luddite::GBuff *DDRenderInterfaceLuddite::makeDebugGeom( luddite::SceneNode *parent,
                                                         luddite::Material *mtl, int flags )
 {
     luddite::SceneNode *debugNode = new luddite::SceneNode();
@@ -61,9 +67,15 @@ luddite::GBuff *DDRenderInterfaceLuddite::makeDebugGeom( luddite::SceneNode *wor
     gbatch->m_flags = flags;
     debugNode->addGBatch( gbatch );
     
-    worldRoot->addChild( debugNode );
+    parent->addChild( debugNode );
     
     return gbuff;
+}
+
+void DDRenderInterfaceLuddite::setActive(bool active )
+{
+    m_active = active;
+    debugRoot_->setVisible(active);
 }
 
 void DDRenderInterfaceLuddite::beginDraw()
