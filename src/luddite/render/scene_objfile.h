@@ -21,12 +21,12 @@ namespace luddite
 // TODO: should make it load from a buffer not just a file
 SceneNode *scene_objfile(char const *fullpath,
                          RenderDevice *renderDevice,
-                         MaterialDB *mtlDB, float scale=1.0);
+                         MaterialDB *mtlDB, float scale=1.0, bool calcTangents =true);
 
 // Loads an obj file at the default resource path
 SceneNode *scene_objfile_named(char const *filename,
                          RenderDevice *renderDevice,
-                         MaterialDB *mtlDB, float scale=1.0);
+                         MaterialDB *mtlDB, float scale=1.0, bool calcTangents=true);
 
     
 } // namespace luddite

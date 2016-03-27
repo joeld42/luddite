@@ -57,17 +57,17 @@ static _MtlGroup *findOrCreateMtl( std::vector<_MtlGroup*> &mtlGroups,
     return mtl;    
 }
 
-SceneNode *luddite::scene_objfile_named(char const *filename, RenderDevice *renderDevice, MaterialDB *mtlDB, float scale)
+SceneNode *luddite::scene_objfile_named(char const *filename, RenderDevice *renderDevice, MaterialDB *mtlDB, float scale, bool calcTangents)
 {
     std::string filePath = pfPathToResource( filename );
     
 //    Assert( filePath.length(), "Couldn't find resource file"  );
     
-    return scene_objfile( filePath.c_str(), renderDevice, mtlDB, scale );
+    return scene_objfile( filePath.c_str(), renderDevice, mtlDB, scale, calcTangents );
 }
 
 // The last obj loader I will ever write. I hope. But probably not.
-SceneNode *luddite::scene_objfile(char const *filename, RenderDevice *renderDevice, MaterialDB *mtlDB, float scale)
+SceneNode *luddite::scene_objfile(char const *filename, RenderDevice *renderDevice, MaterialDB *mtlDB, float scale, bool calcTangents)
 {
     // Vert, st and norms are shared for all gbuffs in the
     // obj file
@@ -262,7 +262,9 @@ SceneNode *luddite::scene_objfile(char const *filename, RenderDevice *renderDevi
         mtlBatch->m_gbuff = (*mi)->gbuff;
         mtlBatch->m_mtl = mtl;
         
-        mtlBatch->m_gbuff->calcTangents();
+        if (calcTangents) {
+            mtlBatch->m_gbuff->calcTangents();
+        }
         
         objNode->addGBatch( mtlBatch );
     }
